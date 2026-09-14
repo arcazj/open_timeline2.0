@@ -20,7 +20,7 @@ SOURCE_DIRS = ("client", "server", "shared", "scripts", "tests", ".github", "dat
 SOURCE_FILES = ("package.json", "package-lock.json", "pyproject.toml", "uv.lock",
                 "playwright.config.mjs", "playwright.matrix.config.mjs", "playwright.demo.config.mjs", "Dockerfile",
                 ".dockerignore", ".gitignore", ".gitattributes", ".editorconfig", "README.md",
-                "CONTRIBUTING.md", "SECURITY.md", "OpenBEXI_Timeline_Rebuild_Prompt.md")
+                "CONTRIBUTING.md", "SECURITY.md", "LICENSE", "OpenBEXI_Timeline_Rebuild_Prompt.md")
 
 
 def stamp():
@@ -171,13 +171,13 @@ def main():
         ("datasets", [python, "scripts/normalize-test-data.py", "--check"]),
         ("build", [node, "scripts/build-standalone.mjs"]),
         ("rebuild", [node, "scripts/build-standalone.mjs"]),
-        ("browser", [node, "node_modules/@playwright/test/cli.js", "test"]),
     ]
     if options.matrix:
         matrix = [node, "node_modules/@playwright/test/cli.js", "test", "--config", "playwright.matrix.config.mjs"]
         if sys.platform.startswith("linux"):
             matrix = ["xvfb-run", "-a", *matrix]
         checks.append(("matrix", matrix))
+    checks.append(("browser", [node, "node_modules/@playwright/test/cli.js", "test"]))
     before = source_inventory(ROOT)
     report = {"format": "openbexi-candidate-verification", "formatVersion": 1, "startedAt": stamp(),
               "releaseApproved": False, "scope": "Implemented automated checks; not full G0-G5 or manual qualification",

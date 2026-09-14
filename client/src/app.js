@@ -89,7 +89,10 @@ const legacyControls = new Map();
 const $ = selector => document.querySelector(selector);
 const legacyReadOnly = () => !!(state.info?.legacy || state.info?.origin?.legacy)?.readOnly;
 const updateIcons = () => {
-  createIcons({ icons, attrs: { 'stroke-width': 1.7 } }); recordRecovery?.refreshControls();
+  createIcons({ icons, attrs: { 'stroke-width': 1.7 } });
+  // Do not replace an existing SVG while a pointer is pressed over its button.
+  for (const node of document.querySelectorAll('svg[data-lucide]')) node.removeAttribute('data-lucide');
+  recordRecovery?.refreshControls();
   for (const [node, previous] of legacyControls) if (!node.isConnected || !legacyReadOnly()) { if (node.isConnected) node.disabled = previous; legacyControls.delete(node); }
   if (legacyReadOnly()) for (const node of document.querySelectorAll('[data-action="create"],[data-action="edit"],[data-action="duplicate"],[data-action="delete"],#new-command')) {
     if (!legacyControls.has(node)) legacyControls.set(node, node.disabled);
@@ -468,6 +471,7 @@ function showError(error) {
   updateStatus();
 }
 function clearUnauthorized() {
+  changeMonitor?.cancelQueuedReload();
   bandStack?.configure(null);
   ++state.epoch; ++layoutIntent; state.authRequired = true; state.selected = null; state.rows = null; state.overview = null;
   state.queryLoading = false; state.query = null; state.map = null; state.layout = null; state.zones = []; clearTimeout(searchTimer); state.searchPending = false;

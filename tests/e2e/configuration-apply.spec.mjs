@@ -11,7 +11,36 @@ test.afterEach(async () => { await server?.stop(); });
 async function ready(page) { await expect.poll(() => page.evaluate(() => Boolean(window.__timelineDebug?.queryId))).toBe(true); await expect(page.locator('.busy-indicator')).toHaveCount(0); }
 async function open(page, mode) {
   const errors = []; page.on('pageerror', error => errors.push(error.message)); page.on('dialog', dialog => dialog.accept());
-  await page.goto(server.baseUrl); await ready(page);
+  // Capture the bounded bootstrap probe without logging request headers or data.
+  await page.addInitScript(() => {
+    const fetch = window.fetch;
+    window.__bootstrapDiagnostic = [];
+    window.fetch = function (input, options) {
+      'use strict';
+      const args = [input, options];
+      if (args[0] !== '/api/v1/bootstrap') return Reflect.apply(fetch, this, args);
+      const probe = { startedAt: performance.now() };
+      window.__bootstrapDiagnostic.push(probe);
+      const failed = error => {
+        Object.assign(probe, { elapsedMs: performance.now() - probe.startedAt, error: error.name, message: error.message });
+        throw error;
+      };
+      try {
+        return Reflect.apply(fetch, this, args).then(response => {
+          Object.assign(probe, { elapsedMs: performance.now() - probe.startedAt, status: response.status });
+          return response;
+        }, failed);
+      } catch (error) { return failed(error); }
+    };
+  });
+  await page.goto(server.baseUrl);
+  try { await ready(page); }
+  catch (error) {
+    await test.info().attach('bootstrap-diagnostic', {
+      body: JSON.stringify(await page.evaluate(() => window.__bootstrapDiagnostic)), contentType: 'application/json',
+    });
+    throw error;
+  }
   if (mode === 'server') {
     await page.locator('[data-action=sources]').first().click(); await page.locator('#server-form [name=baseUrl]').fill(server.baseUrl); await page.locator('#server-form [name=token]').fill(server.token); await page.locator('#server-form [type=submit]').click(); await page.locator('#switch-source').click();
     await expect.poll(() => page.evaluate(() => window.__timelineDebug.providerKind)).toBe('server'); await ready(page);
@@ -39,6 +68,30 @@ async function exportJson(page) {
   return JSON.parse(text);
 }
 const filter = { sourceIds: ['operations'], kinds: ['session'], schemaRefs: [], expression: null, search: { text: 'gate', mode: 'any', caseSensitive: false, fields: ['/title'] } };
+
+test('cold bootstrap can take more than two seconds without premature sample data', async ({ page }) => {
+  let entered, release;
+  const requested = new Promise(resolve => { entered = resolve; });
+  const inspected = new Promise(resolve => { release = resolve; });
+  await page.route('**/api/v1/bootstrap', async route => {
+    entered();
+    await inspected;
+    const elapsed = await page.evaluate(() => performance.now() - window.__bootstrapDiagnostic[0].startedAt);
+    // Browser dispatch is part of the probe budget, not an additional delay.
+    if (elapsed < 2500) await new Promise(resolve => setTimeout(resolve, Math.ceil(2500 - elapsed)));
+    await route.continue();
+  });
+  const opening = open(page, 'local');
+  try {
+    await requested;
+    expect(await page.evaluate(() => Boolean(window.__timelineDebug?.queryId))).toBe(false);
+    await expect(page.locator('.record-label')).toHaveCount(0);
+  } finally { release(); }
+  expect(await opening).toEqual([]);
+  const [probe] = await page.evaluate(() => window.__bootstrapDiagnostic);
+  expect(probe.status).toBe(404);
+  expect(probe.elapsedMs).toBeGreaterThanOrEqual(2500);
+});
 
 for (const mode of ['local', 'server']) {
   test(`${mode} Apply preserves genuine temporary settings, uses saved-filter scope and exports principal-owned preferences`, async ({ page }, info) => {

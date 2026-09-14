@@ -8,14 +8,14 @@ COPY yaml/test-data/ yaml/test-data/
 COPY shared/ shared/
 COPY scripts/build-standalone.mjs scripts/third-party-notices.mjs scripts/help-content.mjs scripts/
 COPY docs/ docs/
-COPY README.md ./
+COPY README.md LICENSE ./
 RUN npm run build
 
 FROM python:3.12-slim-bookworm@sha256:782412e85d0f0984994c290652577d4018aff08145c85b262bb63dc0c7522254 AS python-base
 COPY --from=ghcr.io/astral-sh/uv:0.12.13@sha256:b485bd65cc2cf1c9a93b3554012c9c3778cf7b1b5fd3d3096ce9e1226c97e1e6 /uv /usr/local/bin/uv
 WORKDIR /app
 ENV UV_PYTHON_DOWNLOADS=never UV_LINK_MODE=copy PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml uv.lock LICENSE ./
 RUN uv sync --locked --no-dev --no-install-project
 
 FROM python-base AS verification
@@ -39,7 +39,7 @@ COPY docs/*.md docs/
 COPY docs/releases/ docs/releases/
 COPY .github/workflows/ .github/workflows/
 COPY config/github-protection.json config/github-protection.json
-COPY README.md ./
+COPY README.md Dockerfile .dockerignore ./
 COPY server/ server/
 COPY scripts/ scripts/
 COPY tests/ tests/

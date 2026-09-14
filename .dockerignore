@@ -1,5 +1,6 @@
 **
 !Dockerfile
+!.dockerignore
 !package.json
 !package-lock.json
 !pyproject.toml
@@ -17,6 +18,7 @@
 !.github/workflows/**
 !config/github-protection.json
 !README.md
+!LICENSE
 !playwright.config.mjs
 !playwright.matrix.config.mjs
 !playwright.demo.config.mjs

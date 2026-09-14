@@ -38,6 +38,7 @@ from .services.local_browser import local_browser_key, require_local_browser, so
 from .services.startup import StartupStatus
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+CLIENT_HTML = PROJECT_ROOT / "dist" / "index.html"
 BASE = "/api/v1/workspaces/default"
 
 
@@ -571,10 +572,9 @@ def create_app(data_root=None, token=None, seed_path=None, metrics_path=None, le
 
     @app.get("/")
     async def index():
-        path = PROJECT_ROOT / "dist" / "index.html"
-        if not path.exists():
+        if not CLIENT_HTML.exists():
             return JSONResponse({"message": "Client build is missing; run npm run build."}, status_code=404)
-        return FileResponse(path, media_type="text/html")
+        return FileResponse(CLIENT_HTML, media_type="text/html")
 
     return app
 

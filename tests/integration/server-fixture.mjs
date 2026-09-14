@@ -37,7 +37,9 @@ export async function startServer() {
     }
   }
   async function ready() {
-    for (let i = 0; i < 120; i++) {
+    // Cold JSON recovery on Windows can exceed the old 12-second polling budget.
+    const deadline = performance.now() + 30000;
+    while (performance.now() < deadline) {
       if (child.exitCode !== null) throw new Error(`Python service exited: ${output}`);
       try { if ((await fetch(`${baseUrl}/api/v1/health`, { signal: AbortSignal.timeout(250) })).ok) return; }
       catch { /* Wait for ASGI startup, not for an arbitrary fixed server delay. */ }

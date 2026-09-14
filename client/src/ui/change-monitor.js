@@ -1,16 +1,37 @@
 export function createChangeMonitor(host, { delay = 250 } = {}) {
   let source = null, generation = null, baseline = 0, latest = 0, mode = 'pinned';
   let required = null, inFlight = false, disposed = false, unsubscribe, timer, session = 0;
+  let explicitPending = false, explicitWaiters = [];
   const snapshot = () => ({ active: !!source, generation, baseline, latest, mode, required, inFlight, pending: latest > baseline });
   const paint = () => host.render(snapshot());
   const boundaryRequired = () => ['authorization-lost', 'generation-changed', 'replay-gap'].includes(required);
   const cancelTimer = () => { clearTimeout(timer); timer = null; };
+  function cancelExplicit() {
+    explicitPending = false;
+    const waiters = explicitWaiters; explicitWaiters = [];
+    waiters.forEach(resolve => resolve(false));
+  }
   function schedule() {
-    if (disposed || !source || required || mode !== 'live' || latest <= baseline || inFlight || timer) return;
-    timer = setTimeout(() => { timer = null; void refresh(false); }, delay);
+    if (disposed || !source || inFlight || timer || !explicitPending && (required || mode !== 'live' || latest <= baseline)) return;
+    timer = setTimeout(() => {
+      timer = null;
+      if (!explicitPending) { void refresh(false); return; }
+      if (host.blocked()) { schedule(); return; }
+      const waiters = explicitWaiters; explicitWaiters = []; explicitPending = false;
+      void refresh(true).then(result => waiters.forEach(resolve => resolve(result)));
+    }, delay);
   }
   async function refresh(explicit) {
-    if (disposed || !source || inFlight || host.blocked()) { if (!explicit) schedule(); return false; }
+    if (disposed || !source) return false;
+    if (inFlight || host.blocked() || explicit && explicitPending) {
+      // Keep one explicit read intent while layout, gestures, or drafts are busy.
+      if (explicit) {
+        explicitPending = true;
+        const result = new Promise(resolve => explicitWaiters.push(resolve));
+        schedule(); return result;
+      }
+      schedule(); return false;
+    }
     if (!explicit && (required || mode !== 'live' || latest <= baseline)) return false;
     const ticket = session, previous = baseline;
     inFlight = true; cancelTimer(); paint();
@@ -31,7 +52,7 @@ export function createChangeMonitor(host, { delay = 250 } = {}) {
       if (ticket === session && !disposed) { inFlight = false; paint(); schedule(); }
     }
   }
-  function stop() { session++; unsubscribe?.(); unsubscribe = null; cancelTimer(); source = null; inFlight = false; }
+  function stop() { session++; unsubscribe?.(); unsubscribe = null; cancelTimer(); cancelExplicit(); source = null; inFlight = false; }
   function start(provider, metadata) {
     stop(); disposed = false; source = provider; generation = metadata.generation;
     baseline = metadata.revision; latest = baseline; required = null; mode = 'pinned';
@@ -40,12 +61,12 @@ export function createChangeMonitor(host, { delay = 250 } = {}) {
     unsubscribe = provider.subscribeChanges(event => {
       if (disposed || ticket !== session || source !== provider) return;
       if (event.type === 'authorization-lost') {
-        required = 'authorization-lost'; cancelTimer(); paint(); host.authorizationLost(event); return;
+        required = 'authorization-lost'; cancelTimer(); cancelExplicit(); paint(); host.authorizationLost(event); return;
       }
       if (event.type === 'generation-changed') {
-        required = event.code === 'replay_gap' ? 'replay-gap' : 'generation-changed'; cancelTimer(); paint(); host.refreshRequired(event); return;
+        required = event.code === 'replay_gap' ? 'replay-gap' : 'generation-changed'; cancelTimer(); cancelExplicit(); paint(); host.refreshRequired(event); return;
       }
-      if (event.type === 'server-unavailable') { host.unavailable(event); return; }
+      if (event.type === 'server-unavailable') { cancelTimer(); cancelExplicit(); host.unavailable(event); return; }
       if (event.type !== 'changed' || event.generation !== generation) return;
       // Empty pages can still advance the scope's high-water mark after source reassignment.
       latest = Math.max(latest, event.throughRevision); paint(); schedule();
@@ -59,6 +80,7 @@ export function createChangeMonitor(host, { delay = 250 } = {}) {
       baseline = Math.max(baseline, query.revision); latest = Math.max(latest, baseline); paint(); schedule();
     },
     setMode(value) { if (!['pinned', 'live'].includes(value)) throw new TypeError('Invalid change-monitor mode'); mode = value; cancelTimer(); paint(); schedule(); },
+    cancelQueuedReload() { cancelTimer(); cancelExplicit(); },
     reload: () => refresh(true),
     get state() { return Object.freeze(snapshot()); },
     dispose() { stop(); disposed = true; },
