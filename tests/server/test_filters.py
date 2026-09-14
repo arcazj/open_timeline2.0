@@ -1,4 +1,5 @@
 import copy
+import threading
 
 import pytest
 
@@ -148,15 +149,32 @@ def test_search_grammar_unicode_and_limits():
 
 
 @pytest.mark.parametrize("asynchronous", [False, True])
-def test_query_expression_applies_to_all_artifacts_and_pinned_revision(client, app, bundle, write_headers, asynchronous):
+def test_query_expression_applies_to_all_artifacts_and_pinned_revision(client, app, bundle, write_headers, asynchronous, monkeypatch):
     selected = bundle["records"][0]
     ast = {"version": 1, "root": {"op": "eq", "field": "/id", "value": selected["id"]}}
     request = {"domain": bundle["settings"]["overview"], "filters": {"expression": ast}, "search": selected["title"], "searchMode": "phrase"}
     headers = {"Prefer": "respond-async"} if asynchronous else {}
-    response = client.post(BASE + "/query-sessions", json=request, headers=headers)
-    if asynchronous:
-        assert response.status_code == 202, response.text
-    query = prepared(client, response).json()
+    def query_result():
+        if not asynchronous:
+            return prepared(client, client.post(BASE + "/query-sessions", json=request, headers=headers)).json()
+        coordinator, release = app.state.preparations, threading.Event()
+        calculate = coordinator._calculate
+
+        def held(job, resources):
+            assert release.wait(5)
+            return calculate(job, resources)
+
+        # Keep preparation pending until the 202 assertion, regardless of CPU speed.
+        with monkeypatch.context() as patch:
+            patch.setattr(coordinator, "_calculate", held)
+            try:
+                response = client.post(BASE + "/query-sessions", json=request, headers=headers)
+                assert response.status_code == 202, response.text
+            finally:
+                release.set()
+            return prepared(client, response).json()
+
+    query = query_result()
     path = BASE + "/query-sessions/" + query["queryId"]
     assert query["baseTotal"] == query["matchTotal"] == 1
     assert client.get(path + "/density").json()["total"] == 1
@@ -167,10 +185,7 @@ def test_query_expression_applies_to_all_artifacts_and_pinned_revision(client, a
                            headers={**write_headers, "Content-Type": "application/json-patch+json", "If-Match": f'"{write_headers["X-Workspace-Generation"]}:{selected["version"]}"'})
     assert changed.status_code == 200
     assert client.get(path + "/overview").json()["matched"] == 1
-    response = client.post(BASE + "/query-sessions", json=request, headers=headers)
-    if asynchronous:
-        assert response.status_code == 202, response.text
-    fresh = prepared(client, response).json()
+    fresh = query_result()
     assert fresh["baseTotal"] == 1 and fresh["matchTotal"] == 0
     malformed = copy.deepcopy(request)
     malformed["filters"]["surprise"] = True

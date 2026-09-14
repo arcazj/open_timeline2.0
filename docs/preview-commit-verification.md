@@ -298,3 +298,40 @@ readiness. The bounded bootstrap probe now has a test-only diagnostic attachment
 on startup failure, recording response status or error and elapsed time, never
 credentials, request headers or dataset contents. This is evidence collection,
 not a retry or a relaxed startup assertion.
+
+## Async And Stream Test Ordering
+
+The Windows/Python 3.13 job on `75ffdef` found two server-test scheduling
+assumptions before reaching the browser matrix. The filter test requested async
+preparation but could receive an already-ready 200 before asserting 202. It now
+holds the calculation until that assertion, then releases it and checks every
+filtered artifact and pinned revision as before.
+
+The real HTTP stream test could receive an already-buffered idle change frame
+before the revocation error. It now drains only empty frames with the unchanged
+generation/revision, within a bounded wait. Unexpected record changes are not
+discarded; the final error must still be 401 with the restricted error shape, and
+lease release and resume assertions remain. A focused regression verifies idle
+draining, preservation of unexpected changes, and rejection of a wrong revision.
+Neither correction changes server behavior or authorization policy.
+
+## Cold Bootstrap Deadline
+
+The `75ffdef` Windows/Python 3.12 diagnostic captured `AbortError` after 2214 ms
+and 2011 ms in the two failed Firefox configuration cases. The application's
+two-second discovery deadline, rather than a configuration action, ended both
+requests. Initial HTTP discovery now permits up to five seconds without adding
+a fixed delay or retry. File-mode startup still performs no discovery request,
+and a failed configured-server probe still cannot silently activate sample data.
+
+Fake-clock tests cover success at 2.5 seconds, cleared timers after success, and
+abort at exactly five seconds. A browser regression delays bootstrap beyond two
+seconds, checks that records are not shown prematurely, then requires readiness.
+The full local server suite passed 969 tests; one native symlink test was skipped
+because this Windows account lacks symlink privilege. Hosted qualification still
+requires that test without a skip.
+
+All 240 client tests and 21 configuration/slow-bootstrap browser cases across
+Chromium, Firefox and Edge passed locally after these corrections. The browser
+report is `artifacts/hosted-publication/bootstrap-matrix.json`; this focused run
+does not replace the complete hosted candidate checks.

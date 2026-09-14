@@ -69,6 +69,24 @@ async function exportJson(page) {
 }
 const filter = { sourceIds: ['operations'], kinds: ['session'], schemaRefs: [], expression: null, search: { text: 'gate', mode: 'any', caseSensitive: false, fields: ['/title'] } };
 
+test('cold bootstrap can take more than two seconds without premature sample data', async ({ page }) => {
+  let entered;
+  const requested = new Promise(resolve => { entered = resolve; });
+  await page.route('**/api/v1/bootstrap', async route => {
+    entered();
+    await new Promise(resolve => setTimeout(resolve, 2500));
+    await route.continue();
+  });
+  const opening = open(page, 'local');
+  await requested;
+  expect(await page.evaluate(() => Boolean(window.__timelineDebug?.queryId))).toBe(false);
+  await expect(page.locator('.record-label')).toHaveCount(0);
+  expect(await opening).toEqual([]);
+  const [probe] = await page.evaluate(() => window.__bootstrapDiagnostic);
+  expect(probe.status).toBe(404);
+  expect(probe.elapsedMs).toBeGreaterThanOrEqual(2500);
+});
+
 for (const mode of ['local', 'server']) {
   test(`${mode} Apply preserves genuine temporary settings, uses saved-filter scope and exports principal-owned preferences`, async ({ page }, info) => {
     const errors = await open(page, mode);
