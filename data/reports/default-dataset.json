@@ -1,0 +1,20 @@
+{
+  "datePolicy": "Proleptic Gregorian; 1 BC = astronomical 0000; year-only = January 1 UTC; explicit EST=-05:00/EDT=-04:00; trailing ? retained as approximateYear with nominal year position",
+  "dateReview": [],
+  "diagnostics": [],
+  "domain": {
+    "from": "2026-09-12T07:00:00.000Z",
+    "to": "2026-09-12T18:00:00.000Z"
+  },
+  "droppedRecords": 0,
+  "generatedTitles": [],
+  "id": "default-dataset",
+  "inputFormat": "json",
+  "inputRecords": 48,
+  "inputSha256": "66ea0b2767bc34753cc39258398e434a4802a67105167cd23d69598215011ab2",
+  "outputRecords": 48,
+  "referenceStatus": "unapproved-baseline",
+  "sourceAssignment": "default-dataset",
+  "unbundledOriginalAssets": [],
+  "uncertainRecords": 0
+}

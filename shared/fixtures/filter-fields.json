@@ -1,0 +1,9 @@
+{
+  "/id": "string", "/title": "string", "/kind": "string", "/sourceId": "string",
+  "/start": "date", "/end": "date", "/originalStart": "date", "/originalEnd": "date",
+  "/createdAt": "date", "/updatedAt": "date", "/parentSessionId": "string",
+  "/order": "number", "/version": "number", "/schemaId": "string", "/schemaVersion": "number",
+  "/tags": "strings", "/groupIds": "strings",
+  "/data/status": "string", "/data/system": "string", "/data/type": "string",
+  "/data/description": "string", "/data/text": "string"
+}

@@ -1,0 +1,5544 @@
+{
+  "filters": [],
+  "format": "timeline-snapshot",
+  "formatVersion": 1,
+  "manifest": {
+    "bundleId": "34fc2ee9-d357-5f34-8e46-dc61fc3ba62c",
+    "completeness": "complete-for-declared-universe",
+    "generation": "4ea83bdf-738a-547d-87ec-ebfc3b3c6408",
+    "legacy": {
+      "allRecordCount": 127,
+      "readOnly": true,
+      "status": "current"
+    },
+    "recordCount": 127,
+    "revision": 1,
+    "scope": {
+      "sourceIds": [
+        "ephemeris"
+      ],
+      "workspaceId": "default"
+    },
+    "snapshotAt": "2026-09-13T00:00:00.000Z",
+    "sourceKind": "imported",
+    "sourceName": "Ephemeris",
+    "testDataset": {
+      "id": "ephemeris",
+      "reference": null,
+      "referenceStatus": "unapproved-baseline"
+    },
+    "workspaceId": "default"
+  },
+  "models": [
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "description": "",
+      "draft": null,
+      "id": "light",
+      "lifecycle": "active",
+      "name": "Ephemeris reference",
+      "revision": 1,
+      "tags": [],
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "versions": [
+        {
+          "definition": {
+            "bins": 128,
+            "displayUnit": "HOUR",
+            "fontSize": 11,
+            "groupBy": "none",
+            "presentation": {
+              "bandLayout": [
+                {
+                  "height": 76,
+                  "id": "main",
+                  "role": "primary"
+                },
+                {
+                  "height": 24,
+                  "id": "overview",
+                  "role": "overview"
+                }
+              ],
+              "bands": {
+                "overview": {
+                  "backgroundColor": "#dddddd",
+                  "intervalUnit": "YEAR"
+                },
+                "primary": {
+                  "backgroundColor": "#eeeeee",
+                  "barHeight": 6,
+                  "dateColor": "#9099a0",
+                  "intervalUnit": "HOUR",
+                  "pointRadius": 4,
+                  "textColor": "#121212"
+                }
+              },
+              "compact": true,
+              "labels": {
+                "fontSize": 11,
+                "maxLines": 1
+              },
+              "version": 1
+            },
+            "ratio": 4,
+            "rowHeight": 32,
+            "scaleMode": "uniform",
+            "theme": "light",
+            "timeZone": "UTC"
+          },
+          "publishedAt": "2026-09-13T00:00:00.000Z",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "description": "",
+      "draft": null,
+      "id": "classic",
+      "lifecycle": "active",
+      "name": "Classic blue",
+      "revision": 1,
+      "tags": [],
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "versions": [
+        {
+          "definition": {
+            "bins": 128,
+            "displayUnit": "HOUR",
+            "fontSize": 11,
+            "groupBy": "none",
+            "ratio": 4,
+            "rowHeight": 32,
+            "scaleMode": "uniform",
+            "theme": "classic",
+            "timeZone": "UTC"
+          },
+          "publishedAt": "2026-09-13T00:00:00.000Z",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "description": "",
+      "draft": null,
+      "id": "dark",
+      "lifecycle": "active",
+      "name": "Dark timeline",
+      "revision": 1,
+      "tags": [],
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "versions": [
+        {
+          "definition": {
+            "bins": 128,
+            "displayUnit": "HOUR",
+            "fontSize": 11,
+            "groupBy": "none",
+            "ratio": 4,
+            "rowHeight": 32,
+            "scaleMode": "uniform",
+            "theme": "dark",
+            "timeZone": "UTC"
+          },
+          "publishedAt": "2026-09-13T00:00:00.000Z",
+          "version": 1
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-21T10:54:01.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "6f80f916-2fb8-4b6f-89dc-e35e286e2900",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/21 02:04:51.150  Entering Polygon  [Center of Box] 2020/04/21 06:54:01.350  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-0"
+          },
+          "end": "Tue Apr 21 06:54:01 EDT 2020",
+          "start": "Tue Apr 21 02:04:51 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "35bbc9cf-7dac-53e9-9672-d2744f39ae5b",
+      "kind": "session",
+      "order": 0,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-21T06:04:51.000Z",
+      "tags": [],
+      "title": "Ephemeris-0",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-21T22:46:49.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "92a9473e-913e-4355-b760-03c70afd0da9",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/21 13:52:04.350  Entering Polygon  [Center of Box] 2020/04/21 18:46:49.350  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-1"
+          },
+          "end": "Tue Apr 21 18:46:49 EDT 2020",
+          "start": "Tue Apr 21 13:52:04 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "962a505c-e8da-5e6e-8ff5-d98dcb35d164",
+      "kind": "session",
+      "order": 1,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-21T17:52:04.000Z",
+      "tags": [],
+      "title": "Ephemeris-1",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-22T10:55:35.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "f04d3479-0447-46f2-926e-d303cba35bb1",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/22 00:59:22.650  Entering Polygon  [Center of Box] 2020/04/22 06:55:35.850  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-2"
+          },
+          "end": "Wed Apr 22 06:55:35 EDT 2020",
+          "start": "Wed Apr 22 00:59:22 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "5b97f1b0-d061-5735-8868-014f3d646738",
+      "kind": "session",
+      "order": 2,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-22T04:59:22.000Z",
+      "tags": [],
+      "title": "Ephemeris-2",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-22T23:21:33.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "faccffa6-bdb4-4524-8025-4dcddee321ba",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/22 14:33:04.050  Entering Polygon  [Center of Box] 2020/04/22 19:21:33.749  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-3"
+          },
+          "end": "Wed Apr 22 19:21:33 EDT 2020",
+          "start": "Wed Apr 22 14:33:04 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "31049820-0529-5c6a-887b-b90ffabb6ed3",
+      "kind": "session",
+      "order": 3,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-22T18:33:04.000Z",
+      "tags": [],
+      "title": "Ephemeris-3",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-23T10:13:12.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "2dc31f41-7495-41eb-9ad8-46c0949e1eca",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/22 23:30:59.849  Entering Polygon  [Center of Box] 2020/04/23 06:13:12.449  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-4"
+          },
+          "end": "Thu Apr 23 06:13:12 EDT 2020",
+          "start": "Wed Apr 22 23:30:59 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "c35767b0-8199-5f71-a953-aa146fe45fa7",
+      "kind": "session",
+      "order": 4,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-23T03:30:59.000Z",
+      "tags": [],
+      "title": "Ephemeris-4",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-23T22:11:40.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "5cfe497c-7f97-4b4b-8fbb-1036b6d0981d",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/23 13:40:14.249  Entering Polygon  [Center of Box] 2020/04/23 18:11:40.649  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-5"
+          },
+          "end": "Thu Apr 23 18:11:40 EDT 2020",
+          "start": "Thu Apr 23 13:40:14 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "033de0e4-81dc-5c0d-b35f-4051768eae9d",
+      "kind": "session",
+      "order": 5,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-23T17:40:14.000Z",
+      "tags": [],
+      "title": "Ephemeris-5",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-24T11:37:21.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "8544c355-392d-4a16-b1dc-6ad5fb78dcfc",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/24 00:59:11.849  Entering Polygon  [Center of Box] 2020/04/24 07:37:21.449  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-6"
+          },
+          "end": "Fri Apr 24 07:37:21 EDT 2020",
+          "start": "Fri Apr 24 00:59:11 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "afda23a6-cb95-5fba-aa67-cadd56f8e9e4",
+      "kind": "session",
+      "order": 6,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-24T04:59:11.000Z",
+      "tags": [],
+      "title": "Ephemeris-6",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-24T21:19:15.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "e6a7d4d3-4d81-4ccc-9a1c-5df925bf633d",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/24 12:24:00.449  Entering Polygon  [Center of Box] 2020/04/24 17:19:15.149  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-7"
+          },
+          "end": "Fri Apr 24 17:19:15 EDT 2020",
+          "start": "Fri Apr 24 12:24:00 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "6fe0e205-c68b-5133-9a73-10bcb89707c9",
+      "kind": "session",
+      "order": 7,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-24T16:24:00.000Z",
+      "tags": [],
+      "title": "Ephemeris-7",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-25T20:41:54.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "117c50d7-9741-4710-8b94-95196440fa9a",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/25 02:00:23.849  Entering Polygon  [Center of Box] 2020/04/25 16:41:54.149  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-8"
+          },
+          "end": "Sat Apr 25 16:41:54 EDT 2020",
+          "start": "Sat Apr 25 02:00:23 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "287c0dec-5941-5e77-b388-6065f785edac",
+      "kind": "session",
+      "order": 8,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-25T06:00:23.000Z",
+      "tags": [],
+      "title": "Ephemeris-8",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-26T20:13:27.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "8c0e3ac8-b9f6-4f56-894a-e93320168e04",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/26 02:45:21.148  Entering Polygon  [Center of Box] 2020/04/26 16:13:27.748  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-9"
+          },
+          "end": "Sun Apr 26 16:13:27 EDT 2020",
+          "start": "Sun Apr 26 02:45:21 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "203d0133-d60f-54b7-8e4a-a7ddd2eac1d2",
+      "kind": "session",
+      "order": 9,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-26T06:45:21.000Z",
+      "tags": [],
+      "title": "Ephemeris-9",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-27T12:51:58.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "a1514aa2-6a56-4400-9bfa-486a6bc052ac",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/27 03:18:44.548  Entering Polygon  [Center of Box] 2020/04/27 08:51:58.048  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-10"
+          },
+          "end": "Mon Apr 27 08:51:58 EDT 2020",
+          "start": "Mon Apr 27 03:18:44 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "816d88c4-4bc4-5794-880c-c46df8a9737e",
+      "kind": "session",
+      "order": 10,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-27T07:18:44.000Z",
+      "tags": [],
+      "title": "Ephemeris-10",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-28T13:02:02.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "12e88401-ea90-407f-af91-80e3c5d82832",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/28 05:39:38.248  Entering Polygon  [Center of Box] 2020/04/28 09:02:02.848  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-11"
+          },
+          "end": "Tue Apr 28 09:02:02 EDT 2020",
+          "start": "Tue Apr 28 05:39:38 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "10b12199-cd40-5c0e-a47b-e41e6bae8984",
+      "kind": "session",
+      "order": 11,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-28T09:39:38.000Z",
+      "tags": [],
+      "title": "Ephemeris-11",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-28T21:53:46.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "3afa8676-3c93-4532-97e9-9b65f2807948",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/28 17:32:31.648  Entering Polygon  [Center of Box] 2020/04/28 17:53:46.048  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-12"
+          },
+          "end": "Tue Apr 28 17:53:46 EDT 2020",
+          "start": "Tue Apr 28 17:32:31 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "beb983e5-00e0-5090-9a71-02133f043ac8",
+      "kind": "session",
+      "order": 12,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-28T21:32:31.000Z",
+      "tags": [],
+      "title": "Ephemeris-12",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-29T10:37:00.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "8f320a4c-d9cb-43ff-9238-c8a06f3e6040",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/29 05:21:57.148  Entering Polygon  [Center of Box] 2020/04/29 06:37:00.748  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-13"
+          },
+          "end": "Wed Apr 29 06:37:00 EDT 2020",
+          "start": "Wed Apr 29 05:21:57 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "365fee8d-f21f-5d6f-8d24-2bc31c51420d",
+      "kind": "session",
+      "order": 13,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-29T09:21:57.000Z",
+      "tags": [],
+      "title": "Ephemeris-13",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-30T00:07:00.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "d28983f0-f729-4272-aeaa-1529d27e3b4e",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/29 17:11:09.147  Entering Polygon  [Center of Box] 2020/04/29 20:07:00.747  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-14"
+          },
+          "end": "Wed Apr 29 20:07:00 EDT 2020",
+          "start": "Wed Apr 29 17:11:09 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "6ff5edc0-3c52-53a6-b672-17e7e1824d02",
+      "kind": "session",
+      "order": 14,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-29T21:11:09.000Z",
+      "tags": [],
+      "title": "Ephemeris-14",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-30T08:59:05.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "f77e4d82-1bbe-47eb-8952-8b57e3f77ca5",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/30 04:55:21.447  Entering Polygon  [Center of Box] 2020/04/30 04:59:05.547  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-15"
+          },
+          "end": "Thu Apr 30 04:59:05 EDT 2020",
+          "start": "Thu Apr 30 04:55:21 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "f96a2c7b-48ed-51b5-afb1-df0da7621e09",
+      "kind": "session",
+      "order": 15,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-30T08:55:21.000Z",
+      "tags": [],
+      "title": "Ephemeris-15",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-30T22:04:25.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "cf406904-4088-49c9-b731-5a866c868a9d",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/30 16:41:02.847  Entering Polygon  [Center of Box] 2020/04/30 18:04:25.947  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-16"
+          },
+          "end": "Thu Apr 30 18:04:25 EDT 2020",
+          "start": "Thu Apr 30 16:41:02 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "66adabcb-aab7-5a60-a9bf-60aa01c2e00c",
+      "kind": "session",
+      "order": 16,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-30T20:41:02.000Z",
+      "tags": [],
+      "title": "Ephemeris-16",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-01T10:19:14.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "b9a9583c-4300-4f75-9dd7-21c009b5a21a",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/01 04:21:12.147  Entering Polygon  [Center of Box] 2020/05/01 06:19:14.247  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-17"
+          },
+          "end": "Fri May 01 06:19:14 EDT 2020",
+          "start": "Fri May 01 04:21:12 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "4d20614f-0986-56fd-9a56-808086e19c7a",
+      "kind": "session",
+      "order": 17,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-01T08:21:12.000Z",
+      "tags": [],
+      "title": "Ephemeris-17",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-01T20:56:04.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "59b80457-af21-4b47-b365-a39dda02a79e",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/01 16:05:10.947  Entering Polygon  [Center of Box] 2020/05/01 16:56:04.647  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-18"
+          },
+          "end": "Fri May 01 16:56:04 EDT 2020",
+          "start": "Fri May 01 16:05:10 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "f4803f6a-68e1-51db-bed0-487085ecc785",
+      "kind": "session",
+      "order": 18,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-01T20:05:10.000Z",
+      "tags": [],
+      "title": "Ephemeris-18",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-02T11:17:36.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "1dc6cd9d-87b5-4187-b18f-26556d3f0f0a",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/02 03:45:12.147  Entering Polygon  [Center of Box] 2020/05/02 07:17:36.147  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-19"
+          },
+          "end": "Sat May 02 07:17:36 EDT 2020",
+          "start": "Sat May 02 03:45:12 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "bd2571e4-f034-5652-9192-bd4252453def",
+      "kind": "session",
+      "order": 19,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-02T07:45:12.000Z",
+      "tags": [],
+      "title": "Ephemeris-19",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-02T20:21:55.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "d46c5c4b-68df-4553-a657-814febc7b4fa",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/02 15:30:42.747  Entering Polygon  [Center of Box] 2020/05/02 16:21:55.347  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-20"
+          },
+          "end": "Sat May 02 16:21:55 EDT 2020",
+          "start": "Sat May 02 15:30:42 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "97605d28-3ec3-5ed5-aa9e-5cb8835d9349",
+      "kind": "session",
+      "order": 20,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-02T19:30:42.000Z",
+      "tags": [],
+      "title": "Ephemeris-20",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-03T11:40:43.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "729a931c-1452-454d-877b-11c17e1545b5",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/03 03:15:24.746  Entering Polygon  [Center of Box] 2020/05/03 07:40:43.946  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-21"
+          },
+          "end": "Sun May 03 07:40:43 EDT 2020",
+          "start": "Sun May 03 03:15:24 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "89890ac5-7e31-5e70-b9ec-39af75fc5518",
+      "kind": "session",
+      "order": 21,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-03T07:15:24.000Z",
+      "tags": [],
+      "title": "Ephemeris-21",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-03T20:19:13.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "3f03a745-1cb3-4637-a388-86a308e8af1f",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/03 15:05:11.846  Entering Polygon  [Center of Box] 2020/05/03 16:19:13.346  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-22"
+          },
+          "end": "Sun May 03 16:19:13 EDT 2020",
+          "start": "Sun May 03 15:05:11 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "e5adfaac-93f6-5399-a6a1-6a09db3e91d9",
+      "kind": "session",
+      "order": 22,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-03T19:05:11.000Z",
+      "tags": [],
+      "title": "Ephemeris-22",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-04T11:33:48.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "759d8a9f-aa37-4ca4-aa32-67b58e036a5f",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/04 02:56:36.146  Entering Polygon  [Center of Box] 2020/05/04 07:33:48.146  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-23"
+          },
+          "end": "Mon May 04 07:33:48 EDT 2020",
+          "start": "Mon May 04 02:56:36 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "294bc5ad-2a40-5a56-bde3-706c819dc17b",
+      "kind": "session",
+      "order": 23,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-04T06:56:36.000Z",
+      "tags": [],
+      "title": "Ephemeris-23",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-04T20:42:04.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "4518218c-030c-4a1b-b3d1-aa71c0b2a2de",
+          "data": {
+            "satellite": "IS-21",
+            "text": "Spacecraft: Intelsat IS-21 at 302.00 deg E / 58.00 deg W Atlantic Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/04 14:50:53.246  Entering Polygon  [Center of Box] 2020/05/04 16:42:04.946  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-24"
+          },
+          "end": "Mon May 04 16:42:04 EDT 2020",
+          "start": "Mon May 04 14:50:53 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "324c3def-684e-5780-9e65-55a07fb510a1",
+      "kind": "session",
+      "order": 24,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-04T18:50:53.000Z",
+      "tags": [],
+      "title": "Ephemeris-24",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-21T09:21:03.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "ffc2614a-870e-46c6-85f2-e97c77b4e2ef",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/21 05:18:23.850  Entering Polygon  [Center of Box] 2020/04/21 05:21:03.150  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-0"
+          },
+          "end": "Tue Apr 21 05:21:03 EDT 2020",
+          "start": "Tue Apr 21 05:18:23 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "0d85ae1a-a368-5e97-a8ca-4223efabfbd1",
+      "kind": "session",
+      "order": 25,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-21T09:18:23.000Z",
+      "tags": [],
+      "title": "Ephemeris-0",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-21T21:18:58.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "8665ca49-bf47-445b-a29a-70f563d58153",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/21 17:16:19.650  Entering Polygon  [Center of Box] 2020/04/21 17:18:58.950  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-1"
+          },
+          "end": "Tue Apr 21 17:18:58 EDT 2020",
+          "start": "Tue Apr 21 17:16:19 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "29b455e2-1924-5ec6-b72a-fbbc2ab777f4",
+      "kind": "session",
+      "order": 26,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-21T21:16:19.000Z",
+      "tags": [],
+      "title": "Ephemeris-1",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-22T09:16:57.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "4ed355f7-b9e4-4619-9626-a92522cf74ad",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/22 05:14:18.150  Entering Polygon  [Center of Box] 2020/04/22 05:16:57.450  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-2"
+          },
+          "end": "Wed Apr 22 05:16:57 EDT 2020",
+          "start": "Wed Apr 22 05:14:18 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "f27e6f65-43d6-51ac-a222-e7c5d717efb1",
+      "kind": "session",
+      "order": 27,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-22T09:14:18.000Z",
+      "tags": [],
+      "title": "Ephemeris-2",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-22T21:14:53.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "745e6d0d-c36c-4af3-98c6-5b6eebf3e991",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/22 17:12:13.949  Entering Polygon  [Center of Box] 2020/04/22 17:14:53.249  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-3"
+          },
+          "end": "Wed Apr 22 17:14:53 EDT 2020",
+          "start": "Wed Apr 22 17:12:13 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "af64c243-0597-5bce-8c57-630e68de9e21",
+      "kind": "session",
+      "order": 28,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-22T21:12:13.000Z",
+      "tags": [],
+      "title": "Ephemeris-3",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-23T09:12:51.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "f33a9cf9-d9f9-4ab9-89b5-cf7c8b90c985",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/23 05:10:12.449  Entering Polygon  [Center of Box] 2020/04/23 05:12:51.749  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-4"
+          },
+          "end": "Thu Apr 23 05:12:51 EDT 2020",
+          "start": "Thu Apr 23 05:10:12 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "4f0d792e-6875-576f-8bbb-096c66d6fb5d",
+      "kind": "session",
+      "order": 29,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-23T09:10:12.000Z",
+      "tags": [],
+      "title": "Ephemeris-4",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-23T21:10:47.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "6807bae5-a84b-40e5-a150-f821ddc78efc",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/23 17:08:08.249  Entering Polygon  [Center of Box] 2020/04/23 17:10:47.549  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-5"
+          },
+          "end": "Thu Apr 23 17:10:47 EDT 2020",
+          "start": "Thu Apr 23 17:08:08 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "5526498e-e43a-5be0-a9fc-26f237faaa41",
+      "kind": "session",
+      "order": 30,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-23T21:08:08.000Z",
+      "tags": [],
+      "title": "Ephemeris-5",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-24T09:08:43.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "0a1be361-959c-48f0-8c83-4bfd7e9e0710",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/24 05:06:04.049  Entering Polygon  [Center of Box] 2020/04/24 05:08:43.349  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-6"
+          },
+          "end": "Fri Apr 24 05:08:43 EDT 2020",
+          "start": "Fri Apr 24 05:06:04 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "1ac8fa4a-4356-5c48-b789-7a54f7db99b5",
+      "kind": "session",
+      "order": 31,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-24T09:06:04.000Z",
+      "tags": [],
+      "title": "Ephemeris-6",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-24T21:06:39.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "2d2e5a4e-6347-450c-b14a-c0cd4874cee7",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/24 17:03:59.849  Entering Polygon  [Center of Box] 2020/04/24 17:06:39.149  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-7"
+          },
+          "end": "Fri Apr 24 17:06:39 EDT 2020",
+          "start": "Fri Apr 24 17:03:59 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "7fee3367-23d2-5f51-865e-b0b3cefca82d",
+      "kind": "session",
+      "order": 32,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-24T21:03:59.000Z",
+      "tags": [],
+      "title": "Ephemeris-7",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-25T09:04:34.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "7fd519fb-28f8-42bf-92f8-bfe338ce10a3",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/25 05:01:55.649  Entering Polygon  [Center of Box] 2020/04/25 05:04:34.949  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-8"
+          },
+          "end": "Sat Apr 25 05:04:34 EDT 2020",
+          "start": "Sat Apr 25 05:01:55 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "bd874004-9601-5d8d-834d-0b9ce5059d08",
+      "kind": "session",
+      "order": 33,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-25T09:01:55.000Z",
+      "tags": [],
+      "title": "Ephemeris-8",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-25T21:02:30.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "b3110db3-9cad-49a5-8d3d-a6ad594b9472",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/25 16:59:51.449  Entering Polygon  [Center of Box] 2020/04/25 17:02:30.749  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-9"
+          },
+          "end": "Sat Apr 25 17:02:30 EDT 2020",
+          "start": "Sat Apr 25 16:59:51 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "ce85beeb-1cdd-53fe-83a5-2061786543e2",
+      "kind": "session",
+      "order": 34,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-25T20:59:51.000Z",
+      "tags": [],
+      "title": "Ephemeris-9",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-26T09:00:26.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "8dd7b5ee-0aa0-4d81-b256-d179b22da8c7",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/26 04:57:49.948  Entering Polygon  [Center of Box] 2020/04/26 05:00:26.548  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-10"
+          },
+          "end": "Sun Apr 26 05:00:26 EDT 2020",
+          "start": "Sun Apr 26 04:57:49 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "2676f9dc-ffde-579c-8166-0b8b30688efc",
+      "kind": "session",
+      "order": 35,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-26T08:57:49.000Z",
+      "tags": [],
+      "title": "Ephemeris-10",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-26T20:58:25.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "e0db95fb-3c3b-406e-8ab7-cefc4032c092",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/26 16:55:48.448  Entering Polygon  [Center of Box] 2020/04/26 16:58:25.048  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-11"
+          },
+          "end": "Sun Apr 26 16:58:25 EDT 2020",
+          "start": "Sun Apr 26 16:55:48 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "6c70257d-4f5e-5cf5-959e-7b924422c8fa",
+      "kind": "session",
+      "order": 36,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-26T20:55:48.000Z",
+      "tags": [],
+      "title": "Ephemeris-11",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-27T08:56:23.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "d009118f-3c50-4fe8-829c-9d3d4ef9a894",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/27 04:53:44.248  Entering Polygon  [Center of Box] 2020/04/27 04:56:23.548  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-12"
+          },
+          "end": "Mon Apr 27 04:56:23 EDT 2020",
+          "start": "Mon Apr 27 04:53:44 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "1055a1ff-592f-5855-ab28-a62535bd9c52",
+      "kind": "session",
+      "order": 37,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-27T08:53:44.000Z",
+      "tags": [],
+      "title": "Ephemeris-12",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-27T20:54:24.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "8892e6a3-fb2b-4154-a140-19b88af44203",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/27 16:51:45.448  Entering Polygon  [Center of Box] 2020/04/27 16:54:24.748  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-13"
+          },
+          "end": "Mon Apr 27 16:54:24 EDT 2020",
+          "start": "Mon Apr 27 16:51:45 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "1fbd3de7-ad9b-58c9-a1de-b6a8a5885150",
+      "kind": "session",
+      "order": 38,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-27T20:51:45.000Z",
+      "tags": [],
+      "title": "Ephemeris-13",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-28T08:52:23.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "4f581533-2eb4-4189-9ce2-d6dc84f87c01",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/28 04:49:43.948  Entering Polygon  [Center of Box] 2020/04/28 04:52:23.248  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-14"
+          },
+          "end": "Tue Apr 28 04:52:23 EDT 2020",
+          "start": "Tue Apr 28 04:49:43 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "d8f5da4f-5e8b-5eb1-bc91-738ad1de34fc",
+      "kind": "session",
+      "order": 39,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-28T08:49:43.000Z",
+      "tags": [],
+      "title": "Ephemeris-14",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-28T20:50:24.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "9ed93d9b-1f3c-4a6b-a1dd-1ae3362f3b15",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/28 16:47:47.848  Entering Polygon  [Center of Box] 2020/04/28 16:50:24.448  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-15"
+          },
+          "end": "Tue Apr 28 16:50:24 EDT 2020",
+          "start": "Tue Apr 28 16:47:47 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "d651b25e-e24e-57db-92a8-6d4f90cbb654",
+      "kind": "session",
+      "order": 40,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-28T20:47:47.000Z",
+      "tags": [],
+      "title": "Ephemeris-15",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-29T08:48:25.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "0a9cc2fc-885e-4b7a-9b77-f7aaf658a26e",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/29 04:45:49.048  Entering Polygon  [Center of Box] 2020/04/29 04:48:25.648  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-16"
+          },
+          "end": "Wed Apr 29 04:48:25 EDT 2020",
+          "start": "Wed Apr 29 04:45:49 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "9d054378-a45b-545d-9dc0-d9d3aa20a87f",
+      "kind": "session",
+      "order": 41,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-29T08:45:49.000Z",
+      "tags": [],
+      "title": "Ephemeris-16",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-29T20:46:32.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "71c4553a-94f1-4808-a05e-7e9051e25f39",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/29 16:43:52.947  Entering Polygon  [Center of Box] 2020/04/29 16:46:32.247  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-17"
+          },
+          "end": "Wed Apr 29 16:46:32 EDT 2020",
+          "start": "Wed Apr 29 16:43:52 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "9c976731-1838-59f8-b0d2-76f72f53d9a7",
+      "kind": "session",
+      "order": 42,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-29T20:43:52.000Z",
+      "tags": [],
+      "title": "Ephemeris-17",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-30T08:44:33.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "9a54df7b-0503-449e-bb29-90eb93ec1c66",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/30 04:41:56.847  Entering Polygon  [Center of Box] 2020/04/30 04:44:33.447  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-18"
+          },
+          "end": "Thu Apr 30 04:44:33 EDT 2020",
+          "start": "Thu Apr 30 04:41:56 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "bcb333f8-8fcc-5925-8388-c2a6f56ec376",
+      "kind": "session",
+      "order": 43,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-30T08:41:56.000Z",
+      "tags": [],
+      "title": "Ephemeris-18",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-30T20:42:40.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "49ff712a-0ead-4225-9bbd-db22ae2235cb",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/30 16:40:03.447  Entering Polygon  [Center of Box] 2020/04/30 16:42:40.047  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-19"
+          },
+          "end": "Thu Apr 30 16:42:40 EDT 2020",
+          "start": "Thu Apr 30 16:40:03 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "b22ce0c4-ed83-5650-b59d-5cfed499d8e4",
+      "kind": "session",
+      "order": 44,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-30T20:40:03.000Z",
+      "tags": [],
+      "title": "Ephemeris-19",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-01T08:40:43.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "01ba56b7-855a-4823-bde0-a20e41ca9763",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/01 04:38:04.647  Entering Polygon  [Center of Box] 2020/05/01 04:40:43.947  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-20"
+          },
+          "end": "Fri May 01 04:40:43 EDT 2020",
+          "start": "Fri May 01 04:38:04 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "cc8a0d73-d0e3-5af2-95a8-06b1734b4b05",
+      "kind": "session",
+      "order": 45,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-01T08:38:04.000Z",
+      "tags": [],
+      "title": "Ephemeris-20",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-01T20:38:50.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "63d8bb77-d49c-4de0-b6d4-8c4b49282f1f",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/01 16:36:13.947  Entering Polygon  [Center of Box] 2020/05/01 16:38:50.547  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-21"
+          },
+          "end": "Fri May 01 16:38:50 EDT 2020",
+          "start": "Fri May 01 16:36:13 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "351f402b-53be-50ea-9f7f-4070059437c5",
+      "kind": "session",
+      "order": 46,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-01T20:36:13.000Z",
+      "tags": [],
+      "title": "Ephemeris-21",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-02T08:36:54.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "a7b2e10b-9877-4859-8cad-8410187c54e0",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/02 04:34:15.147  Entering Polygon  [Center of Box] 2020/05/02 04:36:54.447  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-22"
+          },
+          "end": "Sat May 02 04:36:54 EDT 2020",
+          "start": "Sat May 02 04:34:15 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "895481d6-d78c-593e-924b-6d3bf2acf3fb",
+      "kind": "session",
+      "order": 47,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-02T08:34:15.000Z",
+      "tags": [],
+      "title": "Ephemeris-22",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-02T20:35:01.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "350213ec-3f5c-485d-91ff-93f703b121c1",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/02 16:32:24.447  Entering Polygon  [Center of Box] 2020/05/02 16:35:01.047  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-23"
+          },
+          "end": "Sat May 02 16:35:01 EDT 2020",
+          "start": "Sat May 02 16:32:24 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "9a0253ed-4288-5665-a53a-8ac14e102b3c",
+      "kind": "session",
+      "order": 48,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-02T20:32:24.000Z",
+      "tags": [],
+      "title": "Ephemeris-23",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-03T08:33:02.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "1ac54e00-aefa-42cd-a1d0-a4b9ad2f9443",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/03 04:30:22.946  Entering Polygon  [Center of Box] 2020/05/03 04:33:02.246  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-24"
+          },
+          "end": "Sun May 03 04:33:02 EDT 2020",
+          "start": "Sun May 03 04:30:22 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "5fecd231-a8f8-5fe0-850f-421d789cb169",
+      "kind": "session",
+      "order": 49,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-03T08:30:22.000Z",
+      "tags": [],
+      "title": "Ephemeris-24",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-03T20:31:06.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "adf19f3c-e932-484b-8974-28471135dbf9",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/03 16:28:29.546  Entering Polygon  [Center of Box] 2020/05/03 16:31:06.146  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-25"
+          },
+          "end": "Sun May 03 16:31:06 EDT 2020",
+          "start": "Sun May 03 16:28:29 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "82d527aa-1c94-50d6-b0cf-716913554509",
+      "kind": "session",
+      "order": 50,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-03T20:28:29.000Z",
+      "tags": [],
+      "title": "Ephemeris-25",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-04T08:29:07.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "fff85af7-0c50-43b8-97c4-af5efc8223e6",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/04 04:26:28.046  Entering Polygon  [Center of Box] 2020/05/04 04:29:07.346  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-26"
+          },
+          "end": "Mon May 04 04:29:07 EDT 2020",
+          "start": "Mon May 04 04:26:28 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "5df522b6-ae66-5362-818f-a06e8453b55b",
+      "kind": "session",
+      "order": 51,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-04T08:26:28.000Z",
+      "tags": [],
+      "title": "Ephemeris-26",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-04T20:27:08.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "9aeafc06-0149-4bba-8be3-85086ef0bdcd",
+          "data": {
+            "satellite": "IS-1R",
+            "text": "Spacecraft: Intelsat IS-1R at 157.10 deg E / 202.90 deg W Asian Pacific Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/04 16:24:31.946  Entering Polygon  [Center of Box] 2020/05/04 16:27:08.546  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-27"
+          },
+          "end": "Mon May 04 16:27:08 EDT 2020",
+          "start": "Mon May 04 16:24:31 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "d212c2c7-0717-5dd1-9415-f77d1358b97b",
+      "kind": "session",
+      "order": 52,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-04T20:24:31.000Z",
+      "tags": [],
+      "title": "Ephemeris-27",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-21T13:54:28.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "41906088-5a79-4b14-86af-892ef283dc1e",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/21 06:18:58.050  Entering Polygon  [Center of Box] 2020/04/21 09:54:28.350  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-0"
+          },
+          "end": "Tue Apr 21 09:54:28 EDT 2020",
+          "start": "Tue Apr 21 06:18:58 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "170f8d5f-20e2-5ffc-949c-2d07d37228f6",
+      "kind": "session",
+      "order": 53,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-21T10:18:58.000Z",
+      "tags": [],
+      "title": "Ephemeris-0",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-22T02:53:14.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "0aef4916-3be9-4ebc-9ca4-9ff58defdaf6",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/21 19:36:32.850  Entering Polygon  [Center of Box] 2020/04/21 22:53:14.550  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-1"
+          },
+          "end": "Tue Apr 21 22:53:14 EDT 2020",
+          "start": "Tue Apr 21 19:36:32 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "426c566e-7206-5801-96e8-64dcdfa2b419",
+      "kind": "session",
+      "order": 54,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-21T23:36:32.000Z",
+      "tags": [],
+      "title": "Ephemeris-1",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-22T13:32:52.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "efc0c2e5-04c8-4f27-bf33-f0856d17cd2e",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/22 06:10:35.850  Entering Polygon  [Center of Box] 2020/04/22 09:32:52.350  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-2"
+          },
+          "end": "Wed Apr 22 09:32:52 EDT 2020",
+          "start": "Wed Apr 22 06:10:35 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "0a3b4d0a-b4dc-54e7-b8ae-1a590d2b262a",
+      "kind": "session",
+      "order": 55,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-22T10:10:35.000Z",
+      "tags": [],
+      "title": "Ephemeris-2",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-23T03:02:41.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "e2227964-81ea-4ba0-bb28-97ebb89a3e15",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/22 19:47:12.749  Entering Polygon  [Center of Box] 2020/04/22 23:02:41.549  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-3"
+          },
+          "end": "Wed Apr 22 23:02:41 EDT 2020",
+          "start": "Wed Apr 22 19:47:12 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "91a30cbf-8349-5d1c-b5c1-6debe12c8b8f",
+      "kind": "session",
+      "order": 56,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-22T23:47:12.000Z",
+      "tags": [],
+      "title": "Ephemeris-3",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-23T13:16:18.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "8ea97abd-22d4-42db-a7cc-22c7597281d1",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/23 05:57:08.549  Entering Polygon  [Center of Box] 2020/04/23 09:16:18.749  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-4"
+          },
+          "end": "Thu Apr 23 09:16:18 EDT 2020",
+          "start": "Thu Apr 23 05:57:08 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "5bf1bd8d-3d90-56f7-82fe-d9e9c0bceb40",
+      "kind": "session",
+      "order": 57,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-23T09:57:08.000Z",
+      "tags": [],
+      "title": "Ephemeris-4",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-24T02:49:30.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "766a686e-c82b-4618-8818-b99df7c16bbf",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/23 21:31:09.749  Entering Polygon  [Center of Box] 2020/04/23 22:49:30.449  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-5"
+          },
+          "end": "Thu Apr 23 22:49:30 EDT 2020",
+          "start": "Thu Apr 23 21:31:09 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "9ccbe41e-ecd6-5161-aa35-04c80fb81a43",
+      "kind": "session",
+      "order": 58,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-24T01:31:09.000Z",
+      "tags": [],
+      "title": "Ephemeris-5",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-24T14:13:33.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "7707744d-75eb-4221-9570-9e05d3d72730",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/24 09:30:58.949  Entering Polygon  [Center of Box] 2020/04/24 10:13:33.149  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-6"
+          },
+          "end": "Fri Apr 24 10:13:33 EDT 2020",
+          "start": "Fri Apr 24 09:30:58 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "7bc1ea90-3cd7-57f6-9de4-5105842b3833",
+      "kind": "session",
+      "order": 59,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-24T13:30:58.000Z",
+      "tags": [],
+      "title": "Ephemeris-6",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-25T01:52:02.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "4e81dda0-a7d8-4661-885d-8e03cc153040",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/24 21:30:23.849  Entering Polygon  [Center of Box] 2020/04/24 21:52:02.549  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-7"
+          },
+          "end": "Fri Apr 24 21:52:02 EDT 2020",
+          "start": "Fri Apr 24 21:30:23 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "a51c8979-6c04-5761-94f5-5430831b7a1f",
+      "kind": "session",
+      "order": 60,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-25T01:30:23.000Z",
+      "tags": [],
+      "title": "Ephemeris-7",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-25T15:29:41.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "877e4289-f1f3-4a1c-bf9e-0e0a5afd6fa6",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/25 09:29:19.049  Entering Polygon  [Center of Box] 2020/04/25 11:29:41.549  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-8"
+          },
+          "end": "Sat Apr 25 11:29:41 EDT 2020",
+          "start": "Sat Apr 25 09:29:19 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "59adfe3a-1b0d-5285-b0d1-f33b01d2506e",
+      "kind": "session",
+      "order": 61,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-25T13:29:19.000Z",
+      "tags": [],
+      "title": "Ephemeris-8",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-26T14:55:18.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "139f4278-734a-435f-9424-c9359da5524e",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/26 09:24:32.848  Entering Polygon  [Center of Box] 2020/04/26 10:55:18.748  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-9"
+          },
+          "end": "Sun Apr 26 10:55:18 EDT 2020",
+          "start": "Sun Apr 26 09:24:32 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "f2650293-3393-591b-812c-65bed2bee27e",
+      "kind": "session",
+      "order": 62,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-26T13:24:32.000Z",
+      "tags": [],
+      "title": "Ephemeris-9",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-27T01:22:07.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "57c59c62-ec6f-40c7-8493-2f9f4d241998",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/26 21:20:32.548  Entering Polygon  [Center of Box] 2020/04/26 21:22:07.048  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-10"
+          },
+          "end": "Sun Apr 26 21:22:07 EDT 2020",
+          "start": "Sun Apr 26 21:20:32 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "9a7695b8-843d-5e3f-a783-3ba53befc44f",
+      "kind": "session",
+      "order": 63,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-27T01:20:32.000Z",
+      "tags": [],
+      "title": "Ephemeris-10",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-27T14:37:18.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "190e6a40-474f-4285-93e8-8954ab8e9bc7",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/27 09:14:30.748  Entering Polygon  [Center of Box] 2020/04/27 10:37:18.748  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-11"
+          },
+          "end": "Mon Apr 27 10:37:18 EDT 2020",
+          "start": "Mon Apr 27 09:14:30 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "388ff003-1de6-59c6-b5bd-078f5c1089c7",
+      "kind": "session",
+      "order": 64,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-27T13:14:30.000Z",
+      "tags": [],
+      "title": "Ephemeris-11",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-28T01:30:53.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "c3df9ec3-5123-4264-b6e5-9f509d3a538e",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/27 21:07:18.748  Entering Polygon  [Center of Box] 2020/04/27 21:30:53.548  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-12"
+          },
+          "end": "Mon Apr 27 21:30:53 EDT 2020",
+          "start": "Mon Apr 27 21:07:18 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "3d24b5b5-e785-5709-afb9-f4b7b52ad2d6",
+      "kind": "session",
+      "order": 65,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-28T01:07:18.000Z",
+      "tags": [],
+      "title": "Ephemeris-12",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-28T14:30:06.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "85a98df1-d716-4620-95f9-e778301e19fb",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/28 08:56:44.248  Entering Polygon  [Center of Box] 2020/04/28 10:30:06.748  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-13"
+          },
+          "end": "Tue Apr 28 10:30:06 EDT 2020",
+          "start": "Tue Apr 28 08:56:44 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "a4a4ed9e-5c85-5102-9652-f569b23bc8c9",
+      "kind": "session",
+      "order": 66,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-28T12:56:44.000Z",
+      "tags": [],
+      "title": "Ephemeris-13",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-29T01:33:05.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "c591053f-bed3-4d0c-8372-5f04bdf9aa7f",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/28 20:45:31.948  Entering Polygon  [Center of Box] 2020/04/28 21:33:05.848  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-14"
+          },
+          "end": "Tue Apr 28 21:33:05 EDT 2020",
+          "start": "Tue Apr 28 20:45:31 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "59c365e9-1c6f-5221-93a7-6f34381ead73",
+      "kind": "session",
+      "order": 67,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-29T00:45:31.000Z",
+      "tags": [],
+      "title": "Ephemeris-14",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-29T14:30:20.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "897d5b8c-c71e-4deb-b456-85bb6272be54",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/29 08:29:06.448  Entering Polygon  [Center of Box] 2020/04/29 10:30:20.247  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-15"
+          },
+          "end": "Wed Apr 29 10:30:20 EDT 2020",
+          "start": "Wed Apr 29 08:29:06 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "2b87195d-4edd-5c78-b127-599978e30aa1",
+      "kind": "session",
+      "order": 68,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-29T12:29:06.000Z",
+      "tags": [],
+      "title": "Ephemeris-15",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-30T01:29:24.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "8ee1e14a-06c7-47a0-8905-80148dbfd5dc",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/29 20:13:24.147  Entering Polygon  [Center of Box] 2020/04/29 21:29:24.447  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-16"
+          },
+          "end": "Wed Apr 29 21:29:24 EDT 2020",
+          "start": "Wed Apr 29 20:13:24 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "a264b662-f92b-5651-b025-911d451e9bf2",
+      "kind": "session",
+      "order": 69,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-30T00:13:24.000Z",
+      "tags": [],
+      "title": "Ephemeris-16",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-30T14:34:47.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "0b2e1766-6596-415d-9d4b-574e630b4e5e",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/30 07:51:18.447  Entering Polygon  [Center of Box] 2020/04/30 10:34:47.547  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-17"
+          },
+          "end": "Thu Apr 30 10:34:47 EDT 2020",
+          "start": "Thu Apr 30 07:51:18 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "17b3fde1-b9aa-502c-a1b5-50833465864a",
+      "kind": "session",
+      "order": 70,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-30T11:51:18.000Z",
+      "tags": [],
+      "title": "Ephemeris-17",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-01T01:21:37.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "568739b2-a827-463d-99f4-b0c37a998171",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/30 19:32:16.347  Entering Polygon  [Center of Box] 2020/04/30 21:21:37.347  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-18"
+          },
+          "end": "Thu Apr 30 21:21:37 EDT 2020",
+          "start": "Thu Apr 30 19:32:16 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "056b18ff-bbe7-507a-932c-7152e002b1af",
+      "kind": "session",
+      "order": 71,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-30T23:32:16.000Z",
+      "tags": [],
+      "title": "Ephemeris-18",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-01T14:40:43.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "25045187-4e44-4ce1-aead-c8ced1d965e4",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/01 07:29:18.147  Entering Polygon  [Center of Box] 2020/05/01 10:40:43.947  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-19"
+          },
+          "end": "Fri May 01 10:40:43 EDT 2020",
+          "start": "Fri May 01 07:29:18 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "d75049f4-441c-5a53-a791-006402abe725",
+      "kind": "session",
+      "order": 72,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-01T11:29:18.000Z",
+      "tags": [],
+      "title": "Ephemeris-19",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-02T01:12:40.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "11cf1ed9-7ef5-4edb-ba2c-026f522a37cf",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/01 18:48:45.447  Entering Polygon  [Center of Box] 2020/05/01 21:12:40.047  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-20"
+          },
+          "end": "Fri May 01 21:12:40 EDT 2020",
+          "start": "Fri May 01 18:48:45 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "75278c8b-b720-587b-bd25-3ba5e33085c3",
+      "kind": "session",
+      "order": 73,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-01T22:48:45.000Z",
+      "tags": [],
+      "title": "Ephemeris-20",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-02T14:46:43.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "ab7c4a1e-91af-41e8-adbd-37ab172c0649",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/02 07:40:25.047  Entering Polygon  [Center of Box] 2020/05/02 10:46:43.047  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-21"
+          },
+          "end": "Sat May 02 10:46:43 EDT 2020",
+          "start": "Sat May 02 07:40:25 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "058c9188-c532-5e08-81c2-04a35a6868fc",
+      "kind": "session",
+      "order": 74,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-02T11:40:25.000Z",
+      "tags": [],
+      "title": "Ephemeris-21",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-03T01:06:08.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "d95f7fdd-20a5-4607-b9c8-9442d3463fd0",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/02 18:12:50.847  Entering Polygon  [Center of Box] 2020/05/02 21:06:08.546  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-22"
+          },
+          "end": "Sat May 02 21:06:08 EDT 2020",
+          "start": "Sat May 02 18:12:50 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "763dbbe0-146d-5ddf-bbc7-f63cca16011a",
+      "kind": "session",
+      "order": 75,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-02T22:12:50.000Z",
+      "tags": [],
+      "title": "Ephemeris-22",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-03T14:52:58.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "a90322ab-2e1e-4abd-8995-54e551b36b20",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/03 07:50:59.546  Entering Polygon  [Center of Box] 2020/05/03 10:52:58.346  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-23"
+          },
+          "end": "Sun May 03 10:52:58 EDT 2020",
+          "start": "Sun May 03 07:50:59 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "9d5d5bd5-7724-52bc-9315-545fa9e1df98",
+      "kind": "session",
+      "order": 76,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-03T11:50:59.000Z",
+      "tags": [],
+      "title": "Ephemeris-23",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-04T01:04:07.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "0f9f3d84-4bb6-40c0-9b47-ee039247cdb1",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/03 18:03:40.046  Entering Polygon  [Center of Box] 2020/05/03 21:04:07.046  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-24"
+          },
+          "end": "Sun May 03 21:04:07 EDT 2020",
+          "start": "Sun May 03 18:03:40 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "093355bf-2f10-5805-b4b7-6fb51e373788",
+      "kind": "session",
+      "order": 77,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-03T22:03:40.000Z",
+      "tags": [],
+      "title": "Ephemeris-24",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-04T15:00:58.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "08ef355a-20f0-4244-8cf0-916b225390e0",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/04 08:01:34.046  Entering Polygon  [Center of Box] 2020/05/04 11:00:58.946  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-25"
+          },
+          "end": "Mon May 04 11:00:58 EDT 2020",
+          "start": "Mon May 04 08:01:34 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "3a59fb81-f120-5a7d-aabf-05562c5d8591",
+      "kind": "session",
+      "order": 78,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-04T12:01:34.000Z",
+      "tags": [],
+      "title": "Ephemeris-25",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-05T01:36:52.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "817627aa-575e-49d5-9148-c18506f52f64",
+          "data": {
+            "satellite": "G-23 ",
+            "text": "Spacecraft: Intelsat G-23 at 239.00 deg E / 121.00 deg W Galaxy Region (\u00b0W)   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/04 18:19:25.046  Entering Polygon  [Center of Box] 2020/05/04 21:36:52.646  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-26"
+          },
+          "end": "Mon May 04 21:36:52 EDT 2020",
+          "start": "Mon May 04 18:19:25 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "7dac651b-782f-5325-8fc5-12cdee7634c4",
+      "kind": "session",
+      "order": 79,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-04T22:19:25.000Z",
+      "tags": [],
+      "title": "Ephemeris-26",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-21T11:52:17.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "a6ff3b1c-d1c0-43b6-bb5b-d55b96bbf090",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/21 07:31:43.950  Entering Polygon  [Center of Box] 2020/04/21 07:52:17.850  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-0"
+          },
+          "end": "Tue Apr 21 07:52:17 EDT 2020",
+          "start": "Tue Apr 21 07:31:43 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "783675de-41fa-5652-ab45-9402b60e788b",
+      "kind": "session",
+      "order": 80,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-21T11:31:43.000Z",
+      "tags": [],
+      "title": "Ephemeris-0",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-22T03:07:16.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "9fafaa9b-6c5e-4bc7-af80-898ee66ce6e7",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/21 19:49:52.050  Entering Polygon  [Center of Box] 2020/04/21 23:07:16.950  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-1"
+          },
+          "end": "Tue Apr 21 23:07:16 EDT 2020",
+          "start": "Tue Apr 21 19:49:52 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "d6ba61ac-0b15-5fff-ad90-eddc3092bd7f",
+      "kind": "session",
+      "order": 81,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-21T23:49:52.000Z",
+      "tags": [],
+      "title": "Ephemeris-1",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-22T12:33:49.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "fce03866-2be1-4e5c-a0a8-aa8985dcd3c3",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/22 07:23:21.750  Entering Polygon  [Center of Box] 2020/04/22 08:33:49.950  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-2"
+          },
+          "end": "Wed Apr 22 08:33:49 EDT 2020",
+          "start": "Wed Apr 22 07:23:21 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "7c2d549f-eb88-53cb-98dc-fced1c5982d6",
+      "kind": "session",
+      "order": 82,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-22T11:23:21.000Z",
+      "tags": [],
+      "title": "Ephemeris-2",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-23T03:08:35.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "8e0c51b4-8ffd-46fa-b5e6-9ea6bc788159",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/22 19:17:36.149  Entering Polygon  [Center of Box] 2020/04/22 23:08:35.249  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-3"
+          },
+          "end": "Wed Apr 22 23:08:35 EDT 2020",
+          "start": "Wed Apr 22 19:17:36 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "25a095f8-2aa7-5e70-99c4-a219716b18ac",
+      "kind": "session",
+      "order": 83,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-22T23:17:36.000Z",
+      "tags": [],
+      "title": "Ephemeris-3",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-23T12:29:06.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "36f05eea-edd3-4e13-a056-b3fe71cb3050",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/23 07:10:43.049  Entering Polygon  [Center of Box] 2020/04/23 08:29:06.449  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-4"
+          },
+          "end": "Thu Apr 23 08:29:06 EDT 2020",
+          "start": "Thu Apr 23 07:10:43 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "b22932e1-e331-5f89-ad79-9bd17c55b543",
+      "kind": "session",
+      "order": 84,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-23T11:10:43.000Z",
+      "tags": [],
+      "title": "Ephemeris-4",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-24T03:10:55.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "9cc57eb7-d5bd-499e-8f2d-f3594aa0f973",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/23 19:30:55.349  Entering Polygon  [Center of Box] 2020/04/23 23:10:55.649  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-5"
+          },
+          "end": "Thu Apr 23 23:10:55 EDT 2020",
+          "start": "Thu Apr 23 19:30:55 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "2003bfed-dfcc-51c6-a2ad-53485c63d305",
+      "kind": "session",
+      "order": 85,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-23T23:30:55.000Z",
+      "tags": [],
+      "title": "Ephemeris-5",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-24T11:26:36.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "2c361631-8b84-4172-beba-5b55c0520e34",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/24 06:51:05.849  Entering Polygon  [Center of Box] 2020/04/24 07:26:36.149  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-6"
+          },
+          "end": "Fri Apr 24 07:26:36 EDT 2020",
+          "start": "Fri Apr 24 06:51:05 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "5feef115-7db9-5e73-8977-19753e63aa61",
+      "kind": "session",
+      "order": 86,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-24T10:51:05.000Z",
+      "tags": [],
+      "title": "Ephemeris-6",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-27T02:55:32.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "b37a30c5-fd1a-4c9c-8483-8793a9b0f48c",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/26 18:24:27.448  Entering Polygon  [Center of Box] 2020/04/26 22:55:32.248  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-7"
+          },
+          "end": "Sun Apr 26 22:55:32 EDT 2020",
+          "start": "Sun Apr 26 18:24:27 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "9d21def3-e0af-5860-9ae2-f994697d8cb3",
+      "kind": "session",
+      "order": 87,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-26T22:24:27.000Z",
+      "tags": [],
+      "title": "Ephemeris-7",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-27T14:44:17.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "4932ade5-1fce-427c-88af-51c8d073e7ce",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/27 04:44:14.548  Entering Polygon  [Center of Box] 2020/04/27 10:44:17.248  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-8"
+          },
+          "end": "Mon Apr 27 10:44:17 EDT 2020",
+          "start": "Mon Apr 27 04:44:14 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "b35bd9f5-08df-5b2a-ad4a-3ca13dd0f123",
+      "kind": "session",
+      "order": 88,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-27T08:44:14.000Z",
+      "tags": [],
+      "title": "Ephemeris-8",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-28T01:55:43.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "dd6cc375-46a5-4b13-92e2-64fa6ef70d32",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/27 21:52:59.248  Entering Polygon  [Center of Box] 2020/04/27 21:55:43.948  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-9"
+          },
+          "end": "Mon Apr 27 21:55:43 EDT 2020",
+          "start": "Mon Apr 27 21:52:59 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "c2c49ac5-9a11-57e5-b26e-99ccd165ed63",
+      "kind": "session",
+      "order": 89,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-28T01:52:59.000Z",
+      "tags": [],
+      "title": "Ephemeris-9",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-28T05:21:31.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "8f4ff88c-f749-4e77-bcbf-df2055bdb8fc",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/27 23:27:26.548  Entering Polygon  [Center of Box] 2020/04/28 01:21:31.048  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-10"
+          },
+          "end": "Tue Apr 28 01:21:31 EDT 2020",
+          "start": "Mon Apr 27 23:27:26 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "c03a98fa-7201-58c3-b9ba-d13b69779780",
+      "kind": "session",
+      "order": 90,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-28T03:27:26.000Z",
+      "tags": [],
+      "title": "Ephemeris-10",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-28T17:20:50.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "f260ae3f-bc7d-429e-ad5c-0fe52276b9e9",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/28 09:41:36.148  Entering Polygon  [Center of Box] 2020/04/28 13:20:50.548  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-11"
+          },
+          "end": "Tue Apr 28 13:20:50 EDT 2020",
+          "start": "Tue Apr 28 09:41:36 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "f118532b-8ad8-5422-b292-42ce82c7d783",
+      "kind": "session",
+      "order": 91,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-28T13:41:36.000Z",
+      "tags": [],
+      "title": "Ephemeris-11",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-29T05:18:19.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "2c5654a8-1197-4221-a13f-37b386a95e16",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/28 21:25:40.348  Entering Polygon  [Center of Box] 2020/04/29 01:18:19.348  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-12"
+          },
+          "end": "Wed Apr 29 01:18:19 EDT 2020",
+          "start": "Tue Apr 28 21:25:40 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "555475b8-01b3-590c-afc5-1c4f99ce9938",
+      "kind": "session",
+      "order": 92,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-29T01:25:40.000Z",
+      "tags": [],
+      "title": "Ephemeris-12",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-29T17:14:21.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "d12087b2-d954-4e3a-947f-cd38a0d81ac6",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/29 09:10:43.948  Entering Polygon  [Center of Box] 2020/04/29 13:14:21.747  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-13"
+          },
+          "end": "Wed Apr 29 13:14:21 EDT 2020",
+          "start": "Wed Apr 29 09:10:43 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "b7503e55-4cc9-5d42-a1d2-81f6d421acee",
+      "kind": "session",
+      "order": 93,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-29T13:10:43.000Z",
+      "tags": [],
+      "title": "Ephemeris-13",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-30T05:07:23.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "8a26e780-a810-4432-b413-7c6024a87454",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/29 20:50:50.547  Entering Polygon  [Center of Box] 2020/04/30 01:07:23.247  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-14"
+          },
+          "end": "Thu Apr 30 01:07:23 EDT 2020",
+          "start": "Wed Apr 29 20:50:50 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "aaefd46b-29e9-5605-bddc-7345d4766b36",
+      "kind": "session",
+      "order": 94,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-30T00:50:50.000Z",
+      "tags": [],
+      "title": "Ephemeris-14",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-30T13:05:41.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "76a5ab4c-86a4-4fbe-8b70-ff3f07220f30",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/30 08:33:47.247  Entering Polygon  [Center of Box] 2020/04/30 09:05:41.547  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-15"
+          },
+          "end": "Thu Apr 30 09:05:41 EDT 2020",
+          "start": "Thu Apr 30 08:33:47 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "06971f8c-92fd-55ff-8fce-98563433601c",
+      "kind": "session",
+      "order": 95,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-30T12:33:47.000Z",
+      "tags": [],
+      "title": "Ephemeris-15",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-30T16:59:38.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "b8bf7aa5-d56d-44e8-8011-3b204affbc9d",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/30 12:50:41.547  Entering Polygon  [Center of Box] 2020/04/30 12:59:38.847  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-16"
+          },
+          "end": "Thu Apr 30 12:59:38 EDT 2020",
+          "start": "Thu Apr 30 12:50:41 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "165c4ce6-0dcf-504f-8ab7-df9d489491e7",
+      "kind": "session",
+      "order": 96,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-30T16:50:41.000Z",
+      "tags": [],
+      "title": "Ephemeris-16",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-01T04:47:43.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "83539dd0-a757-4572-864b-8df01382e672",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/30 20:13:07.947  Entering Polygon  [Center of Box] 2020/05/01 00:47:43.347  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-17"
+          },
+          "end": "Fri May 01 00:47:43 EDT 2020",
+          "start": "Thu Apr 30 20:13:07 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "a232e7b6-c854-5425-b4be-5b6416e09f8d",
+      "kind": "session",
+      "order": 97,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-01T00:13:07.000Z",
+      "tags": [],
+      "title": "Ephemeris-17",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-02T04:22:25.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "6668b284-2d6a-4c70-a34c-9f0d788a8cc6",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/01 19:39:47.247  Entering Polygon  [Center of Box] 2020/05/02 00:22:25.947  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-18"
+          },
+          "end": "Sat May 02 00:22:25 EDT 2020",
+          "start": "Fri May 01 19:39:47 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "26489924-eb8d-5e92-99a0-23ffb40758db",
+      "kind": "session",
+      "order": 98,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-01T23:39:47.000Z",
+      "tags": [],
+      "title": "Ephemeris-18",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-03T03:58:29.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "76d53351-ecaf-452f-bc12-e9e2e4c7af26",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/02 19:15:45.446  Entering Polygon  [Center of Box] 2020/05/02 23:58:29.546  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-19"
+          },
+          "end": "Sat May 02 23:58:29 EDT 2020",
+          "start": "Sat May 02 19:15:45 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "cc25308e-10c7-522e-ba80-72a55940709e",
+      "kind": "session",
+      "order": 99,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-02T23:15:45.000Z",
+      "tags": [],
+      "title": "Ephemeris-19",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-04T03:42:41.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "a9f84a7c-dd3f-4888-ae34-d94a6f12e59d",
+          "data": {
+            "satellite": "IS-28",
+            "text": "Spacecraft: Intelsat IS-28 at 32.80 deg E / 327.20 deg W Indian Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/03 22:01:40.346  Entering Polygon  [Center of Box] 2020/05/03 23:42:41.846  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-20"
+          },
+          "end": "Sun May 03 23:42:41 EDT 2020",
+          "start": "Sun May 03 22:01:40 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "ee746543-0306-55c0-b989-feeb64e261ea",
+      "kind": "session",
+      "order": 100,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-04T02:01:40.000Z",
+      "tags": [],
+      "title": "Ephemeris-20",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-21T07:16:21.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "19651665-52a3-4fb2-9f48-5e0f5d355f02",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/21 01:42:21.150  Entering Polygon  [Center of Box] 2020/04/21 03:16:21.450  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-0"
+          },
+          "end": "Tue Apr 21 03:16:21 EDT 2020",
+          "start": "Tue Apr 21 01:42:21 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "f56dbbdc-b9b0-5147-876e-c0719997f506",
+      "kind": "session",
+      "order": 101,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-21T05:42:21.000Z",
+      "tags": [],
+      "title": "Ephemeris-0",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-21T20:17:11.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "c4ba5c43-ac84-410a-9d22-df4c7e4dd93f",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/21 13:41:19.050  Entering Polygon  [Center of Box] 2020/04/21 16:17:11.850  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-1"
+          },
+          "end": "Tue Apr 21 16:17:11 EDT 2020",
+          "start": "Tue Apr 21 13:41:19 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "ba1ecdc5-1aa7-50a0-ba46-23f0389f2e6e",
+      "kind": "session",
+      "order": 102,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-21T17:41:19.000Z",
+      "tags": [],
+      "title": "Ephemeris-1",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-22T06:47:52.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "a578b247-e21c-439f-976e-2b4912b9a2c6",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/22 01:40:41.250  Entering Polygon  [Center of Box] 2020/04/22 02:47:52.350  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-2"
+          },
+          "end": "Wed Apr 22 02:47:52 EDT 2020",
+          "start": "Wed Apr 22 01:40:41 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "5ab871dc-1a57-5700-b662-4329aa5676ee",
+      "kind": "session",
+      "order": 103,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-22T05:40:41.000Z",
+      "tags": [],
+      "title": "Ephemeris-2",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-22T20:46:18.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "86d139c5-0066-4481-bdc4-4d73b3c63a91",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/22 13:40:22.350  Entering Polygon  [Center of Box] 2020/04/22 16:46:18.749  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-3"
+          },
+          "end": "Wed Apr 22 16:46:18 EDT 2020",
+          "start": "Wed Apr 22 13:40:22 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "f4bf194c-a080-5e26-8aba-231b940f9f0c",
+      "kind": "session",
+      "order": 104,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-22T17:40:22.000Z",
+      "tags": [],
+      "title": "Ephemeris-3",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-23T06:27:21.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "dbadc39d-ada4-423a-8bc7-237717880f77",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/23 01:40:14.249  Entering Polygon  [Center of Box] 2020/04/23 02:27:21.149  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-4"
+          },
+          "end": "Thu Apr 23 02:27:21 EDT 2020",
+          "start": "Thu Apr 23 01:40:14 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "b7d2bc3b-84bd-574c-b3b6-ba0ba0ae828a",
+      "kind": "session",
+      "order": 105,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-23T05:40:14.000Z",
+      "tags": [],
+      "title": "Ephemeris-4",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-23T20:15:29.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "1209c4cf-7e72-4556-b1ef-65ae31b61195",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/23 13:39:52.649  Entering Polygon  [Center of Box] 2020/04/23 16:15:29.249  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-5"
+          },
+          "end": "Thu Apr 23 16:15:29 EDT 2020",
+          "start": "Thu Apr 23 13:39:52 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "a8b3333d-b224-54ad-9fd1-bf3cc02bbae9",
+      "kind": "session",
+      "order": 106,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-23T17:39:52.000Z",
+      "tags": [],
+      "title": "Ephemeris-5",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-24T06:42:47.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "5592b11e-a59e-4a9f-9a89-1594a7cacf5c",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/24 01:39:12.149  Entering Polygon  [Center of Box] 2020/04/24 02:42:47.249  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-6"
+          },
+          "end": "Fri Apr 24 02:42:47 EDT 2020",
+          "start": "Fri Apr 24 01:39:12 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "b70972a8-2c54-5d33-8b5f-5c4acc1e145d",
+      "kind": "session",
+      "order": 107,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-24T05:39:12.000Z",
+      "tags": [],
+      "title": "Ephemeris-6",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-24T19:49:36.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "efaa05aa-d7cd-437b-9c39-221b4e03d4db",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/24 13:37:37.649  Entering Polygon  [Center of Box] 2020/04/24 15:49:36.749  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-7"
+          },
+          "end": "Fri Apr 24 15:49:36 EDT 2020",
+          "start": "Fri Apr 24 13:37:37 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "c62e99d5-d19a-5cfd-bde9-eeafc4a2ef5a",
+      "kind": "session",
+      "order": 108,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-24T17:37:37.000Z",
+      "tags": [],
+      "title": "Ephemeris-7",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-25T06:55:01.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "52099d70-4425-411e-a417-149000cdddae",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/25 01:35:09.149  Entering Polygon  [Center of Box] 2020/04/25 02:55:01.649  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-8"
+          },
+          "end": "Sat Apr 25 02:55:01 EDT 2020",
+          "start": "Sat Apr 25 01:35:09 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "3f4919ae-a8e5-56f9-8f97-4e23ecd461c1",
+      "kind": "session",
+      "order": 109,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-25T05:35:09.000Z",
+      "tags": [],
+      "title": "Ephemeris-8",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-25T19:29:27.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "6949ff6c-6cfa-4d0c-892d-f32c10404705",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/25 13:30:33.749  Entering Polygon  [Center of Box] 2020/04/25 15:29:27.149  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-9"
+          },
+          "end": "Sat Apr 25 15:29:27 EDT 2020",
+          "start": "Sat Apr 25 13:30:33 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "90bede7a-af7f-5a1c-aab1-d8f65d18e316",
+      "kind": "session",
+      "order": 110,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-25T17:30:33.000Z",
+      "tags": [],
+      "title": "Ephemeris-9",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-26T07:03:45.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "059d9a1f-845a-4fe5-ab47-473ec460bded",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/26 01:24:15.748  Entering Polygon  [Center of Box] 2020/04/26 03:03:45.448  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-10"
+          },
+          "end": "Sun Apr 26 03:03:45 EDT 2020",
+          "start": "Sun Apr 26 01:24:15 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "ec06c507-d98b-5232-a80b-afe34748f93f",
+      "kind": "session",
+      "order": 111,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-26T05:24:15.000Z",
+      "tags": [],
+      "title": "Ephemeris-10",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-26T19:16:10.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "922785f4-bbed-4b0e-a39b-2147f71759c8",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/26 13:13:25.048  Entering Polygon  [Center of Box] 2020/04/26 15:16:10.648  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-11"
+          },
+          "end": "Sun Apr 26 15:16:10 EDT 2020",
+          "start": "Sun Apr 26 13:13:25 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "2739a22d-68c4-51b4-9b4b-f12410fda692",
+      "kind": "session",
+      "order": 112,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-26T17:13:25.000Z",
+      "tags": [],
+      "title": "Ephemeris-11",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-27T07:09:01.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "c7e6e4ab-4e6c-4332-8640-b8e45b82d31b",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/27 00:59:44.248  Entering Polygon  [Center of Box] 2020/04/27 03:09:01.348  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-12"
+          },
+          "end": "Mon Apr 27 03:09:01 EDT 2020",
+          "start": "Mon Apr 27 00:59:44 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "89244f23-7ae1-58f5-9cc4-2e03a7d67b42",
+      "kind": "session",
+      "order": 113,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-27T04:59:44.000Z",
+      "tags": [],
+      "title": "Ephemeris-12",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-27T19:09:31.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "fcca2354-bc77-47c3-baf4-7c1a2e289cc2",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/27 12:35:10.048  Entering Polygon  [Center of Box] 2020/04/27 15:09:31.048  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-13"
+          },
+          "end": "Mon Apr 27 15:09:31 EDT 2020",
+          "start": "Mon Apr 27 12:35:10 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "a17377f0-cb15-5b45-b94b-7778fd5d3a48",
+      "kind": "session",
+      "order": 114,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-27T16:35:10.000Z",
+      "tags": [],
+      "title": "Ephemeris-13",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-28T07:10:52.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "f1b532c8-b1f7-44df-b2f6-69a630601753",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/28 00:03:48.148  Entering Polygon  [Center of Box] 2020/04/28 03:10:52.048  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-14"
+          },
+          "end": "Tue Apr 28 03:10:52 EDT 2020",
+          "start": "Tue Apr 28 00:03:48 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "dbc7654c-1ad9-5e4d-b8e3-56bdf4af8660",
+      "kind": "session",
+      "order": 115,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-28T04:03:48.000Z",
+      "tags": [],
+      "title": "Ephemeris-14",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-28T19:07:45.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "5d5a4b50-9492-43f7-a64f-2cea276aab6b",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/28 11:50:37.048  Entering Polygon  [Center of Box] 2020/04/28 15:07:45.748  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-15"
+          },
+          "end": "Tue Apr 28 15:07:45 EDT 2020",
+          "start": "Tue Apr 28 11:50:37 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "8a8254e7-e69b-5c13-8349-e1aeaad505a9",
+      "kind": "session",
+      "order": 116,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-28T15:50:37.000Z",
+      "tags": [],
+      "title": "Ephemeris-15",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-29T07:09:47.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "c3733955-3612-4811-a0f0-a9b299d8b15a",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/28 23:53:27.148  Entering Polygon  [Center of Box] 2020/04/29 03:09:47.248  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-16"
+          },
+          "end": "Wed Apr 29 03:09:47 EDT 2020",
+          "start": "Tue Apr 28 23:53:27 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "c29afdc9-d58e-5774-b45b-4cd405f2da43",
+      "kind": "session",
+      "order": 117,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-29T03:53:27.000Z",
+      "tags": [],
+      "title": "Ephemeris-16",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-29T20:04:43.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "8abd9e05-0ec2-4875-b378-fd7a636a3d65",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/29 12:04:36.747  Entering Polygon  [Center of Box] 2020/04/29 16:04:43.947  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-17"
+          },
+          "end": "Wed Apr 29 16:04:43 EDT 2020",
+          "start": "Wed Apr 29 12:04:36 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "9fe66fdd-a5ca-58a0-9da4-ea60d129b0d0",
+      "kind": "session",
+      "order": 118,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-29T16:04:36.000Z",
+      "tags": [],
+      "title": "Ephemeris-17",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-30T04:58:42.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "c361070e-26c0-40d3-a896-4149fc7b7e6f",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/29 20:47:17.247  Entering Polygon  [Center of Box] 2020/04/30 00:58:42.147  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-18"
+          },
+          "end": "Thu Apr 30 00:58:42 EDT 2020",
+          "start": "Wed Apr 29 20:47:17 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "b01c252a-44f5-50fd-948d-82c1fdb9ae8c",
+      "kind": "session",
+      "order": 119,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-30T00:47:17.000Z",
+      "tags": [],
+      "title": "Ephemeris-18",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-04-30T18:43:35.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "fe99e6e8-a0e3-41da-81e6-8fe8d2da4fb8",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/30 11:24:39.147  Entering Polygon  [Center of Box] 2020/04/30 14:43:35.847  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-19"
+          },
+          "end": "Thu Apr 30 14:43:35 EDT 2020",
+          "start": "Thu Apr 30 11:24:39 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "7334b555-3ca6-524c-a67b-bd9ee7f77b46",
+      "kind": "session",
+      "order": 120,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-04-30T15:24:39.000Z",
+      "tags": [],
+      "title": "Ephemeris-19",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-01T05:57:47.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "1f0ace78-c522-460b-a8cd-eb4a6078bc31",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/04/30 22:09:08.547  Entering Polygon  [Center of Box] 2020/05/01 01:57:47.247  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-20"
+          },
+          "end": "Fri May 01 01:57:47 EDT 2020",
+          "start": "Thu Apr 30 22:09:08 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "70ea78fd-91e7-54f2-8dac-86087931381e",
+      "kind": "session",
+      "order": 121,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-01T02:09:08.000Z",
+      "tags": [],
+      "title": "Ephemeris-20",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-01T17:48:20.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "09ba7a49-9660-4d9f-bd2f-12bde269dc24",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/01 10:32:21.747  Entering Polygon  [Center of Box] 2020/05/01 13:48:20.247  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-21"
+          },
+          "end": "Fri May 01 13:48:20 EDT 2020",
+          "start": "Fri May 01 10:32:21 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "130984f4-6156-52d9-a93e-256e47425c70",
+      "kind": "session",
+      "order": 122,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-01T14:32:21.000Z",
+      "tags": [],
+      "title": "Ephemeris-21",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-02T07:10:52.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "3ac984b7-f553-44cf-af79-27b8b304ac5e",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/01 23:17:48.747  Entering Polygon  [Center of Box] 2020/05/02 03:10:52.047  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-22"
+          },
+          "end": "Sat May 02 03:10:52 EDT 2020",
+          "start": "Fri May 01 23:17:48 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "e7b4899a-2866-50c6-9597-0418a5f4c281",
+      "kind": "session",
+      "order": 123,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-02T03:17:48.000Z",
+      "tags": [],
+      "title": "Ephemeris-22",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-02T16:57:37.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "3897797b-433a-4a75-b611-ef3e5e2b7d2f",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/02 09:20:51.447  Entering Polygon  [Center of Box] 2020/05/02 12:57:37.347  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-23"
+          },
+          "end": "Sat May 02 12:57:37 EDT 2020",
+          "start": "Sat May 02 09:20:51 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "85bb8664-829a-5d88-9c7b-9ecb8d9001c6",
+      "kind": "session",
+      "order": 124,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-02T13:20:51.000Z",
+      "tags": [],
+      "title": "Ephemeris-23",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-03T09:39:49.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "14d56811-e275-4397-9350-c49a18497838",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/03 00:25:29.546  Entering Polygon  [Center of Box] 2020/05/03 05:39:49.046  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-24"
+          },
+          "end": "Sun May 03 05:39:49 EDT 2020",
+          "start": "Sun May 03 00:25:29 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "0b8933e0-b31d-5617-8ccf-4e19c1207cd1",
+      "kind": "session",
+      "order": 125,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-03T04:25:29.000Z",
+      "tags": [],
+      "title": "Ephemeris-24",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": "2020-05-04T07:04:44.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "ID": "e93b4fb7-aac6-4e2b-9c7d-bf1c9b2e49cd",
+          "data": {
+            "satellite": "IS-19",
+            "text": "Spacecraft: Intelsat IS-19 at 166.00 deg E / 194.00 deg W Pacific Ocean Region   Longitude: +/- 0.015 deg Latitude:  +/- 0.015 deg 2020/05/04 02:06:49.946  Entering Polygon  [Center of Box] 2020/05/04 03:04:44.846  Exiting Polygon   [Center of Box] - Ref: https://my.intelsat.com/ephemeris/public#/",
+            "title": "Ephemeris-25"
+          },
+          "end": "Mon May 04 03:04:44 EDT 2020",
+          "start": "Mon May 04 02:06:49 EDT 2020"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "0f682ad7-ad03-5ac6-8a38-442ba7f55da7",
+      "kind": "session",
+      "order": 126,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "ephemeris",
+      "start": "2020-05-04T06:06:49.000Z",
+      "tags": [],
+      "title": "Ephemeris-25",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    }
+  ],
+  "settings": {
+    "bins": 128,
+    "displayUnit": "HOUR",
+    "fontSize": 11,
+    "groupBy": "none",
+    "modelId": "light",
+    "modelVersion": 1,
+    "overview": {
+      "from": "2020-04-18T00:00:00.000Z",
+      "to": "2020-04-25T00:00:00.000Z"
+    },
+    "presentation": {
+      "bandLayout": [
+        {
+          "height": 76,
+          "id": "main",
+          "role": "primary"
+        },
+        {
+          "height": 24,
+          "id": "overview",
+          "role": "overview"
+        }
+      ],
+      "bands": {
+        "overview": {
+          "backgroundColor": "#dddddd",
+          "intervalUnit": "YEAR"
+        },
+        "primary": {
+          "backgroundColor": "#eeeeee",
+          "barHeight": 6,
+          "dateColor": "#9099a0",
+          "intervalUnit": "HOUR",
+          "pointRadius": 4,
+          "textColor": "#121212"
+        }
+      },
+      "compact": true,
+      "labels": {
+        "fontSize": 11,
+        "maxLines": 1
+      },
+      "version": 1
+    },
+    "range": {
+      "from": "2020-04-21T00:00:00.000Z",
+      "to": "2020-04-22T00:00:00.000Z"
+    },
+    "ratio": 4,
+    "referenceTime": "2020-04-21T12:00:00.000Z",
+    "rowHeight": 32,
+    "scaleMode": "uniform",
+    "theme": "light"
+  },
+  "zones": []
+}

@@ -1,0 +1,1307 @@
+{
+  "filters": [],
+  "format": "timeline-snapshot",
+  "formatVersion": 1,
+  "manifest": {
+    "bundleId": "0a23d872-3a9e-5390-be14-178557aa0f4b",
+    "completeness": "complete-for-declared-universe",
+    "generation": "a524d6bb-7d1a-55e5-9399-b22255768c65",
+    "legacy": {
+      "allRecordCount": 27,
+      "readOnly": true,
+      "status": "current"
+    },
+    "recordCount": 27,
+    "revision": 1,
+    "scope": {
+      "sourceIds": [
+        "monet"
+      ],
+      "workspaceId": "default"
+    },
+    "snapshotAt": "2026-09-13T00:00:00.000Z",
+    "sourceKind": "imported",
+    "sourceName": "Monet",
+    "testDataset": {
+      "id": "monet",
+      "reference": "data/monet.png",
+      "referenceStatus": "provided"
+    },
+    "workspaceId": "default"
+  },
+  "models": [
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "description": "",
+      "draft": null,
+      "id": "light",
+      "lifecycle": "active",
+      "name": "Monet reference",
+      "revision": 1,
+      "tags": [],
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "versions": [
+        {
+          "definition": {
+            "bins": 128,
+            "displayUnit": "DECADE",
+            "fontSize": 11,
+            "groupBy": "none",
+            "presentation": {
+              "bandLayout": [
+                {
+                  "height": 100,
+                  "id": "main",
+                  "relativeAxis": {
+                    "label": "Age",
+                    "origin": "1840-11-14T00:00:00.000Z",
+                    "stepYears": 10
+                  },
+                  "role": "primary"
+                }
+              ],
+              "bands": {
+                "overview": {
+                  "backgroundColor": "#dddddd",
+                  "intervalUnit": "YEAR"
+                },
+                "primary": {
+                  "backgroundColor": "#eeeeee",
+                  "barHeight": 6,
+                  "dateColor": "#9099a0",
+                  "intervalUnit": "DECADE",
+                  "pointRadius": 4,
+                  "textColor": "#121212"
+                }
+              },
+              "compact": true,
+              "labels": {
+                "fontSize": 11,
+                "maxLines": 1
+              },
+              "version": 1
+            },
+            "ratio": 4,
+            "rowHeight": 32,
+            "scaleMode": "uniform",
+            "theme": "light",
+            "timeZone": "UTC"
+          },
+          "publishedAt": "2026-09-13T00:00:00.000Z",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "description": "",
+      "draft": null,
+      "id": "classic",
+      "lifecycle": "active",
+      "name": "Classic blue",
+      "revision": 1,
+      "tags": [],
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "versions": [
+        {
+          "definition": {
+            "bins": 128,
+            "displayUnit": "HOUR",
+            "fontSize": 11,
+            "groupBy": "none",
+            "ratio": 4,
+            "rowHeight": 32,
+            "scaleMode": "uniform",
+            "theme": "classic",
+            "timeZone": "UTC"
+          },
+          "publishedAt": "2026-09-13T00:00:00.000Z",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "description": "",
+      "draft": null,
+      "id": "dark",
+      "lifecycle": "active",
+      "name": "Dark timeline",
+      "revision": 1,
+      "tags": [],
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "versions": [
+        {
+          "definition": {
+            "bins": 128,
+            "displayUnit": "HOUR",
+            "fontSize": 11,
+            "groupBy": "none",
+            "ratio": 4,
+            "rowHeight": 32,
+            "scaleMode": "uniform",
+            "theme": "dark",
+            "timeZone": "UTC"
+          },
+          "publishedAt": "2026-09-13T00:00:00.000Z",
+          "version": 1
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Claude Monet, also known as Oscar-Claude Monet or Claude Oscar Monet was born to Adolphe and Louise-Justine Monet of 45 Rue Laffitte, in the 9th arrondissement of Paris. He was christened as Oscar-Claude at the church of Notre-Dame-de-Lorette. His father wanted him to go into the family (grocery store) business, but Claude Monet wanted to become an artist. His mother was a singer, both parents were second-generation Parisians."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "Claude Monet, also known as Oscar-Claude Monet or Claude Oscar Monet was born to Adolphe and Louise-Justine Monet of 45 Rue Laffitte, in the 9th arrondissement of Paris. He was christened as Oscar-Claude at the church of Notre-Dame-de-Lorette. His father wanted him to go into the family (grocery store) business, but Claude Monet wanted to become an artist. His mother was a singer, both parents were second-generation Parisians.",
+          "image": "monet.png",
+          "link": "http://en.wikipedia.org/wiki/Monet",
+          "start": "Nov 14 1840 00:00:00 GMT",
+          "title": "Birth"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "946ff193-df04-5071-9dfd-9cb691d4faea",
+      "kind": "event",
+      "order": 0,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1840-11-14T00:00:00.000Z",
+      "tags": [],
+      "title": "Birth",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "",
+          "end": "1846",
+          "start": "1845",
+          "title": "Family moved to Le Havre, Normandy"
+        },
+        "uncertainty": {
+          "lateststart": "1846-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "79fd4887-c5b7-52af-85b1-3eb95f11b72b",
+      "kind": "event",
+      "order": 1,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1845-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Family moved to Le Havre, Normandy",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "On the first of April 1851 Monet entered the Le Havre secondary school. He first became known locally for his charcoal caricatures, which he would sell for ten to twenty francs. Monet also undertook his first drawing lessons from Jean-Francois Ochard, a former student of Jacques-Louis David (1748 - 1825). On the beaches of Normandy, he met fellow artist Eug\u00e8ne Boudin, who became his mentor and taught him to use oil paints. Boudin taught Monet en plein air (outdoor) techniques for painting."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "On the first of April 1851 Monet entered the Le Havre secondary school. He first became known locally for his charcoal caricatures, which he would sell for ten to twenty francs. Monet also undertook his first drawing lessons from Jean-Francois Ochard, a former student of Jacques-Louis David (1748 - 1825). On the beaches of Normandy, he met fellow artist Eug\u00e8ne Boudin, who became his mentor and taught him to use oil paints. Boudin taught Monet en plein air (outdoor) techniques for painting.",
+          "start": "Apr 01 1851 00:00:00 GMT",
+          "title": "Entered Le Havre secondary school"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "72089850-d9f3-58c1-a458-01d30a8ef528",
+      "kind": "event",
+      "order": 2,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1851-04-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Entered Le Havre secondary school",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "On 28 January, 1857 his mother died. Now 16 years old, he left school and his widowed, childless aunt Marie-Jeanne took him into her home."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "On 28 January, 1857 his mother died. Now 16 years old, he left school and his widowed, childless aunt Marie-Jeanne took him into her home.",
+          "start": "Jan 28 1857 00:00:00 GMT",
+          "title": "Mother died"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "9fe08a4b-f805-50db-be85-d7223c3acd17",
+      "kind": "event",
+      "order": 3,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1857-01-28T00:00:00.000Z",
+      "tags": [],
+      "title": "Mother died",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "In June of 1861 Monet joined the First Regiment of African Light Cavalry in Algeria for two years of a seven-year commitment, but upon his contracting typhoid his aunt Madame Lecadre intervened to get him out of the army if he agreed to complete an art course at a university. It is also possible that the Dutch painter Johan Barthold Jongkind (whom Monet knew) may have prompted his aunt on this matter."
+      },
+      "deletedAt": null,
+      "end": "1863-07-01T00:00:00.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "description": "In June of 1861 Monet joined the First Regiment of African Light Cavalry in Algeria for two years of a seven-year commitment, but upon his contracting typhoid his aunt Madame Lecadre intervened to get him out of the army if he agreed to complete an art course at a university. It is also possible that the Dutch painter Johan Barthold Jongkind (whom Monet knew) may have prompted his aunt on this matter.",
+          "earliestend": "Jun 01 1863 00:00:00 GMT",
+          "end": "Jul 01 1863 00:00:00 GMT",
+          "isduration": "true",
+          "lateststart": "Jul 01 1861 00:00:00 GMT",
+          "start": "Jun 01 1861 00:00:00 GMT",
+          "title": "Joined Cavalry in Algeria"
+        },
+        "uncertainty": {
+          "earliestend": "1863-06-01T00:00:00.000Z",
+          "lateststart": "1861-07-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "d93d858e-7aa9-5576-98d7-8b3cda65f82b",
+      "kind": "session",
+      "order": 4,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1861-06-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Joined Cavalry in Algeria",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Disillusioned with the traditional art taught at universities, instead in 1862 he joined the studio of Charles Gleyre in Paris, where he met Pierre-Auguste Renoir, Frederic Bazille, and Alfred Sisley. Together they shared new approaches to art, which later came to be known as impressionism, featuring open spaces and light painted with thick brushstrokes."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "Disillusioned with the traditional art taught at universities, instead in 1862 he joined the studio of Charles Gleyre in Paris, where he met Pierre-Auguste Renoir, Frederic Bazille, and Alfred Sisley. Together they shared new approaches to art, which later came to be known as impressionism, featuring open spaces and light painted with thick brushstrokes.",
+          "end": "1863",
+          "start": "1862",
+          "title": "Joined studio of Charles Gleyre in Paris"
+        },
+        "uncertainty": {
+          "lateststart": "1863-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "ffc57f3c-f3c8-5a6f-90c5-f0e0b2fac74d",
+      "kind": "event",
+      "order": 5,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1862-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Joined studio of Charles Gleyre in Paris",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Monet's 1866 Camille or The Woman in the Green Dress (La Femme \u00e0 la Robe Verte), which brought him recognition, depicted Camille Doncieux. Shortly thereafter Doncieux became pregnant and bore their first child, Jean."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "Monet's 1866 Camille or The Woman in the Green Dress (La Femme \u00e0 la Robe Verte), which brought him recognition, depicted Camille Doncieux. Shortly thereafter Doncieux became pregnant and bore their first child, Jean.",
+          "end": "1867",
+          "icon": "../../api/images/green-circle.png",
+          "start": "1866",
+          "title": "Camille"
+        },
+        "uncertainty": {
+          "lateststart": "1867-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "e563f08f-3b10-50ab-b684-0dc59a6cb185",
+      "kind": "event",
+      "order": 6,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#00aa00"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1866-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Camille",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "In 1868, Monet attempted suicide but failed to do so."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "In 1868, Monet attempted suicide but failed to do so.",
+          "end": "1869",
+          "start": "1868",
+          "title": "Attempted suicide"
+        },
+        "uncertainty": {
+          "lateststart": "1869-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "d6e7fe38-d0ef-582a-a514-2924092cfafc",
+      "kind": "event",
+      "order": 7,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1868-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Attempted suicide",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "During the Franco-Prussian War (1870\u20131871), Monet took refuge in England to avoid the conflict. There he studied the works of John Constable and J. M. W. Turner."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "During the Franco-Prussian War (1870\u20131871), Monet took refuge in England to avoid the conflict. There he studied the works of John Constable and J. M. W. Turner.",
+          "end": "1871",
+          "start": "1870",
+          "title": "Took refuge in England"
+        },
+        "uncertainty": {
+          "lateststart": "1871-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "549b8ee0-34d8-5259-a307-8d72809e23e5",
+      "kind": "event",
+      "order": 8,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1870-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Took refuge in England",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "From 1871 to 1878 Monet lived at Argenteuil, a village on the Seine near Paris, and here were painted some of his best known works."
+      },
+      "deletedAt": null,
+      "end": "1879-01-01T00:00:00.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "description": "From 1871 to 1878 Monet lived at Argenteuil, a village on the Seine near Paris, and here were painted some of his best known works.",
+          "earliestend": "1878",
+          "end": "1879",
+          "isduration": "true",
+          "lateststart": "1872",
+          "start": "1871",
+          "title": "Lived at Argenteuil, near Paris"
+        },
+        "uncertainty": {
+          "earliestend": "1878-01-01T00:00:00.000Z",
+          "lateststart": "1872-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "5772f027-a501-5352-94f1-a40142c56d19",
+      "kind": "session",
+      "order": 9,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1871-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Lived at Argenteuil, near Paris",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Upon returning to France, in 1872 (or 1873) he painted Impression, Sunrise (Impression, soleil levant) depicting a Le Havre landscape. It hung in the first impressionist exhibition in 1874 and is now displayed in the Mus\u00e9e Marmottan-Monet, Paris. From the painting's title, art critic Louis Leroy coined the term \"impressionism\", which he intended to be derogatory."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "Upon returning to France, in 1872 (or 1873) he painted Impression, Sunrise (Impression, soleil levant) depicting a Le Havre landscape. It hung in the first impressionist exhibition in 1874 and is now displayed in the Mus\u00e9e Marmottan-Monet, Paris. From the painting's title, art critic Louis Leroy coined the term \"impressionism\", which he intended to be derogatory.",
+          "end": "1873",
+          "icon": "../../api/images/green-circle.png",
+          "image": "impression-sunrise.png",
+          "link": "http://en.wikipedia.org/wiki/Image:Claude_Monet%2C_Impression%2C_soleil_levant%2C_1872.jpg",
+          "start": "1872",
+          "title": "Impression, Sunrise"
+        },
+        "uncertainty": {
+          "lateststart": "1873-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "3350c50f-5925-56e9-b8fa-a73ad0ffe18c",
+      "kind": "event",
+      "order": 10,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#00aa00"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1872-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Impression, Sunrise",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "In 1870, Monet and Doncieux married and in 1873 moved into a house in Argenteuil near the Seine River."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "In 1870, Monet and Doncieux married and in 1873 moved into a house in Argenteuil near the Seine River.",
+          "end": "1871",
+          "start": "1870",
+          "title": "Married Doncieux"
+        },
+        "uncertainty": {
+          "lateststart": "1871-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "464c7403-bb9a-5b87-9a40-9d0d183f80d4",
+      "kind": "event",
+      "order": 11,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1870-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Married Doncieux",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Some of Claude Monet's best known work was done in Argenteuil, including one of his famous garden scenes Monet's Garden at Argenteuil which he painted in 1873."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "Some of Claude Monet's best known work was done in Argenteuil, including one of his famous garden scenes Monet's Garden at Argenteuil which he painted in 1873.",
+          "end": "1874",
+          "icon": "../../api/images/green-circle.png",
+          "image": "http://www.accents-n-art.com/artwork/M00279ss.jpg",
+          "link": "http://www.accents-n-art.com/artists/claude_monet/monets-garden-at-argenteuil.html",
+          "start": "1873",
+          "title": "Monet's Garden at Argenteuil"
+        },
+        "uncertainty": {
+          "lateststart": "1874-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "ca5113f5-047c-5c55-9b4b-740b6d0ca0e2",
+      "kind": "event",
+      "order": 12,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#00aa00"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1873-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Monet's Garden at Argenteuil",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "He worked almost exclusively in Argenteuil from 1875 to 1878. The Seine at Argenteuil was one of his famous paintings during this period. The painting was recently featured in the hit movie Vanilla Sky, starring Tom Cruise and Cameron Diaz."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "He worked almost exclusively in Argenteuil from 1875 to 1878. The Seine at Argenteuil was one of his famous paintings during this period. The painting was recently featured in the hit movie Vanilla Sky, starring Tom Cruise and Cameron Diaz.",
+          "end": "1879",
+          "icon": "../../api/images/green-circle.png",
+          "image": "http://www.accents-n-art.com/artwork/M00506ss.jpg",
+          "link": "http://www.accents-n-art.com/artists/claude_monet/the-seine-at-argenteuil.html",
+          "start": "1875",
+          "title": "The Seine at Argenteuil"
+        },
+        "uncertainty": {
+          "lateststart": "1879-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "264b72cb-9b42-57f7-aab5-a42b61390d76",
+      "kind": "event",
+      "order": 13,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#00aa00"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1875-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "The Seine at Argenteuil",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Monet and Doncieux had another son, Michel, on March 17, 1878."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "Monet and Doncieux had another son, Michel, on March 17, 1878.",
+          "start": "Mar 18 1878 00:00:00 GMT",
+          "title": "Second son Michel born"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "818dc32e-5eb5-53f7-ac45-c925b115623c",
+      "kind": "event",
+      "order": 14,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1878-03-18T00:00:00.000Z",
+      "tags": [],
+      "title": "Second son Michel born",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Madame Monet died of tuberculosis in 1879."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "Madame Monet died of tuberculosis in 1879.",
+          "end": "1880",
+          "start": "1879",
+          "title": "Doncieux died"
+        },
+        "uncertainty": {
+          "lateststart": "1880-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "fc9a2e40-ecc3-5cef-b6fb-dd63caf83c27",
+      "kind": "event",
+      "order": 15,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1879-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Doncieux died",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Alice Hosched\u00e9 decided to help Monet by bringing up his two children together with her own. They lived in Poissy, which Monet hated. In April 1883 they moved to a house in Giverny, Eure, in Haute-Normandie, where he planted a large garden which he painted for the rest of his life."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "Alice Hosched\u00e9 decided to help Monet by bringing up his two children together with her own. They lived in Poissy, which Monet hated. In April 1883 they moved to a house in Giverny, Eure, in Haute-Normandie, where he planted a large garden which he painted for the rest of his life.",
+          "end": "May 01 1883 00:00:00 GMT",
+          "start": "Apr 01 1883 00:00:00 GMT",
+          "title": "Moved to Giverny with Alice Hosched\u00e9"
+        },
+        "uncertainty": {
+          "lateststart": "1883-05-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "522743fe-e2fb-5230-a2fe-195b3979c808",
+      "kind": "event",
+      "order": 16,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1883-04-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Moved to Giverny with Alice Hosched\u00e9",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Monet and Hosched\u00e9 married in 1892."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "Monet and Hosched\u00e9 married in 1892.",
+          "end": "1893",
+          "start": "1892",
+          "title": "Married Hosched\u00e9"
+        },
+        "uncertainty": {
+          "lateststart": "1893-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "31cd9b5a-52fd-52c5-9848-caa47711e9a3",
+      "kind": "event",
+      "order": 17,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1892-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Married Hosched\u00e9",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "In the 1880s and 1890s, Monet began \"series\" painting: paintings of one subject in varying light and viewpoints. His first series is of Rouen Cathedral from different points of view and at different times of the day."
+      },
+      "deletedAt": null,
+      "end": "1900-01-01T00:00:00.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "description": "In the 1880s and 1890s, Monet began \"series\" painting: paintings of one subject in varying light and viewpoints. His first series is of Rouen Cathedral from different points of view and at different times of the day.",
+          "earliestend": "1880",
+          "end": "1900",
+          "isduration": "true",
+          "lateststart": "1900",
+          "start": "1880",
+          "title": "'Series' painting"
+        },
+        "uncertainty": {
+          "earliestend": "1880-01-01T00:00:00.000Z",
+          "lateststart": "1900-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "79600881-49a6-57e9-b513-de4363b1de84",
+      "kind": "session",
+      "order": 18,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#658fe3"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1880-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "'Series' painting",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Twenty views of Monet's Rouen cathedral were exhibited at the Durand-Ruel gallery in 1895."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "Twenty views of Monet's Rouen cathedral were exhibited at the Durand-Ruel gallery in 1895.",
+          "end": "1896",
+          "start": "1895",
+          "title": "Durand-Ruel gallery"
+        },
+        "uncertainty": {
+          "lateststart": "1896-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "7e4e5dad-8de8-5134-88d7-a839cb6d4b8d",
+      "kind": "event",
+      "order": 19,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1895-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Durand-Ruel gallery",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Monet was exceptionally fond of painting controlled nature: his own garden in Giverny, with its water lilies, pond and bridge. He also painted up and down the banks of the Seine."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "Monet was exceptionally fond of painting controlled nature: his own garden in Giverny, with its water lilies, pond and bridge. He also painted up and down the banks of the Seine.",
+          "end": "1890",
+          "icon": "../../api/images/green-circle.png",
+          "image": "water-lily-pond.png",
+          "link": "http://en.wikipedia.org/wiki/Image:Monet.waterlilies.500pix.jpg",
+          "start": "1889",
+          "title": "Water Lily Pond"
+        },
+        "uncertainty": {
+          "lateststart": "1890-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "93af761a-f7db-5520-b37b-0e114e71b53f",
+      "kind": "event",
+      "order": 20,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#00aa00"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1889-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Water Lily Pond",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Claude Monet made several trips to the Mediterranean between 1883 and 1908. During these visits he painted many landscapes and seascapes such as Bordighera. Famous landmarks were also a favorite subject for Monet in the Mediterranean. His paintings in Venice included the Grand Canal, Doges' Palace, and San Giorgio Maggiore. The Monet painting that was stolen in the movie The Thomas Crown Affair was San Giorgio Maggiore at Dusk."
+      },
+      "deletedAt": null,
+      "end": "1909-01-01T00:00:00.000Z",
+      "extensions": {
+        "sourceRecord": {
+          "color": "#0a0",
+          "description": "Claude Monet made several trips to the Mediterranean between 1883 and 1908. During these visits he painted many landscapes and seascapes such as Bordighera. Famous landmarks were also a favorite subject for Monet in the Mediterranean. His paintings in Venice included the Grand Canal, Doges' Palace, and San Giorgio Maggiore. The Monet painting that was stolen in the movie The Thomas Crown Affair was San Giorgio Maggiore at Dusk.",
+          "end": "1909",
+          "image": "http://www.accents-n-art.com/artwork/M00358ss.jpg",
+          "isduration": "true",
+          "link": "http://www.accents-n-art.com/artists/claude_monet/san-giorgio-maggiore-at-dusk.html",
+          "start": "1883",
+          "title": "Painted landscapes and seascapes"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "8dd21d35-b0fb-54f3-8f49-677da02318fc",
+      "kind": "session",
+      "order": 21,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#00aa00"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1883-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Painted landscapes and seascapes",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Monet moved to Giverny, France in 1883. Shortly after his arrival in Giverny, Claude began developing the famous garden that was the inspiration for many of his most famous paintings. The Artist's Garden in Giverny is one of the most popular paintings. His garden in Giverny grew to include a water garden and a japanese style bridge. Water lilies and the Japanese bridge were the subject of many Monet paintings."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "Monet moved to Giverny, France in 1883. Shortly after his arrival in Giverny, Claude began developing the famous garden that was the inspiration for many of his most famous paintings. The Artist's Garden in Giverny is one of the most popular paintings. His garden in Giverny grew to include a water garden and a japanese style bridge. Water lilies and the Japanese bridge were the subject of many Monet paintings.",
+          "end": "1884",
+          "icon": "../../api/images/green-circle.png",
+          "image": "http://www.accents-n-art.com/artwork/M00006ss.jpg",
+          "link": "http://www.accents-n-art.com/artists/claude_monet/monets-garden-the-irises.html",
+          "start": "1883",
+          "title": "The Artist's Garden in Giverny"
+        },
+        "uncertainty": {
+          "lateststart": "1884-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "fe565b16-393e-5200-b9ba-ea499f4a65a9",
+      "kind": "event",
+      "order": 22,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#00aa00"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1883-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "The Artist's Garden in Giverny",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "",
+          "end": "1912",
+          "start": "1911",
+          "title": "Second wife died"
+        },
+        "uncertainty": {
+          "lateststart": "1912-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "d19c720c-bead-56e8-8e36-1b77dd8c6996",
+      "kind": "event",
+      "order": 23,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1911-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Second wife died",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": ""
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "",
+          "end": "1915",
+          "start": "1914",
+          "title": "Son Jean died"
+        },
+        "uncertainty": {
+          "lateststart": "1915-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "c586a631-8958-5057-90ec-2ad4d7d6fb2a",
+      "kind": "event",
+      "order": 24,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1914-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Son Jean died",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Cataracts formed on his eyes for which he underwent two surgeries in 1923. It is interesting to note that the paintings done while the cataracts affected his vision have a general reddish tone, which is a characteristic of the vision of cataract victims. It may also be that after his surgery, he was now able to see certain ultraviolet wavelengths of light that are normally excluded by the lens of the eye; this may have had an effect on the colors he perceived. After his operations he even repainted some of these paintings."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "Cataracts formed on his eyes for which he underwent two surgeries in 1923. It is interesting to note that the paintings done while the cataracts affected his vision have a general reddish tone, which is a characteristic of the vision of cataract victims. It may also be that after his surgery, he was now able to see certain ultraviolet wavelengths of light that are normally excluded by the lens of the eye; this may have had an effect on the colors he perceived. After his operations he even repainted some of these paintings.",
+          "end": "1924",
+          "start": "1923",
+          "title": "Underwent 2 cataract surgeries"
+        },
+        "uncertainty": {
+          "lateststart": "1924-01-01T00:00:00.000Z"
+        }
+      },
+      "groupIds": [],
+      "id": "ff7af434-f34f-53b4-b657-4842400b1091",
+      "kind": "event",
+      "order": 25,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1923-01-01T00:00:00.000Z",
+      "tags": [],
+      "title": "Underwent 2 cataract surgeries",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-13T00:00:00.000Z",
+      "createdBy": "fixture-converter",
+      "data": {
+        "description": "Monet died December 5, 1926 at the age of 86 and is buried in the Giverny church cemetery. His famous home and garden with its waterlily pond and bridge at Giverny are a popular drawcard for tourists. In the house there are many examples of Japanese woodcut prints on the walls."
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "sourceRecord": {
+          "description": "Monet died December 5, 1926 at the age of 86 and is buried in the Giverny church cemetery. His famous home and garden with its waterlily pond and bridge at Giverny are a popular drawcard for tourists. In the house there are many examples of Japanese woodcut prints on the walls.",
+          "start": "Dec 5 1926 00:00:00 GMT",
+          "title": "Death"
+        },
+        "uncertainty": {}
+      },
+      "groupIds": [],
+      "id": "c2dff0c3-a498-51d5-aa06-d255653ca589",
+      "kind": "event",
+      "order": 26,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7464cf"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "monet",
+      "start": "1926-12-05T00:00:00.000Z",
+      "tags": [],
+      "title": "Death",
+      "updatedAt": "2026-09-13T00:00:00.000Z",
+      "updatedBy": "fixture-converter",
+      "version": 1,
+      "workspaceId": "default"
+    }
+  ],
+  "settings": {
+    "bins": 128,
+    "displayUnit": "DECADE",
+    "fontSize": 11,
+    "groupBy": "none",
+    "modelId": "light",
+    "modelVersion": 1,
+    "overview": {
+      "from": "1824-01-01T00:00:00.000Z",
+      "to": "1930-01-01T00:00:00.000Z"
+    },
+    "presentation": {
+      "bandLayout": [
+        {
+          "height": 100,
+          "id": "main",
+          "relativeAxis": {
+            "label": "Age",
+            "origin": "1840-11-14T00:00:00.000Z",
+            "stepYears": 10
+          },
+          "role": "primary"
+        }
+      ],
+      "bands": {
+        "overview": {
+          "backgroundColor": "#dddddd",
+          "intervalUnit": "YEAR"
+        },
+        "primary": {
+          "backgroundColor": "#eeeeee",
+          "barHeight": 6,
+          "dateColor": "#9099a0",
+          "intervalUnit": "DECADE",
+          "pointRadius": 4,
+          "textColor": "#121212"
+        }
+      },
+      "compact": true,
+      "labels": {
+        "fontSize": 11,
+        "maxLines": 1
+      },
+      "version": 1
+    },
+    "range": {
+      "from": "1824-01-01T00:00:00.000Z",
+      "to": "1916-01-01T00:00:00.000Z"
+    },
+    "ratio": 4,
+    "referenceTime": "1840-11-14T00:00:00.000Z",
+    "rowHeight": 32,
+    "scaleMode": "uniform",
+    "theme": "light"
+  },
+  "zones": []
+}

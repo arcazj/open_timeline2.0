@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openbexi.local/schemas/visual-definition.schema.json",
+  "title": "Supported visual model definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["theme", "rowHeight", "fontSize", "groupBy", "displayUnit", "timeZone", "scaleMode", "ratio", "bins"],
+  "properties": {
+    "presentation": {"$ref": "presentation.schema.json"},
+    "theme": {"enum": ["light", "classic", "dark"]},
+    "rowHeight": {"type": "integer", "minimum": 32, "maximum": 128},
+    "fontSize": {"type": "integer", "minimum": 11, "maximum": 24},
+    "groupBy": {"enum": ["none", "sourceId", "kind"]},
+    "displayUnit": {"enum": ["MILLISECOND", "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR", "DECADE", "CENTURY", "MILLENNIUM"]},
+    "timeZone": {"type": "string", "minLength": 1, "maxLength": 100},
+    "scaleMode": {"enum": ["uniform", "adaptive"]},
+    "ratio": {"type": "number", "minimum": 1, "maximum": 32},
+    "bins": {"type": "integer", "minimum": 16, "maximum": 256}
+  }
+}

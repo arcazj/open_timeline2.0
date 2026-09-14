@@ -1,0 +1,221 @@
+{
+  "formatVersion": 1,
+  "recordCount": 100000,
+  "phaseTimeoutSeconds": 120.0,
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "logicalCpuCount": 8,
+    "processor": "Intel64 Family 6 Model 158 Stepping 13, GenuineIntel"
+  },
+  "lanes": [
+    {
+      "lane": "fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "phases": [
+        {
+          "event": "phase-result",
+          "name": "fixture-generation-and-json-files",
+          "status": "ok",
+          "seconds": 20.565985799999908,
+          "rssBefore": 19705856,
+          "rssAfter": 225185792,
+          "sampledPeakRss": 316391424,
+          "processPeakRss": 388718592,
+          "details": {
+            "recordCount": 100000,
+            "seedBytes": 72327873,
+            "pointCount": 20000,
+            "sourceCount": 10,
+            "overviewDays": 30,
+            "detailHours": 6,
+            "files": 0,
+            "fixtureWrites": "isolated fixture construction, not a production transaction/durability benchmark"
+          }
+        }
+      ]
+    },
+    {
+      "lane": "service-only",
+      "exitCode": 0,
+      "timedOut": false,
+      "phases": [
+        {
+          "event": "phase-result",
+          "name": "service-only-json-hydration",
+          "status": "ok",
+          "seconds": 7.71909339999911,
+          "rssBefore": 29163520,
+          "rssAfter": 318443520,
+          "sampledPeakRss": 447246336,
+          "processPeakRss": 457256960,
+          "details": {
+            "recordCount": 100000,
+            "qualification": "service-only hydration; production startup validation bypassed"
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "query-adaptive-full-snapshot",
+          "status": "ok",
+          "seconds": 12.469304899997951,
+          "rssBefore": 318529536,
+          "rssAfter": 524267520,
+          "sampledPeakRss": 574316544,
+          "processPeakRss": 646725632,
+          "details": {
+            "queryId": "e3eca13d-f8bd-4227-b351-1a531df557ef",
+            "snapshotId": "0e0a1cca-a33c-4f02-9aad-e002fd6e85da",
+            "mapId": "8d8116e5-de6e-4561-b9ae-109f43508b34",
+            "generation": "4e60d9d3-d139-599f-8db2-26cee7934d22",
+            "revision": 1,
+            "baseTotal": 100000,
+            "matchTotal": 33333,
+            "overviewTotal": 100000,
+            "overviewMatchTotal": 33333,
+            "state": "ready"
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "density-manifest-read",
+          "status": "ok",
+          "seconds": 0.0005301000019244384,
+          "rssBefore": 524271616,
+          "rssAfter": 524312576,
+          "sampledPeakRss": 524312576,
+          "processPeakRss": 646725632,
+          "details": {
+            "bins": 128,
+            "total": 100000
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "map-manifest-read",
+          "status": "ok",
+          "seconds": 0.0017084999999497086,
+          "rssBefore": 524312576,
+          "rssAfter": 524333056,
+          "sampledPeakRss": 524333056,
+          "processPeakRss": 646725632,
+          "details": {
+            "knots": 129
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "overview-search-aggregation",
+          "status": "ok",
+          "seconds": 0.04670790000091074,
+          "rssBefore": 524333056,
+          "rssAfter": 524378112,
+          "sampledPeakRss": 524378112,
+          "processPeakRss": 646725632,
+          "details": {
+            "items": 128,
+            "total": 100000,
+            "matched": 33333,
+            "aggregated": true
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "table-full-sort-first-page",
+          "status": "ok",
+          "seconds": 6.166533600000548,
+          "rssBefore": 524378112,
+          "rssAfter": 531595264,
+          "sampledPeakRss": 548491264,
+          "processPeakRss": 646725632,
+          "details": {
+            "total": 100000,
+            "items": 100,
+            "pageCount": 1000,
+            "responseBytes": 76140
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "table-next-page",
+          "status": "ok",
+          "seconds": 0.012664799996855436,
+          "rssBefore": 531595264,
+          "rssAfter": 531595264,
+          "sampledPeakRss": 531595264,
+          "processPeakRss": 646725632,
+          "details": {
+            "items": 100,
+            "pageIndex": 1,
+            "responseBytes": 76281
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "layout-detail-six-hours",
+          "status": "ok",
+          "seconds": 0.18985119999706512,
+          "rssBefore": 531595264,
+          "rssAfter": 531603456,
+          "sampledPeakRss": 531636224,
+          "processPeakRss": 646725632,
+          "details": {
+            "detailTotal": 1143,
+            "totalRows": 481,
+            "pageItems": 82,
+            "pageCount": 27,
+            "rowHeight": 32
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "row-page-cached",
+          "status": "ok",
+          "seconds": 0.002423300000373274,
+          "rssBefore": 531603456,
+          "rssAfter": 531603456,
+          "sampledPeakRss": 531603456,
+          "processPeakRss": 646725632,
+          "details": {
+            "items": 82
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "layout-styled-six-hours",
+          "status": "ok",
+          "seconds": 0.23532999999952153,
+          "rssBefore": 531603456,
+          "rssAfter": 531869696,
+          "sampledPeakRss": 531869696,
+          "processPeakRss": 646725632,
+          "details": {
+            "detailTotal": 1143,
+            "totalRows": 481,
+            "pageItems": 79,
+            "pageCount": 33,
+            "rowHeight": 40
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "complete-json-export",
+          "status": "ok",
+          "seconds": 10.039847799998824,
+          "rssBefore": 531869696,
+          "rssAfter": 577294336,
+          "sampledPeakRss": 764510208,
+          "processPeakRss": 836812800,
+          "details": {
+            "records": 100000,
+            "bytes": 72328885,
+            "contentSha256": "e701a35fb1e6a1560908f8b73be9eabbbe13482b04c62974ec0a686e35732ba9"
+          }
+        }
+      ]
+    }
+  ],
+  "temporaryDirectory": "C:\\Users\\arcaz\\AppData\\Local\\Temp\\openbexi-benchmark-pe_nr01d",
+  "temporaryDataRemoved": true
+}

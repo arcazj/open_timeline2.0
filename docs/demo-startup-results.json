@@ -1,0 +1,119 @@
+{
+  "format": "openbexi-demo-startup-v1",
+  "measuredAt": "2026-09-14T00:14:36.395Z",
+  "scope": "Loopback static host with gzip; not a live GitHub Pages measurement",
+  "localBundleSha256": "87166375614d5776db4af6a2f737bd7187f1235f7f3d6a9fe3a353dfb43d3151",
+  "htmlBytes": 8798001,
+  "gzipBytes": 2258930,
+  "brotliBytes": 1749859,
+  "environment": {
+    "platform": "win32",
+    "logicalCpus": 8,
+    "browser": "153.0.4234.32"
+  },
+  "profiles": [
+    {
+      "name": "desktop",
+      "width": 1600,
+      "height": 900,
+      "cpuSlowdown": 1,
+      "latencyMs": 0,
+      "downloadMbps": null,
+      "samples": [
+        {
+          "readyMs": 1135.5999999940395,
+          "domContentLoadedMs": 590.5,
+          "firstContentfulPaintMs": 68,
+          "transferBytes": 2259230,
+          "encodedBodyBytes": 2258930,
+          "decodedBodyBytes": 8798001,
+          "canvasColors": 45,
+          "horizontalOverflow": false,
+          "providerKind": "local",
+          "recordCount": 48,
+          "navigationRoundTripMs": 156.79929999999877
+        },
+        {
+          "readyMs": 1070.0999999940395,
+          "domContentLoadedMs": 541,
+          "firstContentfulPaintMs": 72,
+          "transferBytes": 2259230,
+          "encodedBodyBytes": 2258930,
+          "decodedBodyBytes": 8798001,
+          "canvasColors": 45,
+          "horizontalOverflow": false,
+          "providerKind": "local",
+          "recordCount": 48,
+          "navigationRoundTripMs": 154.78539999999703
+        },
+        {
+          "readyMs": 1058,
+          "domContentLoadedMs": 530.4000000059605,
+          "firstContentfulPaintMs": 68,
+          "transferBytes": 2259230,
+          "encodedBodyBytes": 2258930,
+          "decodedBodyBytes": 8798001,
+          "canvasColors": 45,
+          "horizontalOverflow": false,
+          "providerKind": "local",
+          "recordCount": 48,
+          "navigationRoundTripMs": 152.27709999999934
+        }
+      ],
+      "medianReadyMs": 1070.0999999940395,
+      "maxReadyMs": 1135.5999999940395
+    },
+    {
+      "name": "mobile-slow-4g",
+      "width": 390,
+      "height": 844,
+      "cpuSlowdown": 4,
+      "latencyMs": 150,
+      "downloadMbps": 1.6,
+      "samples": [
+        {
+          "readyMs": 16514.90000000596,
+          "domContentLoadedMs": 14202.29999999702,
+          "firstContentfulPaintMs": 2384,
+          "transferBytes": 2259230,
+          "encodedBodyBytes": 2258930,
+          "decodedBodyBytes": 8798001,
+          "canvasColors": 37,
+          "horizontalOverflow": false,
+          "providerKind": "local",
+          "recordCount": 48,
+          "navigationRoundTripMs": 2306.948400000001
+        },
+        {
+          "readyMs": 16365.10000000894,
+          "domContentLoadedMs": 14082.20000000298,
+          "firstContentfulPaintMs": 2348,
+          "transferBytes": 2259230,
+          "encodedBodyBytes": 2258930,
+          "decodedBodyBytes": 8798001,
+          "canvasColors": 37,
+          "horizontalOverflow": false,
+          "providerKind": "local",
+          "recordCount": 48,
+          "navigationRoundTripMs": 2273.1223000000027
+        },
+        {
+          "readyMs": 16656.79999999702,
+          "domContentLoadedMs": 14245.40000000596,
+          "firstContentfulPaintMs": 2352,
+          "transferBytes": 2259230,
+          "encodedBodyBytes": 2258930,
+          "decodedBodyBytes": 8798001,
+          "canvasColors": 37,
+          "horizontalOverflow": false,
+          "providerKind": "local",
+          "recordCount": 48,
+          "navigationRoundTripMs": 2246.7301000000007
+        }
+      ],
+      "medianReadyMs": 16514.90000000596,
+      "maxReadyMs": 16656.79999999702
+    }
+  ],
+  "status": "measured"
+}

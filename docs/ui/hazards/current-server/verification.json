@@ -1,0 +1,2174 @@
+{
+  "capturedAt": "2026-09-13T15:14:58.078Z",
+  "source": "http://127.0.0.1:8768",
+  "observations": [
+    {
+      "name": "legacy-namespace-desktop",
+      "state": {
+        "providerKind": "server",
+        "executionMode": "server",
+        "providerId": "server:28e36f1a-26d6-4cd8-9fba-7c6248271387",
+        "generation": "03fc8055-0c15-465e-b915-4dce3f3604fd",
+        "sourceName": "Read-only legacy JSON",
+        "queryId": "f8110f0d-80d3-4c62-889b-3c37f5fa3eeb",
+        "layoutId": "179ac702-b079-4599-8ecf-c2d7b9e4f43f",
+        "mapId": "6ba4be61-d954-472d-ad50-e8993493b856",
+        "fromMs": "1789214400000",
+        "toMs": "1789228800000",
+        "domain": {
+          "from": "2026-09-11T14:00:00.000Z",
+          "to": "2026-09-13T14:00:00.000Z"
+        },
+        "startRow": 0,
+        "endRow": 9,
+        "totalRows": 9,
+        "loadedCount": 42,
+        "detailTotal": 42,
+        "overviewTotal": 383,
+        "pageCapacity": 20,
+        "layoutWidth": 2000,
+        "overviewMatched": 383,
+        "search": "",
+        "scaleMode": "uniform",
+        "dirty": false,
+        "view": "timeline",
+        "modelId": "legacy-presentation-a86935198f785e2624830c81db0490ec",
+        "modelVersion": 1,
+        "theme": "light",
+        "rowHeight": 32,
+        "effectiveRowHeight": 32,
+        "fontSize": 12,
+        "timeZone": "UTC",
+        "interactionMode": "navigate",
+        "navigationPhase": "idle",
+        "navigationOffset": 0,
+        "changeMode": "pinned",
+        "changePending": false,
+        "changeRequired": null,
+        "queryRevision": 1,
+        "queryGeneration": "03fc8055-0c15-465e-b915-4dce3f3604fd"
+      },
+      "overlaps": [],
+      "canvases": [
+        {
+          "selector": ".plot-wrap canvas",
+          "width": 2000,
+          "height": 713,
+          "colorCount": 2
+        },
+        {
+          "selector": ".overview-plot canvas",
+          "width": 2000,
+          "height": 203,
+          "colorCount": 12
+        }
+      ],
+      "namespaceLabels": [],
+      "hazards": [
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-volcano-active",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 32,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-volcano-active",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 32,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        }
+      ],
+      "minorTicks": [
+        1789215300000,
+        1789216200000,
+        1789217100000,
+        1789218900000,
+        1789219800000,
+        1789220700000,
+        1789222500000,
+        1789223400000,
+        1789224300000,
+        1789226100000,
+        1789227000000,
+        1789227900000
+      ],
+      "horizontalOverflow": false,
+      "status": "Read-only files / Read-only"
+    },
+    {
+      "name": "legacy-search",
+      "state": {
+        "providerKind": "server",
+        "executionMode": "server",
+        "providerId": "server:28e36f1a-26d6-4cd8-9fba-7c6248271387",
+        "generation": "03fc8055-0c15-465e-b915-4dce3f3604fd",
+        "sourceName": "Read-only legacy JSON",
+        "queryId": "503d9c92-0f7c-40a5-a370-43defd70fd80",
+        "layoutId": "c18c3748-6389-4c83-a16a-f63784849307",
+        "mapId": "b184528b-5347-4de2-ab6a-59a26e55a0e4",
+        "fromMs": "1789214400000",
+        "toMs": "1789228800000",
+        "domain": {
+          "from": "2026-09-11T14:00:00.000Z",
+          "to": "2026-09-13T14:00:00.000Z"
+        },
+        "startRow": 0,
+        "endRow": 9,
+        "totalRows": 9,
+        "loadedCount": 42,
+        "detailTotal": 42,
+        "overviewTotal": 383,
+        "pageCapacity": 20,
+        "layoutWidth": 2000,
+        "overviewMatched": 1,
+        "search": "Kilauea",
+        "scaleMode": "uniform",
+        "dirty": false,
+        "view": "timeline",
+        "modelId": "legacy-presentation-a86935198f785e2624830c81db0490ec",
+        "modelVersion": 1,
+        "theme": "light",
+        "rowHeight": 32,
+        "effectiveRowHeight": 32,
+        "fontSize": 12,
+        "timeZone": "UTC",
+        "interactionMode": "navigate",
+        "navigationPhase": "idle",
+        "navigationOffset": 0,
+        "changeMode": "pinned",
+        "changePending": false,
+        "changeRequired": null,
+        "queryRevision": 1,
+        "queryGeneration": "03fc8055-0c15-465e-b915-4dce3f3604fd"
+      },
+      "overlaps": [],
+      "canvases": [
+        {
+          "selector": ".plot-wrap canvas",
+          "width": 2000,
+          "height": 713,
+          "colorCount": 2
+        },
+        {
+          "selector": ".overview-plot canvas",
+          "width": 2000,
+          "height": 203,
+          "colorCount": 3
+        }
+      ],
+      "namespaceLabels": [],
+      "hazards": [
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-volcano-active",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 32,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-volcano-active",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 32,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        }
+      ],
+      "minorTicks": [
+        1789215300000,
+        1789216200000,
+        1789217100000,
+        1789218900000,
+        1789219800000,
+        1789220700000,
+        1789222500000,
+        1789223400000,
+        1789224300000,
+        1789226100000,
+        1789227000000,
+        1789227900000
+      ],
+      "horizontalOverflow": false,
+      "status": "Read-only files / Read-only"
+    },
+    {
+      "name": "legacy-descriptor",
+      "state": {
+        "providerKind": "server",
+        "executionMode": "server",
+        "providerId": "server:28e36f1a-26d6-4cd8-9fba-7c6248271387",
+        "generation": "03fc8055-0c15-465e-b915-4dce3f3604fd",
+        "sourceName": "Read-only legacy JSON",
+        "queryId": "a12757af-39d8-47d8-9762-3a8ce979dc81",
+        "layoutId": "b0857e4f-747f-413c-9934-5dfc4c9166d7",
+        "mapId": "901485f4-745c-427c-9975-9fb03877ff9a",
+        "fromMs": "1789214400000",
+        "toMs": "1789228800000",
+        "domain": {
+          "from": "2026-09-11T14:00:00.000Z",
+          "to": "2026-09-13T14:00:00.000Z"
+        },
+        "startRow": 0,
+        "endRow": 11,
+        "totalRows": 11,
+        "loadedCount": 42,
+        "detailTotal": 42,
+        "overviewTotal": 383,
+        "pageCapacity": 20,
+        "layoutWidth": 1688,
+        "overviewMatched": 383,
+        "selectedId": "2f7b520c-3171-50ed-8b75-6f4deb625f70",
+        "search": "",
+        "scaleMode": "uniform",
+        "dirty": false,
+        "view": "timeline",
+        "modelId": "legacy-presentation-a86935198f785e2624830c81db0490ec",
+        "modelVersion": 1,
+        "theme": "light",
+        "rowHeight": 32,
+        "effectiveRowHeight": 32,
+        "fontSize": 12,
+        "timeZone": "UTC",
+        "interactionMode": "navigate",
+        "navigationPhase": "idle",
+        "navigationOffset": 0,
+        "changeMode": "pinned",
+        "changePending": false,
+        "changeRequired": null,
+        "queryRevision": 1,
+        "queryGeneration": "03fc8055-0c15-465e-b915-4dce3f3604fd"
+      },
+      "overlaps": [],
+      "canvases": [
+        {
+          "selector": ".plot-wrap canvas",
+          "width": 1688,
+          "height": 713,
+          "colorCount": 6
+        },
+        {
+          "selector": ".overview-plot canvas",
+          "width": 1688,
+          "height": 203,
+          "colorCount": 9
+        }
+      ],
+      "namespaceLabels": [],
+      "hazards": [
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-volcano-active",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 32,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-volcano-active",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 32,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        }
+      ],
+      "minorTicks": [
+        1789215300000,
+        1789216200000,
+        1789217100000,
+        1789218900000,
+        1789219800000,
+        1789220700000,
+        1789222500000,
+        1789223400000,
+        1789224300000,
+        1789226100000,
+        1789227000000,
+        1789227900000
+      ],
+      "horizontalOverflow": false,
+      "status": "Read-only files / Read-only"
+    },
+    {
+      "name": "legacy-namespace-mobile",
+      "state": {
+        "providerKind": "server",
+        "executionMode": "server",
+        "providerId": "server:28e36f1a-26d6-4cd8-9fba-7c6248271387",
+        "generation": "03fc8055-0c15-465e-b915-4dce3f3604fd",
+        "sourceName": "Read-only legacy JSON",
+        "queryId": "a12757af-39d8-47d8-9762-3a8ce979dc81",
+        "layoutId": "e0465be1-e038-477a-8f4c-e9b608266007",
+        "mapId": "901485f4-745c-427c-9975-9fb03877ff9a",
+        "fromMs": "1789214400000",
+        "toMs": "1789228800000",
+        "domain": {
+          "from": "2026-09-11T14:00:00.000Z",
+          "to": "2026-09-13T14:00:00.000Z"
+        },
+        "startRow": 0,
+        "endRow": 10,
+        "totalRows": 42,
+        "loadedCount": 10,
+        "detailTotal": 42,
+        "overviewTotal": 383,
+        "pageCapacity": 10,
+        "layoutWidth": 366,
+        "overviewMatched": 383,
+        "search": "",
+        "scaleMode": "uniform",
+        "dirty": false,
+        "view": "timeline",
+        "modelId": "legacy-presentation-a86935198f785e2624830c81db0490ec",
+        "modelVersion": 1,
+        "theme": "light",
+        "rowHeight": 32,
+        "effectiveRowHeight": 32,
+        "fontSize": 12,
+        "timeZone": "UTC",
+        "interactionMode": "navigate",
+        "navigationPhase": "idle",
+        "navigationOffset": 0,
+        "changeMode": "pinned",
+        "changePending": false,
+        "changeRequired": null,
+        "queryRevision": 1,
+        "queryGeneration": "03fc8055-0c15-465e-b915-4dce3f3604fd"
+      },
+      "overlaps": [],
+      "canvases": [
+        {
+          "selector": ".plot-wrap canvas",
+          "width": 366,
+          "height": 388,
+          "colorCount": 7
+        },
+        {
+          "selector": ".overview-plot canvas",
+          "width": 366,
+          "height": 90,
+          "colorCount": 9
+        }
+      ],
+      "namespaceLabels": [],
+      "hazards": [
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        }
+      ],
+      "minorTicks": [
+        1789215300000,
+        1789216200000,
+        1789217100000,
+        1789218900000,
+        1789219800000,
+        1789220700000,
+        1789222500000,
+        1789223400000,
+        1789224300000,
+        1789226100000,
+        1789227000000,
+        1789227900000
+      ],
+      "horizontalOverflow": false,
+      "status": "Read-only files / Read-only"
+    }
+  ],
+  "errors": [],
+  "queries": [
+    {
+      "path": "/api/v1/workspaces/default/query-sessions",
+      "body": {
+        "domain": {
+          "from": "2026-09-12T15:15:03.408Z",
+          "to": "2026-09-14T15:15:03.408Z"
+        },
+        "filters": {
+          "sourceId": "all",
+          "kind": "all",
+          "filterId": null,
+          "filterVersion": null
+        },
+        "search": "",
+        "searchMode": "any",
+        "searchCaseSensitive": false,
+        "searchFields": [
+          "/title",
+          "/data/description",
+          "/data/text",
+          "/data/system",
+          "/data/type",
+          "/data/status"
+        ],
+        "scaleMode": "uniform",
+        "ratio": 4,
+        "bins": 128
+      }
+    },
+    {
+      "path": "/api/v1/workspaces/default/query-sessions/72203648-4f44-4c04-b682-b623b1db34b9/layouts",
+      "body": {
+        "mapId": "0bb331ea-11da-4b22-93ff-6c8a2d2b46e7",
+        "from": "2026-09-13T13:15:03.408Z",
+        "to": "2026-09-13T17:15:03.408Z",
+        "viewFromMs": "1789305303408",
+        "viewToMs": "1789319703408",
+        "width": 2000,
+        "availableHeight": 661,
+        "rowHeight": 32,
+        "fontSize": 12,
+        "groupBy": "none",
+        "theme": "light",
+        "displayUnit": "HOUR",
+        "presentation": {
+          "version": 1,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808",
+              "sessionColor": "#f8feff",
+              "eventColor": "#0f91f9",
+              "pointRadius": 5,
+              "intervalUnit": "HOUR",
+              "dateFormat": "MM/dd-hh:mm",
+              "barHeight": 10,
+              "axisPosition": "top",
+              "minorDivisions": 4
+            },
+            "overview": {
+              "backgroundColor": "#BCD9DB",
+              "dateColor": "#080808",
+              "sessionColor": "#EAD7F6",
+              "eventColor": "#238448",
+              "intervalUnit": "DAY",
+              "dateFormat": "yyyy mmm dd",
+              "barHeight": 4,
+              "pointRadius": 2,
+              "axisPosition": "bottom"
+            }
+          },
+          "labels": {
+            "fields": [
+              "/title"
+            ],
+            "fontSize": 12
+          },
+          "nesting": {
+            "enabled": true
+          },
+          "sourceStyles": [
+            {
+              "sourceId": "earthquake-dbac7332a3f4d747",
+              "namespace": "earthquake",
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            },
+            {
+              "sourceId": "volcano-63c31d8d0c635679",
+              "namespace": "volcano",
+              "backgroundColor": "#B6E8A7",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            }
+          ]
+        },
+        "renderProfileId": "noto-sans-latin-v1"
+      }
+    },
+    {
+      "path": "/api/v1/workspaces/default/query-sessions",
+      "body": {
+        "domain": {
+          "from": "2026-09-11T14:00:00.000Z",
+          "to": "2026-09-13T14:00:00.000Z"
+        },
+        "filters": {
+          "sourceId": "all",
+          "kind": "all",
+          "filterId": null,
+          "filterVersion": null
+        },
+        "search": "",
+        "searchMode": "any",
+        "searchCaseSensitive": false,
+        "searchFields": [
+          "/title",
+          "/data/description",
+          "/data/text",
+          "/data/system",
+          "/data/type",
+          "/data/status"
+        ],
+        "scaleMode": "uniform",
+        "ratio": 4,
+        "bins": 128
+      }
+    },
+    {
+      "path": "/api/v1/workspaces/default/query-sessions/52457094-9763-425f-97d3-a4fee9723641/layouts",
+      "body": {
+        "mapId": "a925a068-c5f3-40f2-b295-cb924e742368",
+        "from": "2026-09-11T14:00:00.000Z",
+        "to": "2026-09-13T14:00:00.000Z",
+        "viewFromMs": "1789135200000",
+        "viewToMs": "1789308000000",
+        "width": 2000,
+        "availableHeight": 661,
+        "rowHeight": 32,
+        "fontSize": 12,
+        "groupBy": "none",
+        "theme": "light",
+        "displayUnit": "HOUR",
+        "presentation": {
+          "version": 1,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808",
+              "sessionColor": "#f8feff",
+              "eventColor": "#0f91f9",
+              "pointRadius": 5,
+              "intervalUnit": "HOUR",
+              "dateFormat": "MM/dd-hh:mm",
+              "barHeight": 10,
+              "axisPosition": "top",
+              "minorDivisions": 4
+            },
+            "overview": {
+              "backgroundColor": "#BCD9DB",
+              "dateColor": "#080808",
+              "sessionColor": "#EAD7F6",
+              "eventColor": "#238448",
+              "intervalUnit": "DAY",
+              "dateFormat": "yyyy mmm dd",
+              "barHeight": 4,
+              "pointRadius": 2,
+              "axisPosition": "bottom"
+            }
+          },
+          "labels": {
+            "fields": [
+              "/title"
+            ],
+            "fontSize": 12
+          },
+          "nesting": {
+            "enabled": true
+          },
+          "sourceStyles": [
+            {
+              "sourceId": "earthquake-dbac7332a3f4d747",
+              "namespace": "earthquake",
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            },
+            {
+              "sourceId": "volcano-63c31d8d0c635679",
+              "namespace": "volcano",
+              "backgroundColor": "#B6E8A7",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            }
+          ]
+        },
+        "renderProfileId": "noto-sans-latin-v1"
+      }
+    },
+    {
+      "path": "/api/v1/workspaces/default/query-sessions",
+      "body": {
+        "domain": {
+          "from": "2026-09-11T14:00:00.000Z",
+          "to": "2026-09-13T14:00:00.000Z"
+        },
+        "filters": {
+          "sourceId": "all",
+          "kind": "all",
+          "filterId": null,
+          "filterVersion": null
+        },
+        "search": "",
+        "searchMode": "any",
+        "searchCaseSensitive": false,
+        "searchFields": [
+          "/title",
+          "/data/description",
+          "/data/text",
+          "/data/system",
+          "/data/type",
+          "/data/status"
+        ],
+        "scaleMode": "uniform",
+        "ratio": 4,
+        "bins": 128
+      }
+    },
+    {
+      "path": "/api/v1/workspaces/default/query-sessions/f8110f0d-80d3-4c62-889b-3c37f5fa3eeb/layouts",
+      "body": {
+        "mapId": "6ba4be61-d954-472d-ad50-e8993493b856",
+        "from": "2026-09-12T12:00:00.000Z",
+        "to": "2026-09-12T16:00:00.000Z",
+        "viewFromMs": "1789214400000",
+        "viewToMs": "1789228800000",
+        "width": 2000,
+        "availableHeight": 661,
+        "rowHeight": 32,
+        "fontSize": 12,
+        "groupBy": "none",
+        "theme": "light",
+        "displayUnit": "HOUR",
+        "presentation": {
+          "version": 1,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808",
+              "sessionColor": "#f8feff",
+              "eventColor": "#0f91f9",
+              "pointRadius": 5,
+              "intervalUnit": "HOUR",
+              "dateFormat": "MM/dd-hh:mm",
+              "barHeight": 10,
+              "axisPosition": "top",
+              "minorDivisions": 4
+            },
+            "overview": {
+              "backgroundColor": "#BCD9DB",
+              "dateColor": "#080808",
+              "sessionColor": "#EAD7F6",
+              "eventColor": "#238448",
+              "intervalUnit": "DAY",
+              "dateFormat": "yyyy mmm dd",
+              "barHeight": 4,
+              "pointRadius": 2,
+              "axisPosition": "bottom"
+            }
+          },
+          "labels": {
+            "fields": [
+              "/title"
+            ],
+            "fontSize": 12
+          },
+          "nesting": {
+            "enabled": true
+          },
+          "sourceStyles": [
+            {
+              "sourceId": "earthquake-dbac7332a3f4d747",
+              "namespace": "earthquake",
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            },
+            {
+              "sourceId": "volcano-63c31d8d0c635679",
+              "namespace": "volcano",
+              "backgroundColor": "#B6E8A7",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            }
+          ]
+        },
+        "renderProfileId": "noto-sans-latin-v1"
+      }
+    },
+    {
+      "path": "/api/v1/workspaces/default/query-sessions",
+      "body": {
+        "domain": {
+          "from": "2026-09-11T14:00:00.000Z",
+          "to": "2026-09-13T14:00:00.000Z"
+        },
+        "filters": {
+          "sourceId": "all",
+          "kind": "all",
+          "filterId": null,
+          "filterVersion": null
+        },
+        "search": "Kilauea",
+        "searchMode": "any",
+        "searchCaseSensitive": false,
+        "searchFields": [
+          "/title",
+          "/data/description",
+          "/data/text",
+          "/data/system",
+          "/data/type",
+          "/data/status"
+        ],
+        "scaleMode": "uniform",
+        "ratio": 4,
+        "bins": 128
+      }
+    },
+    {
+      "path": "/api/v1/workspaces/default/query-sessions/503d9c92-0f7c-40a5-a370-43defd70fd80/layouts",
+      "body": {
+        "mapId": "b184528b-5347-4de2-ab6a-59a26e55a0e4",
+        "from": "2026-09-12T12:00:00.000Z",
+        "to": "2026-09-12T16:00:00.000Z",
+        "viewFromMs": "1789214400000",
+        "viewToMs": "1789228800000",
+        "width": 2000,
+        "availableHeight": 661,
+        "rowHeight": 32,
+        "fontSize": 12,
+        "groupBy": "none",
+        "theme": "light",
+        "displayUnit": "HOUR",
+        "presentation": {
+          "version": 1,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808",
+              "sessionColor": "#f8feff",
+              "eventColor": "#0f91f9",
+              "pointRadius": 5,
+              "intervalUnit": "HOUR",
+              "dateFormat": "MM/dd-hh:mm",
+              "barHeight": 10,
+              "axisPosition": "top",
+              "minorDivisions": 4
+            },
+            "overview": {
+              "backgroundColor": "#BCD9DB",
+              "dateColor": "#080808",
+              "sessionColor": "#EAD7F6",
+              "eventColor": "#238448",
+              "intervalUnit": "DAY",
+              "dateFormat": "yyyy mmm dd",
+              "barHeight": 4,
+              "pointRadius": 2,
+              "axisPosition": "bottom"
+            }
+          },
+          "labels": {
+            "fields": [
+              "/title"
+            ],
+            "fontSize": 12
+          },
+          "nesting": {
+            "enabled": true
+          },
+          "sourceStyles": [
+            {
+              "sourceId": "earthquake-dbac7332a3f4d747",
+              "namespace": "earthquake",
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            },
+            {
+              "sourceId": "volcano-63c31d8d0c635679",
+              "namespace": "volcano",
+              "backgroundColor": "#B6E8A7",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            }
+          ]
+        },
+        "renderProfileId": "noto-sans-latin-v1"
+      }
+    },
+    {
+      "path": "/api/v1/workspaces/default/query-sessions",
+      "body": {
+        "domain": {
+          "from": "2026-09-11T14:00:00.000Z",
+          "to": "2026-09-13T14:00:00.000Z"
+        },
+        "filters": {
+          "sourceId": "all",
+          "kind": "all",
+          "filterId": null,
+          "filterVersion": null
+        },
+        "search": "",
+        "searchMode": "any",
+        "searchCaseSensitive": false,
+        "searchFields": [
+          "/title",
+          "/data/description",
+          "/data/text",
+          "/data/system",
+          "/data/type",
+          "/data/status"
+        ],
+        "scaleMode": "uniform",
+        "ratio": 4,
+        "bins": 128
+      }
+    },
+    {
+      "path": "/api/v1/workspaces/default/query-sessions/a12757af-39d8-47d8-9762-3a8ce979dc81/layouts",
+      "body": {
+        "mapId": "901485f4-745c-427c-9975-9fb03877ff9a",
+        "from": "2026-09-12T12:00:00.000Z",
+        "to": "2026-09-12T16:00:00.000Z",
+        "viewFromMs": "1789214400000",
+        "viewToMs": "1789228800000",
+        "width": 2000,
+        "availableHeight": 661,
+        "rowHeight": 32,
+        "fontSize": 12,
+        "groupBy": "none",
+        "theme": "light",
+        "displayUnit": "HOUR",
+        "presentation": {
+          "version": 1,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808",
+              "sessionColor": "#f8feff",
+              "eventColor": "#0f91f9",
+              "pointRadius": 5,
+              "intervalUnit": "HOUR",
+              "dateFormat": "MM/dd-hh:mm",
+              "barHeight": 10,
+              "axisPosition": "top",
+              "minorDivisions": 4
+            },
+            "overview": {
+              "backgroundColor": "#BCD9DB",
+              "dateColor": "#080808",
+              "sessionColor": "#EAD7F6",
+              "eventColor": "#238448",
+              "intervalUnit": "DAY",
+              "dateFormat": "yyyy mmm dd",
+              "barHeight": 4,
+              "pointRadius": 2,
+              "axisPosition": "bottom"
+            }
+          },
+          "labels": {
+            "fields": [
+              "/title"
+            ],
+            "fontSize": 12
+          },
+          "nesting": {
+            "enabled": true
+          },
+          "sourceStyles": [
+            {
+              "sourceId": "earthquake-dbac7332a3f4d747",
+              "namespace": "earthquake",
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            },
+            {
+              "sourceId": "volcano-63c31d8d0c635679",
+              "namespace": "volcano",
+              "backgroundColor": "#B6E8A7",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            }
+          ]
+        },
+        "renderProfileId": "noto-sans-latin-v1"
+      }
+    },
+    {
+      "path": "/api/v1/workspaces/default/query-sessions/a12757af-39d8-47d8-9762-3a8ce979dc81/layouts",
+      "body": {
+        "mapId": "901485f4-745c-427c-9975-9fb03877ff9a",
+        "from": "2026-09-12T12:00:00.000Z",
+        "to": "2026-09-12T16:00:00.000Z",
+        "viewFromMs": "1789214400000",
+        "viewToMs": "1789228800000",
+        "width": 1688,
+        "availableHeight": 661,
+        "rowHeight": 32,
+        "fontSize": 12,
+        "groupBy": "none",
+        "theme": "light",
+        "displayUnit": "HOUR",
+        "presentation": {
+          "version": 1,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808",
+              "sessionColor": "#f8feff",
+              "eventColor": "#0f91f9",
+              "pointRadius": 5,
+              "intervalUnit": "HOUR",
+              "dateFormat": "MM/dd-hh:mm",
+              "barHeight": 10,
+              "axisPosition": "top",
+              "minorDivisions": 4
+            },
+            "overview": {
+              "backgroundColor": "#BCD9DB",
+              "dateColor": "#080808",
+              "sessionColor": "#EAD7F6",
+              "eventColor": "#238448",
+              "intervalUnit": "DAY",
+              "dateFormat": "yyyy mmm dd",
+              "barHeight": 4,
+              "pointRadius": 2,
+              "axisPosition": "bottom"
+            }
+          },
+          "labels": {
+            "fields": [
+              "/title"
+            ],
+            "fontSize": 12
+          },
+          "nesting": {
+            "enabled": true
+          },
+          "sourceStyles": [
+            {
+              "sourceId": "earthquake-dbac7332a3f4d747",
+              "namespace": "earthquake",
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            },
+            {
+              "sourceId": "volcano-63c31d8d0c635679",
+              "namespace": "volcano",
+              "backgroundColor": "#B6E8A7",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            }
+          ]
+        },
+        "renderProfileId": "noto-sans-latin-v1"
+      }
+    },
+    {
+      "path": "/api/v1/workspaces/default/query-sessions/a12757af-39d8-47d8-9762-3a8ce979dc81/layouts",
+      "body": {
+        "mapId": "901485f4-745c-427c-9975-9fb03877ff9a",
+        "from": "2026-09-12T12:00:00.000Z",
+        "to": "2026-09-12T16:00:00.000Z",
+        "viewFromMs": "1789214400000",
+        "viewToMs": "1789228800000",
+        "width": 2000,
+        "availableHeight": 661,
+        "rowHeight": 32,
+        "fontSize": 12,
+        "groupBy": "none",
+        "theme": "light",
+        "displayUnit": "HOUR",
+        "presentation": {
+          "version": 1,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808",
+              "sessionColor": "#f8feff",
+              "eventColor": "#0f91f9",
+              "pointRadius": 5,
+              "intervalUnit": "HOUR",
+              "dateFormat": "MM/dd-hh:mm",
+              "barHeight": 10,
+              "axisPosition": "top",
+              "minorDivisions": 4
+            },
+            "overview": {
+              "backgroundColor": "#BCD9DB",
+              "dateColor": "#080808",
+              "sessionColor": "#EAD7F6",
+              "eventColor": "#238448",
+              "intervalUnit": "DAY",
+              "dateFormat": "yyyy mmm dd",
+              "barHeight": 4,
+              "pointRadius": 2,
+              "axisPosition": "bottom"
+            }
+          },
+          "labels": {
+            "fields": [
+              "/title"
+            ],
+            "fontSize": 12
+          },
+          "nesting": {
+            "enabled": true
+          },
+          "sourceStyles": [
+            {
+              "sourceId": "earthquake-dbac7332a3f4d747",
+              "namespace": "earthquake",
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            },
+            {
+              "sourceId": "volcano-63c31d8d0c635679",
+              "namespace": "volcano",
+              "backgroundColor": "#B6E8A7",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            }
+          ]
+        },
+        "renderProfileId": "noto-sans-latin-v1"
+      }
+    },
+    {
+      "path": "/api/v1/workspaces/default/query-sessions/a12757af-39d8-47d8-9762-3a8ce979dc81/layouts",
+      "body": {
+        "mapId": "901485f4-745c-427c-9975-9fb03877ff9a",
+        "from": "2026-09-12T12:00:00.000Z",
+        "to": "2026-09-12T16:00:00.000Z",
+        "viewFromMs": "1789214400000",
+        "viewToMs": "1789228800000",
+        "width": 366,
+        "availableHeight": 336,
+        "rowHeight": 32,
+        "fontSize": 12,
+        "groupBy": "none",
+        "theme": "light",
+        "displayUnit": "HOUR",
+        "presentation": {
+          "version": 1,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808",
+              "sessionColor": "#f8feff",
+              "eventColor": "#0f91f9",
+              "pointRadius": 5,
+              "intervalUnit": "HOUR",
+              "dateFormat": "MM/dd-hh:mm",
+              "barHeight": 10,
+              "axisPosition": "top",
+              "minorDivisions": 4
+            },
+            "overview": {
+              "backgroundColor": "#BCD9DB",
+              "dateColor": "#080808",
+              "sessionColor": "#EAD7F6",
+              "eventColor": "#238448",
+              "intervalUnit": "DAY",
+              "dateFormat": "yyyy mmm dd",
+              "barHeight": 4,
+              "pointRadius": 2,
+              "axisPosition": "bottom"
+            }
+          },
+          "labels": {
+            "fields": [
+              "/title"
+            ],
+            "fontSize": 12
+          },
+          "nesting": {
+            "enabled": true
+          },
+          "sourceStyles": [
+            {
+              "sourceId": "earthquake-dbac7332a3f4d747",
+              "namespace": "earthquake",
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            },
+            {
+              "sourceId": "volcano-63c31d8d0c635679",
+              "namespace": "volcano",
+              "backgroundColor": "#B6E8A7",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            }
+          ]
+        },
+        "renderProfileId": "noto-sans-latin-v1"
+      }
+    },
+    {
+      "path": "/api/v1/workspaces/default/query-sessions/a12757af-39d8-47d8-9762-3a8ce979dc81/layouts",
+      "body": {
+        "mapId": "901485f4-745c-427c-9975-9fb03877ff9a",
+        "from": "2026-09-12T12:00:00.000Z",
+        "to": "2026-09-12T16:00:00.000Z",
+        "viewFromMs": "1789214400000",
+        "viewToMs": "1789228800000",
+        "width": 2000,
+        "availableHeight": 661,
+        "rowHeight": 32,
+        "fontSize": 12,
+        "groupBy": "none",
+        "theme": "light",
+        "displayUnit": "HOUR",
+        "presentation": {
+          "version": 1,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808",
+              "sessionColor": "#f8feff",
+              "eventColor": "#0f91f9",
+              "pointRadius": 5,
+              "intervalUnit": "HOUR",
+              "dateFormat": "MM/dd-hh:mm",
+              "barHeight": 10,
+              "axisPosition": "top",
+              "minorDivisions": 4
+            },
+            "overview": {
+              "backgroundColor": "#BCD9DB",
+              "dateColor": "#080808",
+              "sessionColor": "#EAD7F6",
+              "eventColor": "#238448",
+              "intervalUnit": "DAY",
+              "dateFormat": "yyyy mmm dd",
+              "barHeight": 4,
+              "pointRadius": 2,
+              "axisPosition": "bottom"
+            }
+          },
+          "labels": {
+            "fields": [
+              "/title"
+            ],
+            "fontSize": 12
+          },
+          "nesting": {
+            "enabled": true
+          },
+          "sourceStyles": [
+            {
+              "sourceId": "earthquake-dbac7332a3f4d747",
+              "namespace": "earthquake",
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            },
+            {
+              "sourceId": "volcano-63c31d8d0c635679",
+              "namespace": "volcano",
+              "backgroundColor": "#B6E8A7",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            }
+          ]
+        },
+        "renderProfileId": "noto-sans-latin-v1"
+      }
+    },
+    {
+      "path": "/api/v1/workspaces/default/query-sessions/a12757af-39d8-47d8-9762-3a8ce979dc81/layouts",
+      "body": {
+        "mapId": "901485f4-745c-427c-9975-9fb03877ff9a",
+        "from": "2026-09-12T11:48:28.800Z",
+        "to": "2026-09-12T15:48:28.800Z",
+        "viewFromMs": "1789213708800",
+        "viewToMs": "1789228108800",
+        "width": 2000,
+        "availableHeight": 661,
+        "rowHeight": 32,
+        "fontSize": 12,
+        "groupBy": "none",
+        "theme": "light",
+        "displayUnit": "HOUR",
+        "presentation": {
+          "version": 1,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808",
+              "sessionColor": "#f8feff",
+              "eventColor": "#0f91f9",
+              "pointRadius": 5,
+              "intervalUnit": "HOUR",
+              "dateFormat": "MM/dd-hh:mm",
+              "barHeight": 10,
+              "axisPosition": "top",
+              "minorDivisions": 4
+            },
+            "overview": {
+              "backgroundColor": "#BCD9DB",
+              "dateColor": "#080808",
+              "sessionColor": "#EAD7F6",
+              "eventColor": "#238448",
+              "intervalUnit": "DAY",
+              "dateFormat": "yyyy mmm dd",
+              "barHeight": 4,
+              "pointRadius": 2,
+              "axisPosition": "bottom"
+            }
+          },
+          "labels": {
+            "fields": [
+              "/title"
+            ],
+            "fontSize": 12
+          },
+          "nesting": {
+            "enabled": true
+          },
+          "sourceStyles": [
+            {
+              "sourceId": "earthquake-dbac7332a3f4d747",
+              "namespace": "earthquake",
+              "backgroundColor": "#BBEDF0",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            },
+            {
+              "sourceId": "volcano-63c31d8d0c635679",
+              "namespace": "volcano",
+              "backgroundColor": "#B6E8A7",
+              "textColor": "#080808",
+              "dateColor": "#080808"
+            }
+          ]
+        },
+        "renderProfileId": "noto-sans-latin-v1"
+      }
+    }
+  ],
+  "standaloneBundleSha256": "738d811266304f8444978ed7d0a121f8031b93fecb03f608efcfc1cbb422e42a",
+  "loadedBundleSha256": "738d811266304f8444978ed7d0a121f8031b93fecb03f608efcfc1cbb422e42a",
+  "visibleSearchMatches": 1,
+  "searchMatched": 1,
+  "drag": {
+    "status": "passed",
+    "before": {
+      "fromMs": "1789214400000",
+      "toMs": "1789228800000"
+    },
+    "after": {
+      "fromMs": "1789213708800",
+      "toMs": "1789228108800"
+    },
+    "heldOffsets": [
+      96,
+      96
+    ],
+    "pinnedQuery": true,
+    "pinnedMap": true,
+    "dirty": false
+  },
+  "status": "passed"
+}

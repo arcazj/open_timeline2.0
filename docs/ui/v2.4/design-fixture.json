@@ -1,0 +1,526 @@
+{
+  "note": "Static specification design data, not application code or a persisted runtime store. Display actual authorized JSON records in implementation; do not ship these as fallback content. UTC minutes on 2026-09-12. Rows are illustrative authored layout, not a tested server allocator.",
+  "date": "2026-09-12",
+  "overview": [
+    0,
+    1440
+  ],
+  "detail": [
+    480,
+    1020
+  ],
+  "focus": 750,
+  "map": {
+    "knots": [
+      0,
+      720,
+      780,
+      1440
+    ],
+    "relativeSlopes": [
+      1,
+      4,
+      1
+    ],
+    "origin": 0
+  },
+  "zones": [
+    {
+      "id": "ZONE-1",
+      "title": "Maintenance",
+      "start": 730,
+      "end": 765,
+      "color": "#EE9B42",
+      "opacity": 0.25
+    },
+    {
+      "id": "ZONE-2",
+      "title": "Verification window",
+      "start": 750,
+      "end": 800,
+      "color": "#52A9AB",
+      "opacity": 0.18
+    }
+  ],
+  "records": [
+    {
+      "id": "OPS-001",
+      "title": "Ground-station coverage",
+      "start": 420,
+      "end": 760,
+      "row": 0,
+      "color": "#397AA6",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-002",
+      "title": "Telemetry downlink",
+      "start": 735,
+      "end": 800,
+      "row": 1,
+      "color": "#7B58A0",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-003",
+      "title": "Continuous signal watch",
+      "start": 720,
+      "end": 1080,
+      "row": 2,
+      "color": "#318C73",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-004",
+      "title": "Clock alignment 04",
+      "start": 745,
+      "end": null,
+      "row": 3,
+      "color": "#AE6845",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-005",
+      "title": "Link verification 05",
+      "start": 750,
+      "end": 758,
+      "row": 4,
+      "color": "#526C9F",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-006",
+      "title": "Archive checksum 06",
+      "start": 755,
+      "end": 767,
+      "row": 5,
+      "color": "#397AA6",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-007",
+      "title": "Signal acquisition 07",
+      "start": 760,
+      "end": null,
+      "row": 6,
+      "color": "#7B58A0",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-008",
+      "title": "Quality checkpoint 08",
+      "start": 730,
+      "end": 750,
+      "row": 7,
+      "color": "#318C73",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-009",
+      "title": "Packet validation 09",
+      "start": 735,
+      "end": 743,
+      "row": 8,
+      "color": "#AE6845",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-010",
+      "title": "Telemetry check 10",
+      "start": 740,
+      "end": null,
+      "row": 9,
+      "color": "#526C9F",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-011",
+      "title": "Command review 11",
+      "start": 745,
+      "end": 761,
+      "row": 10,
+      "color": "#397AA6",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-012",
+      "title": "Clock alignment 12",
+      "start": 750,
+      "end": 770,
+      "row": 11,
+      "color": "#7B58A0",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-013",
+      "title": "Link verification 13",
+      "start": 755,
+      "end": null,
+      "row": 12,
+      "color": "#318C73",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-014",
+      "title": "Archive checksum 14",
+      "start": 760,
+      "end": 772,
+      "row": 13,
+      "color": "#AE6845",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-015",
+      "title": "Signal acquisition 15",
+      "start": 730,
+      "end": 746,
+      "row": 14,
+      "color": "#526C9F",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-016",
+      "title": "Quality checkpoint 16",
+      "start": 735,
+      "end": null,
+      "row": 15,
+      "color": "#397AA6",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-017",
+      "title": "Packet validation 17",
+      "start": 740,
+      "end": 748,
+      "row": 16,
+      "color": "#7B58A0",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-018",
+      "title": "Telemetry check 18",
+      "start": 745,
+      "end": 757,
+      "row": 17,
+      "color": "#318C73",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-019",
+      "title": "Command review 19",
+      "start": 750,
+      "end": null,
+      "row": 18,
+      "color": "#AE6845",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-020",
+      "title": "Clock alignment 20",
+      "start": 755,
+      "end": 775,
+      "row": 19,
+      "color": "#526C9F",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-021",
+      "title": "Link verification 21",
+      "start": 760,
+      "end": 768,
+      "row": 20,
+      "color": "#397AA6",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-022",
+      "title": "Archive checksum 22",
+      "start": 730,
+      "end": null,
+      "row": 21,
+      "color": "#7B58A0",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-023",
+      "title": "Signal acquisition 23",
+      "start": 735,
+      "end": 751,
+      "row": 22,
+      "color": "#318C73",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-024",
+      "title": "Quality checkpoint 24",
+      "start": 740,
+      "end": 760,
+      "row": 23,
+      "color": "#AE6845",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-025",
+      "title": "Packet validation 25",
+      "start": 745,
+      "end": null,
+      "row": 24,
+      "color": "#526C9F",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-026",
+      "title": "Telemetry check 26",
+      "start": 750,
+      "end": 762,
+      "row": 25,
+      "color": "#397AA6",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-027",
+      "title": "Command review 27",
+      "start": 755,
+      "end": 771,
+      "row": 26,
+      "color": "#7B58A0",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-028",
+      "title": "Clock alignment 28",
+      "start": 760,
+      "end": null,
+      "row": 27,
+      "color": "#318C73",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-029",
+      "title": "Link verification 29",
+      "start": 730,
+      "end": 738,
+      "row": 28,
+      "color": "#AE6845",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-030",
+      "title": "Archive checksum 30",
+      "start": 735,
+      "end": 747,
+      "row": 29,
+      "color": "#526C9F",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-031",
+      "title": "Signal acquisition 31",
+      "start": 740,
+      "end": null,
+      "row": 30,
+      "color": "#397AA6",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-032",
+      "title": "Quality checkpoint 32",
+      "start": 745,
+      "end": 765,
+      "row": 31,
+      "color": "#7B58A0",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-033",
+      "title": "Packet validation 33",
+      "start": 750,
+      "end": 758,
+      "row": 32,
+      "color": "#318C73",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-034",
+      "title": "Telemetry check 34",
+      "start": 755,
+      "end": null,
+      "row": 33,
+      "color": "#AE6845",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-035",
+      "title": "Command review 35",
+      "start": 760,
+      "end": 776,
+      "row": 34,
+      "color": "#526C9F",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-036",
+      "title": "Clock alignment 36",
+      "start": 730,
+      "end": 750,
+      "row": 35,
+      "color": "#397AA6",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-037",
+      "title": "Link verification 37",
+      "start": 735,
+      "end": null,
+      "row": 36,
+      "color": "#7B58A0",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-038",
+      "title": "Archive checksum 38",
+      "start": 740,
+      "end": 752,
+      "row": 37,
+      "color": "#318C73",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-039",
+      "title": "Signal acquisition 39",
+      "start": 745,
+      "end": 761,
+      "row": 38,
+      "color": "#AE6845",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-040",
+      "title": "Quality checkpoint 40",
+      "start": 750,
+      "end": null,
+      "row": 39,
+      "color": "#526C9F",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-041",
+      "title": "Antenna ready",
+      "start": 510,
+      "end": null,
+      "row": 3,
+      "color": "#318C73",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-042",
+      "title": "Receiver check",
+      "start": 533,
+      "end": 553,
+      "row": 4,
+      "color": "#AE6845",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-043",
+      "title": "Operator handover",
+      "start": 556,
+      "end": null,
+      "row": 5,
+      "color": "#526C9F",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-044",
+      "title": "Queue opened",
+      "start": 579,
+      "end": 599,
+      "row": 6,
+      "color": "#397AA6",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-045",
+      "title": "Data export",
+      "start": 890,
+      "end": null,
+      "row": 7,
+      "color": "#7B58A0",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-046",
+      "title": "Archive complete",
+      "start": 915,
+      "end": 930,
+      "row": 8,
+      "color": "#318C73",
+      "kind": "session"
+    },
+    {
+      "id": "OPS-047",
+      "title": "Report approved",
+      "start": 940,
+      "end": null,
+      "row": 9,
+      "color": "#AE6845",
+      "kind": "event"
+    },
+    {
+      "id": "OPS-048",
+      "title": "Link closed",
+      "start": 965,
+      "end": 980,
+      "row": 10,
+      "color": "#526C9F",
+      "kind": "session"
+    }
+  ],
+  "providerStates": {
+    "note": "Authored display states only; no provider connection, import, mutation or synchronization was executed.",
+    "local": {
+      "name": "Local snapshot",
+      "file": "operations-snapshot.json",
+      "scope": "complete-workspace",
+      "recordTotal": 48,
+      "originRevision": 104,
+      "storage": "memory",
+      "state": "ready"
+    },
+    "reconnect": {
+      "activeProvider": "local",
+      "serverAvailable": true,
+      "localOriginRevision": 104,
+      "serverRevision": 108,
+      "localRecordTotal": 48,
+      "serverAuthorizedTotal": 51,
+      "localModified": 2,
+      "localNew": 0,
+      "localDeleted": 0,
+      "exportPending": true,
+      "scopesComparable": false,
+      "automaticSync": false,
+      "uploadQueued": false
+    }
+  },
+  "scaleSettings": {
+    "mode": "automatic",
+    "displayUnit": "HOUR",
+    "maximumRatio": 4,
+    "densityBins": 128,
+    "displayTimeZone": "UTC",
+    "supportedUnits": [
+      "MILLISECOND",
+      "SECOND",
+      "MINUTE",
+      "HOUR",
+      "DAY",
+      "WEEK",
+      "MONTH",
+      "YEAR",
+      "DECADE",
+      "CENTURY",
+      "MILLENNIUM"
+    ]
+  }
+}

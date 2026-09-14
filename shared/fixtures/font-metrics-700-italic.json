@@ -1,0 +1,9505 @@
+{
+  "profileId": "noto-sans-latin-700-italic-v1",
+  "fontFamily": "Noto Sans",
+  "fontWeight": 700,
+  "fontStyle": "italic",
+  "unitsPerEm": 1000,
+  "ascent": 1069,
+  "descent": -293,
+  "glyphs": {
+    "0": {
+      "advance": 0,
+      "xMin": 0,
+      "xMax": 0,
+      "yMin": 0,
+      "yMax": 0
+    },
+    "13": {
+      "advance": 260,
+      "xMin": 0,
+      "xMax": 0,
+      "yMin": 0,
+      "yMax": 0
+    },
+    "32": {
+      "advance": 260,
+      "xMin": 0,
+      "xMax": 0,
+      "yMin": 0,
+      "yMax": 0
+    },
+    "33": {
+      "advance": 287,
+      "xMin": 11,
+      "xMax": 318,
+      "yMin": -13,
+      "yMax": 714
+    },
+    "34": {
+      "advance": 453,
+      "xMin": 98,
+      "xMax": 466,
+      "yMin": 456,
+      "yMax": 714
+    },
+    "35": {
+      "advance": 646,
+      "xMin": 20,
+      "xMax": 651,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "36": {
+      "advance": 551,
+      "xMin": 25,
+      "xMax": 547,
+      "yMin": -58,
+      "yMax": 760
+    },
+    "37": {
+      "advance": 856,
+      "xMin": 56,
+      "xMax": 820,
+      "yMin": -9,
+      "yMax": 724
+    },
+    "38": {
+      "advance": 708,
+      "xMin": 33,
+      "xMax": 698,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "39": {
+      "advance": 255,
+      "xMin": 98,
+      "xMax": 268,
+      "yMin": 456,
+      "yMax": 714
+    },
+    "40": {
+      "advance": 339,
+      "xMin": 36,
+      "xMax": 410,
+      "yMin": -158,
+      "yMax": 714
+    },
+    "41": {
+      "advance": 341,
+      "xMin": -70,
+      "xMax": 304,
+      "yMin": -158,
+      "yMax": 726
+    },
+    "42": {
+      "advance": 546,
+      "xMin": 85,
+      "xMax": 565,
+      "yMin": 281,
+      "yMax": 765
+    },
+    "43": {
+      "advance": 572,
+      "xMin": 53,
+      "xMax": 538,
+      "yMin": 111,
+      "yMax": 596
+    },
+    "44": {
+      "advance": 287,
+      "xMin": -48,
+      "xMax": 192,
+      "yMin": -129,
+      "yMax": 116
+    },
+    "45": {
+      "advance": 323,
+      "xMin": 17,
+      "xMax": 300,
+      "yMin": 206,
+      "yMax": 330
+    },
+    "46": {
+      "advance": 287,
+      "xMin": 8,
+      "xMax": 183,
+      "yMin": -13,
+      "yMax": 155
+    },
+    "47": {
+      "advance": 424,
+      "xMin": -45,
+      "xMax": 497,
+      "yMin": -6,
+      "yMax": 720
+    },
+    "48": {
+      "advance": 551,
+      "xMin": 32,
+      "xMax": 542,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "49": {
+      "advance": 551,
+      "xMin": 89,
+      "xMax": 487,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "50": {
+      "advance": 551,
+      "xMin": -24,
+      "xMax": 536,
+      "yMin": 0,
+      "yMax": 724
+    },
+    "51": {
+      "advance": 551,
+      "xMin": 7,
+      "xMax": 539,
+      "yMin": -10,
+      "yMax": 724
+    },
+    "52": {
+      "advance": 551,
+      "xMin": -12,
+      "xMax": 539,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "53": {
+      "advance": 551,
+      "xMin": 13,
+      "xMax": 551,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "54": {
+      "advance": 551,
+      "xMin": 43,
+      "xMax": 563,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "55": {
+      "advance": 551,
+      "xMin": 38,
+      "xMax": 594,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "56": {
+      "advance": 551,
+      "xMin": 27,
+      "xMax": 550,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "57": {
+      "advance": 551,
+      "xMin": 42,
+      "xMax": 533,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "58": {
+      "advance": 287,
+      "xMin": 8,
+      "xMax": 272,
+      "yMin": -13,
+      "yMax": 556
+    },
+    "59": {
+      "advance": 287,
+      "xMin": -54,
+      "xMax": 272,
+      "yMin": -129,
+      "yMax": 556
+    },
+    "60": {
+      "advance": 572,
+      "xMin": 53,
+      "xMax": 538,
+      "yMin": 99,
+      "yMax": 625
+    },
+    "61": {
+      "advance": 572,
+      "xMin": 53,
+      "xMax": 538,
+      "yMin": 204,
+      "yMax": 500
+    },
+    "62": {
+      "advance": 572,
+      "xMin": 53,
+      "xMax": 538,
+      "yMin": 99,
+      "yMax": 625
+    },
+    "63": {
+      "advance": 459,
+      "xMin": 77,
+      "xMax": 491,
+      "yMin": -13,
+      "yMax": 724
+    },
+    "64": {
+      "advance": 856,
+      "xMin": 45,
+      "xMax": 846,
+      "yMin": -91,
+      "yMax": 714
+    },
+    "65": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 568,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "66": {
+      "advance": 620,
+      "xMin": 26,
+      "xMax": 611,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "67": {
+      "advance": 613,
+      "xMin": 59,
+      "xMax": 652,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "68": {
+      "advance": 677,
+      "xMin": 26,
+      "xMax": 646,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "69": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 577,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "70": {
+      "advance": 533,
+      "xMin": 26,
+      "xMax": 575,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "71": {
+      "advance": 690,
+      "xMin": 59,
+      "xMax": 679,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "72": {
+      "advance": 701,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "73": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 438,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "74": {
+      "advance": 334,
+      "xMin": -158,
+      "xMax": 340,
+      "yMin": -211,
+      "yMax": 714
+    },
+    "75": {
+      "advance": 613,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "76": {
+      "advance": 518,
+      "xMin": 26,
+      "xMax": 451,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "77": {
+      "advance": 880,
+      "xMin": 26,
+      "xMax": 885,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "78": {
+      "advance": 758,
+      "xMin": 25,
+      "xMax": 763,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "79": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "80": {
+      "advance": 610,
+      "xMin": 26,
+      "xMax": 615,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "81": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -170,
+      "yMax": 725
+    },
+    "82": {
+      "advance": 620,
+      "xMin": 26,
+      "xMax": 594,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "83": {
+      "advance": 530,
+      "xMin": 20,
+      "xMax": 542,
+      "yMin": -10,
+      "yMax": 724
+    },
+    "84": {
+      "advance": 532,
+      "xMin": 81,
+      "xMax": 603,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "85": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "86": {
+      "advance": 590,
+      "xMin": 90,
+      "xMax": 680,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "87": {
+      "advance": 894,
+      "xMin": 90,
+      "xMax": 988,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "88": {
+      "advance": 610,
+      "xMin": -57,
+      "xMax": 688,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "89": {
+      "advance": 564,
+      "xMin": 91,
+      "xMax": 656,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "90": {
+      "advance": 536,
+      "xMin": -30,
+      "xMax": 586,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "91": {
+      "advance": 331,
+      "xMin": -18,
+      "xMax": 399,
+      "yMin": -158,
+      "yMax": 714
+    },
+    "92": {
+      "advance": 424,
+      "xMin": 108,
+      "xMax": 346,
+      "yMin": -6,
+      "yMax": 720
+    },
+    "93": {
+      "advance": 331,
+      "xMin": -67,
+      "xMax": 349,
+      "yMin": -158,
+      "yMax": 714
+    },
+    "94": {
+      "advance": 551,
+      "xMin": 17,
+      "xMax": 526,
+      "yMin": 254,
+      "yMax": 718
+    },
+    "95": {
+      "advance": 400,
+      "xMin": -91,
+      "xMax": 325,
+      "yMin": -158,
+      "yMax": -90
+    },
+    "96": {
+      "advance": 324,
+      "xMin": 145,
+      "xMax": 355,
+      "yMin": 606,
+      "yMax": 766
+    },
+    "97": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "98": {
+      "advance": 595,
+      "xMin": 18,
+      "xMax": 551,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "99": {
+      "advance": 484,
+      "xMin": 44,
+      "xMax": 495,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "100": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 622,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "101": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 532,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "102": {
+      "advance": 374,
+      "xMin": -106,
+      "xMax": 485,
+      "yMin": -240,
+      "yMax": 765
+    },
+    "103": {
+      "advance": 596,
+      "xMin": 18,
+      "xMax": 578,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "104": {
+      "advance": 604,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "105": {
+      "advance": 299,
+      "xMin": 18,
+      "xMax": 321,
+      "yMin": 0,
+      "yMax": 761
+    },
+    "106": {
+      "advance": 299,
+      "xMin": -128,
+      "xMax": 323,
+      "yMin": -240,
+      "yMax": 761
+    },
+    "107": {
+      "advance": 568,
+      "xMin": 18,
+      "xMax": 617,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "108": {
+      "advance": 299,
+      "xMin": 17,
+      "xMax": 328,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "109": {
+      "advance": 905,
+      "xMin": 18,
+      "xMax": 854,
+      "yMin": 0,
+      "yMax": 556
+    },
+    "110": {
+      "advance": 604,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": 0,
+      "yMax": 556
+    },
+    "111": {
+      "advance": 585,
+      "xMin": 44,
+      "xMax": 541,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "112": {
+      "advance": 595,
+      "xMin": -33,
+      "xMax": 551,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "113": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 577,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "114": {
+      "advance": 422,
+      "xMin": 18,
+      "xMax": 460,
+      "yMin": 0,
+      "yMax": 556
+    },
+    "115": {
+      "advance": 475,
+      "xMin": 11,
+      "xMax": 455,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "116": {
+      "advance": 410,
+      "xMin": 46,
+      "xMax": 429,
+      "yMin": -10,
+      "yMax": 662
+    },
+    "117": {
+      "advance": 604,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 546
+    },
+    "118": {
+      "advance": 512,
+      "xMin": 50,
+      "xMax": 570,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "119": {
+      "advance": 788,
+      "xMin": 61,
+      "xMax": 839,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "120": {
+      "advance": 534,
+      "xMin": -50,
+      "xMax": 583,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "121": {
+      "advance": 519,
+      "xMin": -69,
+      "xMax": 571,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "122": {
+      "advance": 469,
+      "xMin": -18,
+      "xMax": 479,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "123": {
+      "advance": 355,
+      "xMin": -1,
+      "xMax": 419,
+      "yMin": -158,
+      "yMax": 714
+    },
+    "124": {
+      "advance": 551,
+      "xMin": 222,
+      "xMax": 329,
+      "yMin": -227,
+      "yMax": 757
+    },
+    "125": {
+      "advance": 355,
+      "xMin": -51,
+      "xMax": 357,
+      "yMin": -158,
+      "yMax": 714
+    },
+    "126": {
+      "advance": 572,
+      "xMin": 53,
+      "xMax": 538,
+      "yMin": 269,
+      "yMax": 436
+    },
+    "160": {
+      "advance": 260,
+      "xMin": 0,
+      "xMax": 0,
+      "yMin": 0,
+      "yMax": 0
+    },
+    "161": {
+      "advance": 286,
+      "xMin": -36,
+      "xMax": 268,
+      "yMin": -181,
+      "yMax": 546
+    },
+    "162": {
+      "advance": 551,
+      "xMin": 80,
+      "xMax": 529,
+      "yMin": -10,
+      "yMax": 724
+    },
+    "163": {
+      "advance": 551,
+      "xMin": -6,
+      "xMax": 606,
+      "yMin": 0,
+      "yMax": 725
+    },
+    "164": {
+      "advance": 551,
+      "xMin": 56,
+      "xMax": 517,
+      "yMin": 124,
+      "yMax": 583
+    },
+    "165": {
+      "advance": 551,
+      "xMin": 43,
+      "xMax": 630,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "166": {
+      "advance": 551,
+      "xMin": 222,
+      "xMax": 329,
+      "yMin": -227,
+      "yMax": 757
+    },
+    "167": {
+      "advance": 486,
+      "xMin": 10,
+      "xMax": 502,
+      "yMin": -10,
+      "yMax": 765
+    },
+    "168": {
+      "advance": 554,
+      "xMin": 203,
+      "xMax": 525,
+      "yMin": 621,
+      "yMax": 752
+    },
+    "169": {
+      "advance": 832,
+      "xMin": 49,
+      "xMax": 783,
+      "yMin": -10,
+      "yMax": 724
+    },
+    "170": {
+      "advance": 379,
+      "xMin": 73,
+      "xMax": 430,
+      "yMin": 367,
+      "yMax": 721
+    },
+    "171": {
+      "advance": 566,
+      "xMin": 35,
+      "xMax": 567,
+      "yMin": 44,
+      "yMax": 506
+    },
+    "172": {
+      "advance": 572,
+      "xMin": 53,
+      "xMax": 538,
+      "yMin": 121,
+      "yMax": 406
+    },
+    "173": {
+      "advance": 323,
+      "xMin": 17,
+      "xMax": 300,
+      "yMin": 206,
+      "yMax": 330
+    },
+    "174": {
+      "advance": 832,
+      "xMin": 49,
+      "xMax": 783,
+      "yMin": -10,
+      "yMax": 724
+    },
+    "175": {
+      "advance": 428,
+      "xMin": 101,
+      "xMax": 555,
+      "yMin": 759,
+      "yMax": 859
+    },
+    "176": {
+      "advance": 424,
+      "xMin": 40,
+      "xMax": 384,
+      "yMin": 386,
+      "yMax": 724
+    },
+    "177": {
+      "advance": 572,
+      "xMin": 53,
+      "xMax": 538,
+      "yMin": 0,
+      "yMax": 626
+    },
+    "178": {
+      "advance": 379,
+      "xMin": 56,
+      "xMax": 423,
+      "yMin": 415,
+      "yMax": 853
+    },
+    "179": {
+      "advance": 379,
+      "xMin": 72,
+      "xMax": 424,
+      "yMin": 407,
+      "yMax": 852
+    },
+    "180": {
+      "advance": 322,
+      "xMin": 113,
+      "xMax": 385,
+      "yMin": 606,
+      "yMax": 766
+    },
+    "181": {
+      "advance": 610,
+      "xMin": -33,
+      "xMax": 593,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "182": {
+      "advance": 655,
+      "xMin": 72,
+      "xMax": 587,
+      "yMin": -127,
+      "yMax": 760
+    },
+    "183": {
+      "advance": 287,
+      "xMin": 66,
+      "xMax": 241,
+      "yMin": 270,
+      "yMax": 438
+    },
+    "184": {
+      "advance": 205,
+      "xMin": -101,
+      "xMax": 128,
+      "yMin": -240,
+      "yMax": 0
+    },
+    "185": {
+      "advance": 379,
+      "xMin": 91,
+      "xMax": 387,
+      "yMin": 415,
+      "yMax": 843
+    },
+    "186": {
+      "advance": 368,
+      "xMin": 83,
+      "xMax": 399,
+      "yMin": 365,
+      "yMax": 720
+    },
+    "187": {
+      "advance": 562,
+      "xMin": 0,
+      "xMax": 527,
+      "yMin": 44,
+      "yMax": 504
+    },
+    "188": {
+      "advance": 834,
+      "xMin": 71,
+      "xMax": 799,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "189": {
+      "advance": 891,
+      "xMin": 71,
+      "xMax": 849,
+      "yMin": -1,
+      "yMax": 714
+    },
+    "190": {
+      "advance": 863,
+      "xMin": 47,
+      "xMax": 828,
+      "yMin": 0,
+      "yMax": 723
+    },
+    "191": {
+      "advance": 465,
+      "xMin": -26,
+      "xMax": 388,
+      "yMin": -180,
+      "yMax": 557
+    },
+    "192": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 568,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "193": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 612,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "194": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 614,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "195": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 638,
+      "yMin": 0,
+      "yMax": 926
+    },
+    "196": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 593,
+      "yMin": 0,
+      "yMax": 920
+    },
+    "197": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 568,
+      "yMin": 0,
+      "yMax": 1005
+    },
+    "198": {
+      "advance": 895,
+      "xMin": -60,
+      "xMax": 929,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "199": {
+      "advance": 613,
+      "xMin": 59,
+      "xMax": 652,
+      "yMin": -240,
+      "yMax": 725
+    },
+    "200": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 577,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "201": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 582,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "202": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 581,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "203": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 577,
+      "yMin": 0,
+      "yMax": 920
+    },
+    "204": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 438,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "205": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 483,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "206": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 485,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "207": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 464,
+      "yMin": 0,
+      "yMax": 920
+    },
+    "208": {
+      "advance": 677,
+      "xMin": 16,
+      "xMax": 646,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "209": {
+      "advance": 758,
+      "xMin": 25,
+      "xMax": 763,
+      "yMin": 0,
+      "yMax": 926
+    },
+    "210": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "211": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "212": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "213": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 926
+    },
+    "214": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 920
+    },
+    "215": {
+      "advance": 572,
+      "xMin": 73,
+      "xMax": 518,
+      "yMin": 131,
+      "yMax": 575
+    },
+    "216": {
+      "advance": 730,
+      "xMin": 49,
+      "xMax": 712,
+      "yMin": -42,
+      "yMax": 752
+    },
+    "217": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "218": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "219": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "220": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 920
+    },
+    "221": {
+      "advance": 564,
+      "xMin": 91,
+      "xMax": 656,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "222": {
+      "advance": 601,
+      "xMin": 26,
+      "xMax": 571,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "223": {
+      "advance": 659,
+      "xMin": -127,
+      "xMax": 635,
+      "yMin": -240,
+      "yMax": 765
+    },
+    "224": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "225": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "226": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "227": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 758
+    },
+    "228": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 752
+    },
+    "229": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 837
+    },
+    "230": {
+      "advance": 872,
+      "xMin": 44,
+      "xMax": 847,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "231": {
+      "advance": 484,
+      "xMin": 44,
+      "xMax": 495,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "232": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 532,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "233": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 547,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "234": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 549,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "235": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 532,
+      "yMin": -10,
+      "yMax": 752
+    },
+    "236": {
+      "advance": 299,
+      "xMin": 18,
+      "xMax": 298,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "237": {
+      "advance": 299,
+      "xMin": 18,
+      "xMax": 411,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "238": {
+      "advance": 299,
+      "xMin": 12,
+      "xMax": 411,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "239": {
+      "advance": 299,
+      "xMin": 18,
+      "xMax": 390,
+      "yMin": 0,
+      "yMax": 752
+    },
+    "240": {
+      "advance": 577,
+      "xMin": 35,
+      "xMax": 565,
+      "yMin": -10,
+      "yMax": 765
+    },
+    "241": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 599,
+      "yMin": 0,
+      "yMax": 758
+    },
+    "242": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 541,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "243": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 547,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "244": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 547,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "245": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 758
+    },
+    "246": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 541,
+      "yMin": -10,
+      "yMax": 752
+    },
+    "247": {
+      "advance": 572,
+      "xMin": 53,
+      "xMax": 538,
+      "yMin": 108,
+      "yMax": 597
+    },
+    "248": {
+      "advance": 585,
+      "xMin": 21,
+      "xMax": 550,
+      "yMin": -50,
+      "yMax": 572
+    },
+    "249": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "250": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "251": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "252": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 752
+    },
+    "253": {
+      "advance": 519,
+      "xMin": -69,
+      "xMax": 571,
+      "yMin": -240,
+      "yMax": 766
+    },
+    "254": {
+      "advance": 596,
+      "xMin": -33,
+      "xMax": 552,
+      "yMin": -240,
+      "yMax": 760
+    },
+    "255": {
+      "advance": 519,
+      "xMin": -69,
+      "xMax": 571,
+      "yMin": -240,
+      "yMax": 752
+    },
+    "305": {
+      "advance": 299,
+      "xMin": 18,
+      "xMax": 284,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "338": {
+      "advance": 901,
+      "xMin": 60,
+      "xMax": 935,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "339": {
+      "advance": 882,
+      "xMin": 44,
+      "xMax": 857,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "699": {
+      "advance": 215,
+      "xMin": 56,
+      "xMax": 296,
+      "yMin": 469,
+      "yMax": 714
+    },
+    "700": {
+      "advance": 217,
+      "xMin": 51,
+      "xMax": 291,
+      "yMin": 469,
+      "yMax": 714
+    },
+    "710": {
+      "advance": 482,
+      "xMin": 113,
+      "xMax": 512,
+      "yMin": 606,
+      "yMax": 766
+    },
+    "730": {
+      "advance": 330,
+      "xMin": 138,
+      "xMax": 383,
+      "yMin": 605,
+      "yMax": 837
+    },
+    "732": {
+      "advance": 460,
+      "xMin": 111,
+      "xMax": 522,
+      "yMin": 605,
+      "yMax": 758
+    },
+    "768": {
+      "advance": 0,
+      "xMin": -415,
+      "xMax": -205,
+      "yMin": 606,
+      "yMax": 766
+    },
+    "769": {
+      "advance": 0,
+      "xMin": -231,
+      "xMax": 41,
+      "yMin": 606,
+      "yMax": 766
+    },
+    "771": {
+      "advance": 0,
+      "xMin": -439,
+      "xMax": -28,
+      "yMin": 605,
+      "yMax": 758
+    },
+    "772": {
+      "advance": 0,
+      "xMin": -85,
+      "xMax": 239,
+      "yMin": 606,
+      "yMax": 704
+    },
+    "776": {
+      "advance": 0,
+      "xMin": -76,
+      "xMax": 246,
+      "yMin": 621,
+      "yMax": 752
+    },
+    "777": {
+      "advance": 0,
+      "xMin": -296,
+      "xMax": -84,
+      "yMin": 595,
+      "yMax": 830
+    },
+    "803": {
+      "advance": 0,
+      "xMin": -454,
+      "xMax": -289,
+      "yMin": -212,
+      "yMax": -64
+    },
+    "809": {
+      "advance": 0,
+      "xMin": -156,
+      "xMax": 3,
+      "yMin": -305,
+      "yMax": -31
+    },
+    "8194": {
+      "advance": 500,
+      "xMin": 0,
+      "xMax": 0,
+      "yMin": 0,
+      "yMax": 0
+    },
+    "8201": {
+      "advance": 166,
+      "xMin": 0,
+      "xMax": 0,
+      "yMin": 0,
+      "yMax": 0
+    },
+    "8203": {
+      "advance": 0,
+      "xMin": 0,
+      "xMax": 0,
+      "yMin": 0,
+      "yMax": 0
+    },
+    "8211": {
+      "advance": 480,
+      "xMin": 20,
+      "xMax": 460,
+      "yMin": 213,
+      "yMax": 326
+    },
+    "8212": {
+      "advance": 960,
+      "xMin": 20,
+      "xMax": 940,
+      "yMin": 213,
+      "yMax": 326
+    },
+    "8216": {
+      "advance": 217,
+      "xMin": 56,
+      "xMax": 296,
+      "yMin": 469,
+      "yMax": 714
+    },
+    "8217": {
+      "advance": 217,
+      "xMin": 51,
+      "xMax": 291,
+      "yMin": 469,
+      "yMax": 714
+    },
+    "8218": {
+      "advance": 280,
+      "xMin": -50,
+      "xMax": 190,
+      "yMin": -129,
+      "yMax": 116
+    },
+    "8220": {
+      "advance": 433,
+      "xMin": 56,
+      "xMax": 512,
+      "yMin": 469,
+      "yMax": 714
+    },
+    "8221": {
+      "advance": 433,
+      "xMin": 52,
+      "xMax": 508,
+      "yMin": 469,
+      "yMax": 714
+    },
+    "8222": {
+      "advance": 497,
+      "xMin": -50,
+      "xMax": 407,
+      "yMin": -129,
+      "yMax": 116
+    },
+    "8226": {
+      "advance": 376,
+      "xMin": 68,
+      "xMax": 348,
+      "yMin": 210,
+      "yMax": 520
+    },
+    "8230": {
+      "advance": 833,
+      "xMin": 8,
+      "xMax": 731,
+      "yMin": -13,
+      "yMax": 155
+    },
+    "8242": {
+      "advance": 283,
+      "xMin": 63,
+      "xMax": 347,
+      "yMin": 456,
+      "yMax": 714
+    },
+    "8243": {
+      "advance": 513,
+      "xMin": 63,
+      "xMax": 577,
+      "yMin": 456,
+      "yMax": 714
+    },
+    "8249": {
+      "advance": 326,
+      "xMin": 35,
+      "xMax": 326,
+      "yMin": 44,
+      "yMax": 506
+    },
+    "8250": {
+      "advance": 324,
+      "xMin": 0,
+      "xMax": 289,
+      "yMin": 44,
+      "yMax": 504
+    },
+    "8260": {
+      "advance": 125,
+      "xMin": -261,
+      "xMax": 387,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "8364": {
+      "advance": 551,
+      "xMin": 20,
+      "xMax": 608,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "8482": {
+      "advance": 773,
+      "xMin": 17,
+      "xMax": 701,
+      "yMin": 362,
+      "yMax": 714
+    },
+    "8722": {
+      "advance": 323,
+      "xMin": 17,
+      "xMax": 300,
+      "yMin": 206,
+      "yMax": 330
+    },
+    "65279": {
+      "advance": 0,
+      "xMin": 0,
+      "xMax": 0,
+      "yMin": 0,
+      "yMax": 0
+    },
+    "65533": {
+      "advance": 1000,
+      "xMin": 42,
+      "xMax": 958,
+      "yMin": -156,
+      "yMax": 760
+    },
+    "256": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 589,
+      "yMin": 0,
+      "yMax": 872
+    },
+    "257": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 704
+    },
+    "258": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 612,
+      "yMin": 0,
+      "yMax": 937
+    },
+    "259": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 769
+    },
+    "260": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 568,
+      "yMin": -241,
+      "yMax": 714
+    },
+    "261": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -241,
+      "yMax": 556
+    },
+    "262": {
+      "advance": 613,
+      "xMin": 59,
+      "xMax": 652,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "263": {
+      "advance": 484,
+      "xMin": 44,
+      "xMax": 519,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "264": {
+      "advance": 613,
+      "xMin": 59,
+      "xMax": 652,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "265": {
+      "advance": 484,
+      "xMin": 44,
+      "xMax": 519,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "266": {
+      "advance": 613,
+      "xMin": 59,
+      "xMax": 652,
+      "yMin": -10,
+      "yMax": 929
+    },
+    "267": {
+      "advance": 484,
+      "xMin": 44,
+      "xMax": 495,
+      "yMin": -10,
+      "yMax": 761
+    },
+    "268": {
+      "advance": 613,
+      "xMin": 59,
+      "xMax": 676,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "269": {
+      "advance": 484,
+      "xMin": 44,
+      "xMax": 556,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "270": {
+      "advance": 677,
+      "xMin": 26,
+      "xMax": 667,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "271": {
+      "advance": 679,
+      "xMin": 44,
+      "xMax": 833,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "272": {
+      "advance": 677,
+      "xMin": 16,
+      "xMax": 646,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "273": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 680,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "274": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 577,
+      "yMin": 0,
+      "yMax": 872
+    },
+    "275": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 532,
+      "yMin": -10,
+      "yMax": 704
+    },
+    "276": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 586,
+      "yMin": 0,
+      "yMax": 937
+    },
+    "277": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 547,
+      "yMin": -10,
+      "yMax": 769
+    },
+    "278": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 577,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "279": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 532,
+      "yMin": -10,
+      "yMax": 761
+    },
+    "280": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 577,
+      "yMin": -241,
+      "yMax": 714
+    },
+    "281": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 532,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "282": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 619,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "283": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 586,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "284": {
+      "advance": 690,
+      "xMin": 59,
+      "xMax": 679,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "285": {
+      "advance": 596,
+      "xMin": 18,
+      "xMax": 578,
+      "yMin": -240,
+      "yMax": 766
+    },
+    "286": {
+      "advance": 690,
+      "xMin": 59,
+      "xMax": 679,
+      "yMin": -10,
+      "yMax": 937
+    },
+    "287": {
+      "advance": 596,
+      "xMin": 18,
+      "xMax": 578,
+      "yMin": -240,
+      "yMax": 769
+    },
+    "288": {
+      "advance": 690,
+      "xMin": 59,
+      "xMax": 679,
+      "yMin": -10,
+      "yMax": 929
+    },
+    "289": {
+      "advance": 596,
+      "xMin": 18,
+      "xMax": 578,
+      "yMin": -240,
+      "yMax": 761
+    },
+    "290": {
+      "advance": 690,
+      "xMin": 59,
+      "xMax": 679,
+      "yMin": -221,
+      "yMax": 725
+    },
+    "291": {
+      "advance": 596,
+      "xMin": 18,
+      "xMax": 578,
+      "yMin": -240,
+      "yMax": 766
+    },
+    "292": {
+      "advance": 701,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "293": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": 0,
+      "yMax": 980
+    },
+    "294": {
+      "advance": 701,
+      "xMin": 26,
+      "xMax": 773,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "295": {
+      "advance": 604,
+      "xMin": 18,
+      "xMax": 547,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "296": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 509,
+      "yMin": 0,
+      "yMax": 926
+    },
+    "297": {
+      "advance": 299,
+      "xMin": 18,
+      "xMax": 442,
+      "yMin": 0,
+      "yMax": 758
+    },
+    "298": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 460,
+      "yMin": 0,
+      "yMax": 872
+    },
+    "299": {
+      "advance": 299,
+      "xMin": 18,
+      "xMax": 387,
+      "yMin": 0,
+      "yMax": 704
+    },
+    "300": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 483,
+      "yMin": 0,
+      "yMax": 937
+    },
+    "301": {
+      "advance": 299,
+      "xMin": 18,
+      "xMax": 416,
+      "yMin": 0,
+      "yMax": 769
+    },
+    "302": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 438,
+      "yMin": -241,
+      "yMax": 714
+    },
+    "303": {
+      "advance": 299,
+      "xMin": -36,
+      "xMax": 321,
+      "yMin": -241,
+      "yMax": 761
+    },
+    "304": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 438,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "306": {
+      "advance": 714,
+      "xMin": -29,
+      "xMax": 723,
+      "yMin": -211,
+      "yMax": 714
+    },
+    "307": {
+      "advance": 598,
+      "xMin": 18,
+      "xMax": 622,
+      "yMin": -240,
+      "yMax": 761
+    },
+    "308": {
+      "advance": 334,
+      "xMin": -158,
+      "xMax": 464,
+      "yMin": -211,
+      "yMax": 934
+    },
+    "309": {
+      "advance": 299,
+      "xMin": -128,
+      "xMax": 411,
+      "yMin": -240,
+      "yMax": 766
+    },
+    "310": {
+      "advance": 627,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": -221,
+      "yMax": 714
+    },
+    "311": {
+      "advance": 568,
+      "xMin": 18,
+      "xMax": 617,
+      "yMin": -221,
+      "yMax": 760
+    },
+    "312": {
+      "advance": 568,
+      "xMin": 18,
+      "xMax": 617,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "313": {
+      "advance": 518,
+      "xMin": 26,
+      "xMax": 485,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "314": {
+      "advance": 299,
+      "xMin": 17,
+      "xMax": 456,
+      "yMin": 0,
+      "yMax": 980
+    },
+    "315": {
+      "advance": 518,
+      "xMin": 26,
+      "xMax": 451,
+      "yMin": -221,
+      "yMax": 714
+    },
+    "316": {
+      "advance": 299,
+      "xMin": -38,
+      "xMax": 328,
+      "yMin": -221,
+      "yMax": 760
+    },
+    "317": {
+      "advance": 518,
+      "xMin": 26,
+      "xMax": 573,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "318": {
+      "advance": 379,
+      "xMin": 17,
+      "xMax": 533,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "319": {
+      "advance": 518,
+      "xMin": 26,
+      "xMax": 504,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "320": {
+      "advance": 441,
+      "xMin": 17,
+      "xMax": 470,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "321": {
+      "advance": 518,
+      "xMin": -1,
+      "xMax": 451,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "322": {
+      "advance": 327,
+      "xMin": 0,
+      "xMax": 356,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "323": {
+      "advance": 758,
+      "xMin": 25,
+      "xMax": 763,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "324": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 569,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "325": {
+      "advance": 758,
+      "xMin": 25,
+      "xMax": 763,
+      "yMin": -221,
+      "yMax": 714
+    },
+    "326": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": -221,
+      "yMax": 556
+    },
+    "327": {
+      "advance": 758,
+      "xMin": 25,
+      "xMax": 763,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "328": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 606,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "329": {
+      "advance": 706,
+      "xMin": 24,
+      "xMax": 655,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "330": {
+      "advance": 755,
+      "xMin": 26,
+      "xMax": 760,
+      "yMin": -210,
+      "yMax": 714
+    },
+    "331": {
+      "advance": 604,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "332": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 872
+    },
+    "333": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 541,
+      "yMin": -10,
+      "yMax": 704
+    },
+    "334": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 937
+    },
+    "335": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 552,
+      "yMin": -10,
+      "yMax": 769
+    },
+    "336": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 774,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "337": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 662,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "340": {
+      "advance": 620,
+      "xMin": 26,
+      "xMax": 605,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "341": {
+      "advance": 422,
+      "xMin": 18,
+      "xMax": 500,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "342": {
+      "advance": 620,
+      "xMin": 26,
+      "xMax": 594,
+      "yMin": -221,
+      "yMax": 714
+    },
+    "343": {
+      "advance": 422,
+      "xMin": -33,
+      "xMax": 460,
+      "yMin": -221,
+      "yMax": 556
+    },
+    "344": {
+      "advance": 620,
+      "xMin": 26,
+      "xMax": 642,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "345": {
+      "advance": 422,
+      "xMin": 18,
+      "xMax": 537,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "346": {
+      "advance": 531,
+      "xMin": 20,
+      "xMax": 554,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "347": {
+      "advance": 475,
+      "xMin": 11,
+      "xMax": 482,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "348": {
+      "advance": 531,
+      "xMin": 20,
+      "xMax": 554,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "349": {
+      "advance": 475,
+      "xMin": 11,
+      "xMax": 482,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "350": {
+      "advance": 531,
+      "xMin": 20,
+      "xMax": 542,
+      "yMin": -240,
+      "yMax": 724.0
+    },
+    "351": {
+      "advance": 475,
+      "xMin": 11,
+      "xMax": 455,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "352": {
+      "advance": 531,
+      "xMin": 20,
+      "xMax": 591,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "353": {
+      "advance": 475,
+      "xMin": 11,
+      "xMax": 519,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "354": {
+      "advance": 532,
+      "xMin": 78,
+      "xMax": 603,
+      "yMin": -240,
+      "yMax": 714
+    },
+    "355": {
+      "advance": 410,
+      "xMin": 46,
+      "xMax": 429,
+      "yMin": -240,
+      "yMax": 662
+    },
+    "356": {
+      "advance": 532,
+      "xMin": 81,
+      "xMax": 603,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "357": {
+      "advance": 410,
+      "xMin": 46,
+      "xMax": 545,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "358": {
+      "advance": 532,
+      "xMin": 75,
+      "xMax": 603,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "359": {
+      "advance": 410,
+      "xMin": 15,
+      "xMax": 429,
+      "yMin": -10,
+      "yMax": 662
+    },
+    "360": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 926
+    },
+    "361": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 590,
+      "yMin": -10,
+      "yMax": 758
+    },
+    "362": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 872
+    },
+    "363": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 704
+    },
+    "364": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 937
+    },
+    "365": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 769
+    },
+    "366": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 1005
+    },
+    "367": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 837
+    },
+    "368": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 751,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "369": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 675,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "370": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -241,
+      "yMax": 714
+    },
+    "371": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -241,
+      "yMax": 546
+    },
+    "372": {
+      "advance": 904,
+      "xMin": 90,
+      "xMax": 988,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "373": {
+      "advance": 788,
+      "xMin": 61,
+      "xMax": 839,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "374": {
+      "advance": 564,
+      "xMin": 91,
+      "xMax": 656,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "375": {
+      "advance": 519,
+      "xMin": -69,
+      "xMax": 571,
+      "yMin": -240,
+      "yMax": 766
+    },
+    "376": {
+      "advance": 564,
+      "xMin": 91,
+      "xMax": 656,
+      "yMin": 0,
+      "yMax": 920
+    },
+    "377": {
+      "advance": 536,
+      "xMin": -30,
+      "xMax": 586,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "378": {
+      "advance": 469,
+      "xMin": -18,
+      "xMax": 497,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "379": {
+      "advance": 536,
+      "xMin": -30,
+      "xMax": 586,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "380": {
+      "advance": 469,
+      "xMin": -18,
+      "xMax": 479,
+      "yMin": 0,
+      "yMax": 761
+    },
+    "381": {
+      "advance": 536,
+      "xMin": -30,
+      "xMax": 606,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "382": {
+      "advance": 469,
+      "xMin": -18,
+      "xMax": 534,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "383": {
+      "advance": 358,
+      "xMin": -120,
+      "xMax": 469,
+      "yMin": -240,
+      "yMax": 765
+    },
+    "384": {
+      "advance": 595,
+      "xMin": 18,
+      "xMax": 551,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "385": {
+      "advance": 743,
+      "xMin": 63,
+      "xMax": 734,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "386": {
+      "advance": 593,
+      "xMin": 26,
+      "xMax": 575,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "387": {
+      "advance": 595,
+      "xMin": 18,
+      "xMax": 597,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "388": {
+      "advance": 641,
+      "xMin": 61,
+      "xMax": 586,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "389": {
+      "advance": 590,
+      "xMin": 61,
+      "xMax": 546,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "390": {
+      "advance": 613,
+      "xMin": -3,
+      "xMax": 590,
+      "yMin": -11,
+      "yMax": 724
+    },
+    "391": {
+      "advance": 613,
+      "xMin": 59,
+      "xMax": 768,
+      "yMin": -10,
+      "yMax": 878
+    },
+    "392": {
+      "advance": 484,
+      "xMin": 44,
+      "xMax": 617,
+      "yMin": -10,
+      "yMax": 765
+    },
+    "393": {
+      "advance": 677,
+      "xMin": 16,
+      "xMax": 646,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "394": {
+      "advance": 787,
+      "xMin": 50,
+      "xMax": 756,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "395": {
+      "advance": 594,
+      "xMin": 30,
+      "xMax": 598,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "396": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 623,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "397": {
+      "advance": 594,
+      "xMin": -28,
+      "xMax": 547,
+      "yMin": -218,
+      "yMax": 557
+    },
+    "398": {
+      "advance": 543,
+      "xMin": 5,
+      "xMax": 555,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "399": {
+      "advance": 660,
+      "xMin": 33,
+      "xMax": 629,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "400": {
+      "advance": 596,
+      "xMin": 20,
+      "xMax": 636,
+      "yMin": -10,
+      "yMax": 724
+    },
+    "401": {
+      "advance": 680,
+      "xMin": -78,
+      "xMax": 723,
+      "yMin": -242,
+      "yMax": 714
+    },
+    "402": {
+      "advance": 493,
+      "xMin": -86,
+      "xMax": 602,
+      "yMin": -242,
+      "yMax": 765
+    },
+    "403": {
+      "advance": 690,
+      "xMin": 59,
+      "xMax": 792,
+      "yMin": -10,
+      "yMax": 878
+    },
+    "404": {
+      "advance": 590,
+      "xMin": 85,
+      "xMax": 685,
+      "yMin": -240,
+      "yMax": 714
+    },
+    "405": {
+      "advance": 915,
+      "xMin": 18,
+      "xMax": 901,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "406": {
+      "advance": 383,
+      "xMin": 50,
+      "xMax": 322,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "407": {
+      "advance": 386,
+      "xMin": -30,
+      "xMax": 442,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "408": {
+      "advance": 623,
+      "xMin": 26,
+      "xMax": 689,
+      "yMin": 0,
+      "yMax": 725
+    },
+    "409": {
+      "advance": 568,
+      "xMin": 18,
+      "xMax": 617,
+      "yMin": 0,
+      "yMax": 767
+    },
+    "410": {
+      "advance": 299,
+      "xMin": 6,
+      "xMax": 334,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "411": {
+      "advance": 572,
+      "xMin": -45,
+      "xMax": 527,
+      "yMin": -10,
+      "yMax": 765
+    },
+    "412": {
+      "advance": 994,
+      "xMin": 59,
+      "xMax": 999,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "413": {
+      "advance": 758,
+      "xMin": -100,
+      "xMax": 763,
+      "yMin": -240,
+      "yMax": 714
+    },
+    "414": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "415": {
+      "advance": 730,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "416": {
+      "advance": 772,
+      "xMin": 60,
+      "xMax": 878,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "417": {
+      "advance": 643,
+      "xMin": 44,
+      "xMax": 731,
+      "yMin": -10,
+      "yMax": 628
+    },
+    "418": {
+      "advance": 1086,
+      "xMin": 52,
+      "xMax": 1025,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "419": {
+      "advance": 892,
+      "xMin": 44,
+      "xMax": 841,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "420": {
+      "advance": 720,
+      "xMin": 50,
+      "xMax": 725,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "421": {
+      "advance": 596,
+      "xMin": -33,
+      "xMax": 552,
+      "yMin": -240,
+      "yMax": 767
+    },
+    "422": {
+      "advance": 610,
+      "xMin": 25,
+      "xMax": 563,
+      "yMin": -100,
+      "yMax": 714
+    },
+    "423": {
+      "advance": 531,
+      "xMin": 20,
+      "xMax": 536,
+      "yMin": -10,
+      "yMax": 724
+    },
+    "424": {
+      "advance": 474,
+      "xMin": 14,
+      "xMax": 460,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "425": {
+      "advance": 543,
+      "xMin": -30,
+      "xMax": 586,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "426": {
+      "advance": 339,
+      "xMin": 21,
+      "xMax": 315,
+      "yMin": -240,
+      "yMax": 765
+    },
+    "427": {
+      "advance": 410,
+      "xMin": 46,
+      "xMax": 429,
+      "yMin": -240,
+      "yMax": 662
+    },
+    "428": {
+      "advance": 576,
+      "xMin": 50,
+      "xMax": 647,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "429": {
+      "advance": 410,
+      "xMin": 46,
+      "xMax": 436,
+      "yMin": -10,
+      "yMax": 765
+    },
+    "430": {
+      "advance": 531,
+      "xMin": 82,
+      "xMax": 602,
+      "yMin": -240,
+      "yMax": 714
+    },
+    "431": {
+      "advance": 775,
+      "xMin": 69,
+      "xMax": 922,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "432": {
+      "advance": 711,
+      "xMin": 52,
+      "xMax": 817,
+      "yMin": -10,
+      "yMax": 627
+    },
+    "433": {
+      "advance": 724,
+      "xMin": 54,
+      "xMax": 778,
+      "yMin": -11,
+      "yMax": 714
+    },
+    "434": {
+      "advance": 692,
+      "xMin": 63.35433070866142,
+      "xMax": 671,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "435": {
+      "advance": 598,
+      "xMin": 91,
+      "xMax": 666,
+      "yMin": 0,
+      "yMax": 724
+    },
+    "436": {
+      "advance": 558,
+      "xMin": -69,
+      "xMax": 608,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "437": {
+      "advance": 536,
+      "xMin": -30,
+      "xMax": 586,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "438": {
+      "advance": 469,
+      "xMin": -18,
+      "xMax": 479,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "439": {
+      "advance": 556,
+      "xMin": -2,
+      "xMax": 567,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "440": {
+      "advance": 559,
+      "xMin": 30,
+      "xMax": 607,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "441": {
+      "advance": 549,
+      "xMin": -21,
+      "xMax": 564,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "442": {
+      "advance": 545,
+      "xMin": -39,
+      "xMax": 524,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "443": {
+      "advance": 551,
+      "xMin": -23,
+      "xMax": 556,
+      "yMin": 0,
+      "yMax": 765
+    },
+    "444": {
+      "advance": 558,
+      "xMin": 0,
+      "xMax": 588,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "445": {
+      "advance": 537,
+      "xMin": 0,
+      "xMax": 533,
+      "yMin": -10,
+      "yMax": 546
+    },
+    "446": {
+      "advance": 472,
+      "xMin": 0,
+      "xMax": 439,
+      "yMin": -10,
+      "yMax": 662
+    },
+    "447": {
+      "advance": 593,
+      "xMin": -34,
+      "xMax": 550,
+      "yMin": -240,
+      "yMax": 555
+    },
+    "448": {
+      "advance": 291,
+      "xMin": 34,
+      "xMax": 303,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "449": {
+      "advance": 551,
+      "xMin": 34,
+      "xMax": 563,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "450": {
+      "advance": 516,
+      "xMin": 44,
+      "xMax": 521,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "451": {
+      "advance": 287,
+      "xMin": 11,
+      "xMax": 318,
+      "yMin": -13,
+      "yMax": 714
+    },
+    "452": {
+      "advance": 1213,
+      "xMin": 26,
+      "xMax": 1283,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "453": {
+      "advance": 1132,
+      "xMin": 26,
+      "xMax": 1206,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "454": {
+      "advance": 1049,
+      "xMin": 44,
+      "xMax": 1123,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "455": {
+      "advance": 849,
+      "xMin": 26,
+      "xMax": 858,
+      "yMin": -211,
+      "yMax": 714
+    },
+    "456": {
+      "advance": 815,
+      "xMin": 26,
+      "xMax": 841,
+      "yMin": -240,
+      "yMax": 761
+    },
+    "457": {
+      "advance": 598,
+      "xMin": 17,
+      "xMax": 622,
+      "yMin": -240,
+      "yMax": 761
+    },
+    "458": {
+      "advance": 1086,
+      "xMin": 25,
+      "xMax": 1095,
+      "yMin": -211,
+      "yMax": 714
+    },
+    "459": {
+      "advance": 1052,
+      "xMin": 25,
+      "xMax": 1078,
+      "yMin": -240,
+      "yMax": 761
+    },
+    "460": {
+      "advance": 901,
+      "xMin": 18,
+      "xMax": 927,
+      "yMin": -240,
+      "yMax": 761
+    },
+    "461": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 651,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "462": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 594,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "463": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 522,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "464": {
+      "advance": 299,
+      "xMin": 18,
+      "xMax": 448,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "465": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "466": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 584,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "467": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "468": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 597,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "469": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 1023
+    },
+    "470": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 855
+    },
+    "471": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 1049
+    },
+    "472": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 881
+    },
+    "473": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 1050
+    },
+    "474": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 604,
+      "yMin": -10,
+      "yMax": 882
+    },
+    "475": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 1049
+    },
+    "476": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 881
+    },
+    "477": {
+      "advance": 557,
+      "xMin": 25,
+      "xMax": 513,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "478": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 629,
+      "yMin": 0,
+      "yMax": 1023
+    },
+    "479": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 855
+    },
+    "480": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 615,
+      "yMin": 0,
+      "yMax": 1020
+    },
+    "481": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 855
+    },
+    "482": {
+      "advance": 895,
+      "xMin": -60,
+      "xMax": 929,
+      "yMin": 0,
+      "yMax": 872
+    },
+    "483": {
+      "advance": 872,
+      "xMin": 44,
+      "xMax": 847,
+      "yMin": -10,
+      "yMax": 704
+    },
+    "484": {
+      "advance": 690,
+      "xMin": 59,
+      "xMax": 679,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "485": {
+      "advance": 594,
+      "xMin": 13,
+      "xMax": 577,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "486": {
+      "advance": 690,
+      "xMin": 59,
+      "xMax": 699,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "487": {
+      "advance": 596,
+      "xMin": 18,
+      "xMax": 589,
+      "yMin": -240,
+      "yMax": 766
+    },
+    "488": {
+      "advance": 627,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "489": {
+      "advance": 568,
+      "xMin": 18,
+      "xMax": 617,
+      "yMin": 0,
+      "yMax": 980
+    },
+    "490": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -241,
+      "yMax": 725
+    },
+    "491": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 541,
+      "yMin": -241,
+      "yMax": 556
+    },
+    "492": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -241,
+      "yMax": 872
+    },
+    "493": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 541,
+      "yMin": -241,
+      "yMax": 704
+    },
+    "494": {
+      "advance": 556,
+      "xMin": -2,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 931
+    },
+    "495": {
+      "advance": 547,
+      "xMin": -44,
+      "xMax": 544,
+      "yMin": -242,
+      "yMax": 766
+    },
+    "496": {
+      "advance": 299,
+      "xMin": -128,
+      "xMax": 446,
+      "yMin": -240,
+      "yMax": 766
+    },
+    "497": {
+      "advance": 1213,
+      "xMin": 26,
+      "xMax": 1263,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "498": {
+      "advance": 1147,
+      "xMin": 26,
+      "xMax": 1156,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "499": {
+      "advance": 1064,
+      "xMin": 44,
+      "xMax": 1073,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "500": {
+      "advance": 690,
+      "xMin": 59,
+      "xMax": 679,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "501": {
+      "advance": 596,
+      "xMin": 18,
+      "xMax": 578,
+      "yMin": -240,
+      "yMax": 766
+    },
+    "502": {
+      "advance": 1008,
+      "xMin": 26,
+      "xMax": 981,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "503": {
+      "advance": 645,
+      "xMin": -25,
+      "xMax": 652,
+      "yMin": -240,
+      "yMax": 725
+    },
+    "504": {
+      "advance": 758,
+      "xMin": 25,
+      "xMax": 763,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "505": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "506": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 645,
+      "yMin": 0,
+      "yMax": 958
+    },
+    "507": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 605,
+      "yMin": -10,
+      "yMax": 958
+    },
+    "508": {
+      "advance": 895,
+      "xMin": -60,
+      "xMax": 929,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "509": {
+      "advance": 872,
+      "xMin": 44,
+      "xMax": 847,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "510": {
+      "advance": 731,
+      "xMin": 49,
+      "xMax": 712,
+      "yMin": -42,
+      "yMax": 929
+    },
+    "511": {
+      "advance": 585,
+      "xMin": 21,
+      "xMax": 567,
+      "yMin": -50,
+      "yMax": 766
+    },
+    "512": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 568,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "513": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "514": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 603,
+      "yMin": 0,
+      "yMax": 937
+    },
+    "515": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 769
+    },
+    "516": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 577,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "517": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 532,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "518": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 577,
+      "yMin": 0,
+      "yMax": 937
+    },
+    "519": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 532,
+      "yMin": -10,
+      "yMax": 769
+    },
+    "520": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 438,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "521": {
+      "advance": 299,
+      "xMin": -40,
+      "xMax": 342,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "522": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 474,
+      "yMin": 0,
+      "yMax": 937
+    },
+    "523": {
+      "advance": 299,
+      "xMin": 18,
+      "xMax": 403,
+      "yMin": 0,
+      "yMax": 769
+    },
+    "524": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "525": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 541,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "526": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 937
+    },
+    "527": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 541,
+      "yMin": -10,
+      "yMax": 769
+    },
+    "528": {
+      "advance": 620,
+      "xMin": 26,
+      "xMax": 594,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "529": {
+      "advance": 422,
+      "xMin": 18,
+      "xMax": 460,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "530": {
+      "advance": 620,
+      "xMin": 26,
+      "xMax": 596,
+      "yMin": 0,
+      "yMax": 937
+    },
+    "531": {
+      "advance": 422,
+      "xMin": 18,
+      "xMax": 492,
+      "yMin": 0,
+      "yMax": 769
+    },
+    "532": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "533": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "534": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 937
+    },
+    "535": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 769
+    },
+    "536": {
+      "advance": 531,
+      "xMin": 20,
+      "xMax": 542,
+      "yMin": -221,
+      "yMax": 724
+    },
+    "537": {
+      "advance": 475,
+      "xMin": 11,
+      "xMax": 455,
+      "yMin": -221,
+      "yMax": 556
+    },
+    "538": {
+      "advance": 532,
+      "xMin": 78,
+      "xMax": 603,
+      "yMin": -221,
+      "yMax": 714
+    },
+    "539": {
+      "advance": 410,
+      "xMin": 46,
+      "xMax": 429,
+      "yMin": -221,
+      "yMax": 662
+    },
+    "540": {
+      "advance": 629,
+      "xMin": -45,
+      "xMax": 623,
+      "yMin": -180,
+      "yMax": 724
+    },
+    "541": {
+      "advance": 506,
+      "xMin": -71,
+      "xMax": 495,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "542": {
+      "advance": 701,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "543": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": 0,
+      "yMax": 980
+    },
+    "544": {
+      "advance": 734,
+      "xMin": 26,
+      "xMax": 698,
+      "yMin": -240,
+      "yMax": 725
+    },
+    "545": {
+      "advance": 855,
+      "xMin": 44,
+      "xMax": 810,
+      "yMin": -72,
+      "yMax": 760
+    },
+    "546": {
+      "advance": 746,
+      "xMin": 38,
+      "xMax": 750,
+      "yMin": -30,
+      "yMax": 714
+    },
+    "547": {
+      "advance": 629,
+      "xMin": 41,
+      "xMax": 650,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "548": {
+      "advance": 536,
+      "xMin": -30,
+      "xMax": 586,
+      "yMin": -230,
+      "yMax": 714
+    },
+    "549": {
+      "advance": 469,
+      "xMin": -18,
+      "xMax": 479,
+      "yMin": -224,
+      "yMax": 546
+    },
+    "550": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 568,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "551": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 761
+    },
+    "552": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 577,
+      "yMin": -240,
+      "yMax": 714
+    },
+    "553": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 532,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "554": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 1023
+    },
+    "555": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 565,
+      "yMin": -10,
+      "yMax": 855
+    },
+    "556": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 1023
+    },
+    "557": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 556,
+      "yMin": -10,
+      "yMax": 855
+    },
+    "558": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 929
+    },
+    "559": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 541,
+      "yMin": -10,
+      "yMax": 761
+    },
+    "560": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 1020
+    },
+    "561": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 561,
+      "yMin": -10,
+      "yMax": 855
+    },
+    "562": {
+      "advance": 564,
+      "xMin": 91,
+      "xMax": 656,
+      "yMin": 0,
+      "yMax": 872
+    },
+    "563": {
+      "advance": 519,
+      "xMin": -69,
+      "xMax": 571,
+      "yMin": -240,
+      "yMax": 704
+    },
+    "564": {
+      "advance": 415,
+      "xMin": -65,
+      "xMax": 410,
+      "yMin": -48,
+      "yMax": 760
+    },
+    "565": {
+      "advance": 727,
+      "xMin": 18,
+      "xMax": 713,
+      "yMin": -54,
+      "yMax": 556
+    },
+    "566": {
+      "advance": 425,
+      "xMin": -17,
+      "xMax": 429,
+      "yMin": -54,
+      "yMax": 662
+    },
+    "567": {
+      "advance": 299,
+      "xMin": -128,
+      "xMax": 285,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "568": {
+      "advance": 892,
+      "xMin": 44,
+      "xMax": 848,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "569": {
+      "advance": 891,
+      "xMin": 43,
+      "xMax": 847,
+      "yMin": -214,
+      "yMax": 556
+    },
+    "570": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 596,
+      "yMin": -75,
+      "yMax": 760
+    },
+    "571": {
+      "advance": 613,
+      "xMin": 59,
+      "xMax": 652,
+      "yMin": -75,
+      "yMax": 760
+    },
+    "572": {
+      "advance": 483,
+      "xMin": 40,
+      "xMax": 537,
+      "yMin": -155,
+      "yMax": 680
+    },
+    "573": {
+      "advance": 518,
+      "xMin": 23,
+      "xMax": 451,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "574": {
+      "advance": 531,
+      "xMin": -48,
+      "xMax": 616,
+      "yMin": -44,
+      "yMax": 791
+    },
+    "575": {
+      "advance": 475,
+      "xMin": 11,
+      "xMax": 455,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "576": {
+      "advance": 464,
+      "xMin": -18,
+      "xMax": 479,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "577": {
+      "advance": 483,
+      "xMin": 74,
+      "xMax": 506,
+      "yMin": 0,
+      "yMax": 725
+    },
+    "578": {
+      "advance": 479,
+      "xMin": 41,
+      "xMax": 460,
+      "yMin": 0,
+      "yMax": 557
+    },
+    "579": {
+      "advance": 620,
+      "xMin": -13,
+      "xMax": 611,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "580": {
+      "advance": 692,
+      "xMin": 9,
+      "xMax": 728,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "581": {
+      "advance": 600,
+      "xMin": -60,
+      "xMax": 540,
+      "yMin": 0,
+      "yMax": 717
+    },
+    "582": {
+      "advance": 542,
+      "xMin": 26,
+      "xMax": 577,
+      "yMin": -75,
+      "yMax": 760
+    },
+    "583": {
+      "advance": 557,
+      "xMin": 35,
+      "xMax": 532,
+      "yMin": -208,
+      "yMax": 750
+    },
+    "584": {
+      "advance": 334,
+      "xMin": -158,
+      "xMax": 363,
+      "yMin": -211,
+      "yMax": 714
+    },
+    "585": {
+      "advance": 299,
+      "xMin": -128,
+      "xMax": 323,
+      "yMin": -240,
+      "yMax": 761
+    },
+    "586": {
+      "advance": 745,
+      "xMin": 60,
+      "xMax": 750,
+      "yMin": -240,
+      "yMax": 725
+    },
+    "587": {
+      "advance": 596,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "588": {
+      "advance": 609,
+      "xMin": 8,
+      "xMax": 584,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "589": {
+      "advance": 422,
+      "xMin": -10,
+      "xMax": 460,
+      "yMin": 0,
+      "yMax": 556
+    },
+    "590": {
+      "advance": 564,
+      "xMin": 46,
+      "xMax": 656,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "591": {
+      "advance": 519,
+      "xMin": -69,
+      "xMax": 571,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "592": {
+      "advance": 583,
+      "xMin": 48,
+      "xMax": 558,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "593": {
+      "advance": 613,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "594": {
+      "advance": 613,
+      "xMin": 38,
+      "xMax": 572,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "595": {
+      "advance": 595,
+      "xMin": 18,
+      "xMax": 551,
+      "yMin": -10,
+      "yMax": 767
+    },
+    "596": {
+      "advance": 484,
+      "xMin": -10,
+      "xMax": 441,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "597": {
+      "advance": 500,
+      "xMin": -3,
+      "xMax": 493,
+      "yMin": -53,
+      "yMax": 556
+    },
+    "598": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 622,
+      "yMin": -240,
+      "yMax": 760
+    },
+    "599": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 697,
+      "yMin": -10,
+      "yMax": 767
+    },
+    "600": {
+      "advance": 541,
+      "xMin": 19,
+      "xMax": 495,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "601": {
+      "advance": 557,
+      "xMin": 25,
+      "xMax": 513,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "602": {
+      "advance": 786,
+      "xMin": 25,
+      "xMax": 789,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "603": {
+      "advance": 516,
+      "xMin": 25,
+      "xMax": 473,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "604": {
+      "advance": 528,
+      "xMin": 9,
+      "xMax": 496,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "605": {
+      "advance": 743,
+      "xMin": 12,
+      "xMax": 765,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "606": {
+      "advance": 599,
+      "xMin": 44,
+      "xMax": 570,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "607": {
+      "advance": 299,
+      "xMin": -128,
+      "xMax": 312,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "608": {
+      "advance": 596,
+      "xMin": 18,
+      "xMax": 700,
+      "yMin": -240,
+      "yMax": 767
+    },
+    "609": {
+      "advance": 596,
+      "xMin": 18,
+      "xMax": 578,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "610": {
+      "advance": 578,
+      "xMin": 40,
+      "xMax": 540,
+      "yMin": -8,
+      "yMax": 556
+    },
+    "611": {
+      "advance": 512,
+      "xMin": 26,
+      "xMax": 575,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "612": {
+      "advance": 550,
+      "xMin": 40,
+      "xMax": 589,
+      "yMin": -13,
+      "yMax": 556
+    },
+    "613": {
+      "advance": 604,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "614": {
+      "advance": 604,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": 0,
+      "yMax": 767
+    },
+    "615": {
+      "advance": 604,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": -240,
+      "yMax": 767
+    },
+    "616": {
+      "advance": 299,
+      "xMin": -8,
+      "xMax": 321,
+      "yMin": 0,
+      "yMax": 761
+    },
+    "617": {
+      "advance": 376,
+      "xMin": 42,
+      "xMax": 328,
+      "yMin": -10,
+      "yMax": 546
+    },
+    "618": {
+      "advance": 314,
+      "xMin": -39,
+      "xMax": 353,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "619": {
+      "advance": 415,
+      "xMin": 0,
+      "xMax": 455,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "620": {
+      "advance": 397,
+      "xMin": 17,
+      "xMax": 417,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "621": {
+      "advance": 298,
+      "xMin": 1,
+      "xMax": 328,
+      "yMin": -240,
+      "yMax": 760
+    },
+    "622": {
+      "advance": 722,
+      "xMin": 18,
+      "xMax": 697,
+      "yMin": -242,
+      "yMax": 760
+    },
+    "623": {
+      "advance": 905,
+      "xMin": 52,
+      "xMax": 888,
+      "yMin": -10,
+      "yMax": 546
+    },
+    "624": {
+      "advance": 905,
+      "xMin": 52,
+      "xMax": 888,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "625": {
+      "advance": 905,
+      "xMin": 18,
+      "xMax": 854,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "626": {
+      "advance": 604,
+      "xMin": -108,
+      "xMax": 553,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "627": {
+      "advance": 604,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "628": {
+      "advance": 637,
+      "xMin": 18,
+      "xMax": 620,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "629": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 541,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "630": {
+      "advance": 827,
+      "xMin": 44,
+      "xMax": 825,
+      "yMin": -8,
+      "yMax": 556
+    },
+    "631": {
+      "advance": 800,
+      "xMin": 34,
+      "xMax": 752,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "632": {
+      "advance": 763,
+      "xMin": 44,
+      "xMax": 719,
+      "yMin": -240,
+      "yMax": 760
+    },
+    "633": {
+      "advance": 422,
+      "xMin": -38,
+      "xMax": 404,
+      "yMin": -10,
+      "yMax": 546
+    },
+    "634": {
+      "advance": 428,
+      "xMin": -38,
+      "xMax": 449,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "635": {
+      "advance": 421,
+      "xMin": -36,
+      "xMax": 404,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "636": {
+      "advance": 422,
+      "xMin": -33,
+      "xMax": 460,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "637": {
+      "advance": 422,
+      "xMin": 1,
+      "xMax": 460,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "638": {
+      "advance": 375,
+      "xMin": 15,
+      "xMax": 416,
+      "yMin": 0,
+      "yMax": 558
+    },
+    "639": {
+      "advance": 362,
+      "xMin": 35,
+      "xMax": 315,
+      "yMin": -240,
+      "yMax": 558
+    },
+    "640": {
+      "advance": 543,
+      "xMin": 19,
+      "xMax": 480,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "641": {
+      "advance": 585,
+      "xMin": 18,
+      "xMax": 638,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "642": {
+      "advance": 475,
+      "xMin": -40,
+      "xMax": 455,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "643": {
+      "advance": 297,
+      "xMin": -108,
+      "xMax": 401,
+      "yMin": -240,
+      "yMax": 767
+    },
+    "644": {
+      "advance": 297,
+      "xMin": -108,
+      "xMax": 401,
+      "yMin": -240,
+      "yMax": 767
+    },
+    "645": {
+      "advance": 305,
+      "xMin": 12,
+      "xMax": 258,
+      "yMin": -240,
+      "yMax": 558
+    },
+    "646": {
+      "advance": 297,
+      "xMin": -175,
+      "xMax": 401,
+      "yMin": -240,
+      "yMax": 767
+    },
+    "647": {
+      "advance": 410,
+      "xMin": -19,
+      "xMax": 364,
+      "yMin": -116,
+      "yMax": 556
+    },
+    "648": {
+      "advance": 410,
+      "xMin": 9,
+      "xMax": 429,
+      "yMin": -240,
+      "yMax": 662
+    },
+    "649": {
+      "advance": 605,
+      "xMin": -4,
+      "xMax": 618,
+      "yMin": -10,
+      "yMax": 546
+    },
+    "650": {
+      "advance": 638,
+      "xMin": 33,
+      "xMax": 660,
+      "yMin": -10,
+      "yMax": 546
+    },
+    "651": {
+      "advance": 623,
+      "xMin": 60,
+      "xMax": 599,
+      "yMin": -9,
+      "yMax": 556
+    },
+    "652": {
+      "advance": 512,
+      "xMin": -58,
+      "xMax": 462,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "653": {
+      "advance": 788,
+      "xMin": -52,
+      "xMax": 726,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "654": {
+      "advance": 519,
+      "xMin": -52,
+      "xMax": 588,
+      "yMin": 0,
+      "yMax": 786
+    },
+    "655": {
+      "advance": 461,
+      "xMin": 50,
+      "xMax": 521,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "656": {
+      "advance": 469,
+      "xMin": -18,
+      "xMax": 479,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "657": {
+      "advance": 558,
+      "xMin": -23,
+      "xMax": 538,
+      "yMin": -87,
+      "yMax": 546
+    },
+    "658": {
+      "advance": 547,
+      "xMin": -44,
+      "xMax": 522,
+      "yMin": -242,
+      "yMax": 546
+    },
+    "659": {
+      "advance": 547,
+      "xMin": -76,
+      "xMax": 522,
+      "yMin": -253,
+      "yMax": 546
+    },
+    "660": {
+      "advance": 479,
+      "xMin": 80,
+      "xMax": 523,
+      "yMin": 0,
+      "yMax": 765
+    },
+    "661": {
+      "advance": 481,
+      "xMin": 87,
+      "xMax": 550,
+      "yMin": 0,
+      "yMax": 765
+    },
+    "662": {
+      "advance": 481,
+      "xMin": -27,
+      "xMax": 436,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "663": {
+      "advance": 514,
+      "xMin": 20,
+      "xMax": 524,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "664": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "665": {
+      "advance": 526,
+      "xMin": 25,
+      "xMax": 497,
+      "yMin": 0,
+      "yMax": 547
+    },
+    "666": {
+      "advance": 599,
+      "xMin": 21,
+      "xMax": 555,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "667": {
+      "advance": 589,
+      "xMin": 44,
+      "xMax": 679,
+      "yMin": -10,
+      "yMax": 765
+    },
+    "668": {
+      "advance": 582,
+      "xMin": 18,
+      "xMax": 565,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "669": {
+      "advance": 299,
+      "xMin": -172,
+      "xMax": 323,
+      "yMin": -240,
+      "yMax": 761
+    },
+    "670": {
+      "advance": 568,
+      "xMin": -48,
+      "xMax": 551,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "671": {
+      "advance": 430,
+      "xMin": 19,
+      "xMax": 373,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "672": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 698,
+      "yMin": -240,
+      "yMax": 767
+    },
+    "673": {
+      "advance": 479,
+      "xMin": 23,
+      "xMax": 523,
+      "yMin": 0,
+      "yMax": 765
+    },
+    "674": {
+      "advance": 479,
+      "xMin": 76,
+      "xMax": 548,
+      "yMin": 0,
+      "yMax": 765
+    },
+    "675": {
+      "advance": 932,
+      "xMin": 44,
+      "xMax": 949,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "676": {
+      "advance": 1018,
+      "xMin": 44,
+      "xMax": 993,
+      "yMin": -242,
+      "yMax": 760
+    },
+    "677": {
+      "advance": 1037,
+      "xMin": 44,
+      "xMax": 1017,
+      "yMin": -87,
+      "yMax": 760
+    },
+    "678": {
+      "advance": 773,
+      "xMin": 46,
+      "xMax": 753,
+      "yMin": 0,
+      "yMax": 662
+    },
+    "679": {
+      "advance": 602,
+      "xMin": 46,
+      "xMax": 706,
+      "yMin": -240,
+      "yMax": 765
+    },
+    "680": {
+      "advance": 839,
+      "xMin": 46,
+      "xMax": 832,
+      "yMin": -10,
+      "yMax": 662
+    },
+    "681": {
+      "advance": 901,
+      "xMin": -107,
+      "xMax": 850,
+      "yMin": -240,
+      "yMax": 765
+    },
+    "682": {
+      "advance": 721,
+      "xMin": 17,
+      "xMax": 701,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "683": {
+      "advance": 655,
+      "xMin": 17,
+      "xMax": 665,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "684": {
+      "advance": 516,
+      "xMin": 10,
+      "xMax": 605,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "685": {
+      "advance": 588,
+      "xMin": 18,
+      "xMax": 606,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "686": {
+      "advance": 609,
+      "xMin": 9,
+      "xMax": 592,
+      "yMin": -240,
+      "yMax": 558
+    },
+    "687": {
+      "advance": 609,
+      "xMin": 9,
+      "xMax": 592,
+      "yMin": -240,
+      "yMax": 558
+    },
+    "688": {
+      "advance": 393,
+      "xMin": 65,
+      "xMax": 412,
+      "yMin": 287,
+      "yMax": 743
+    },
+    "689": {
+      "advance": 393,
+      "xMin": 65,
+      "xMax": 412,
+      "yMin": 287,
+      "yMax": 747
+    },
+    "690": {
+      "advance": 194,
+      "xMin": -30,
+      "xMax": 263,
+      "yMin": 143,
+      "yMax": 744
+    },
+    "691": {
+      "advance": 274,
+      "xMin": 64,
+      "xMax": 352,
+      "yMin": 287,
+      "yMax": 621
+    },
+    "692": {
+      "advance": 274,
+      "xMin": 28,
+      "xMax": 316,
+      "yMin": 281,
+      "yMax": 615
+    },
+    "693": {
+      "advance": 274,
+      "xMin": 30,
+      "xMax": 316,
+      "yMin": 143,
+      "yMax": 615
+    },
+    "694": {
+      "advance": 380,
+      "xMin": 65,
+      "xMax": 468,
+      "yMin": 287,
+      "yMax": 615
+    },
+    "695": {
+      "advance": 512,
+      "xMin": 93,
+      "xMax": 598,
+      "yMin": 287,
+      "yMax": 615
+    },
+    "696": {
+      "advance": 335,
+      "xMin": 8,
+      "xMax": 424,
+      "yMin": 143,
+      "yMax": 615
+    },
+    "697": {
+      "advance": 215,
+      "xMin": 51,
+      "xMax": 291,
+      "yMin": 469,
+      "yMax": 714
+    },
+    "698": {
+      "advance": 433,
+      "xMin": 52,
+      "xMax": 508,
+      "yMin": 469,
+      "yMax": 714
+    },
+    "701": {
+      "advance": 215,
+      "xMin": 109,
+      "xMax": 249,
+      "yMin": 469,
+      "yMax": 714
+    },
+    "702": {
+      "advance": 184,
+      "xMin": 97,
+      "xMax": 244,
+      "yMin": 589,
+      "yMax": 817
+    },
+    "703": {
+      "advance": 181,
+      "xMin": 123,
+      "xMax": 267,
+      "yMin": 588,
+      "yMax": 820
+    },
+    "704": {
+      "advance": 308,
+      "xMin": 104,
+      "xMax": 371,
+      "yMin": 454,
+      "yMax": 766
+    },
+    "705": {
+      "advance": 308,
+      "xMin": 93,
+      "xMax": 389,
+      "yMin": 454,
+      "yMax": 766
+    },
+    "706": {
+      "advance": 285,
+      "xMin": 116,
+      "xMax": 358,
+      "yMin": 532,
+      "yMax": 795
+    },
+    "707": {
+      "advance": 285,
+      "xMin": 116,
+      "xMax": 358,
+      "yMin": 532,
+      "yMax": 795
+    },
+    "708": {
+      "advance": 284,
+      "xMin": 84,
+      "xMax": 348,
+      "yMin": 542,
+      "yMax": 785
+    },
+    "709": {
+      "advance": 284,
+      "xMin": 100,
+      "xMax": 364,
+      "yMin": 542,
+      "yMax": 785
+    },
+    "711": {
+      "advance": 482,
+      "xMin": 145,
+      "xMax": 544,
+      "yMin": 606,
+      "yMax": 766
+    },
+    "712": {
+      "advance": 180,
+      "xMin": 87,
+      "xMax": 246,
+      "yMin": 496,
+      "yMax": 770
+    },
+    "713": {
+      "advance": 384,
+      "xMin": 111,
+      "xMax": 435,
+      "yMin": 606,
+      "yMax": 704
+    },
+    "714": {
+      "advance": 322,
+      "xMin": 113,
+      "xMax": 385,
+      "yMin": 606,
+      "yMax": 766
+    },
+    "715": {
+      "advance": 324,
+      "xMin": 145,
+      "xMax": 355,
+      "yMin": 606,
+      "yMax": 766
+    },
+    "716": {
+      "advance": 181,
+      "xMin": -61,
+      "xMax": 97,
+      "yMin": -205,
+      "yMax": 69
+    },
+    "718": {
+      "advance": 324,
+      "xMin": -27,
+      "xMax": 183,
+      "yMin": -205,
+      "yMax": -45
+    },
+    "719": {
+      "advance": 322,
+      "xMin": -59,
+      "xMax": 213,
+      "yMin": -204,
+      "yMax": -44
+    },
+    "720": {
+      "advance": 286,
+      "xMin": -3,
+      "xMax": 288,
+      "yMin": 0,
+      "yMax": 536
+    },
+    "721": {
+      "advance": 286,
+      "xMin": 111,
+      "xMax": 288,
+      "yMin": 397,
+      "yMax": 536
+    },
+    "722": {
+      "advance": 203,
+      "xMin": 23,
+      "xMax": 170,
+      "yMin": 192,
+      "yMax": 420
+    },
+    "723": {
+      "advance": 201,
+      "xMin": 49,
+      "xMax": 193,
+      "yMin": 191,
+      "yMax": 423
+    },
+    "724": {
+      "advance": 270,
+      "xMin": 36,
+      "xMax": 229,
+      "yMin": 232,
+      "yMax": 392
+    },
+    "725": {
+      "advance": 270,
+      "xMin": 57,
+      "xMax": 251,
+      "yMin": 232,
+      "yMax": 392
+    },
+    "726": {
+      "advance": 270,
+      "xMin": 31,
+      "xMax": 253,
+      "yMin": 208,
+      "yMax": 408
+    },
+    "727": {
+      "advance": 278,
+      "xMin": 30,
+      "xMax": 261,
+      "yMin": 273,
+      "yMax": 333
+    },
+    "733": {
+      "advance": 506,
+      "xMin": 114,
+      "xMax": 569,
+      "yMin": 606,
+      "yMax": 766
+    },
+    "734": {
+      "advance": 246,
+      "xMin": -120,
+      "xMax": 239,
+      "yMin": 166,
+      "yMax": 403
+    },
+    "735": {
+      "advance": 284,
+      "xMin": 112,
+      "xMax": 342,
+      "yMin": 571,
+      "yMax": 775
+    },
+    "736": {
+      "advance": 335,
+      "xMin": 70,
+      "xMax": 427,
+      "yMin": 143,
+      "yMax": 615
+    },
+    "737": {
+      "advance": 194,
+      "xMin": 64,
+      "xMax": 267,
+      "yMin": 287,
+      "yMax": 743
+    },
+    "738": {
+      "advance": 308,
+      "xMin": 60,
+      "xMax": 348,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "739": {
+      "advance": 347,
+      "xMin": 20,
+      "xMax": 433,
+      "yMin": 287,
+      "yMax": 615
+    },
+    "740": {
+      "advance": 313,
+      "xMin": 109,
+      "xMax": 411,
+      "yMin": 287,
+      "yMax": 746
+    },
+    "741": {
+      "advance": 418,
+      "xMin": 78,
+      "xMax": 340,
+      "yMin": 0,
+      "yMax": 688
+    },
+    "742": {
+      "advance": 418,
+      "xMin": 78,
+      "xMax": 340,
+      "yMin": 0,
+      "yMax": 688
+    },
+    "743": {
+      "advance": 418,
+      "xMin": 78,
+      "xMax": 340,
+      "yMin": 0,
+      "yMax": 688
+    },
+    "744": {
+      "advance": 418,
+      "xMin": 78,
+      "xMax": 340,
+      "yMin": 0,
+      "yMax": 688
+    },
+    "745": {
+      "advance": 418,
+      "xMin": 76,
+      "xMax": 338,
+      "yMin": 0,
+      "yMax": 688
+    },
+    "746": {
+      "advance": 418,
+      "xMin": 78,
+      "xMax": 340,
+      "yMin": 166,
+      "yMax": 528
+    },
+    "747": {
+      "advance": 418,
+      "xMin": 78,
+      "xMax": 340,
+      "yMin": 166,
+      "yMax": 528
+    },
+    "748": {
+      "advance": 482,
+      "xMin": -26,
+      "xMax": 373,
+      "yMin": -199,
+      "yMax": -39
+    },
+    "749": {
+      "advance": 483,
+      "xMin": 110,
+      "xMax": 553,
+      "yMin": 595,
+      "yMax": 799
+    },
+    "750": {
+      "advance": 433,
+      "xMin": 52,
+      "xMax": 508,
+      "yMin": 469,
+      "yMax": 714
+    },
+    "751": {
+      "advance": 413,
+      "xMin": -22,
+      "xMax": 311,
+      "yMin": -240,
+      "yMax": -18
+    },
+    "752": {
+      "advance": 413,
+      "xMin": -69,
+      "xMax": 264,
+      "yMin": -240,
+      "yMax": -20
+    },
+    "753": {
+      "advance": 330,
+      "xMin": -46,
+      "xMax": 237,
+      "yMin": -240,
+      "yMax": 23
+    },
+    "754": {
+      "advance": 330,
+      "xMin": -69,
+      "xMax": 214,
+      "yMin": -240,
+      "yMax": 23
+    },
+    "755": {
+      "advance": 333,
+      "xMin": -50,
+      "xMax": 195,
+      "yMin": -294,
+      "yMax": -61
+    },
+    "756": {
+      "advance": 324,
+      "xMin": 76,
+      "xMax": 286,
+      "yMin": 283,
+      "yMax": 443
+    },
+    "757": {
+      "advance": 496,
+      "xMin": 76,
+      "xMax": 458,
+      "yMin": 281,
+      "yMax": 441
+    },
+    "758": {
+      "advance": 506,
+      "xMin": 45,
+      "xMax": 500,
+      "yMin": 281,
+      "yMax": 441
+    },
+    "759": {
+      "advance": 460,
+      "xMin": -60,
+      "xMax": 351,
+      "yMin": -202,
+      "yMax": -49
+    },
+    "760": {
+      "advance": 286,
+      "xMin": 52,
+      "xMax": 316,
+      "yMin": 196,
+      "yMax": 765
+    },
+    "761": {
+      "advance": 297,
+      "xMin": 127,
+      "xMax": 333,
+      "yMin": 435,
+      "yMax": 681
+    },
+    "762": {
+      "advance": 352,
+      "xMin": 127,
+      "xMax": 347,
+      "yMin": 435,
+      "yMax": 681
+    },
+    "763": {
+      "advance": 339,
+      "xMin": 34,
+      "xMax": 240,
+      "yMin": 0,
+      "yMax": 246
+    },
+    "764": {
+      "advance": 297,
+      "xMin": -7,
+      "xMax": 199,
+      "yMin": 0,
+      "yMax": 246
+    },
+    "765": {
+      "advance": 561,
+      "xMin": -27,
+      "xMax": 419,
+      "yMin": -208,
+      "yMax": -43
+    },
+    "766": {
+      "advance": 561,
+      "xMin": -27,
+      "xMax": 419,
+      "yMin": -208,
+      "yMax": -43
+    },
+    "767": {
+      "advance": 546,
+      "xMin": -30,
+      "xMax": 424,
+      "yMin": -240,
+      "yMax": 75
+    },
+    "7424": {
+      "advance": 534,
+      "xMin": -50,
+      "xMax": 471,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7425": {
+      "advance": 678,
+      "xMin": -55,
+      "xMax": 687,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7426": {
+      "advance": 872,
+      "xMin": 19,
+      "xMax": 822,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "7427": {
+      "advance": 520,
+      "xMin": 8,
+      "xMax": 523,
+      "yMin": 0,
+      "yMax": 547
+    },
+    "7428": {
+      "advance": 522,
+      "xMin": 41,
+      "xMax": 527,
+      "yMin": -8,
+      "yMax": 556
+    },
+    "7429": {
+      "advance": 581,
+      "xMin": 20,
+      "xMax": 532,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7430": {
+      "advance": 585,
+      "xMin": 3,
+      "xMax": 513,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7431": {
+      "advance": 477,
+      "xMin": 26,
+      "xMax": 488,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7432": {
+      "advance": 524,
+      "xMin": -8,
+      "xMax": 514,
+      "yMin": -10,
+      "yMax": 557
+    },
+    "7433": {
+      "advance": 299,
+      "xMin": -21,
+      "xMax": 281,
+      "yMin": -213,
+      "yMax": 547
+    },
+    "7434": {
+      "advance": 305,
+      "xMin": -119,
+      "xMax": 284,
+      "yMin": -157,
+      "yMax": 546
+    },
+    "7435": {
+      "advance": 507,
+      "xMin": -13,
+      "xMax": 547,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7436": {
+      "advance": 410,
+      "xMin": 7,
+      "xMax": 346,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7437": {
+      "advance": 755,
+      "xMin": 29,
+      "xMax": 728,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7438": {
+      "advance": 670,
+      "xMin": 18,
+      "xMax": 652,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7439": {
+      "advance": 612,
+      "xMin": 41,
+      "xMax": 565,
+      "yMin": -8,
+      "yMax": 556
+    },
+    "7440": {
+      "advance": 477,
+      "xMin": -14,
+      "xMax": 430,
+      "yMin": -8,
+      "yMax": 554
+    },
+    "7441": {
+      "advance": 656,
+      "xMin": 46,
+      "xMax": 612,
+      "yMin": 27,
+      "yMax": 524
+    },
+    "7442": {
+      "advance": 656,
+      "xMin": 46,
+      "xMax": 612,
+      "yMin": 46,
+      "yMax": 497
+    },
+    "7443": {
+      "advance": 647,
+      "xMin": 8,
+      "xMax": 630,
+      "yMin": 25,
+      "yMax": 554
+    },
+    "7444": {
+      "advance": 882,
+      "xMin": 23,
+      "xMax": 836,
+      "yMin": -8,
+      "yMax": 558
+    },
+    "7445": {
+      "advance": 590,
+      "xMin": 32,
+      "xMax": 567,
+      "yMin": -7,
+      "yMax": 546
+    },
+    "7446": {
+      "advance": 584,
+      "xMin": 48,
+      "xMax": 542,
+      "yMin": 269,
+      "yMax": 555
+    },
+    "7447": {
+      "advance": 585,
+      "xMin": 44,
+      "xMax": 536,
+      "yMin": -10,
+      "yMax": 269
+    },
+    "7448": {
+      "advance": 508,
+      "xMin": 27,
+      "xMax": 489,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7449": {
+      "advance": 504,
+      "xMin": -35,
+      "xMax": 474,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7450": {
+      "advance": 485,
+      "xMin": 37,
+      "xMax": 455,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7451": {
+      "advance": 425,
+      "xMin": 48,
+      "xMax": 469,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7452": {
+      "advance": 570,
+      "xMin": 51,
+      "xMax": 558,
+      "yMin": -9,
+      "yMax": 546
+    },
+    "7453": {
+      "advance": 596,
+      "xMin": 28,
+      "xMax": 584,
+      "yMin": 10,
+      "yMax": 543
+    },
+    "7454": {
+      "advance": 865,
+      "xMin": 41,
+      "xMax": 803,
+      "yMin": 5,
+      "yMax": 538
+    },
+    "7455": {
+      "advance": 855,
+      "xMin": 146,
+      "xMax": 702,
+      "yMin": -146,
+      "yMax": 690
+    },
+    "7456": {
+      "advance": 471,
+      "xMin": 52,
+      "xMax": 536,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7457": {
+      "advance": 748,
+      "xMin": 62,
+      "xMax": 802,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7458": {
+      "advance": 451,
+      "xMin": -35,
+      "xMax": 473,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7459": {
+      "advance": 453,
+      "xMin": -5,
+      "xMax": 442,
+      "yMin": -10,
+      "yMax": 546
+    },
+    "7460": {
+      "advance": 479,
+      "xMin": -10,
+      "xMax": 533,
+      "yMin": -10,
+      "yMax": 765
+    },
+    "7461": {
+      "advance": 488,
+      "xMin": -48,
+      "xMax": 444,
+      "yMin": -10,
+      "yMax": 554
+    },
+    "7462": {
+      "advance": 403,
+      "xMin": 23,
+      "xMax": 446,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7463": {
+      "advance": 455,
+      "xMin": -61,
+      "xMax": 389,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7464": {
+      "advance": 574,
+      "xMin": 22,
+      "xMax": 550,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7465": {
+      "advance": 474,
+      "xMin": 27,
+      "xMax": 489,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7466": {
+      "advance": 641,
+      "xMin": 67,
+      "xMax": 645,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7467": {
+      "advance": 558,
+      "xMin": -26,
+      "xMax": 554,
+      "yMin": -8,
+      "yMax": 546
+    },
+    "7468": {
+      "advance": 410,
+      "xMin": 14,
+      "xMax": 422,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7469": {
+      "advance": 584,
+      "xMin": 14,
+      "xMax": 657,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7470": {
+      "advance": 403,
+      "xMin": 70,
+      "xMax": 450,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7471": {
+      "advance": 403,
+      "xMin": 61,
+      "xMax": 470,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7472": {
+      "advance": 441,
+      "xMin": 70,
+      "xMax": 473,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7473": {
+      "advance": 353,
+      "xMin": 70,
+      "xMax": 428,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7474": {
+      "advance": 353,
+      "xMin": 56,
+      "xMax": 414,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7475": {
+      "advance": 449,
+      "xMin": 91,
+      "xMax": 494,
+      "yMin": 281,
+      "yMax": 722
+    },
+    "7476": {
+      "advance": 455,
+      "xMin": 70,
+      "xMax": 511,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7477": {
+      "advance": 251,
+      "xMin": 34,
+      "xMax": 338,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7478": {
+      "advance": 217,
+      "xMin": -50,
+      "xMax": 274,
+      "yMin": 160,
+      "yMax": 715
+    },
+    "7479": {
+      "advance": 398,
+      "xMin": 70,
+      "xMax": 511,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7480": {
+      "advance": 331,
+      "xMin": 70,
+      "xMax": 346,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7481": {
+      "advance": 574,
+      "xMin": 70,
+      "xMax": 628,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7482": {
+      "advance": 493,
+      "xMin": 69,
+      "xMax": 549,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7483": {
+      "advance": 491,
+      "xMin": 70,
+      "xMax": 547,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7484": {
+      "advance": 475,
+      "xMin": 91,
+      "xMax": 508,
+      "yMin": 281,
+      "yMax": 722
+    },
+    "7485": {
+      "advance": 487,
+      "xMin": 78,
+      "xMax": 541,
+      "yMin": 269,
+      "yMax": 715
+    },
+    "7486": {
+      "advance": 391,
+      "xMin": 70,
+      "xMax": 453,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7487": {
+      "advance": 403,
+      "xMin": 70,
+      "xMax": 439,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7488": {
+      "advance": 346,
+      "xMin": 106,
+      "xMax": 445,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7489": {
+      "advance": 450,
+      "xMin": 97,
+      "xMax": 508,
+      "yMin": 281,
+      "yMax": 715
+    },
+    "7490": {
+      "advance": 588,
+      "xMin": 112,
+      "xMax": 695,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "7491": {
+      "advance": 385,
+      "xMin": 82,
+      "xMax": 429,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7492": {
+      "advance": 378,
+      "xMin": 84,
+      "xMax": 416,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7493": {
+      "advance": 385,
+      "xMin": 82,
+      "xMax": 429,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7494": {
+      "advance": 567,
+      "xMin": 65,
+      "xMax": 587,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7495": {
+      "advance": 388,
+      "xMin": 65,
+      "xMax": 411,
+      "yMin": 281,
+      "yMax": 743
+    },
+    "7496": {
+      "advance": 386,
+      "xMin": 82,
+      "xMax": 457,
+      "yMin": 281,
+      "yMax": 743
+    },
+    "7497": {
+      "advance": 356,
+      "xMin": 82,
+      "xMax": 399,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7498": {
+      "advance": 356,
+      "xMin": 69,
+      "xMax": 386,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7499": {
+      "advance": 335,
+      "xMin": 69,
+      "xMax": 360,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7500": {
+      "advance": 293,
+      "xMin": 48,
+      "xMax": 387,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7501": {
+      "advance": 388,
+      "xMin": 64,
+      "xMax": 429,
+      "yMin": 143,
+      "yMax": 621
+    },
+    "7502": {
+      "advance": 194,
+      "xMin": 39,
+      "xMax": 236,
+      "yMin": 159,
+      "yMax": 615
+    },
+    "7503": {
+      "advance": 370,
+      "xMin": 65,
+      "xMax": 454,
+      "yMin": 287,
+      "yMax": 743
+    },
+    "7504": {
+      "advance": 589,
+      "xMin": 65,
+      "xMax": 608,
+      "yMin": 287,
+      "yMax": 621
+    },
+    "7505": {
+      "advance": 393,
+      "xMin": 65,
+      "xMax": 412,
+      "yMin": 143,
+      "yMax": 621
+    },
+    "7506": {
+      "advance": 384,
+      "xMin": 82,
+      "xMax": 405,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7507": {
+      "advance": 315,
+      "xMin": 46,
+      "xMax": 340,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7508": {
+      "advance": 379,
+      "xMin": 84,
+      "xMax": 405,
+      "yMin": 448,
+      "yMax": 620
+    },
+    "7509": {
+      "advance": 379,
+      "xMin": 82,
+      "xMax": 401,
+      "yMin": 281,
+      "yMax": 448
+    },
+    "7510": {
+      "advance": 388,
+      "xMin": 32,
+      "xMax": 411,
+      "yMin": 143,
+      "yMax": 621
+    },
+    "7511": {
+      "advance": 265,
+      "xMin": 83,
+      "xMax": 332,
+      "yMin": 281,
+      "yMax": 684
+    },
+    "7512": {
+      "advance": 393,
+      "xMin": 88,
+      "xMax": 435,
+      "yMin": 281,
+      "yMax": 615
+    },
+    "7513": {
+      "advance": 387,
+      "xMin": 71,
+      "xMax": 433,
+      "yMin": 293,
+      "yMax": 613
+    },
+    "7514": {
+      "advance": 589,
+      "xMin": 87,
+      "xMax": 630,
+      "yMin": 281,
+      "yMax": 615
+    },
+    "7515": {
+      "advance": 335,
+      "xMin": 86,
+      "xMax": 424,
+      "yMin": 287,
+      "yMax": 615
+    },
+    "7516": {
+      "advance": 319,
+      "xMin": 22,
+      "xMax": 342,
+      "yMin": 281,
+      "yMax": 619
+    },
+    "7517": {
+      "advance": 404,
+      "xMin": 32,
+      "xMax": 440,
+      "yMin": 143,
+      "yMax": 746
+    },
+    "7518": {
+      "advance": 335,
+      "xMin": 84,
+      "xMax": 388,
+      "yMin": 161,
+      "yMax": 615
+    },
+    "7519": {
+      "advance": 378,
+      "xMin": 77,
+      "xMax": 451,
+      "yMin": 281,
+      "yMax": 746
+    },
+    "7520": {
+      "advance": 506,
+      "xMin": 84,
+      "xMax": 526,
+      "yMin": 143,
+      "yMax": 621
+    },
+    "7521": {
+      "advance": 359,
+      "xMin": 15,
+      "xMax": 468,
+      "yMin": 142,
+      "yMax": 619
+    },
+    "7522": {
+      "advance": 194,
+      "xMin": -41,
+      "xMax": 157,
+      "yMin": -96,
+      "yMax": 361
+    },
+    "7523": {
+      "advance": 274,
+      "xMin": -41,
+      "xMax": 247,
+      "yMin": -96,
+      "yMax": 238
+    },
+    "7524": {
+      "advance": 393,
+      "xMin": -17,
+      "xMax": 330,
+      "yMin": -102,
+      "yMax": 232
+    },
+    "7525": {
+      "advance": 335,
+      "xMin": -19,
+      "xMax": 319,
+      "yMin": -96,
+      "yMax": 232
+    },
+    "7526": {
+      "advance": 404,
+      "xMin": -73,
+      "xMax": 335,
+      "yMin": -240,
+      "yMax": 363
+    },
+    "7527": {
+      "advance": 335,
+      "xMin": -21,
+      "xMax": 283,
+      "yMin": -222,
+      "yMax": 232
+    },
+    "7528": {
+      "advance": 388,
+      "xMin": -73,
+      "xMax": 297,
+      "yMin": -240,
+      "yMax": 238
+    },
+    "7529": {
+      "advance": 506,
+      "xMin": -21,
+      "xMax": 421,
+      "yMin": -240,
+      "yMax": 238
+    },
+    "7530": {
+      "advance": 359,
+      "xMin": -90,
+      "xMax": 363,
+      "yMin": -241,
+      "yMax": 236
+    },
+    "7531": {
+      "advance": 899,
+      "xMin": 58,
+      "xMax": 874,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "7532": {
+      "advance": 595,
+      "xMin": 3,
+      "xMax": 551,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "7533": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 754,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "7534": {
+      "advance": 373,
+      "xMin": -107,
+      "xMax": 482,
+      "yMin": -240,
+      "yMax": 765
+    },
+    "7535": {
+      "advance": 905,
+      "xMin": -82,
+      "xMax": 984,
+      "yMin": 0,
+      "yMax": 556
+    },
+    "7536": {
+      "advance": 604,
+      "xMin": -77,
+      "xMax": 679,
+      "yMin": 0,
+      "yMax": 556
+    },
+    "7537": {
+      "advance": 595,
+      "xMin": -160,
+      "xMax": 551,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "7538": {
+      "advance": 421,
+      "xMin": -85,
+      "xMax": 458,
+      "yMin": 0,
+      "yMax": 556
+    },
+    "7539": {
+      "advance": 378,
+      "xMin": -91,
+      "xMax": 412,
+      "yMin": 0,
+      "yMax": 558
+    },
+    "7540": {
+      "advance": 475,
+      "xMin": -18,
+      "xMax": 506,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "7541": {
+      "advance": 410,
+      "xMin": -68,
+      "xMax": 429,
+      "yMin": -10,
+      "yMax": 662
+    },
+    "7542": {
+      "advance": 455,
+      "xMin": -23,
+      "xMax": 473,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7543": {
+      "advance": 596,
+      "xMin": 17,
+      "xMax": 578,
+      "yMin": -10,
+      "yMax": 786
+    },
+    "7544": {
+      "advance": 401,
+      "xMin": 64,
+      "xMax": 442,
+      "yMin": 287,
+      "yMax": 615
+    },
+    "7545": {
+      "advance": 546,
+      "xMin": -44,
+      "xMax": 558,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "7546": {
+      "advance": 975,
+      "xMin": 17,
+      "xMax": 936,
+      "yMin": -75,
+      "yMax": 760
+    },
+    "7547": {
+      "advance": 348,
+      "xMin": -39,
+      "xMax": 353,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "7548": {
+      "advance": 367,
+      "xMin": -9,
+      "xMax": 328,
+      "yMin": -10,
+      "yMax": 546
+    },
+    "7549": {
+      "advance": 596,
+      "xMin": -33,
+      "xMax": 609,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "7550": {
+      "advance": 627,
+      "xMin": -11,
+      "xMax": 643,
+      "yMin": -10,
+      "yMax": 546
+    },
+    "7551": {
+      "advance": 638,
+      "xMin": -17,
+      "xMax": 660,
+      "yMin": -10,
+      "yMax": 546
+    },
+    "7552": {
+      "advance": 595,
+      "xMin": 18,
+      "xMax": 551,
+      "yMin": -230,
+      "yMax": 760
+    },
+    "7553": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 622,
+      "yMin": -230,
+      "yMax": 760
+    },
+    "7554": {
+      "advance": 512,
+      "xMin": -107,
+      "xMax": 482,
+      "yMin": -240,
+      "yMax": 765
+    },
+    "7555": {
+      "advance": 785,
+      "xMin": 13,
+      "xMax": 737,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "7556": {
+      "advance": 568,
+      "xMin": 18,
+      "xMax": 617,
+      "yMin": -230,
+      "yMax": 760
+    },
+    "7557": {
+      "advance": 307,
+      "xMin": -20,
+      "xMax": 328,
+      "yMin": -224,
+      "yMax": 760
+    },
+    "7558": {
+      "advance": 905,
+      "xMin": 18,
+      "xMax": 854,
+      "yMin": -230,
+      "yMax": 556
+    },
+    "7559": {
+      "advance": 604,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": -230,
+      "yMax": 556
+    },
+    "7560": {
+      "advance": 595,
+      "xMin": -33,
+      "xMax": 551,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "7561": {
+      "advance": 422,
+      "xMin": -22,
+      "xMax": 460,
+      "yMin": -224,
+      "yMax": 556
+    },
+    "7562": {
+      "advance": 475,
+      "xMin": 11,
+      "xMax": 455,
+      "yMin": -224,
+      "yMax": 556
+    },
+    "7563": {
+      "advance": 489,
+      "xMin": -108,
+      "xMax": 441,
+      "yMin": -240,
+      "yMax": 767
+    },
+    "7564": {
+      "advance": 512,
+      "xMin": 50,
+      "xMax": 570,
+      "yMin": -230,
+      "yMax": 546
+    },
+    "7565": {
+      "advance": 546,
+      "xMin": -50,
+      "xMax": 583,
+      "yMin": -224,
+      "yMax": 546
+    },
+    "7566": {
+      "advance": 469,
+      "xMin": -18,
+      "xMax": 479,
+      "yMin": -224,
+      "yMax": 546
+    },
+    "7567": {
+      "advance": 594,
+      "xMin": 20,
+      "xMax": 594,
+      "yMin": -230,
+      "yMax": 556
+    },
+    "7568": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 600,
+      "yMin": -230,
+      "yMax": 556
+    },
+    "7569": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 697,
+      "yMin": -240,
+      "yMax": 767
+    },
+    "7570": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 532,
+      "yMin": -230,
+      "yMax": 556
+    },
+    "7571": {
+      "advance": 513,
+      "xMin": 19,
+      "xMax": 523,
+      "yMin": -230,
+      "yMax": 556
+    },
+    "7572": {
+      "advance": 528,
+      "xMin": -39,
+      "xMax": 496,
+      "yMin": -224,
+      "yMax": 556
+    },
+    "7573": {
+      "advance": 709,
+      "xMin": 25,
+      "xMax": 638,
+      "yMin": -230,
+      "yMax": 556
+    },
+    "7574": {
+      "advance": 297,
+      "xMin": 18,
+      "xMax": 319,
+      "yMin": -230,
+      "yMax": 760
+    },
+    "7575": {
+      "advance": 484,
+      "xMin": -31,
+      "xMax": 440,
+      "yMin": -224,
+      "yMax": 556
+    },
+    "7576": {
+      "advance": 297,
+      "xMin": -104,
+      "xMax": 401,
+      "yMin": -230,
+      "yMax": 767
+    },
+    "7577": {
+      "advance": 604,
+      "xMin": 54,
+      "xMax": 593,
+      "yMin": -230,
+      "yMax": 546
+    },
+    "7578": {
+      "advance": 535,
+      "xMin": -40,
+      "xMax": 540,
+      "yMin": -230,
+      "yMax": 546
+    },
+    "7579": {
+      "advance": 385,
+      "xMin": 78,
+      "xMax": 425,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7580": {
+      "advance": 315,
+      "xMin": 82,
+      "xMax": 374,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7581": {
+      "advance": 322,
+      "xMin": 51,
+      "xMax": 373,
+      "yMin": 255,
+      "yMax": 621
+    },
+    "7582": {
+      "advance": 369,
+      "xMin": 76,
+      "xMax": 420,
+      "yMin": 281,
+      "yMax": 746
+    },
+    "7583": {
+      "advance": 343,
+      "xMin": 59,
+      "xMax": 375,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7584": {
+      "advance": 244,
+      "xMin": -16,
+      "xMax": 368,
+      "yMin": 143,
+      "yMax": 746
+    },
+    "7585": {
+      "advance": 194,
+      "xMin": -30,
+      "xMax": 256,
+      "yMin": 143,
+      "yMax": 615
+    },
+    "7586": {
+      "advance": 388,
+      "xMin": 64,
+      "xMax": 429,
+      "yMin": 143,
+      "yMax": 621
+    },
+    "7587": {
+      "advance": 393,
+      "xMin": 88,
+      "xMax": 435,
+      "yMin": 143,
+      "yMax": 615
+    },
+    "7588": {
+      "advance": 194,
+      "xMin": 48,
+      "xMax": 262,
+      "yMin": 287,
+      "yMax": 744
+    },
+    "7589": {
+      "advance": 237,
+      "xMin": 80,
+      "xMax": 266,
+      "yMin": 281,
+      "yMax": 615
+    },
+    "7590": {
+      "advance": 226,
+      "xMin": 28,
+      "xMax": 283,
+      "yMin": 287,
+      "yMax": 615
+    },
+    "7591": {
+      "advance": 257,
+      "xMin": 28,
+      "xMax": 283,
+      "yMin": 287,
+      "yMax": 615
+    },
+    "7592": {
+      "advance": 194,
+      "xMin": -58,
+      "xMax": 263,
+      "yMin": 143,
+      "yMax": 744
+    },
+    "7593": {
+      "advance": 194,
+      "xMin": 54,
+      "xMax": 267,
+      "yMin": 143,
+      "yMax": 743
+    },
+    "7594": {
+      "advance": 200,
+      "xMin": 40,
+      "xMax": 267,
+      "yMin": 153,
+      "yMax": 743
+    },
+    "7595": {
+      "advance": 298,
+      "xMin": 65,
+      "xMax": 295,
+      "yMin": 287,
+      "yMax": 615
+    },
+    "7596": {
+      "advance": 589,
+      "xMin": 65,
+      "xMax": 608,
+      "yMin": 143,
+      "yMax": 621
+    },
+    "7597": {
+      "advance": 589,
+      "xMin": 87,
+      "xMax": 630,
+      "yMin": 143,
+      "yMax": 615
+    },
+    "7598": {
+      "advance": 393,
+      "xMin": -17,
+      "xMax": 412,
+      "yMin": 143,
+      "yMax": 621
+    },
+    "7599": {
+      "advance": 393,
+      "xMin": 65,
+      "xMax": 412,
+      "yMin": 143,
+      "yMax": 621
+    },
+    "7600": {
+      "advance": 436,
+      "xMin": 65,
+      "xMax": 456,
+      "yMin": 287,
+      "yMax": 615
+    },
+    "7601": {
+      "advance": 384,
+      "xMin": 82,
+      "xMax": 405,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7602": {
+      "advance": 505,
+      "xMin": 82,
+      "xMax": 520,
+      "yMin": 143,
+      "yMax": 743
+    },
+    "7603": {
+      "advance": 308,
+      "xMin": 27,
+      "xMax": 348,
+      "yMin": 143,
+      "yMax": 621
+    },
+    "7604": {
+      "advance": 193,
+      "xMin": -17,
+      "xMax": 314,
+      "yMin": 143,
+      "yMax": 747
+    },
+    "7605": {
+      "advance": 265,
+      "xMin": 83,
+      "xMax": 332,
+      "yMin": 143,
+      "yMax": 684
+    },
+    "7606": {
+      "advance": 393,
+      "xMin": 51,
+      "xMax": 455,
+      "yMin": 281,
+      "yMax": 615
+    },
+    "7607": {
+      "advance": 415,
+      "xMin": 44,
+      "xMax": 452,
+      "yMin": 281,
+      "yMax": 615
+    },
+    "7608": {
+      "advance": 408,
+      "xMin": 86,
+      "xMax": 416,
+      "yMin": 282,
+      "yMax": 615
+    },
+    "7609": {
+      "advance": 423,
+      "xMin": 92,
+      "xMax": 443,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "7610": {
+      "advance": 335,
+      "xMin": 15,
+      "xMax": 353,
+      "yMin": 287,
+      "yMax": 615
+    },
+    "7611": {
+      "advance": 296,
+      "xMin": 41,
+      "xMax": 365,
+      "yMin": 287,
+      "yMax": 615
+    },
+    "7612": {
+      "advance": 296,
+      "xMin": 41,
+      "xMax": 365,
+      "yMin": 143,
+      "yMax": 615
+    },
+    "7613": {
+      "advance": 368,
+      "xMin": 38,
+      "xMax": 403,
+      "yMin": 235,
+      "yMax": 615
+    },
+    "7614": {
+      "advance": 350,
+      "xMin": 24,
+      "xMax": 392,
+      "yMin": 142,
+      "yMax": 615
+    },
+    "7615": {
+      "advance": 382,
+      "xMin": 80,
+      "xMax": 417,
+      "yMin": 281,
+      "yMax": 746
+    },
+    "7680": {
+      "advance": 628,
+      "xMin": -60,
+      "xMax": 568,
+      "yMin": -294,
+      "yMax": 714
+    },
+    "7681": {
+      "advance": 592,
+      "xMin": 44,
+      "xMax": 578,
+      "yMin": -294,
+      "yMax": 556
+    },
+    "7682": {
+      "advance": 621,
+      "xMin": 26,
+      "xMax": 611,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "7683": {
+      "advance": 596,
+      "xMin": 18,
+      "xMax": 551,
+      "yMin": -10,
+      "yMax": 761
+    },
+    "7684": {
+      "advance": 621,
+      "xMin": 26,
+      "xMax": 611,
+      "yMin": -212,
+      "yMax": 714
+    },
+    "7685": {
+      "advance": 596,
+      "xMin": 18,
+      "xMax": 551,
+      "yMin": -212,
+      "yMax": 760
+    },
+    "7686": {
+      "advance": 621,
+      "xMin": 26,
+      "xMax": 611,
+      "yMin": -170,
+      "yMax": 714
+    },
+    "7687": {
+      "advance": 596,
+      "xMin": 18,
+      "xMax": 551,
+      "yMin": -163,
+      "yMax": 760
+    },
+    "7688": {
+      "advance": 613,
+      "xMin": 59,
+      "xMax": 652,
+      "yMin": -240,
+      "yMax": 934
+    },
+    "7689": {
+      "advance": 484,
+      "xMin": 44,
+      "xMax": 519,
+      "yMin": -240,
+      "yMax": 766
+    },
+    "7690": {
+      "advance": 677,
+      "xMin": 26,
+      "xMax": 646,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "7691": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 622,
+      "yMin": -10,
+      "yMax": 761
+    },
+    "7692": {
+      "advance": 677,
+      "xMin": 26,
+      "xMax": 646,
+      "yMin": -212,
+      "yMax": 714
+    },
+    "7693": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 622,
+      "yMin": -212,
+      "yMax": 760
+    },
+    "7694": {
+      "advance": 677,
+      "xMin": 26,
+      "xMax": 646,
+      "yMin": -167,
+      "yMax": 714
+    },
+    "7695": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 622,
+      "yMin": -157,
+      "yMax": 760
+    },
+    "7696": {
+      "advance": 677,
+      "xMin": 26,
+      "xMax": 646,
+      "yMin": -240,
+      "yMax": 714
+    },
+    "7697": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 622,
+      "yMin": -240,
+      "yMax": 760
+    },
+    "7698": {
+      "advance": 677,
+      "xMin": 26,
+      "xMax": 646,
+      "yMin": -205,
+      "yMax": 714
+    },
+    "7699": {
+      "advance": 594,
+      "xMin": 25,
+      "xMax": 622,
+      "yMin": -200,
+      "yMax": 760
+    },
+    "7700": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 577,
+      "yMin": 0,
+      "yMax": 1040
+    },
+    "7701": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 532,
+      "yMin": -10,
+      "yMax": 872
+    },
+    "7702": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 584,
+      "yMin": 0,
+      "yMax": 1040
+    },
+    "7703": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 549,
+      "yMin": -10,
+      "yMax": 872
+    },
+    "7704": {
+      "advance": 543,
+      "xMin": -4,
+      "xMax": 577,
+      "yMin": -200,
+      "yMax": 714
+    },
+    "7705": {
+      "advance": 557,
+      "xMin": 6,
+      "xMax": 532,
+      "yMin": -198,
+      "yMax": 556
+    },
+    "7706": {
+      "advance": 543,
+      "xMin": -9,
+      "xMax": 577,
+      "yMin": -202,
+      "yMax": 714
+    },
+    "7707": {
+      "advance": 557,
+      "xMin": 10,
+      "xMax": 532,
+      "yMin": -198,
+      "yMax": 556
+    },
+    "7708": {
+      "advance": 543,
+      "xMin": 26,
+      "xMax": 586,
+      "yMin": -240,
+      "yMax": 937
+    },
+    "7709": {
+      "advance": 557,
+      "xMin": 44,
+      "xMax": 547,
+      "yMin": -240,
+      "yMax": 769
+    },
+    "7710": {
+      "advance": 533,
+      "xMin": 26,
+      "xMax": 575,
+      "yMin": 0,
+      "yMax": 926
+    },
+    "7711": {
+      "advance": 374,
+      "xMin": -106,
+      "xMax": 485,
+      "yMin": -240,
+      "yMax": 975
+    },
+    "7712": {
+      "advance": 690,
+      "xMin": 59,
+      "xMax": 679,
+      "yMin": -10,
+      "yMax": 872
+    },
+    "7713": {
+      "advance": 596,
+      "xMin": 18,
+      "xMax": 578,
+      "yMin": -240,
+      "yMax": 704
+    },
+    "7714": {
+      "advance": 701,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "7715": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": 0,
+      "yMax": 975
+    },
+    "7716": {
+      "advance": 701,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": -212,
+      "yMax": 714
+    },
+    "7717": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": -212,
+      "yMax": 760
+    },
+    "7718": {
+      "advance": 701,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": 0,
+      "yMax": 920
+    },
+    "7719": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": 0,
+      "yMax": 966
+    },
+    "7720": {
+      "advance": 701,
+      "xMin": -30,
+      "xMax": 705,
+      "yMin": -240,
+      "yMax": 714
+    },
+    "7721": {
+      "advance": 605,
+      "xMin": -39,
+      "xMax": 553,
+      "yMin": -240,
+      "yMax": 760
+    },
+    "7722": {
+      "advance": 701,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": -216,
+      "yMax": 714
+    },
+    "7723": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": -216,
+      "yMax": 760
+    },
+    "7724": {
+      "advance": 383,
+      "xMin": -101,
+      "xMax": 438,
+      "yMin": -205,
+      "yMax": 714
+    },
+    "7725": {
+      "advance": 299,
+      "xMin": -140,
+      "xMax": 321,
+      "yMin": -202,
+      "yMax": 761
+    },
+    "7726": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 502,
+      "yMin": 0,
+      "yMax": 1049
+    },
+    "7727": {
+      "advance": 299,
+      "xMin": 18,
+      "xMax": 431,
+      "yMin": 0,
+      "yMax": 881
+    },
+    "7728": {
+      "advance": 627,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "7729": {
+      "advance": 568,
+      "xMin": 18,
+      "xMax": 617,
+      "yMin": 0,
+      "yMax": 980
+    },
+    "7730": {
+      "advance": 627,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": -212,
+      "yMax": 714
+    },
+    "7731": {
+      "advance": 568,
+      "xMin": 18,
+      "xMax": 617,
+      "yMin": -212,
+      "yMax": 760
+    },
+    "7732": {
+      "advance": 627,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": -165,
+      "yMax": 714
+    },
+    "7733": {
+      "advance": 568,
+      "xMin": 18,
+      "xMax": 617,
+      "yMin": -174,
+      "yMax": 760
+    },
+    "7734": {
+      "advance": 518,
+      "xMin": 26,
+      "xMax": 451,
+      "yMin": -212,
+      "yMax": 714
+    },
+    "7735": {
+      "advance": 299,
+      "xMin": -20,
+      "xMax": 328,
+      "yMin": -212,
+      "yMax": 760
+    },
+    "7736": {
+      "advance": 518,
+      "xMin": 26,
+      "xMax": 462,
+      "yMin": -212,
+      "yMax": 872
+    },
+    "7737": {
+      "advance": 299,
+      "xMin": -20,
+      "xMax": 432,
+      "yMin": -212,
+      "yMax": 918
+    },
+    "7738": {
+      "advance": 518,
+      "xMin": 26,
+      "xMax": 451,
+      "yMin": -164,
+      "yMax": 714
+    },
+    "7739": {
+      "advance": 299,
+      "xMin": -88,
+      "xMax": 328,
+      "yMin": -164,
+      "yMax": 760
+    },
+    "7740": {
+      "advance": 518,
+      "xMin": -9,
+      "xMax": 451,
+      "yMin": -200,
+      "yMax": 714
+    },
+    "7741": {
+      "advance": 299,
+      "xMin": -145,
+      "xMax": 328,
+      "yMin": -200,
+      "yMax": 760
+    },
+    "7742": {
+      "advance": 882,
+      "xMin": 26,
+      "xMax": 885,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "7743": {
+      "advance": 905,
+      "xMin": 18,
+      "xMax": 854,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "7744": {
+      "advance": 882,
+      "xMin": 26,
+      "xMax": 885,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "7745": {
+      "advance": 905,
+      "xMin": 18,
+      "xMax": 854,
+      "yMin": 0,
+      "yMax": 761
+    },
+    "7746": {
+      "advance": 882,
+      "xMin": 26,
+      "xMax": 885,
+      "yMin": -212,
+      "yMax": 714
+    },
+    "7747": {
+      "advance": 905,
+      "xMin": 18,
+      "xMax": 854,
+      "yMin": -212,
+      "yMax": 556
+    },
+    "7748": {
+      "advance": 758,
+      "xMin": 25,
+      "xMax": 763,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "7749": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": 0,
+      "yMax": 761
+    },
+    "7750": {
+      "advance": 758,
+      "xMin": 25,
+      "xMax": 763,
+      "yMin": -212,
+      "yMax": 714
+    },
+    "7751": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": -212,
+      "yMax": 556
+    },
+    "7752": {
+      "advance": 758,
+      "xMin": 25,
+      "xMax": 763,
+      "yMin": -167,
+      "yMax": 714
+    },
+    "7753": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": -167,
+      "yMax": 556
+    },
+    "7754": {
+      "advance": 758,
+      "xMin": 25,
+      "xMax": 763,
+      "yMin": -200,
+      "yMax": 714
+    },
+    "7755": {
+      "advance": 605,
+      "xMin": 12,
+      "xMax": 553,
+      "yMin": -200,
+      "yMax": 556
+    },
+    "7756": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 1059
+    },
+    "7757": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 586,
+      "yMin": -10,
+      "yMax": 891
+    },
+    "7758": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 1049
+    },
+    "7759": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 556,
+      "yMin": -10,
+      "yMax": 881
+    },
+    "7760": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 1040
+    },
+    "7761": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 541,
+      "yMin": -10,
+      "yMax": 872
+    },
+    "7762": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 1040
+    },
+    "7763": {
+      "advance": 590,
+      "xMin": 44,
+      "xMax": 549,
+      "yMin": -10,
+      "yMax": 872
+    },
+    "7764": {
+      "advance": 610,
+      "xMin": 26,
+      "xMax": 615,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "7765": {
+      "advance": 596,
+      "xMin": -33,
+      "xMax": 571,
+      "yMin": -240,
+      "yMax": 766
+    },
+    "7766": {
+      "advance": 610,
+      "xMin": 26,
+      "xMax": 615,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "7767": {
+      "advance": 596,
+      "xMin": -33,
+      "xMax": 551,
+      "yMin": -240,
+      "yMax": 761
+    },
+    "7768": {
+      "advance": 620,
+      "xMin": 26,
+      "xMax": 594,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "7769": {
+      "advance": 422,
+      "xMin": 18,
+      "xMax": 460,
+      "yMin": 0,
+      "yMax": 761
+    },
+    "7770": {
+      "advance": 620,
+      "xMin": 26,
+      "xMax": 594,
+      "yMin": -212,
+      "yMax": 714
+    },
+    "7771": {
+      "advance": 422,
+      "xMin": -15,
+      "xMax": 460,
+      "yMin": -212,
+      "yMax": 556
+    },
+    "7772": {
+      "advance": 620,
+      "xMin": 26,
+      "xMax": 594,
+      "yMin": -212,
+      "yMax": 872
+    },
+    "7773": {
+      "advance": 422,
+      "xMin": -15,
+      "xMax": 476,
+      "yMin": -212,
+      "yMax": 704
+    },
+    "7774": {
+      "advance": 620,
+      "xMin": 26,
+      "xMax": 594,
+      "yMin": -164,
+      "yMax": 714
+    },
+    "7775": {
+      "advance": 422,
+      "xMin": -80,
+      "xMax": 460,
+      "yMin": -170,
+      "yMax": 556
+    },
+    "7776": {
+      "advance": 531,
+      "xMin": 20,
+      "xMax": 542,
+      "yMin": -10,
+      "yMax": 929
+    },
+    "7777": {
+      "advance": 475,
+      "xMin": 11,
+      "xMax": 455,
+      "yMin": -10,
+      "yMax": 761
+    },
+    "7778": {
+      "advance": 531,
+      "xMin": 20,
+      "xMax": 542,
+      "yMin": -212,
+      "yMax": 724
+    },
+    "7779": {
+      "advance": 475,
+      "xMin": 11,
+      "xMax": 455,
+      "yMin": -212,
+      "yMax": 556
+    },
+    "7780": {
+      "advance": 531,
+      "xMin": 20,
+      "xMax": 619,
+      "yMin": -10,
+      "yMax": 934
+    },
+    "7781": {
+      "advance": 475,
+      "xMin": 11,
+      "xMax": 547,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "7782": {
+      "advance": 531,
+      "xMin": 20,
+      "xMax": 604,
+      "yMin": -10,
+      "yMax": 1061
+    },
+    "7783": {
+      "advance": 475,
+      "xMin": 11,
+      "xMax": 532,
+      "yMin": -10,
+      "yMax": 894
+    },
+    "7784": {
+      "advance": 531,
+      "xMin": 20,
+      "xMax": 542,
+      "yMin": -212,
+      "yMax": 929
+    },
+    "7785": {
+      "advance": 475,
+      "xMin": 11,
+      "xMax": 455,
+      "yMin": -212,
+      "yMax": 761
+    },
+    "7786": {
+      "advance": 532,
+      "xMin": 81,
+      "xMax": 603,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "7787": {
+      "advance": 410,
+      "xMin": 46,
+      "xMax": 429,
+      "yMin": -10,
+      "yMax": 861
+    },
+    "7788": {
+      "advance": 532,
+      "xMin": 81,
+      "xMax": 603,
+      "yMin": -212,
+      "yMax": 714
+    },
+    "7789": {
+      "advance": 410,
+      "xMin": 46,
+      "xMax": 429,
+      "yMin": -212,
+      "yMax": 662
+    },
+    "7790": {
+      "advance": 532,
+      "xMin": 25,
+      "xMax": 603,
+      "yMin": -163,
+      "yMax": 714
+    },
+    "7791": {
+      "advance": 410,
+      "xMin": -10,
+      "xMax": 429,
+      "yMin": -157,
+      "yMax": 662
+    },
+    "7792": {
+      "advance": 532,
+      "xMin": -31,
+      "xMax": 603,
+      "yMin": -200,
+      "yMax": 714
+    },
+    "7793": {
+      "advance": 410,
+      "xMin": -52,
+      "xMax": 429,
+      "yMin": -200,
+      "yMax": 662
+    },
+    "7794": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -185,
+      "yMax": 714
+    },
+    "7795": {
+      "advance": 605,
+      "xMin": 37,
+      "xMax": 587,
+      "yMin": -185,
+      "yMax": 546
+    },
+    "7796": {
+      "advance": 692,
+      "xMin": 60,
+      "xMax": 700,
+      "yMin": -205,
+      "yMax": 714
+    },
+    "7797": {
+      "advance": 605,
+      "xMin": 24,
+      "xMax": 587,
+      "yMin": -205,
+      "yMax": 546
+    },
+    "7798": {
+      "advance": 692,
+      "xMin": 64,
+      "xMax": 700,
+      "yMin": -200,
+      "yMax": 714
+    },
+    "7799": {
+      "advance": 605,
+      "xMin": 8,
+      "xMax": 587,
+      "yMin": -200,
+      "yMax": 546
+    },
+    "7800": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 1059
+    },
+    "7801": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 599,
+      "yMin": -10,
+      "yMax": 891
+    },
+    "7802": {
+      "advance": 692,
+      "xMin": 68,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 1030
+    },
+    "7803": {
+      "advance": 605,
+      "xMin": 54,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 862
+    },
+    "7804": {
+      "advance": 590,
+      "xMin": 90,
+      "xMax": 680,
+      "yMin": 0,
+      "yMax": 926
+    },
+    "7805": {
+      "advance": 512,
+      "xMin": 50,
+      "xMax": 570,
+      "yMin": 0,
+      "yMax": 758
+    },
+    "7806": {
+      "advance": 590,
+      "xMin": 90,
+      "xMax": 680,
+      "yMin": -212,
+      "yMax": 714
+    },
+    "7807": {
+      "advance": 512,
+      "xMin": 50,
+      "xMax": 570,
+      "yMin": -212,
+      "yMax": 546
+    },
+    "7808": {
+      "advance": 904,
+      "xMin": 90,
+      "xMax": 988,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "7809": {
+      "advance": 788,
+      "xMin": 61,
+      "xMax": 839,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "7810": {
+      "advance": 904,
+      "xMin": 90,
+      "xMax": 988,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "7811": {
+      "advance": 788,
+      "xMin": 61,
+      "xMax": 839,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "7812": {
+      "advance": 904,
+      "xMin": 90,
+      "xMax": 988,
+      "yMin": 0,
+      "yMax": 920
+    },
+    "7813": {
+      "advance": 788,
+      "xMin": 61,
+      "xMax": 839,
+      "yMin": 0,
+      "yMax": 752
+    },
+    "7814": {
+      "advance": 904,
+      "xMin": 90,
+      "xMax": 988,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "7815": {
+      "advance": 788,
+      "xMin": 61,
+      "xMax": 839,
+      "yMin": 0,
+      "yMax": 761
+    },
+    "7816": {
+      "advance": 904,
+      "xMin": 90,
+      "xMax": 988,
+      "yMin": -212,
+      "yMax": 714
+    },
+    "7817": {
+      "advance": 788,
+      "xMin": 61,
+      "xMax": 839,
+      "yMin": -212,
+      "yMax": 546
+    },
+    "7818": {
+      "advance": 610,
+      "xMin": -57,
+      "xMax": 688,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "7819": {
+      "advance": 534,
+      "xMin": -50,
+      "xMax": 583,
+      "yMin": 0,
+      "yMax": 761
+    },
+    "7820": {
+      "advance": 610,
+      "xMin": -57,
+      "xMax": 688,
+      "yMin": 0,
+      "yMax": 920
+    },
+    "7821": {
+      "advance": 534,
+      "xMin": -50,
+      "xMax": 583,
+      "yMin": 0,
+      "yMax": 752
+    },
+    "7822": {
+      "advance": 564,
+      "xMin": 91,
+      "xMax": 656,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "7823": {
+      "advance": 519,
+      "xMin": -69,
+      "xMax": 571,
+      "yMin": -240,
+      "yMax": 761
+    },
+    "7824": {
+      "advance": 536,
+      "xMin": -30,
+      "xMax": 586,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "7825": {
+      "advance": 469,
+      "xMin": -18,
+      "xMax": 497,
+      "yMin": 0,
+      "yMax": 766
+    },
+    "7826": {
+      "advance": 536,
+      "xMin": -30,
+      "xMax": 586,
+      "yMin": -212,
+      "yMax": 714
+    },
+    "7827": {
+      "advance": 469,
+      "xMin": -18,
+      "xMax": 479,
+      "yMin": -212,
+      "yMax": 546
+    },
+    "7828": {
+      "advance": 536,
+      "xMin": -30,
+      "xMax": 586,
+      "yMin": -167,
+      "yMax": 714
+    },
+    "7829": {
+      "advance": 469,
+      "xMin": -18,
+      "xMax": 479,
+      "yMin": -166,
+      "yMax": 546
+    },
+    "7830": {
+      "advance": 605,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": -167,
+      "yMax": 760
+    },
+    "7831": {
+      "advance": 410,
+      "xMin": 46,
+      "xMax": 456,
+      "yMin": -10,
+      "yMax": 872
+    },
+    "7832": {
+      "advance": 788,
+      "xMin": 61,
+      "xMax": 839,
+      "yMin": 0,
+      "yMax": 837
+    },
+    "7833": {
+      "advance": 519,
+      "xMin": -69,
+      "xMax": 571,
+      "yMin": -240,
+      "yMax": 837
+    },
+    "7834": {
+      "advance": 618,
+      "xMin": 44,
+      "xMax": 712,
+      "yMin": -10,
+      "yMax": 830
+    },
+    "7835": {
+      "advance": 358,
+      "xMin": -120,
+      "xMax": 469,
+      "yMin": -240,
+      "yMax": 946
+    },
+    "7836": {
+      "advance": 358,
+      "xMin": -120,
+      "xMax": 469,
+      "yMin": -240,
+      "yMax": 765
+    },
+    "7837": {
+      "advance": 358,
+      "xMin": -120,
+      "xMax": 469,
+      "yMin": -240,
+      "yMax": 765
+    },
+    "7838": {
+      "advance": 745,
+      "xMin": 20,
+      "xMax": 686,
+      "yMin": -10,
+      "yMax": 724
+    },
+    "7839": {
+      "advance": 582,
+      "xMin": 37,
+      "xMax": 612,
+      "yMin": -10,
+      "yMax": 765
+    },
+    "7922": {
+      "advance": 564,
+      "xMin": 91,
+      "xMax": 656,
+      "yMin": 0,
+      "yMax": 934
+    },
+    "7923": {
+      "advance": 519,
+      "xMin": -69,
+      "xMax": 571,
+      "yMin": -240,
+      "yMax": 766
+    },
+    "7924": {
+      "advance": 564,
+      "xMin": 91,
+      "xMax": 656,
+      "yMin": -212,
+      "yMax": 714
+    },
+    "7925": {
+      "advance": 519,
+      "xMin": -69,
+      "xMax": 571,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "7926": {
+      "advance": 564,
+      "xMin": 91,
+      "xMax": 656,
+      "yMin": 0,
+      "yMax": 995
+    },
+    "7927": {
+      "advance": 519,
+      "xMin": -69,
+      "xMax": 571,
+      "yMin": -240,
+      "yMax": 830
+    },
+    "7928": {
+      "advance": 564,
+      "xMin": 91,
+      "xMax": 656,
+      "yMin": 0,
+      "yMax": 926
+    },
+    "7929": {
+      "advance": 519,
+      "xMin": -69,
+      "xMax": 571,
+      "yMin": -240,
+      "yMax": 758
+    },
+    "7930": {
+      "advance": 795,
+      "xMin": 26,
+      "xMax": 738,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "7931": {
+      "advance": 590,
+      "xMin": 17,
+      "xMax": 678,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "7932": {
+      "advance": 686,
+      "xMin": 66,
+      "xMax": 639,
+      "yMin": -10,
+      "yMax": 724
+    },
+    "7933": {
+      "advance": 582,
+      "xMin": 44.945945945945944,
+      "xMax": 531,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "7934": {
+      "advance": 598,
+      "xMin": -11,
+      "xMax": 690,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "7935": {
+      "advance": 519,
+      "xMin": -95,
+      "xMax": 571,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "8224": {
+      "advance": 514,
+      "xMin": 95,
+      "xMax": 511,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "8352": {
+      "advance": 572,
+      "xMin": 56,
+      "xMax": 588,
+      "yMin": 0,
+      "yMax": 724
+    },
+    "8353": {
+      "advance": 552,
+      "xMin": 32,
+      "xMax": 627,
+      "yMin": -58,
+      "yMax": 759
+    },
+    "8354": {
+      "advance": 572,
+      "xMin": 34,
+      "xMax": 616,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "8355": {
+      "advance": 551,
+      "xMin": 0,
+      "xMax": 591,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "8356": {
+      "advance": 551,
+      "xMin": -6,
+      "xMax": 606,
+      "yMin": 0,
+      "yMax": 725
+    },
+    "8357": {
+      "advance": 905,
+      "xMin": 18,
+      "xMax": 854,
+      "yMin": -110,
+      "yMax": 666
+    },
+    "8358": {
+      "advance": 581,
+      "xMin": 15,
+      "xMax": 601,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "8359": {
+      "advance": 856,
+      "xMin": 28,
+      "xMax": 844,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "8360": {
+      "advance": 896,
+      "xMin": 13,
+      "xMax": 901,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "8361": {
+      "advance": 727,
+      "xMin": 20,
+      "xMax": 785,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "8362": {
+      "advance": 865,
+      "xMin": 33,
+      "xMax": 867,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "8363": {
+      "advance": 594,
+      "xMin": 7,
+      "xMax": 680,
+      "yMin": -158,
+      "yMax": 760
+    },
+    "8365": {
+      "advance": 572,
+      "xMin": 17,
+      "xMax": 675,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "8366": {
+      "advance": 531,
+      "xMin": 39,
+      "xMax": 602,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "8367": {
+      "advance": 1010,
+      "xMin": 20,
+      "xMax": 980,
+      "yMin": -240,
+      "yMax": 724
+    },
+    "8368": {
+      "advance": 590,
+      "xMin": -56,
+      "xMax": 590,
+      "yMin": -240,
+      "yMax": 725
+    },
+    "8369": {
+      "advance": 572,
+      "xMin": 5,
+      "xMax": 604,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "8370": {
+      "advance": 690,
+      "xMin": 57,
+      "xMax": 683,
+      "yMin": -75,
+      "yMax": 766
+    },
+    "8371": {
+      "advance": 600,
+      "xMin": -60,
+      "xMax": 627,
+      "yMin": 0,
+      "yMax": 717
+    },
+    "8372": {
+      "advance": 571,
+      "xMin": 4,
+      "xMax": 590,
+      "yMin": -10,
+      "yMax": 724
+    },
+    "8373": {
+      "advance": 612,
+      "xMin": 60,
+      "xMax": 652,
+      "yMin": -80,
+      "yMax": 760
+    },
+    "8374": {
+      "advance": 676,
+      "xMin": 28,
+      "xMax": 695,
+      "yMin": -10,
+      "yMax": 662
+    },
+    "8375": {
+      "advance": 686,
+      "xMin": -21,
+      "xMax": 699,
+      "yMin": -78,
+      "yMax": 724.0
+    },
+    "8376": {
+      "advance": 529,
+      "xMin": 40,
+      "xMax": 596,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "8377": {
+      "advance": 551,
+      "xMin": 69,
+      "xMax": 571,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "8378": {
+      "advance": 551,
+      "xMin": 9,
+      "xMax": 545,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "8379": {
+      "advance": 643,
+      "xMin": 67,
+      "xMax": 674,
+      "yMin": -8,
+      "yMax": 721
+    },
+    "8380": {
+      "advance": 815,
+      "xMin": -5,
+      "xMax": 759,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "8381": {
+      "advance": 582,
+      "xMin": -12,
+      "xMax": 595,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "8382": {
+      "advance": 612,
+      "xMin": -13,
+      "xMax": 651,
+      "yMin": 0,
+      "yMax": 815
+    },
+    "8383": {
+      "advance": 551,
+      "xMin": 26,
+      "xMax": 552,
+      "yMin": -98,
+      "yMax": 815
+    },
+    "8467": {
+      "advance": 500,
+      "xMin": 20,
+      "xMax": 464,
+      "yMin": -9,
+      "yMax": 723
+    },
+    "11360": {
+      "advance": 518,
+      "xMin": -13,
+      "xMax": 451,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "11361": {
+      "advance": 298,
+      "xMin": 1,
+      "xMax": 338,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "11362": {
+      "advance": 518,
+      "xMin": -52,
+      "xMax": 451,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "11363": {
+      "advance": 610,
+      "xMin": 26,
+      "xMax": 615,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "11364": {
+      "advance": 609,
+      "xMin": 7,
+      "xMax": 584,
+      "yMin": -240,
+      "yMax": 714
+    },
+    "11365": {
+      "advance": 592,
+      "xMin": 2,
+      "xMax": 583,
+      "yMin": -208,
+      "yMax": 760
+    },
+    "11366": {
+      "advance": 410,
+      "xMin": -36,
+      "xMax": 545,
+      "yMin": -208,
+      "yMax": 760
+    },
+    "11367": {
+      "advance": 766,
+      "xMin": 26,
+      "xMax": 718,
+      "yMin": -208,
+      "yMax": 714
+    },
+    "11368": {
+      "advance": 620,
+      "xMin": 18,
+      "xMax": 580,
+      "yMin": -196,
+      "yMax": 760
+    },
+    "11369": {
+      "advance": 644,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": -208,
+      "yMax": 714
+    },
+    "11370": {
+      "advance": 581,
+      "xMin": 18,
+      "xMax": 617,
+      "yMin": -196,
+      "yMax": 760
+    },
+    "11371": {
+      "advance": 536,
+      "xMin": -30,
+      "xMax": 586,
+      "yMin": -208,
+      "yMax": 714
+    },
+    "11372": {
+      "advance": 469,
+      "xMin": -18,
+      "xMax": 479,
+      "yMin": -198,
+      "yMax": 546
+    },
+    "11373": {
+      "advance": 745,
+      "xMin": 60,
+      "xMax": 750,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "11374": {
+      "advance": 880,
+      "xMin": 26,
+      "xMax": 885,
+      "yMin": -212,
+      "yMax": 714
+    },
+    "11375": {
+      "advance": 628,
+      "xMin": 96,
+      "xMax": 724,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "11376": {
+      "advance": 748,
+      "xMin": 18,
+      "xMax": 708,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "11377": {
+      "advance": 532,
+      "xMin": 50,
+      "xMax": 600,
+      "yMin": 0,
+      "yMax": 556
+    },
+    "11378": {
+      "advance": 944,
+      "xMin": 90,
+      "xMax": 1025,
+      "yMin": 0,
+      "yMax": 724
+    },
+    "11379": {
+      "advance": 838,
+      "xMin": 61,
+      "xMax": 876,
+      "yMin": 0,
+      "yMax": 556
+    },
+    "11380": {
+      "advance": 539,
+      "xMin": -5,
+      "xMax": 597,
+      "yMin": 0,
+      "yMax": 556
+    },
+    "11381": {
+      "advance": 533,
+      "xMin": 26,
+      "xMax": 532,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "11382": {
+      "advance": 444,
+      "xMin": 17,
+      "xMax": 427,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "11383": {
+      "advance": 764,
+      "xMin": 44,
+      "xMax": 720,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "11384": {
+      "advance": 675,
+      "xMin": 44,
+      "xMax": 650,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "11385": {
+      "advance": 421,
+      "xMin": -37,
+      "xMax": 412,
+      "yMin": -10,
+      "yMax": 765
+    },
+    "11386": {
+      "advance": 600,
+      "xMin": 44,
+      "xMax": 541,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "11387": {
+      "advance": 428,
+      "xMin": -12,
+      "xMax": 402,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "11388": {
+      "advance": 194,
+      "xMin": -135,
+      "xMax": 158,
+      "yMin": -240,
+      "yMax": 361
+    },
+    "11389": {
+      "advance": 385,
+      "xMin": 87,
+      "xMax": 470,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "11390": {
+      "advance": 531,
+      "xMin": 20,
+      "xMax": 543,
+      "yMin": -231,
+      "yMax": 724
+    },
+    "11391": {
+      "advance": 536,
+      "xMin": -30,
+      "xMax": 586,
+      "yMin": -234,
+      "yMax": 714
+    },
+    "42784": {
+      "advance": 456,
+      "xMin": 122,
+      "xMax": 480,
+      "yMin": 464,
+      "yMax": 714
+    },
+    "42785": {
+      "advance": 484,
+      "xMin": 40,
+      "xMax": 398,
+      "yMin": -1,
+      "yMax": 329
+    },
+    "42786": {
+      "advance": 342,
+      "xMin": 24,
+      "xMax": 364,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42787": {
+      "advance": 290,
+      "xMin": 30,
+      "xMax": 301,
+      "yMin": -1,
+      "yMax": 596
+    },
+    "42788": {
+      "advance": 400,
+      "xMin": 80,
+      "xMax": 446,
+      "yMin": 264,
+      "yMax": 712
+    },
+    "42789": {
+      "advance": 356,
+      "xMin": 44,
+      "xMax": 371,
+      "yMin": 152,
+      "yMax": 551
+    },
+    "42790": {
+      "advance": 701,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": -210,
+      "yMax": 714
+    },
+    "42791": {
+      "advance": 604,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": -240,
+      "yMax": 760
+    },
+    "42792": {
+      "advance": 834,
+      "xMin": 81,
+      "xMax": 797,
+      "yMin": -241,
+      "yMax": 714
+    },
+    "42793": {
+      "advance": 870,
+      "xMin": 46,
+      "xMax": 845,
+      "yMin": -242,
+      "yMax": 662
+    },
+    "42794": {
+      "advance": 574,
+      "xMin": 30,
+      "xMax": 615,
+      "yMin": -10,
+      "yMax": 724
+    },
+    "42795": {
+      "advance": 549,
+      "xMin": -21,
+      "xMax": 556,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "42796": {
+      "advance": 531,
+      "xMin": 5,
+      "xMax": 538,
+      "yMin": -9,
+      "yMax": 714
+    },
+    "42797": {
+      "advance": 522,
+      "xMin": -44,
+      "xMax": 503,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "42798": {
+      "advance": 610,
+      "xMin": 5,
+      "xMax": 606,
+      "yMin": -9,
+      "yMax": 714
+    },
+    "42799": {
+      "advance": 600,
+      "xMin": -44,
+      "xMax": 562,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "42800": {
+      "advance": 463,
+      "xMin": 26,
+      "xMax": 470,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "42801": {
+      "advance": 468,
+      "xMin": 16,
+      "xMax": 464,
+      "yMin": -8,
+      "yMax": 590
+    },
+    "42802": {
+      "advance": 1112,
+      "xMin": -60,
+      "xMax": 1052,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42803": {
+      "advance": 913,
+      "xMin": 45,
+      "xMax": 896,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42804": {
+      "advance": 1073,
+      "xMin": -60,
+      "xMax": 1043,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "42805": {
+      "advance": 899,
+      "xMin": 44,
+      "xMax": 855,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42806": {
+      "advance": 1022,
+      "xMin": -60,
+      "xMax": 1031,
+      "yMin": -10,
+      "yMax": 717
+    },
+    "42807": {
+      "advance": 905,
+      "xMin": 44,
+      "xMax": 888,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42808": {
+      "advance": 886,
+      "xMin": -60,
+      "xMax": 976,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42809": {
+      "advance": 880,
+      "xMin": 44,
+      "xMax": 934,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42810": {
+      "advance": 876,
+      "xMin": -60,
+      "xMax": 976,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42811": {
+      "advance": 872,
+      "xMin": 40,
+      "xMax": 930,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42812": {
+      "advance": 886,
+      "xMin": -60,
+      "xMax": 976,
+      "yMin": -239,
+      "yMax": 714
+    },
+    "42813": {
+      "advance": 882,
+      "xMin": 44,
+      "xMax": 934,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "42814": {
+      "advance": 613,
+      "xMin": -3,
+      "xMax": 590,
+      "yMin": -11,
+      "yMax": 724
+    },
+    "42815": {
+      "advance": 484,
+      "xMin": -10,
+      "xMax": 441,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42816": {
+      "advance": 613,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42817": {
+      "advance": 568,
+      "xMin": 18,
+      "xMax": 617,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "42818": {
+      "advance": 613,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42819": {
+      "advance": 568,
+      "xMin": 18,
+      "xMax": 617,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "42820": {
+      "advance": 613,
+      "xMin": 26,
+      "xMax": 705,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42821": {
+      "advance": 568,
+      "xMin": 18,
+      "xMax": 617,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "42822": {
+      "advance": 664,
+      "xMin": 103,
+      "xMax": 598,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42823": {
+      "advance": 444,
+      "xMin": 91,
+      "xMax": 417,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "42824": {
+      "advance": 518,
+      "xMin": 26,
+      "xMax": 451,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42825": {
+      "advance": 297,
+      "xMin": 17,
+      "xMax": 369,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "42826": {
+      "advance": 716,
+      "xMin": 23,
+      "xMax": 762,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "42827": {
+      "advance": 646,
+      "xMin": 1,
+      "xMax": 647,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42828": {
+      "advance": 830,
+      "xMin": 60,
+      "xMax": 903,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "42829": {
+      "advance": 708,
+      "xMin": 44,
+      "xMax": 727,
+      "yMin": -9,
+      "yMax": 555
+    },
+    "42830": {
+      "advance": 1205,
+      "xMin": 59,
+      "xMax": 1174,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "42831": {
+      "advance": 930,
+      "xMin": 44,
+      "xMax": 881,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42832": {
+      "advance": 610,
+      "xMin": -26,
+      "xMax": 615,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42833": {
+      "advance": 596,
+      "xMin": -93,
+      "xMax": 551,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "42834": {
+      "advance": 735,
+      "xMin": 3,
+      "xMax": 740,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42835": {
+      "advance": 738,
+      "xMin": -43,
+      "xMax": 695,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "42836": {
+      "advance": 890,
+      "xMin": 98,
+      "xMax": 895,
+      "yMin": 0,
+      "yMax": 723
+    },
+    "42837": {
+      "advance": 861,
+      "xMin": 41,
+      "xMax": 817,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "42838": {
+      "advance": 731,
+      "xMin": 55,
+      "xMax": 695,
+      "yMin": -173,
+      "yMax": 725
+    },
+    "42839": {
+      "advance": 596,
+      "xMin": 44,
+      "xMax": 577,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "42840": {
+      "advance": 840,
+      "xMin": 59,
+      "xMax": 857,
+      "yMin": -210,
+      "yMax": 725
+    },
+    "42841": {
+      "advance": 670,
+      "xMin": 44,
+      "xMax": 743,
+      "yMin": -249,
+      "yMax": 556
+    },
+    "42842": {
+      "advance": 555,
+      "xMin": 109,
+      "xMax": 529,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42843": {
+      "advance": 503,
+      "xMin": 68,
+      "xMax": 478,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "42844": {
+      "advance": 610,
+      "xMin": -24,
+      "xMax": 578,
+      "yMin": -137,
+      "yMax": 724
+    },
+    "42845": {
+      "advance": 580,
+      "xMin": -27,
+      "xMax": 543,
+      "yMin": -139,
+      "yMax": 556
+    },
+    "42846": {
+      "advance": 590,
+      "xMin": 24,
+      "xMax": 680,
+      "yMin": -9,
+      "yMax": 723
+    },
+    "42847": {
+      "advance": 512,
+      "xMin": -27,
+      "xMax": 570,
+      "yMin": -93,
+      "yMax": 639
+    },
+    "42848": {
+      "advance": 894,
+      "xMin": 90,
+      "xMax": 988,
+      "yMin": -239,
+      "yMax": 714
+    },
+    "42849": {
+      "advance": 788,
+      "xMin": 61,
+      "xMax": 839,
+      "yMin": -239,
+      "yMax": 546
+    },
+    "42850": {
+      "advance": 550,
+      "xMin": -43,
+      "xMax": 523,
+      "yMin": -240,
+      "yMax": 765
+    },
+    "42851": {
+      "advance": 552,
+      "xMin": -43,
+      "xMax": 509,
+      "yMin": -240,
+      "yMax": 660
+    },
+    "42852": {
+      "advance": 601,
+      "xMin": 29,
+      "xMax": 554,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42853": {
+      "advance": 596,
+      "xMin": -33,
+      "xMax": 552,
+      "yMin": -240,
+      "yMax": 760
+    },
+    "42854": {
+      "advance": 591,
+      "xMin": -38,
+      "xMax": 579,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42855": {
+      "advance": 596,
+      "xMin": -85,
+      "xMax": 552,
+      "yMin": -240,
+      "yMax": 760
+    },
+    "42856": {
+      "advance": 700,
+      "xMin": -16,
+      "xMax": 775,
+      "yMin": -240,
+      "yMax": 714
+    },
+    "42857": {
+      "advance": 557,
+      "xMin": -33,
+      "xMax": 611,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "42858": {
+      "advance": 596,
+      "xMin": 20,
+      "xMax": 586,
+      "yMin": -10,
+      "yMax": 724
+    },
+    "42859": {
+      "advance": 546,
+      "xMin": -71,
+      "xMax": 495,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "42860": {
+      "advance": 605,
+      "xMin": -8,
+      "xMax": 653,
+      "yMin": -9,
+      "yMax": 724
+    },
+    "42861": {
+      "advance": 605,
+      "xMin": -46,
+      "xMax": 668,
+      "yMin": -241,
+      "yMax": 766
+    },
+    "42862": {
+      "advance": 621,
+      "xMin": 89,
+      "xMax": 590,
+      "yMin": -10,
+      "yMax": 722
+    },
+    "42863": {
+      "advance": 611,
+      "xMin": 50,
+      "xMax": 548,
+      "yMin": -240,
+      "yMax": 557
+    },
+    "42864": {
+      "advance": 403,
+      "xMin": 86,
+      "xMax": 409,
+      "yMin": 143,
+      "yMax": 621
+    },
+    "42865": {
+      "advance": 750,
+      "xMin": 44,
+      "xMax": 720,
+      "yMin": -157,
+      "yMax": 760
+    },
+    "42866": {
+      "advance": 465,
+      "xMin": 17,
+      "xMax": 435,
+      "yMin": -157,
+      "yMax": 760
+    },
+    "42867": {
+      "advance": 1067,
+      "xMin": 18,
+      "xMax": 1037,
+      "yMin": -157,
+      "yMax": 556
+    },
+    "42868": {
+      "advance": 767,
+      "xMin": 18,
+      "xMax": 737,
+      "yMin": -157,
+      "yMax": 556
+    },
+    "42869": {
+      "advance": 603,
+      "xMin": 18,
+      "xMax": 640,
+      "yMin": 0,
+      "yMax": 697
+    },
+    "42870": {
+      "advance": 810,
+      "xMin": 19,
+      "xMax": 766,
+      "yMin": -157,
+      "yMax": 546
+    },
+    "42871": {
+      "advance": 785,
+      "xMin": 46,
+      "xMax": 854,
+      "yMin": -10,
+      "yMax": 766
+    },
+    "42872": {
+      "advance": 530,
+      "xMin": -8,
+      "xMax": 492,
+      "yMin": 0,
+      "yMax": 724
+    },
+    "42873": {
+      "advance": 731,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "42874": {
+      "advance": 586,
+      "xMin": 43,
+      "xMax": 537,
+      "yMin": -10,
+      "yMax": 726
+    },
+    "42875": {
+      "advance": 430,
+      "xMin": -16,
+      "xMax": 503,
+      "yMin": -207,
+      "yMax": 724
+    },
+    "42876": {
+      "advance": 422,
+      "xMin": -34,
+      "xMax": 460,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "42877": {
+      "advance": 588,
+      "xMin": 43,
+      "xMax": 587,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "42878": {
+      "advance": 588,
+      "xMin": 37,
+      "xMax": 581,
+      "yMin": 0,
+      "yMax": 724
+    },
+    "42879": {
+      "advance": 546,
+      "xMin": -12,
+      "xMax": 590,
+      "yMin": 0,
+      "yMax": 786
+    },
+    "42880": {
+      "advance": 518,
+      "xMin": 103,
+      "xMax": 528,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42881": {
+      "advance": 299,
+      "xMin": -34,
+      "xMax": 283,
+      "yMin": -240,
+      "yMax": 547
+    },
+    "42882": {
+      "advance": 732,
+      "xMin": -16,
+      "xMax": 675,
+      "yMin": -198,
+      "yMax": 724
+    },
+    "42883": {
+      "advance": 630,
+      "xMin": -33,
+      "xMax": 600,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "42884": {
+      "advance": 430,
+      "xMin": -16,
+      "xMax": 503,
+      "yMin": -207,
+      "yMax": 724
+    },
+    "42885": {
+      "advance": 422,
+      "xMin": -33,
+      "xMax": 460,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "42886": {
+      "advance": 612,
+      "xMin": 60,
+      "xMax": 633,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "42887": {
+      "advance": 483,
+      "xMin": 44,
+      "xMax": 512,
+      "yMin": -10,
+      "yMax": 546
+    },
+    "42888": {
+      "advance": 482,
+      "xMin": -60,
+      "xMax": 339,
+      "yMin": -210,
+      "yMax": -50
+    },
+    "42889": {
+      "advance": 277,
+      "xMin": 20,
+      "xMax": 261,
+      "yMin": 55,
+      "yMax": 552
+    },
+    "42890": {
+      "advance": 455,
+      "xMin": 23,
+      "xMax": 450,
+      "yMin": 170,
+      "yMax": 466
+    },
+    "42891": {
+      "advance": 287,
+      "xMin": 70,
+      "xMax": 318,
+      "yMin": 232,
+      "yMax": 714
+    },
+    "42892": {
+      "advance": 260,
+      "xMin": 96,
+      "xMax": 273,
+      "yMin": 370,
+      "yMax": 714
+    },
+    "42893": {
+      "advance": 701,
+      "xMin": 91,
+      "xMax": 705,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42894": {
+      "advance": 444,
+      "xMin": 39,
+      "xMax": 437,
+      "yMin": -102,
+      "yMax": 760
+    },
+    "42895": {
+      "advance": 374,
+      "xMin": 73,
+      "xMax": 336,
+      "yMin": 230,
+      "yMax": 477
+    },
+    "42896": {
+      "advance": 758,
+      "xMin": 25,
+      "xMax": 763,
+      "yMin": -208,
+      "yMax": 714
+    },
+    "42897": {
+      "advance": 627,
+      "xMin": 18,
+      "xMax": 584,
+      "yMin": -196,
+      "yMax": 556
+    },
+    "42898": {
+      "advance": 613,
+      "xMin": 19,
+      "xMax": 664,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "42899": {
+      "advance": 510,
+      "xMin": 8,
+      "xMax": 521,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42900": {
+      "advance": 463,
+      "xMin": 44,
+      "xMax": 493,
+      "yMin": -247,
+      "yMax": 556
+    },
+    "42901": {
+      "advance": 604,
+      "xMin": 18,
+      "xMax": 553,
+      "yMin": -231,
+      "yMax": 760
+    },
+    "42902": {
+      "advance": 750,
+      "xMin": 15,
+      "xMax": 741,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42903": {
+      "advance": 820,
+      "xMin": 13,
+      "xMax": 770,
+      "yMin": -178,
+      "yMax": 760
+    },
+    "42904": {
+      "advance": 533,
+      "xMin": 26,
+      "xMax": 575,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42905": {
+      "advance": 374,
+      "xMin": -106,
+      "xMax": 485,
+      "yMin": -240,
+      "yMax": 765
+    },
+    "42906": {
+      "advance": 731,
+      "xMin": 19,
+      "xMax": 736,
+      "yMin": -10,
+      "yMax": 724
+    },
+    "42907": {
+      "advance": 618,
+      "xMin": 19,
+      "xMax": 601,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42908": {
+      "advance": 717,
+      "xMin": 19,
+      "xMax": 682,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "42909": {
+      "advance": 604,
+      "xMin": 21,
+      "xMax": 555,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42910": {
+      "advance": 758,
+      "xMin": 62,
+      "xMax": 763,
+      "yMin": -10,
+      "yMax": 714
+    },
+    "42911": {
+      "advance": 628,
+      "xMin": 45,
+      "xMax": 611,
+      "yMin": -10,
+      "yMax": 546
+    },
+    "42912": {
+      "advance": 690,
+      "xMin": 15,
+      "xMax": 722,
+      "yMin": -10,
+      "yMax": 725
+    },
+    "42913": {
+      "advance": 596,
+      "xMin": -16,
+      "xMax": 613,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "42914": {
+      "advance": 613,
+      "xMin": 0,
+      "xMax": 705,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42915": {
+      "advance": 568,
+      "xMin": -8,
+      "xMax": 617,
+      "yMin": 0,
+      "yMax": 760
+    },
+    "42916": {
+      "advance": 755,
+      "xMin": 5,
+      "xMax": 786,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42917": {
+      "advance": 604,
+      "xMin": -1,
+      "xMax": 619,
+      "yMin": 0,
+      "yMax": 556
+    },
+    "42918": {
+      "advance": 600,
+      "xMin": 26,
+      "xMax": 661,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42919": {
+      "advance": 421,
+      "xMin": -19,
+      "xMax": 460,
+      "yMin": 0,
+      "yMax": 556
+    },
+    "42920": {
+      "advance": 530,
+      "xMin": 20,
+      "xMax": 542,
+      "yMin": -10,
+      "yMax": 724.0
+    },
+    "42921": {
+      "advance": 473,
+      "xMin": -7,
+      "xMax": 463,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42922": {
+      "advance": 822,
+      "xMin": 73,
+      "xMax": 827,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42923": {
+      "advance": 625,
+      "xMin": 20,
+      "xMax": 586,
+      "yMin": -10,
+      "yMax": 724
+    },
+    "42924": {
+      "advance": 705,
+      "xMin": 26,
+      "xMax": 711,
+      "yMin": -240,
+      "yMax": 725
+    },
+    "42925": {
+      "advance": 587,
+      "xMin": 21,
+      "xMax": 520,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42926": {
+      "advance": 532,
+      "xMin": -42,
+      "xMax": 603,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42927": {
+      "advance": 625,
+      "xMin": 38,
+      "xMax": 590,
+      "yMin": -141,
+      "yMax": 592
+    },
+    "42928": {
+      "advance": 632,
+      "xMin": -42,
+      "xMax": 637,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42929": {
+      "advance": 532,
+      "xMin": -39,
+      "xMax": 482,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42930": {
+      "advance": 371,
+      "xMin": -119,
+      "xMax": 377,
+      "yMin": -220,
+      "yMax": 714
+    },
+    "42931": {
+      "advance": 699,
+      "xMin": -100,
+      "xMax": 766,
+      "yMin": -239,
+      "yMax": 725
+    },
+    "42932": {
+      "advance": 620,
+      "xMin": -25,
+      "xMax": 611,
+      "yMin": -240,
+      "yMax": 714
+    },
+    "42933": {
+      "advance": 621,
+      "xMin": -32,
+      "xMax": 596,
+      "yMin": -240,
+      "yMax": 765
+    },
+    "42934": {
+      "advance": 1013,
+      "xMin": 65,
+      "xMax": 984,
+      "yMin": -10,
+      "yMax": 723
+    },
+    "42935": {
+      "advance": 871,
+      "xMin": 44,
+      "xMax": 821,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42936": {
+      "advance": 691,
+      "xMin": -22,
+      "xMax": 798,
+      "yMin": -50,
+      "yMax": 752
+    },
+    "42937": {
+      "advance": 605,
+      "xMin": -22,
+      "xMax": 677,
+      "yMin": -49,
+      "yMax": 569
+    },
+    "42938": {
+      "advance": 956,
+      "xMin": -60,
+      "xMax": 1002,
+      "yMin": 0,
+      "yMax": 874
+    },
+    "42939": {
+      "advance": 920,
+      "xMin": 44,
+      "xMax": 966,
+      "yMin": -10,
+      "yMax": 874
+    },
+    "42940": {
+      "advance": 711,
+      "xMin": -29,
+      "xMax": 757,
+      "yMin": 0,
+      "yMax": 874
+    },
+    "42941": {
+      "advance": 627,
+      "xMin": 18,
+      "xMax": 673,
+      "yMin": 0,
+      "yMax": 874
+    },
+    "42942": {
+      "advance": 1020,
+      "xMin": 68,
+      "xMax": 1066,
+      "yMin": -10,
+      "yMax": 874
+    },
+    "42943": {
+      "advance": 933,
+      "xMin": 54,
+      "xMax": 979,
+      "yMin": -10,
+      "yMax": 874
+    },
+    "42944": {
+      "advance": 724,
+      "xMin": 59,
+      "xMax": 700,
+      "yMin": -118,
+      "yMax": 819
+    },
+    "42945": {
+      "advance": 585,
+      "xMin": 44,
+      "xMax": 541,
+      "yMin": -108,
+      "yMax": 640
+    },
+    "42946": {
+      "advance": 1126,
+      "xMin": 90,
+      "xMax": 1118,
+      "yMin": -10,
+      "yMax": 834
+    },
+    "42947": {
+      "advance": 973,
+      "xMin": 50,
+      "xMax": 951,
+      "yMin": -10,
+      "yMax": 642
+    },
+    "42948": {
+      "advance": 612,
+      "xMin": 60,
+      "xMax": 652,
+      "yMin": -247,
+      "yMax": 725
+    },
+    "42949": {
+      "advance": 530,
+      "xMin": -40,
+      "xMax": 542,
+      "yMin": -240,
+      "yMax": 724
+    },
+    "42950": {
+      "advance": 536,
+      "xMin": -30,
+      "xMax": 586,
+      "yMin": -230,
+      "yMax": 714
+    },
+    "42951": {
+      "advance": 677,
+      "xMin": 26,
+      "xMax": 646,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42952": {
+      "advance": 594,
+      "xMin": 44,
+      "xMax": 622,
+      "yMin": -10,
+      "yMax": 760
+    },
+    "42953": {
+      "advance": 531,
+      "xMin": 17,
+      "xMax": 558,
+      "yMin": -10,
+      "yMax": 724.0
+    },
+    "42954": {
+      "advance": 473,
+      "xMin": 5,
+      "xMax": 476,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42960": {
+      "advance": 625,
+      "xMin": 26.78082191780822,
+      "xMax": 669,
+      "yMin": -11,
+      "yMax": 714
+    },
+    "42961": {
+      "advance": 610,
+      "xMin": -25.21917808219178,
+      "xMax": 625,
+      "yMin": -240,
+      "yMax": 546
+    },
+    "42963": {
+      "advance": 644,
+      "xMin": -32,
+      "xMax": 602,
+      "yMin": -240,
+      "yMax": 760
+    },
+    "42965": {
+      "advance": 633,
+      "xMin": -33,
+      "xMax": 599.8571428571429,
+      "yMin": -240,
+      "yMax": 556
+    },
+    "42966": {
+      "advance": 745,
+      "xMin": 20,
+      "xMax": 712,
+      "yMin": 0,
+      "yMax": 724
+    },
+    "42967": {
+      "advance": 692,
+      "xMin": 18,
+      "xMax": 695,
+      "yMin": 0,
+      "yMax": 765
+    },
+    "42968": {
+      "advance": 618,
+      "xMin": 33.73913043478261,
+      "xMax": 630,
+      "yMin": -10,
+      "yMax": 724.0
+    },
+    "42969": {
+      "advance": 511,
+      "xMin": 18.42857142857143,
+      "xMax": 491,
+      "yMin": -10,
+      "yMax": 556
+    },
+    "42994": {
+      "advance": 425,
+      "xMin": 89,
+      "xMax": 474,
+      "yMin": 281,
+      "yMax": 722
+    },
+    "42995": {
+      "advance": 351,
+      "xMin": 52,
+      "xMax": 409,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "42996": {
+      "advance": 520,
+      "xMin": 97,
+      "xMax": 513,
+      "yMin": 185,
+      "yMax": 722
+    },
+    "42997": {
+      "advance": 533,
+      "xMin": 42,
+      "xMax": 543,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "42998": {
+      "advance": 443,
+      "xMin": 20,
+      "xMax": 426,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "42999": {
+      "advance": 749,
+      "xMin": 45,
+      "xMax": 744,
+      "yMin": 205,
+      "yMax": 529
+    },
+    "43000": {
+      "advance": 455,
+      "xMin": 70,
+      "xMax": 556,
+      "yMin": 287,
+      "yMax": 715
+    },
+    "43001": {
+      "advance": 568,
+      "xMin": 82,
+      "xMax": 610,
+      "yMin": 281,
+      "yMax": 621
+    },
+    "43002": {
+      "advance": 803,
+      "xMin": 26,
+      "xMax": 778,
+      "yMin": 0,
+      "yMax": 546
+    },
+    "43003": {
+      "advance": 530,
+      "xMin": 69,
+      "xMax": 540,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "43004": {
+      "advance": 609,
+      "xMin": 83,
+      "xMax": 619,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "43005": {
+      "advance": 882,
+      "xMin": 25,
+      "xMax": 884,
+      "yMin": 0,
+      "yMax": 714
+    },
+    "43006": {
+      "advance": 383,
+      "xMin": -29,
+      "xMax": 484,
+      "yMin": 0,
+      "yMax": 929
+    },
+    "43007": {
+      "advance": 1112,
+      "xMin": -60,
+      "xMax": 1206,
+      "yMin": 0,
+      "yMax": 714
+    }
+  },
+  "fontSha256": "618fda07c207f7f4d67fbf5f304c2de33691654124f5b461a3b4e352bb3f8c8a",
+  "extendedFontSha256": "eeb3183259e87dee644d822b9ecf148781e76f86cf7b53ab5b31493cb65d559f"
+}

@@ -1,0 +1,279 @@
+{
+  "capturedAt": "2026-09-13T10:08:21.506Z",
+  "source": "http://127.0.0.1:8767",
+  "observations": [
+    {
+      "name": "legacy-namespace-desktop",
+      "state": {
+        "providerKind": "server",
+        "executionMode": "server",
+        "providerId": "server:6e885628-e256-4f30-b4ec-30f03d976009",
+        "generation": "9a088ecb-b2b3-4cf5-988b-d74de038acbf",
+        "sourceName": "Read-only legacy JSON",
+        "queryId": "aeabe59d-b033-4c19-9739-b7471616c298",
+        "layoutId": "65d65327-f335-416c-84f6-0b99adf7c5ba",
+        "mapId": "4980ec19-dc4e-459b-b4ad-463e1324e07d",
+        "fromMs": "1711235100000",
+        "toMs": "1711242300000",
+        "domain": {
+          "from": "2024-03-23T11:35:00.000Z",
+          "to": "2024-03-24T11:35:00.000Z"
+        },
+        "startRow": 0,
+        "endRow": 12,
+        "totalRows": 63,
+        "loadedCount": 11,
+        "detailTotal": 62,
+        "overviewTotal": 785,
+        "pageCapacity": 12,
+        "layoutWidth": 1560,
+        "overviewMatched": 785,
+        "search": "",
+        "scaleMode": "uniform",
+        "dirty": false,
+        "view": "timeline",
+        "modelId": "legacy-presentation-8cf178b014bf3c0aa7d21f2d5e433a8e",
+        "modelVersion": 1,
+        "theme": "light",
+        "rowHeight": 32,
+        "effectiveRowHeight": 41,
+        "fontSize": 12,
+        "timeZone": "UTC",
+        "interactionMode": "navigate",
+        "navigationPhase": "idle",
+        "navigationOffset": 0,
+        "changeMode": "pinned",
+        "changePending": false,
+        "changeRequired": null,
+        "queryRevision": 1,
+        "queryGeneration": "9a088ecb-b2b3-4cf5-988b-d74de038acbf"
+      },
+      "overlaps": [],
+      "canvases": [
+        {
+          "selector": ".plot-wrap canvas",
+          "width": 1560,
+          "height": 563,
+          "colorCount": 19
+        },
+        {
+          "selector": ".overview-plot canvas",
+          "width": 1560,
+          "height": 153,
+          "colorCount": 605
+        }
+      ],
+      "namespaceLabels": [
+        "SOURCE1"
+      ],
+      "horizontalOverflow": false,
+      "status": "Read-only files / Read-only"
+    },
+    {
+      "name": "legacy-search",
+      "state": {
+        "providerKind": "server",
+        "executionMode": "server",
+        "providerId": "server:6e885628-e256-4f30-b4ec-30f03d976009",
+        "generation": "9a088ecb-b2b3-4cf5-988b-d74de038acbf",
+        "sourceName": "Read-only legacy JSON",
+        "queryId": "a52581e4-889d-4b3a-9abe-c16d23ab4238",
+        "layoutId": "ac78c8dc-5371-4b35-84c9-0b1646769e8b",
+        "mapId": "6032e57a-1337-43d5-92e9-97cc1c8013d3",
+        "fromMs": "1711235100000",
+        "toMs": "1711242300000",
+        "domain": {
+          "from": "2024-03-23T11:35:00.000Z",
+          "to": "2024-03-24T11:35:00.000Z"
+        },
+        "startRow": 12,
+        "endRow": 24,
+        "totalRows": 63,
+        "loadedCount": 12,
+        "detailTotal": 62,
+        "overviewTotal": 785,
+        "pageCapacity": 12,
+        "layoutWidth": 1560,
+        "overviewMatched": 7,
+        "search": "5_1 0_3",
+        "scaleMode": "uniform",
+        "dirty": false,
+        "view": "timeline",
+        "modelId": "legacy-presentation-8cf178b014bf3c0aa7d21f2d5e433a8e",
+        "modelVersion": 1,
+        "theme": "light",
+        "rowHeight": 32,
+        "effectiveRowHeight": 41,
+        "fontSize": 12,
+        "timeZone": "UTC",
+        "interactionMode": "navigate",
+        "navigationPhase": "idle",
+        "navigationOffset": 0,
+        "changeMode": "pinned",
+        "changePending": false,
+        "changeRequired": null,
+        "queryRevision": 1,
+        "queryGeneration": "9a088ecb-b2b3-4cf5-988b-d74de038acbf"
+      },
+      "overlaps": [],
+      "canvases": [
+        {
+          "selector": ".plot-wrap canvas",
+          "width": 1560,
+          "height": 563,
+          "colorCount": 24
+        },
+        {
+          "selector": ".overview-plot canvas",
+          "width": 1560,
+          "height": 153,
+          "colorCount": 13
+        }
+      ],
+      "namespaceLabels": [],
+      "horizontalOverflow": false,
+      "status": "Read-only files / Read-only"
+    },
+    {
+      "name": "legacy-descriptor",
+      "state": {
+        "providerKind": "server",
+        "executionMode": "server",
+        "providerId": "server:6e885628-e256-4f30-b4ec-30f03d976009",
+        "generation": "9a088ecb-b2b3-4cf5-988b-d74de038acbf",
+        "sourceName": "Read-only legacy JSON",
+        "queryId": "90c34d10-a9e7-4631-91fd-d4c6c41b36d0",
+        "layoutId": "146cf0ae-7e9e-47ad-8f6b-d0a2ef4b48ef",
+        "mapId": "8bc10206-88d5-4b89-86c4-12cd32e82f52",
+        "fromMs": "1711235100000",
+        "toMs": "1711242300000",
+        "domain": {
+          "from": "2024-03-23T11:35:00.000Z",
+          "to": "2024-03-24T11:35:00.000Z"
+        },
+        "startRow": 0,
+        "endRow": 12,
+        "totalRows": 63,
+        "loadedCount": 11,
+        "detailTotal": 62,
+        "overviewTotal": 785,
+        "pageCapacity": 12,
+        "layoutWidth": 1248,
+        "overviewMatched": 785,
+        "selectedId": "09e2440b-20f7-5fb8-80cd-968cbdc63226",
+        "search": "",
+        "scaleMode": "uniform",
+        "dirty": false,
+        "view": "timeline",
+        "modelId": "legacy-presentation-8cf178b014bf3c0aa7d21f2d5e433a8e",
+        "modelVersion": 1,
+        "theme": "light",
+        "rowHeight": 32,
+        "effectiveRowHeight": 41,
+        "fontSize": 12,
+        "timeZone": "UTC",
+        "interactionMode": "navigate",
+        "navigationPhase": "idle",
+        "navigationOffset": 0,
+        "changeMode": "pinned",
+        "changePending": false,
+        "changeRequired": null,
+        "queryRevision": 1,
+        "queryGeneration": "9a088ecb-b2b3-4cf5-988b-d74de038acbf"
+      },
+      "overlaps": [],
+      "canvases": [
+        {
+          "selector": ".plot-wrap canvas",
+          "width": 1248,
+          "height": 563,
+          "colorCount": 26
+        },
+        {
+          "selector": ".overview-plot canvas",
+          "width": 1248,
+          "height": 153,
+          "colorCount": 578
+        }
+      ],
+      "namespaceLabels": [
+        "SOURCE1"
+      ],
+      "horizontalOverflow": false,
+      "status": "Read-only files / Read-only"
+    },
+    {
+      "name": "legacy-namespace-mobile",
+      "state": {
+        "providerKind": "server",
+        "executionMode": "server",
+        "providerId": "server:6e885628-e256-4f30-b4ec-30f03d976009",
+        "generation": "9a088ecb-b2b3-4cf5-988b-d74de038acbf",
+        "sourceName": "Read-only legacy JSON",
+        "queryId": "90c34d10-a9e7-4631-91fd-d4c6c41b36d0",
+        "layoutId": "294850d9-e271-416c-b6fc-b7817696d133",
+        "mapId": "8bc10206-88d5-4b89-86c4-12cd32e82f52",
+        "fromMs": "1711235100000",
+        "toMs": "1711242300000",
+        "domain": {
+          "from": "2024-03-23T11:35:00.000Z",
+          "to": "2024-03-24T11:35:00.000Z"
+        },
+        "startRow": 0,
+        "endRow": 8,
+        "totalRows": 63,
+        "loadedCount": 7,
+        "detailTotal": 62,
+        "overviewTotal": 785,
+        "pageCapacity": 8,
+        "layoutWidth": 366,
+        "overviewMatched": 785,
+        "search": "",
+        "scaleMode": "uniform",
+        "dirty": false,
+        "view": "timeline",
+        "modelId": "legacy-presentation-8cf178b014bf3c0aa7d21f2d5e433a8e",
+        "modelVersion": 1,
+        "theme": "light",
+        "rowHeight": 32,
+        "effectiveRowHeight": 41,
+        "fontSize": 12,
+        "timeZone": "UTC",
+        "interactionMode": "navigate",
+        "navigationPhase": "idle",
+        "navigationOffset": 0,
+        "changeMode": "pinned",
+        "changePending": false,
+        "changeRequired": null,
+        "queryRevision": 1,
+        "queryGeneration": "9a088ecb-b2b3-4cf5-988b-d74de038acbf"
+      },
+      "overlaps": [],
+      "canvases": [
+        {
+          "selector": ".plot-wrap canvas",
+          "width": 366,
+          "height": 388,
+          "colorCount": 32
+        },
+        {
+          "selector": ".overview-plot canvas",
+          "width": 366,
+          "height": 90,
+          "colorCount": 597
+        }
+      ],
+      "namespaceLabels": [
+        "SOURCE1"
+      ],
+      "horizontalOverflow": false,
+      "status": "Read-only files / Read-only"
+    }
+  ],
+  "errors": [],
+  "standaloneBundleSha256": "a317c75aed6fd7b00b28140e77e57eba3a6161a27103d191f434b34dab2039eb",
+  "loadedBundleSha256": "a317c75aed6fd7b00b28140e77e57eba3a6161a27103d191f434b34dab2039eb",
+  "visibleSearchMatches": 1,
+  "searchMatched": 7,
+  "status": "passed"
+}

@@ -1,0 +1,229 @@
+{
+  "formatVersion": 1,
+  "recordCount": 100000,
+  "phaseTimeoutSeconds": 120.0,
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "logicalCpuCount": 8,
+    "processor": "Intel64 Family 6 Model 158 Stepping 13, GenuineIntel"
+  },
+  "lanes": [
+    {
+      "lane": "fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "phases": [
+        {
+          "event": "phase-result",
+          "name": "fixture-generation-and-json-files",
+          "status": "ok",
+          "seconds": 74.83663080000042,
+          "rssBefore": 19521536,
+          "rssAfter": 231124992,
+          "sampledPeakRss": 322256896,
+          "processPeakRss": 388677632,
+          "details": {
+            "recordCount": 100000,
+            "seedBytes": 72327873,
+            "pointCount": 20000,
+            "sourceCount": 10,
+            "overviewDays": 30,
+            "detailHours": 6,
+            "files": 100001,
+            "fixtureWrites": "isolated fixture construction, not a production transaction/durability benchmark"
+          }
+        }
+      ]
+    },
+    {
+      "lane": "production",
+      "exitCode": 1,
+      "timedOut": true,
+      "phases": [
+        {
+          "event": "phase-result",
+          "name": "repository-startup",
+          "status": "timeout",
+          "secondsLowerBound": 120.0,
+          "supervisorSampledPeakRss": 4411392
+        }
+      ]
+    },
+    {
+      "lane": "service-only",
+      "exitCode": 1,
+      "timedOut": true,
+      "phases": [
+        {
+          "event": "phase-result",
+          "name": "service-only-json-hydration",
+          "status": "ok",
+          "seconds": 7.3447126999999455,
+          "rssBefore": 29917184,
+          "rssAfter": 320520192,
+          "sampledPeakRss": 443408384,
+          "processPeakRss": 459395072,
+          "details": {
+            "recordCount": 100000,
+            "qualification": "service-only hydration; production startup validation bypassed"
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "query-adaptive-full-snapshot",
+          "status": "ok",
+          "seconds": 12.501769600003172,
+          "rssBefore": 320602112,
+          "rssAfter": 507400192,
+          "sampledPeakRss": 576466944,
+          "processPeakRss": 648798208,
+          "details": {
+            "queryId": "c2304ec7-afa6-4d3d-8348-e65446c737d7",
+            "snapshotId": "cf09a6d7-3d09-409d-bca1-a87e30e5a8f0",
+            "mapId": "6f1dc1b1-5899-4a1b-a190-c21a6c1117a2",
+            "generation": "4e60d9d3-d139-599f-8db2-26cee7934d22",
+            "revision": 1,
+            "baseTotal": 100000,
+            "matchTotal": 33333,
+            "overviewTotal": 100000,
+            "overviewMatchTotal": 33333,
+            "state": "ready"
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "density-manifest-read",
+          "status": "ok",
+          "seconds": 0.0005232000003161374,
+          "rssBefore": 507404288,
+          "rssAfter": 507428864,
+          "sampledPeakRss": 507428864,
+          "processPeakRss": 648798208,
+          "details": {
+            "bins": 128,
+            "total": 100000
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "map-manifest-read",
+          "status": "ok",
+          "seconds": 0.00025489999825367704,
+          "rssBefore": 507428864,
+          "rssAfter": 507432960,
+          "sampledPeakRss": 507432960,
+          "processPeakRss": 648798208,
+          "details": {
+            "knots": 129
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "overview-search-aggregation",
+          "status": "ok",
+          "seconds": 13.276168399999733,
+          "rssBefore": 507432960,
+          "rssAfter": 508080128,
+          "sampledPeakRss": 508100608,
+          "processPeakRss": 648798208,
+          "details": {
+            "items": 128,
+            "total": 100000,
+            "matched": 33333,
+            "aggregated": true
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "table-full-sort-first-page",
+          "status": "ok",
+          "seconds": 6.078169199998229,
+          "rssBefore": 508080128,
+          "rssAfter": 517718016,
+          "sampledPeakRss": 533409792,
+          "processPeakRss": 648798208,
+          "details": {
+            "total": 100000,
+            "items": 100,
+            "pageCount": 1000,
+            "responseBytes": 76140
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "table-next-page",
+          "status": "ok",
+          "seconds": 0.012643099998967955,
+          "rssBefore": 517718016,
+          "rssAfter": 517718016,
+          "sampledPeakRss": 517718016,
+          "processPeakRss": 648798208,
+          "details": {
+            "items": 100,
+            "pageIndex": 1,
+            "responseBytes": 76281
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "layout-detail-six-hours",
+          "status": "ok",
+          "seconds": 0.4212738000023819,
+          "rssBefore": 517718016,
+          "rssAfter": 517763072,
+          "sampledPeakRss": 517763072,
+          "processPeakRss": 648798208,
+          "details": {
+            "detailTotal": 1143,
+            "totalRows": 481,
+            "pageItems": 82,
+            "pageCount": 27,
+            "rowHeight": 32
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "layout-styled-six-hours",
+          "status": "ok",
+          "seconds": 0.4692021000009845,
+          "rssBefore": 517763072,
+          "rssAfter": 518348800,
+          "sampledPeakRss": 518356992,
+          "processPeakRss": 648798208,
+          "details": {
+            "detailTotal": 1143,
+            "totalRows": 481,
+            "pageItems": 79,
+            "pageCount": 33,
+            "rowHeight": 40
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "complete-json-export",
+          "status": "ok",
+          "seconds": 8.822136599999794,
+          "rssBefore": 518348800,
+          "rssAfter": 564641792,
+          "sampledPeakRss": 747532288,
+          "processPeakRss": 819863552,
+          "details": {
+            "records": 100000,
+            "bytes": 72328885,
+            "contentSha256": "e701a35fb1e6a1560908f8b73be9eabbbe13482b04c62974ec0a686e35732ba9"
+          }
+        },
+        {
+          "event": "phase-result",
+          "name": "layout-full-thirty-days",
+          "status": "timeout",
+          "secondsLowerBound": 120.0,
+          "supervisorSampledPeakRss": 4382720
+        }
+      ]
+    }
+  ],
+  "temporaryDirectory": "C:\\Users\\arcaz\\AppData\\Local\\Temp\\openbexi-benchmark-am56l1od",
+  "temporaryDataRemoved": true
+}

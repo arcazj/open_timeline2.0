@@ -1,0 +1,7 @@
+.main-axis{overflow:hidden}
+.axis-tick-layer{position:absolute;inset:0;will-change:transform}
+.plot-wrap[data-navigation-phase=dragging] .record-label-layer,.plot-wrap[data-navigation-phase=coasting] .record-label-layer{will-change:transform}
+.plot-wrap[data-navigation-phase=dragging],.plot-wrap[data-navigation-phase=coasting]{user-select:none;cursor:grabbing}
+.plot-wrap[data-navigation-phase=settling] .record-label-layer{pointer-events:none}
+.navigation-pending-edge{position:absolute;top:0;bottom:0;min-width:0;overflow:hidden;pointer-events:none;background:#b9cbd51c;border-inline:1px dotted #8fa3af;color:var(--muted);font-size:10px;padding-top:30px;text-align:center;white-space:nowrap}
+.plot-wrap[data-navigation-phase=dragging] .empty-state,.plot-wrap[data-navigation-phase=coasting] .empty-state,.plot-wrap[data-navigation-phase=settling] .empty-state{display:none}

@@ -1,0 +1,23 @@
+{
+  "datePolicy": "Proleptic Gregorian; 1 BC = astronomical 0000; year-only = January 1 UTC; explicit EST=-05:00/EDT=-04:00; trailing ? retained as approximateYear with nominal year position",
+  "dateReview": [],
+  "diagnostics": [],
+  "domain": {
+    "from": "1961-05-20T06:00:00.000Z",
+    "to": "1978-01-01T06:00:00.000Z"
+  },
+  "droppedRecords": 0,
+  "generatedTitles": [],
+  "id": "jfk",
+  "inputFormat": "html-event-markup",
+  "inputRecords": 130,
+  "inputSha256": "0240d59cd7d383a470d55b1d7959242d78a98d133c07f50b51bf58e399a26731",
+  "outputRecords": 130,
+  "referenceStatus": "provided",
+  "sourceAssignment": "jfk",
+  "unbundledOriginalAssets": [
+    "../../api/images/dark-red-circle.png",
+    "motorcade.png"
+  ],
+  "uncertainRecords": 8
+}

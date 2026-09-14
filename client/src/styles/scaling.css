@@ -1,0 +1,10 @@
+.filter-strip { flex-wrap: wrap; gap: 8px 12px; }
+.local-scale-controls { display: flex; align-items: center; gap: 8px; max-width: 100%; font-size: 12px; }
+.local-scale-controls label { white-space: nowrap; }
+.local-scale-controls input[type=range] { width: 100px; min-width: 60px; height: 28px; padding: 0; accent-color: var(--accent); }
+.local-scale-controls output { width: 38px; flex: none; font-variant-numeric: tabular-nums; }
+@media (max-width: 600px) {
+  .local-scale-controls { width: 100%; flex-wrap: wrap; gap: 6px; }
+  .local-scale-controls input[type=range] { flex: 1; }
+  .local-scale-controls select { max-width: 132px; }
+}

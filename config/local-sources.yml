@@ -1,0 +1,19 @@
+data_sources:
+  - namespace: SOURCE1
+    type: json_file
+    enable: true
+    permission: ''
+    converter2events_class: build_in
+    data_path: /data/
+    data_model: /data/SOURCES1/yyyy/mm/dd
+    filter: {include: '', exclude: ''}
+    render: {color: '#000000', textColor: '#ffffff', dateColor: '#ffffff'}
+  - namespace: SOURCE2
+    type: json_file
+    enable: true
+    permission: ''
+    converter2events_class: build_in
+    data_path: /data/
+    data_model: /data/SOURCES2/yyyy/mm/dd
+    filter: {include: '', exclude: ''}
+    render: {color: '#D3D3D3', textColor: '#000000', dateColor: '#000000'}

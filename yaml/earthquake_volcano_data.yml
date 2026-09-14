@@ -1,0 +1,26 @@
+version: 1
+server:
+  host: 127.0.0.1
+  port: 8770
+  local_browser: true
+  state_root: ../var/earthquake-volcano
+legacy:
+  root: ../../openbexi_timeline
+  allow_roots: [C:/data/earthquake, C:/data/volcano]
+  path_maps: {/data: C:/data}
+  model: models/regular_timeline_earthquake.json
+  timezone: UTC
+  dialect: legacy-json
+data_sources:
+  - namespace: earthquake
+    type: json_file
+    enable: true
+    data_path: /data/
+    data_model: /data/earthquake/yyyy/mm/dd
+    render: {color: '#BBEDF0', textColor: '#080808', dateColor: '#080808', alternateColor: '#BCD9DB'}
+  - namespace: volcano
+    type: json_file
+    enable: true
+    data_path: /data/
+    data_model: /data/volcano/yyyy/mm/dd
+    render: {color: '#B6E8A7', textColor: '#080808', dateColor: '#080808', alternateColor: '#BCD9DB'}

@@ -1,0 +1,35 @@
+# First Implementation Slice
+
+Status: implementation authorized. Revision 2.4 remains the product specification; this document coordinates the first tested increment, not a relaxation of release gates. Do not call this increment the complete release.
+
+## Ownership and Scope
+
+Python provides JSON-file persistence, record CRUD, immutable query/layout handles, density, overview, zones and complete snapshot export. The same JavaScript client renders either provider. This original slice implements orthographic timeline/overview, zones, local magnification, row pagination, search, source/type filters, table/split, descriptor, basic editing, source import/export and outage/reconnect. Later bounded increments add the [versioned model catalog](model-catalog-contract.md), [optional presentation](presentation-contract.md), structured filter/table APIs and [embedded Local worker](standalone-mode.md). The base shapes below remain first-slice context, not restrictions that exclude those documented extensions. Complete legacy migration and full production security/recovery certification remain explicitly tracked.
+
+## Portable Data
+
+The JSON envelope is `{format:'timeline-snapshot', formatVersion:1, manifest, records, zones, models, filters, settings}`. Manifest fields: `bundleId`, `workspaceId`, `generation`, `revision`, `snapshotAt`, `sourceName`, `sourceKind`, `completeness:'complete-for-declared-universe'`, `recordCount`, `scope:{workspaceId,sourceIds}`. Root builds shared schemas and complete generic initial data; no static authored row numbers become runtime layout inputs.
+
+Canonical record fields: UUID `id`, `workspaceId`, `kind`, `title`, ISO `start`, nullable `end`, nullable `parentSessionId`, integer `order`, `sourceId`, `groupIds`, `tags`, `data`, `render:{color}`, `extensions`, nullable `schemaId`/`schemaVersion`, nullable `originalStart`/`originalEnd`, `version`, `createdAt`/`updatedAt`, `createdBy`/`updatedBy`, nullable `deletedAt`. Zones: `id,title,start,end,color,opacity`. Basic visual models: `id,name,theme,version,rowHeight,fontSize,groupBy`. Settings: `range:{from,to}`, `overview:{from,to}`, `referenceTime`, `modelId`, `scaleMode`, `ratio`, `bins`.
+
+## Shared Asynchronous Provider API
+
+`initialize()` returns `{identity,sourceName,sourceKind,workspaceId,generation,revision,snapshotAt,recordCount,completeness,settings,models,capabilities}`. `getStatus()` returns current source metadata. `createQuery(input)`, `getDensity(queryId)`, `getMap(queryId,mapId)`, `getOverview(queryId)`, `getZones(queryId)`, `createLayout(queryId,input)`, `getRows(queryId,layoutId,{cursor})`, `getPlacement(queryId,layoutId,recordId)`, `getRecord(id)`, `executeCommand(command)`, `exportSnapshot()`, `releaseQuery(queryId)`, `releaseLayout(queryId,layoutId)`, `dispose()`. Use promise results and AbortSignal where supported. Errors have `code`, `message`, `status`.
+
+Query input: `{domain:{from,to},filters:{sourceId:'all',kind:'all'},search:'',scaleMode:'uniform'|'adaptive',ratio:4,bins:128}`. Domain does not move for ordinary main-band pan. Query manifest: `{queryId,snapshotId,mapId,generation,revision,baseTotal,matchTotal,overviewTotal,overviewMatchTotal,state:'ready'}`. Density response: `{bins:[{from,to,points,overlapMs,endpoints,density}],complete:true,total}`. Map: `{mapId,domain:{from,to},knots:[{timeMs,u}],mode,ratio}`; u and continuous a/b use decimal strings. Overview: `{items:[{id,kind,start,end,color,title,count?}],total,matched,aggregated,domain}`. Zones response: `{items}`.
+
+Layout input: `{mapId,from,to,width,availableHeight,rowHeight:32,fontSize:13,groupBy:'none'|'sourceId'|'kind',renderProfileId:'noto-sans-latin-v1'}`. from/to accept strict ISO instants; exact fractional continuous view bounds may be supplied as decimal epoch-ms strings under `viewFromMs`/`viewToMs`. Layout manifest: `{layoutId,mapId,totalRows,detailTotal,detailMatchTotal,renderInstanceTotal,rowHeight,pageCapacity,from,to,width}`. Rows: `{layoutId,mapId,items:[{record,row,xStart,xEnd,labelX,labelWidth,footprintStart,footprintEnd,match}],startRow,endRow,totalRows,pageIndex,pageCount,previousCursor,nextCursor,pageComplete:true,loadedCount}`. x positions are CSS plot-relative. Cursor identity binds immutable layout. Packing uses shared font metrics and reserves complete bar/marker+label footprints and 4px clearance. Never pack individual pages independently. Text is above duration bars; point labels follow marker. Row y is computed relative to startRow by the renderer. Structural grouping support may supply row type/name.
+
+Commands: `{type:'create'|'update'|'delete'|'restore',generation,recordId?,payload?,expectedVersion?,clientCommandId}`. Both providers require the explicitly captured source generation; omission returns precondition_required/428. Mutation result: `{record,durability:'server-committed'|'memory-only',generation,revision}`. Local export returns a complete envelope, Server export gets an explicit complete-snapshot endpoint, never gathers ordinary query pages. Unknown server write outcomes are never replayed into Local.
+
+## Python Transport
+
+`GET /api/v1/health` is bounded public health; workspace B=`/api/v1/workspaces/default`. `GET B` returns initialize metadata, `POST B/query-sessions` creates query, and nested `density`, `maps/{mapId}`, `overview`, `zones`, `layouts`, `layouts/{layoutId}/rows`, `layouts/{layoutId}/placement/{recordId}` map to the provider interface. `GET/POST B/records`, `GET/PUT/DELETE B/records/{id}`, `POST B/records/{id}/restore`, `GET B/snapshot`, read-only `GET B/command-results/{clientCommandId}`. Writes enforce If-Match and workspace-generation/idempotency headers. Configure bearer token through environment, never embed it in builds; bind to loopback and require token for API data. `/` serves generated dist/index.html. Client ServerProvider gets explicit token from source dialog. Python app factory accepts temporary test roots and token.
+
+## Shared Geometry
+
+Use decimal.js in JS and Decimal in Python for normalized viewport arithmetic. Density-log-v1 follows the normative scale contract, exact complete-filter density, never page sampling. `shared/fixtures/font-metrics.json` supplies the original Noto Sans Latin 400-normal profile; the presentation increment adds measured 700-normal, 400-italic and 700-italic profiles with their matching bundled fonts. Both engines use measured glyph advances/bounds at configured CSS font size, kerning/ligatures disabled in DOM labels. Unsupported glyph/profile cases must be diagnosed; no character-count estimate can silently claim universal shaping support. Coordinate helper contracts are recorded in time-scale.js and their focused tests.
+
+## Verification
+
+Root owns package/build/dev scripts, schemas/data/font assets, docs and end-to-end/provider-parity tests. Backend owner owns server and server tests; core owner owns client data/time-scale/layout and unit tests; UI owner owns template/app/rendering/styles/controls. Do not edit another owner's files without coordination. Runtime tests and candidate coverage, not this document, establish what actually works.

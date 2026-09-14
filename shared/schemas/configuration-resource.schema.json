@@ -1,0 +1,13 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://openbexi.local/schemas/configuration-resource.schema.json",
+  "type":"object","additionalProperties":false,
+  "required":["formatVersion","id","name","description","tags","revision","lifecycle","createdAt","updatedAt","ownerId","visibility","copiedFrom","draft","versions"],
+  "properties": {
+    "formatVersion":{"const":1},"id":{"$ref":"configuration-definition.schema.json#/$defs/id"},"name":{"type":"string","minLength":1,"maxLength":100},"description":{"type":"string","maxLength":2000},"tags":{"type":"array","maxItems":20,"uniqueItems":true,"items":{"type":"string","minLength":1,"maxLength":100}},
+    "revision":{"type":"integer","minimum":1,"maximum":9007199254740991},"lifecycle":{"enum":["active","archived"]},"createdAt":{"type":"string","format":"date-time"},"updatedAt":{"type":"string","format":"date-time"},"ownerId":{"type":"string","minLength":1,"maxLength":128},"visibility":{"enum":["personal","workspace"]},
+    "copiedFrom":{"oneOf":[{"type":"null"},{"type":"object","additionalProperties":false,"required":["family","id","version"],"properties":{"family":{"enum":["sources","groups","schemas","filters","views"]},"id":{"$ref":"configuration-definition.schema.json#/$defs/id"},"version":{"type":["integer","null"],"minimum":1,"maximum":32}}}]},
+    "draft":{"type":["object","null"]},
+    "versions":{"type":"array","maxItems":32,"items":{"type":"object","additionalProperties":false,"required":["version","publishedAt","publishedBy","definition"],"properties":{"version":{"type":"integer","minimum":1,"maximum":32},"publishedAt":{"type":"string","format":"date-time"},"publishedBy":{"type":"string","minLength":1,"maxLength":128},"definition":{"type":"object"}}}}
+  }
+}

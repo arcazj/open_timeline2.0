@@ -1,0 +1,125 @@
+{
+  "formatVersion": 1,
+  "recordCount": 100,
+  "phaseTimeoutSeconds": 120.0,
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "logicalCpuCount": 8,
+    "processor": "Intel64 Family 6 Model 158 Stepping 13, GenuineIntel"
+  },
+  "lanes": [
+    {
+      "lane": "fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "phases": [
+        {
+          "event": "phase-result",
+          "name": "fixture-generation-and-json-files",
+          "status": "ok",
+          "seconds": 0.18589170000268496,
+          "rssBefore": 19767296,
+          "rssAfter": 30437376,
+          "sampledPeakRss": 30441472,
+          "processPeakRss": 30453760,
+          "details": {
+            "recordCount": 100,
+            "seedBytes": 73230,
+            "pointCount": 20,
+            "sourceCount": 10,
+            "overviewDays": 30,
+            "detailHours": 6,
+            "files": 3,
+            "storageLayout": "shards",
+            "fixtureWrites": "isolated fixture construction, not a production transaction/durability benchmark"
+          }
+        }
+      ],
+      "startupProfiles": []
+    },
+    {
+      "lane": "production",
+      "exitCode": 0,
+      "timedOut": false,
+      "phases": [
+        {
+          "event": "phase-result",
+          "name": "repository-startup",
+          "status": "ok",
+          "seconds": 0.054182899999432266,
+          "rssBefore": 31105024,
+          "rssAfter": 34308096,
+          "sampledPeakRss": 34308096,
+          "processPeakRss": 34324480,
+          "details": {
+            "recordCount": 100,
+            "readWorkers": 32,
+            "storageLayoutVersion": 2,
+            "shardCount": 1
+          }
+        }
+      ],
+      "startupProfiles": [
+        {
+          "repository-read-parse-json": {
+            "calls": 1,
+            "seconds": 0.006176299997605383,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "filesystem-read-bytes": {
+            "calls": 12,
+            "seconds": 0.007428499997331528,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "strict-json-parse": {
+            "calls": 14,
+            "seconds": 0.004121699996176176,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "bounded-descriptor-read-parse": {
+            "calls": 2,
+            "seconds": 0.022586800001590746,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "snapshot-validation-inclusive": {
+            "calls": 1,
+            "seconds": 0.016547899998840876,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "snapshot-jsonschema": {
+            "calls": 1,
+            "seconds": 0.0006485000012617093,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "snapshot-record-fields": {
+            "calls": 100,
+            "seconds": 0.005897100007132394,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "record-relationships-only": {
+            "calls": 100,
+            "seconds": 7.40000104997307e-05,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "catalog-normalization": {
+            "calls": 1,
+            "seconds": 0.0020719999993161764,
+            "activeCount": 0,
+            "activeSeconds": 0
+          }
+        }
+      ]
+    }
+  ],
+  "temporaryDirectory": "C:\\Users\\arcaz\\AppData\\Local\\Temp\\openbexi-benchmark-h0gt1gny",
+  "temporaryDataRemoved": true
+}

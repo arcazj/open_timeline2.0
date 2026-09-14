@@ -1,0 +1,1772 @@
+{
+  "filters": [],
+  "format": "timeline-snapshot",
+  "formatVersion": 1,
+  "manifest": {
+    "bundleId": "4e9ea3a4-b625-5a05-9522-2c81289decc4",
+    "completeness": "complete-for-declared-universe",
+    "generation": "4e60d9d3-d139-599f-8db2-26cee7934d22",
+    "recordCount": 48,
+    "revision": 1,
+    "scope": {
+      "sourceIds": [
+        "operations",
+        "verification"
+      ],
+      "workspaceId": "default"
+    },
+    "snapshotAt": "2026-09-12T00:00:00.000Z",
+    "sourceKind": "sample",
+    "sourceName": "Operations sample",
+    "testDataset": {
+      "id": "default-dataset",
+      "reference": null,
+      "referenceStatus": "unapproved-baseline"
+    },
+    "workspaceId": "default"
+  },
+  "models": [
+    {
+      "fontSize": 13,
+      "groupBy": "none",
+      "id": "light",
+      "name": "Light timeline",
+      "rowHeight": 32,
+      "theme": "light",
+      "version": 1
+    },
+    {
+      "fontSize": 13,
+      "groupBy": "kind",
+      "id": "classic",
+      "name": "Classic blue",
+      "rowHeight": 32,
+      "theme": "classic",
+      "version": 1
+    },
+    {
+      "fontSize": 13,
+      "groupBy": "sourceId",
+      "id": "dark",
+      "name": "Dark timeline",
+      "rowHeight": 32,
+      "theme": "dark",
+      "version": 1
+    }
+  ],
+  "records": [
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:40:00.000Z",
+      "extensions": {
+        "alias": "OPS-001"
+      },
+      "groupIds": [],
+      "id": "4a260baa-2a4d-5649-ab75-1220ad1ed6c1",
+      "kind": "session",
+      "order": 0,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#397AA6"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T07:00:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Ground-station coverage",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T13:20:00.000Z",
+      "extensions": {
+        "alias": "OPS-002"
+      },
+      "groupIds": [],
+      "id": "a2d49bd1-5d34-5870-94fd-7db95fbd05b2",
+      "kind": "session",
+      "order": 1,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7B58A0"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:15:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Telemetry downlink",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T18:00:00.000Z",
+      "extensions": {
+        "alias": "OPS-003"
+      },
+      "groupIds": [],
+      "id": "5315e621-0511-5615-8ab6-0306dd6b62c6",
+      "kind": "session",
+      "order": 2,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#318C73"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:00:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Continuous signal watch",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-004"
+      },
+      "groupIds": [],
+      "id": "aa2e76f7-5d21-541e-9b87-3798d2ccf0b3",
+      "kind": "event",
+      "order": 3,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#AE6845"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T12:25:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Clock alignment 04",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:38:00.000Z",
+      "extensions": {
+        "alias": "OPS-005"
+      },
+      "groupIds": [],
+      "id": "e53c68a6-1e1d-5916-9cc5-5896f573a8d2",
+      "kind": "session",
+      "order": 4,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#526C9F"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:30:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Link verification 05",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:47:00.000Z",
+      "extensions": {
+        "alias": "OPS-006"
+      },
+      "groupIds": [],
+      "id": "6bde8616-fea7-5a4c-b015-8839b70ad4eb",
+      "kind": "session",
+      "order": 5,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#397AA6"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:35:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Archive checksum 06",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-007"
+      },
+      "groupIds": [],
+      "id": "de5e41d0-71d8-588b-83cd-48bce2ee6ff6",
+      "kind": "event",
+      "order": 6,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7B58A0"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T12:40:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Signal acquisition 07",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:30:00.000Z",
+      "extensions": {
+        "alias": "OPS-008"
+      },
+      "groupIds": [],
+      "id": "8ed71cd8-3d46-5453-97b0-8e53e2cef22f",
+      "kind": "session",
+      "order": 7,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#318C73"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:10:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Quality checkpoint 08",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:23:00.000Z",
+      "extensions": {
+        "alias": "OPS-009"
+      },
+      "groupIds": [],
+      "id": "b2a26283-0bdc-5b4f-8cbb-1fd92dbbb9f2",
+      "kind": "session",
+      "order": 8,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#AE6845"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:15:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Packet validation 09",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-010"
+      },
+      "groupIds": [],
+      "id": "b442e8f9-5360-528c-8fcd-bffab0c3aed1",
+      "kind": "event",
+      "order": 9,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#526C9F"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T12:20:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Telemetry check 10",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:41:00.000Z",
+      "extensions": {
+        "alias": "OPS-011"
+      },
+      "groupIds": [],
+      "id": "0c269490-2c44-5be7-8294-028ba5c9dfcc",
+      "kind": "session",
+      "order": 10,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#397AA6"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:25:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Command review 11",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:50:00.000Z",
+      "extensions": {
+        "alias": "OPS-012"
+      },
+      "groupIds": [],
+      "id": "144bc3c8-03da-5679-8b00-0723db8c6754",
+      "kind": "session",
+      "order": 11,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7B58A0"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:30:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Clock alignment 12",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-013"
+      },
+      "groupIds": [],
+      "id": "946f96fe-5d02-5b95-abc7-f69bdc472dc3",
+      "kind": "event",
+      "order": 12,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#318C73"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T12:35:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Link verification 13",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:52:00.000Z",
+      "extensions": {
+        "alias": "OPS-014"
+      },
+      "groupIds": [],
+      "id": "97c9d50d-2f0a-5677-9d23-6643ec99b1ed",
+      "kind": "session",
+      "order": 13,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#AE6845"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:40:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Archive checksum 14",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:26:00.000Z",
+      "extensions": {
+        "alias": "OPS-015"
+      },
+      "groupIds": [],
+      "id": "fb561d16-86d8-57d4-8fcd-b0df54ab2f6a",
+      "kind": "session",
+      "order": 14,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#526C9F"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:10:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Signal acquisition 15",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-016"
+      },
+      "groupIds": [],
+      "id": "e4b2e5c3-8ed6-568b-9aa3-1e6441338f68",
+      "kind": "event",
+      "order": 15,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#397AA6"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T12:15:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Quality checkpoint 16",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:28:00.000Z",
+      "extensions": {
+        "alias": "OPS-017"
+      },
+      "groupIds": [],
+      "id": "a36033a4-b52b-545a-84bf-510830cf303b",
+      "kind": "session",
+      "order": 16,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7B58A0"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:20:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Packet validation 17",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:37:00.000Z",
+      "extensions": {
+        "alias": "OPS-018"
+      },
+      "groupIds": [],
+      "id": "f3f54f56-1918-5bda-a494-987c4c30a073",
+      "kind": "session",
+      "order": 17,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#318C73"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:25:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Telemetry check 18",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-019"
+      },
+      "groupIds": [],
+      "id": "4561504a-63fb-5876-b6a9-d3ed52a7912a",
+      "kind": "event",
+      "order": 18,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#AE6845"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T12:30:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Command review 19",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:55:00.000Z",
+      "extensions": {
+        "alias": "OPS-020"
+      },
+      "groupIds": [],
+      "id": "52cc7394-a5bf-5298-8182-6da6a634bb13",
+      "kind": "session",
+      "order": 19,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#526C9F"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:35:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Clock alignment 20",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:48:00.000Z",
+      "extensions": {
+        "alias": "OPS-021"
+      },
+      "groupIds": [],
+      "id": "bf97a652-21ce-5bd6-9f92-61a16c05c2d8",
+      "kind": "session",
+      "order": 20,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#397AA6"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:40:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Link verification 21",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-022"
+      },
+      "groupIds": [],
+      "id": "4604fae7-9c03-521c-874b-cf9fb557d77f",
+      "kind": "event",
+      "order": 21,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7B58A0"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T12:10:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Archive checksum 22",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:31:00.000Z",
+      "extensions": {
+        "alias": "OPS-023"
+      },
+      "groupIds": [],
+      "id": "91202293-1eba-5d92-99cc-32da3f67d257",
+      "kind": "session",
+      "order": 22,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#318C73"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:15:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Signal acquisition 23",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:40:00.000Z",
+      "extensions": {
+        "alias": "OPS-024"
+      },
+      "groupIds": [],
+      "id": "455b4665-2e4a-590b-9ed6-b13c4be572cc",
+      "kind": "session",
+      "order": 23,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#AE6845"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:20:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Quality checkpoint 24",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-025"
+      },
+      "groupIds": [],
+      "id": "75aa0ee2-af84-5d60-a1f1-005831c03057",
+      "kind": "event",
+      "order": 24,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#526C9F"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T12:25:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Packet validation 25",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:42:00.000Z",
+      "extensions": {
+        "alias": "OPS-026"
+      },
+      "groupIds": [],
+      "id": "eb733bf3-0449-523c-9b50-2287bcd8a65b",
+      "kind": "session",
+      "order": 25,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#397AA6"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:30:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Telemetry check 26",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:51:00.000Z",
+      "extensions": {
+        "alias": "OPS-027"
+      },
+      "groupIds": [],
+      "id": "76e707e2-7bc9-52f1-b379-ee71a7cc6a8a",
+      "kind": "session",
+      "order": 26,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7B58A0"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:35:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Command review 27",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-028"
+      },
+      "groupIds": [],
+      "id": "1da188ef-bf69-55f0-b233-7e76df1b6054",
+      "kind": "event",
+      "order": 27,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#318C73"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T12:40:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Clock alignment 28",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:18:00.000Z",
+      "extensions": {
+        "alias": "OPS-029"
+      },
+      "groupIds": [],
+      "id": "fba93782-e127-5962-81ae-1ebffc8cce7d",
+      "kind": "session",
+      "order": 28,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#AE6845"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:10:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Link verification 29",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:27:00.000Z",
+      "extensions": {
+        "alias": "OPS-030"
+      },
+      "groupIds": [],
+      "id": "12c5d624-1d7d-5e15-8cc7-38ba07626b9f",
+      "kind": "session",
+      "order": 29,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#526C9F"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:15:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Archive checksum 30",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-031"
+      },
+      "groupIds": [],
+      "id": "ba566968-c74a-55a7-b914-ca20685da3ba",
+      "kind": "event",
+      "order": 30,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#397AA6"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T12:20:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Signal acquisition 31",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:45:00.000Z",
+      "extensions": {
+        "alias": "OPS-032"
+      },
+      "groupIds": [],
+      "id": "70c4a544-6cb9-5672-bd49-9cd12ae354b7",
+      "kind": "session",
+      "order": 31,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7B58A0"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:25:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Quality checkpoint 32",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:38:00.000Z",
+      "extensions": {
+        "alias": "OPS-033"
+      },
+      "groupIds": [],
+      "id": "8c849788-b92a-5a86-bdec-8257dbf95e5f",
+      "kind": "session",
+      "order": 32,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#318C73"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:30:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Packet validation 33",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-034"
+      },
+      "groupIds": [],
+      "id": "ff7866eb-938b-58dc-beea-49d2b71880f8",
+      "kind": "event",
+      "order": 33,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#AE6845"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T12:35:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Telemetry check 34",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:56:00.000Z",
+      "extensions": {
+        "alias": "OPS-035"
+      },
+      "groupIds": [],
+      "id": "12cb0e43-e31a-5d3f-8f95-54928c0fca58",
+      "kind": "session",
+      "order": 34,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#526C9F"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:40:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Command review 35",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:30:00.000Z",
+      "extensions": {
+        "alias": "OPS-036"
+      },
+      "groupIds": [],
+      "id": "dc94c921-811e-5277-83c7-6878286f8fa6",
+      "kind": "session",
+      "order": 35,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#397AA6"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:10:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Clock alignment 36",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-037"
+      },
+      "groupIds": [],
+      "id": "bf6cd2e4-d701-592e-bff5-ceed9ffe1f15",
+      "kind": "event",
+      "order": 36,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7B58A0"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T12:15:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Link verification 37",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:32:00.000Z",
+      "extensions": {
+        "alias": "OPS-038"
+      },
+      "groupIds": [],
+      "id": "4641df20-e573-5ecb-b199-1fd6ce4d04ee",
+      "kind": "session",
+      "order": 37,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#318C73"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:20:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Archive checksum 38",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T12:41:00.000Z",
+      "extensions": {
+        "alias": "OPS-039"
+      },
+      "groupIds": [],
+      "id": "a85bc9ee-6be5-5134-93a4-a29ca4c43774",
+      "kind": "session",
+      "order": 38,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#AE6845"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T12:25:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Signal acquisition 39",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-040"
+      },
+      "groupIds": [],
+      "id": "900fff1a-561e-5742-beff-d7831e22d238",
+      "kind": "event",
+      "order": 39,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#526C9F"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T12:30:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Quality checkpoint 40",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-041"
+      },
+      "groupIds": [],
+      "id": "ec52879a-7961-53cc-8dc9-11911fd33359",
+      "kind": "event",
+      "order": 40,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#318C73"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T08:30:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Antenna ready",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T09:13:00.000Z",
+      "extensions": {
+        "alias": "OPS-042"
+      },
+      "groupIds": [],
+      "id": "4aac509c-084d-5791-b0fc-7ff68b75504c",
+      "kind": "session",
+      "order": 41,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#AE6845"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T08:53:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Receiver check",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-043"
+      },
+      "groupIds": [],
+      "id": "c8f230bc-f5f0-5ca5-b17d-3117190dc060",
+      "kind": "event",
+      "order": 42,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#526C9F"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T09:16:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Operator handover",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T09:59:00.000Z",
+      "extensions": {
+        "alias": "OPS-044"
+      },
+      "groupIds": [],
+      "id": "e0360491-f43f-5b0d-bc29-136c89e70ff9",
+      "kind": "session",
+      "order": 43,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#397AA6"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T09:39:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Queue opened",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-045"
+      },
+      "groupIds": [],
+      "id": "59e1dd0a-1393-540f-ae6e-aa8e000f5bff",
+      "kind": "event",
+      "order": 44,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#7B58A0"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T14:50:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Data export",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T15:30:00.000Z",
+      "extensions": {
+        "alias": "OPS-046"
+      },
+      "groupIds": [],
+      "id": "24ba91a9-9b48-52ca-bd70-f581a6de799f",
+      "kind": "session",
+      "order": 45,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#318C73"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "verification",
+      "start": "2026-09-12T15:15:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Archive complete",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": null,
+      "extensions": {
+        "alias": "OPS-047"
+      },
+      "groupIds": [],
+      "id": "a9b9c4d3-5622-53fa-931e-3940e21d2ef4",
+      "kind": "event",
+      "order": 46,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#AE6845"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T15:40:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Report approved",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    },
+    {
+      "createdAt": "2026-09-12T00:00:00.000Z",
+      "createdBy": "sample",
+      "data": {
+        "description": "Generic operational sample record.",
+        "status": "Nominal"
+      },
+      "deletedAt": null,
+      "end": "2026-09-12T16:20:00.000Z",
+      "extensions": {
+        "alias": "OPS-048"
+      },
+      "groupIds": [],
+      "id": "a80bdcb4-2eec-52a1-ad6c-bd23560d01f1",
+      "kind": "session",
+      "order": 47,
+      "originalEnd": null,
+      "originalStart": null,
+      "parentSessionId": null,
+      "render": {
+        "color": "#526C9F"
+      },
+      "schemaId": null,
+      "schemaVersion": null,
+      "sourceId": "operations",
+      "start": "2026-09-12T16:05:00.000Z",
+      "tags": [
+        "sample"
+      ],
+      "title": "Link closed",
+      "updatedAt": "2026-09-12T00:00:00.000Z",
+      "updatedBy": "sample",
+      "version": 1,
+      "workspaceId": "default"
+    }
+  ],
+  "settings": {
+    "bins": 128,
+    "modelId": "light",
+    "overview": {
+      "from": "2026-09-12T00:00:00.000Z",
+      "to": "2026-09-13T00:00:00.000Z"
+    },
+    "range": {
+      "from": "2026-09-12T08:00:00.000Z",
+      "to": "2026-09-12T17:00:00.000Z"
+    },
+    "ratio": 4,
+    "referenceTime": "2026-09-12T12:30:00.000Z",
+    "scaleMode": "uniform"
+  },
+  "zones": [
+    {
+      "color": "#EE9B42",
+      "end": "2026-09-12T12:45:00.000Z",
+      "id": "b8b76e9f-5cb7-52f5-b837-c801ac221e98",
+      "opacity": 0.25,
+      "start": "2026-09-12T12:10:00.000Z",
+      "title": "Maintenance"
+    },
+    {
+      "color": "#52A9AB",
+      "end": "2026-09-12T13:20:00.000Z",
+      "id": "6dee24c6-f84b-5695-ba49-9891a2e057e7",
+      "opacity": 0.18,
+      "start": "2026-09-12T12:30:00.000Z",
+      "title": "Verification window"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "datePolicy": "Proleptic Gregorian; 1 BC = astronomical 0000; year-only = January 1 UTC; explicit EST=-05:00/EDT=-04:00; trailing ? retained as approximateYear with nominal year position",
+  "dateReview": [],
+  "diagnostics": [
+    {
+      "code": "legacy_trailing_commas",
+      "count": 1
+    }
+  ],
+  "domain": {
+    "from": "2020-04-21T05:42:21.000Z",
+    "to": "2020-05-05T01:36:52.000Z"
+  },
+  "droppedRecords": 0,
+  "generatedTitles": [],
+  "id": "ephemeris",
+  "inputFormat": "json",
+  "inputRecords": 127,
+  "inputSha256": "a5eae7fab0dc5896a3f2ad3796d85aef052fa8f750694dce582c8445989afe23",
+  "outputRecords": 127,
+  "referenceStatus": "unapproved-baseline",
+  "sourceAssignment": "ephemeris",
+  "unbundledOriginalAssets": [],
+  "uncertainRecords": 0
+}

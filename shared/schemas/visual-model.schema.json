@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openbexi.local/schemas/visual-model.schema.json",
+  "title": "Versioned visual model",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "description", "tags", "revision", "lifecycle", "createdAt", "updatedAt", "draft", "versions"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{1,128}$"},
+    "name": {"type": "string", "minLength": 1, "maxLength": 100},
+    "description": {"type": "string", "maxLength": 2000},
+    "tags": {"type": "array", "maxItems": 20, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 40}},
+    "revision": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+    "lifecycle": {"enum": ["active", "archived"]},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": "string", "format": "date-time"},
+    "draft": {"anyOf": [{"type": "null"}, {"$ref": "visual-definition.schema.json"}]},
+    "versions": {"type": "array", "maxItems": 32, "items": {
+      "type": "object", "additionalProperties": false,
+      "required": ["version", "publishedAt", "definition"],
+      "properties": {
+        "version": {"type": "integer", "minimum": 1, "maximum": 32},
+        "publishedAt": {"type": "string", "format": "date-time"},
+        "definition": {"$ref": "visual-definition.schema.json"}
+      }
+    }}
+  }
+}

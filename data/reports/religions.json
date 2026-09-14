@@ -1,0 +1,25 @@
+{
+  "datePolicy": "Proleptic Gregorian; 1 BC = astronomical 0000; year-only = January 1 UTC; explicit EST=-05:00/EDT=-04:00; trailing ? retained as approximateYear with nominal year position",
+  "dateReview": [],
+  "diagnostics": [],
+  "domain": {
+    "from": "-000199-01-01T00:00:00.000Z",
+    "to": "2006-01-01T00:00:00.000Z"
+  },
+  "droppedRecords": 0,
+  "generatedTitles": [
+    {
+      "recordId": "fee8cdbe-66e2-5a72-b2cb-62365e71bc61",
+      "title": "Untitled source event 104"
+    }
+  ],
+  "id": "religions",
+  "inputFormat": "html-event-markup",
+  "inputRecords": 730,
+  "inputSha256": "483bed33532b96dbb1ccdc093c438948a4a68168ea51d88d4d61f1b9935c0210",
+  "outputRecords": 730,
+  "referenceStatus": "provided",
+  "sourceAssignment": "Section beginning at Canonicalization of Tanakh is judaism; preceding section is christianity",
+  "unbundledOriginalAssets": [],
+  "uncertainRecords": 32
+}

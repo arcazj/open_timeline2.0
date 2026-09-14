@@ -1,0 +1,10 @@
+{
+  "ob_green_flag.png": "legacy-green-flag",
+  "ob_yellow_flag.png": "legacy-yellow-flag",
+  "ob_red_flag.png": "legacy-red-flag",
+  "ob_orange_flag.png": "legacy-orange-flag",
+  "ob_volcano.png": "legacy-volcano",
+  "ob_volcano_active.png": "legacy-volcano-active",
+  "ob_volcano_no_active.png": "legacy-volcano-inactive",
+  "ob_volcano_very_active.png": "legacy-volcano-very-active"
+}

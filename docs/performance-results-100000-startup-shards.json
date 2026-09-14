@@ -1,0 +1,169 @@
+{
+  "formatVersion": 1,
+  "recordCount": 100000,
+  "phaseTimeoutSeconds": 120.0,
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "logicalCpuCount": 8,
+    "processor": "Intel64 Family 6 Model 158 Stepping 13, GenuineIntel"
+  },
+  "lanes": [
+    {
+      "lane": "fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "phases": [
+        {
+          "event": "phase-result",
+          "name": "fixture-generation-and-json-files",
+          "status": "ok",
+          "seconds": 27.175683099998423,
+          "rssBefore": 19509248,
+          "rssAfter": 324055040,
+          "sampledPeakRss": 529227776,
+          "processPeakRss": 529227776,
+          "details": {
+            "recordCount": 100000,
+            "seedBytes": 72327873,
+            "pointCount": 20000,
+            "sourceCount": 10,
+            "overviewDays": 30,
+            "detailHours": 6,
+            "files": 27,
+            "storageLayout": "shards",
+            "fixtureWrites": "isolated fixture construction, not a production transaction/durability benchmark"
+          }
+        }
+      ],
+      "startupProfiles": []
+    },
+    {
+      "lane": "production",
+      "exitCode": 0,
+      "timedOut": false,
+      "phases": [
+        {
+          "event": "phase-result",
+          "name": "repository-startup",
+          "status": "ok",
+          "seconds": 16.369447500001115,
+          "rssBefore": 31395840,
+          "rssAfter": 326254592,
+          "sampledPeakRss": 330088448,
+          "processPeakRss": 331968512,
+          "details": {
+            "recordCount": 100000,
+            "readWorkers": 32,
+            "storageLayoutVersion": 2,
+            "shardCount": 25
+          }
+        }
+      ],
+      "startupProfiles": [
+        {
+          "repository-read-parse-json": {
+            "calls": 1,
+            "seconds": 0.006342700002278434,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "filesystem-read-bytes": {
+            "calls": 12,
+            "seconds": 0.007662600004550768,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "strict-json-parse": {
+            "calls": 38,
+            "seconds": 3.493981400002667,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "bounded-descriptor-read-parse": {
+            "calls": 26,
+            "seconds": 3.7361170000003767,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "snapshot-validation-inclusive": {
+            "calls": 0,
+            "seconds": 0.0,
+            "activeCount": 1,
+            "activeSeconds": 4.7783988999981375
+          },
+          "snapshot-jsonschema": {
+            "calls": 1,
+            "seconds": 0.6049566000001505,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "snapshot-record-fields": {
+            "calls": 25776,
+            "seconds": 1.7803082001046278,
+            "activeCount": 1,
+            "activeSeconds": 0.0001235999989148695
+          }
+        },
+        {
+          "repository-read-parse-json": {
+            "calls": 1,
+            "seconds": 0.006342700002278434,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "filesystem-read-bytes": {
+            "calls": 12,
+            "seconds": 0.007662600004550768,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "strict-json-parse": {
+            "calls": 38,
+            "seconds": 3.493981400002667,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "bounded-descriptor-read-parse": {
+            "calls": 26,
+            "seconds": 3.7361170000003767,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "snapshot-validation-inclusive": {
+            "calls": 1,
+            "seconds": 11.147847699998238,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "snapshot-jsonschema": {
+            "calls": 1,
+            "seconds": 0.6049566000001505,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "snapshot-record-fields": {
+            "calls": 100000,
+            "seconds": 7.204478300114715,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "record-relationships-only": {
+            "calls": 100000,
+            "seconds": 0.09722559946749243,
+            "activeCount": 0,
+            "activeSeconds": 0
+          },
+          "catalog-normalization": {
+            "calls": 1,
+            "seconds": 0.0023344000001088716,
+            "activeCount": 0,
+            "activeSeconds": 0
+          }
+        }
+      ]
+    }
+  ],
+  "temporaryDirectory": "C:\\Users\\arcaz\\AppData\\Local\\Temp\\openbexi-benchmark-k9ttxbyj",
+  "temporaryDataRemoved": true
+}

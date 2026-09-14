@@ -1,0 +1,44 @@
+.modal.help-modal { --border: var(--line); --panel: var(--surface); --bg: var(--canvas); --accent-soft: var(--hover); width: min(1000px, 100%); max-height: calc(100dvh - 32px); display: flex; flex-direction: column; overflow: hidden; }
+.help-tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--border); padding: 8px 0 12px; flex-shrink: 0; }
+.help-tabs button { display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; }
+.help-tabs button[aria-pressed="true"] { color: var(--accent); background: var(--accent-soft); border-color: var(--accent); }
+.help-body { overflow: auto; min-height: 180px; padding: 8px 2px 4px; overscroll-behavior: contain; }
+.help-body h3 { font-size: 14px; margin: 18px 0 10px; }
+.help-section-heading, .help-document-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.help-document-heading { justify-content: flex-start; margin: 8px 0 12px; }
+.help-section-heading h3, .help-document-heading h3 { margin: 4px 0; }
+.help-actions { display: flex; align-items: stretch; flex-wrap: wrap; gap: 8px; margin: 10px 0 16px; }
+.help-actions button, .help-actions a, .help-document-heading button { display: inline-flex; align-items: center; gap: 8px; padding: 9px 12px; min-height: 38px; }
+.help-actions a { color: var(--text); border: 1px solid var(--border); border-radius: 4px; text-decoration: none; background: var(--panel); }
+.help-actions button, .help-document-heading button { border-color: var(--border); }
+.help-actions svg, .help-tabs svg, .help-document-heading svg { width: 16px; height: 16px; flex-shrink: 0; }
+.help-body label { display: grid; gap: 6px; font-size: 12px; }
+.help-body textarea { width: 100%; resize: vertical; min-height: 74px; font: 12px/1.5 monospace; overflow-wrap: anywhere; }
+.help-body .subtle { font-size: 12px; line-height: 1.5; }
+.help-facts { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 5px 12px; font-size: 12px; }
+.help-facts dt { color: var(--muted); }
+.help-facts dd { margin: 0; overflow-wrap: anywhere; }
+.help-status { min-height: 20px; flex-shrink: 0; margin: 10px 0 0; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.help-preview { display: block; width: 100%; height: auto; border: 1px solid var(--border); margin: 10px 0; }
+.help-preview[hidden] { display: none; }
+.help-document { font-size: 13px; line-height: 1.65; overflow-wrap: anywhere; }
+.help-document h1 { font-size: 22px; line-height: 1.3; }
+.help-document h2 { font-size: 18px; }
+.help-document h3 { font-size: 15px; }
+.help-document pre, .help-license-list pre, .help-json, .help-review { white-space: pre-wrap; overflow-wrap: anywhere; font: 12px/1.55 monospace; background: var(--bg); padding: 12px; }
+.help-document table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+.help-document th, .help-document td { padding: 6px; border: 1px solid var(--border); text-align: left; vertical-align: top; }
+.help-document a { color: var(--accent); text-decoration: underline; }
+.help-license-list details { padding: 10px 0; border-top: 1px solid var(--border); font-size: 13px; }
+.help-license-list summary { cursor: pointer; overflow-wrap: anywhere; }
+.help-swagger { width: 100%; height: min(64dvh, 640px); min-height: 240px; border: 1px solid var(--border); background: white; }
+.help-body .help-diagnostics { height: 290px; }
+@media (max-width: 850px) {
+  .app-header { flex-wrap: wrap; height: auto; min-height: 52px; }
+  .brand { font-size: 14px; }
+  .app-header .help-tool { width: 44px; height: 44px; }
+  .modal.help-modal { max-height: calc(100dvh - 16px); }
+  .help-tabs button { padding: 8px; }
+  .help-actions button, .help-actions a { min-height: 44px; }
+  .help-facts { grid-template-columns: 68px minmax(0, 1fr); }
+}

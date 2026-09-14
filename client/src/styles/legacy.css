@@ -1,0 +1,12 @@
+.timeline-view.legacy-proportions .overview-section {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 var(--legacy-overview-height);
+  height: auto;
+  min-height: 90px;
+  max-height: 65%;
+}
+.timeline-view.legacy-proportions .overview-plot { flex: 1; height: auto; min-height: 28px; }
+.timeline-view.legacy-proportions .overview-window { height: 100%; }
+.timeline-view.legacy-proportions .overview-handle { height: calc(100% - 16px); min-height: 20px; }
+.legacy-descriptor { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; }

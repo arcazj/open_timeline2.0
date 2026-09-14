@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "dataset": "monet",
+  "recordCount": 27,
+  "bandCount": 1,
+  "viewport": {
+    "width": 1832,
+    "height": 600
+  },
+  "canvasColors": 26,
+  "errors": [],
+  "httpRequests": [],
+  "buildSha256": "7c5c88efee8e9345f168f2e90c3e29249cc3b849e6c867eaf37807f17240eea8"
+}

@@ -1,0 +1,29 @@
+{
+  "datePolicy": "Proleptic Gregorian; 1 BC = astronomical 0000; year-only = January 1 UTC; explicit EST=-05:00/EDT=-04:00; trailing ? retained as approximateYear with nominal year position",
+  "dateReview": [],
+  "diagnostics": [],
+  "domain": {
+    "from": "1840-11-14T00:00:00.000Z",
+    "to": "1926-12-05T00:00:00.000Z"
+  },
+  "droppedRecords": 0,
+  "generatedTitles": [],
+  "id": "monet",
+  "inputFormat": "html-event-markup",
+  "inputRecords": 27,
+  "inputSha256": "2b1da046e93c9a30bde40ac828d87d586ae7520eb58616a9431244c6a718c38d",
+  "outputRecords": 27,
+  "referenceStatus": "provided",
+  "sourceAssignment": "monet",
+  "unbundledOriginalAssets": [
+    "../../api/images/green-circle.png",
+    "http://www.accents-n-art.com/artwork/M00006ss.jpg",
+    "http://www.accents-n-art.com/artwork/M00279ss.jpg",
+    "http://www.accents-n-art.com/artwork/M00358ss.jpg",
+    "http://www.accents-n-art.com/artwork/M00506ss.jpg",
+    "impression-sunrise.png",
+    "monet.png",
+    "water-lily-pond.png"
+  ],
+  "uncertainRecords": 21
+}

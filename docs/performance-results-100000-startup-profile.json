@@ -1,0 +1,191 @@
+{
+  "formatVersion": 1,
+  "recordCount": 100000,
+  "phaseTimeoutSeconds": 120.0,
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "logicalCpuCount": 8,
+    "processor": "Intel64 Family 6 Model 158 Stepping 13, GenuineIntel"
+  },
+  "lanes": [
+    {
+      "lane": "fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "phases": [
+        {
+          "event": "phase-result",
+          "name": "fixture-generation-and-json-files",
+          "status": "ok",
+          "seconds": 80.89637039999798,
+          "rssBefore": 19259392,
+          "rssAfter": 231751680,
+          "sampledPeakRss": 323141632,
+          "processPeakRss": 388976640,
+          "details": {
+            "recordCount": 100000,
+            "seedBytes": 72327873,
+            "pointCount": 20000,
+            "sourceCount": 10,
+            "overviewDays": 30,
+            "detailHours": 6,
+            "files": 100001,
+            "fixtureWrites": "isolated fixture construction, not a production transaction/durability benchmark"
+          }
+        }
+      ],
+      "startupProfiles": []
+    },
+    {
+      "lane": "production",
+      "exitCode": 1,
+      "timedOut": true,
+      "phases": [
+        {
+          "event": "phase-result",
+          "name": "repository-startup",
+          "status": "timeout",
+          "secondsLowerBound": 120.0,
+          "supervisorSampledPeakRss": 282988544
+        }
+      ],
+      "startupProfiles": [
+        {
+          "repository-read-parse-json": {
+            "calls": 1430,
+            "seconds": 8.917746300048748,
+            "activeSeconds": 0.004303100002289284
+          },
+          "repository-record-validation": {
+            "calls": 1429,
+            "seconds": 0.28721829999631154,
+            "activeSeconds": 0
+          }
+        },
+        {
+          "repository-read-parse-json": {
+            "calls": 3122,
+            "seconds": 18.580745800009026,
+            "activeSeconds": 0.0035485000007611234
+          },
+          "repository-record-validation": {
+            "calls": 3121,
+            "seconds": 0.6172798000552575,
+            "activeSeconds": 0
+          }
+        },
+        {
+          "repository-read-parse-json": {
+            "calls": 4786,
+            "seconds": 28.179161600030056,
+            "activeSeconds": 0.0037198000027274247
+          },
+          "repository-record-validation": {
+            "calls": 4785,
+            "seconds": 1.0066265001405554,
+            "activeSeconds": 0
+          }
+        },
+        {
+          "repository-read-parse-json": {
+            "calls": 6341,
+            "seconds": 37.84330829999817,
+            "activeSeconds": 0.00557190000108676
+          },
+          "repository-record-validation": {
+            "calls": 6340,
+            "seconds": 1.3221220002415066,
+            "activeSeconds": 0
+          }
+        },
+        {
+          "repository-read-parse-json": {
+            "calls": 8020,
+            "seconds": 47.50252520008871,
+            "activeSeconds": 0.0008096999990812037
+          },
+          "repository-record-validation": {
+            "calls": 8019,
+            "seconds": 1.6543135002066265,
+            "activeSeconds": 0
+          }
+        },
+        {
+          "repository-read-parse-json": {
+            "calls": 9735,
+            "seconds": 57.154560100076196,
+            "activeSeconds": 0.0032596999990346376
+          },
+          "repository-record-validation": {
+            "calls": 9734,
+            "seconds": 1.988051600248582,
+            "activeSeconds": 0
+          }
+        },
+        {
+          "repository-read-parse-json": {
+            "calls": 11392,
+            "seconds": 66.81656200009093,
+            "activeSeconds": 0.003111199999693781
+          },
+          "repository-record-validation": {
+            "calls": 11391,
+            "seconds": 2.3169385002147465,
+            "activeSeconds": 0
+          }
+        },
+        {
+          "repository-read-parse-json": {
+            "calls": 13048,
+            "seconds": 76.47503580007105,
+            "activeSeconds": 0.004390000001876615
+          },
+          "repository-record-validation": {
+            "calls": 13047,
+            "seconds": 2.6454259003185143,
+            "activeSeconds": 0
+          }
+        },
+        {
+          "repository-read-parse-json": {
+            "calls": 14739,
+            "seconds": 86.13817310012018,
+            "activeSeconds": 0.0009625999991840217
+          },
+          "repository-record-validation": {
+            "calls": 14738,
+            "seconds": 2.977397200313135,
+            "activeSeconds": 0
+          }
+        },
+        {
+          "repository-read-parse-json": {
+            "calls": 16381,
+            "seconds": 95.80001520006044,
+            "activeSeconds": 0.003960399997595232
+          },
+          "repository-record-validation": {
+            "calls": 16380,
+            "seconds": 3.2992624003236415,
+            "activeSeconds": 0
+          }
+        },
+        {
+          "repository-read-parse-json": {
+            "calls": 18080,
+            "seconds": 105.44590570011133,
+            "activeSeconds": 0.003654100000858307
+          },
+          "repository-record-validation": {
+            "calls": 18079,
+            "seconds": 3.633762500310695,
+            "activeSeconds": 0
+          }
+        }
+      ]
+    }
+  ],
+  "temporaryDirectory": "C:\\Users\\arcaz\\AppData\\Local\\Temp\\openbexi-benchmark-nsvkj6rf",
+  "temporaryDataRemoved": true
+}

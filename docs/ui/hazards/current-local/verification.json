@@ -1,0 +1,1308 @@
+{
+  "capturedAt": "2026-09-13T15:15:10.311Z",
+  "source": "output/hazard-parity/hazard-range-snapshot.json",
+  "observations": [
+    {
+      "name": "legacy-namespace-desktop",
+      "state": {
+        "providerKind": "local",
+        "executionMode": "worker",
+        "providerId": "local:bf26ebfd-f637-4754-8532-12acdc9eec70",
+        "generation": "38208784-7d15-4850-abfe-36c1ced231b3",
+        "sourceName": "Read-only legacy JSON",
+        "queryId": "baf78dc1-bc11-4f98-8b61-79d5df3c9a71",
+        "layoutId": "723d00ea-0acb-4885-bc0c-46cec56bb52e",
+        "mapId": "8b0ba0ce-9322-47aa-a303-ad68f191336b",
+        "fromMs": "1789214400000",
+        "toMs": "1789228800000",
+        "domain": {
+          "from": "2026-09-11T14:00:00.000Z",
+          "to": "2026-09-13T14:00:00.000Z"
+        },
+        "startRow": 0,
+        "endRow": 9,
+        "totalRows": 9,
+        "loadedCount": 42,
+        "detailTotal": 42,
+        "overviewTotal": 383,
+        "pageCapacity": 20,
+        "layoutWidth": 2000,
+        "overviewMatched": 383,
+        "search": "",
+        "scaleMode": "uniform",
+        "dirty": false,
+        "view": "timeline",
+        "modelId": "legacy-presentation-a86935198f785e2624830c81db0490ec",
+        "modelVersion": 1,
+        "theme": "light",
+        "rowHeight": 32,
+        "effectiveRowHeight": 32,
+        "fontSize": 12,
+        "timeZone": "UTC",
+        "interactionMode": "navigate",
+        "navigationPhase": "idle",
+        "navigationOffset": 0,
+        "changeMode": "pinned",
+        "changePending": false,
+        "changeRequired": null,
+        "queryRevision": 1,
+        "queryGeneration": "38208784-7d15-4850-abfe-36c1ced231b3"
+      },
+      "overlaps": [],
+      "canvases": [
+        {
+          "selector": ".plot-wrap canvas",
+          "width": 2000,
+          "height": 713,
+          "colorCount": 2
+        },
+        {
+          "selector": ".overview-plot canvas",
+          "width": 2000,
+          "height": 203,
+          "colorCount": 13
+        }
+      ],
+      "namespaceLabels": [],
+      "hazards": [
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-volcano-active",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 32,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-volcano-active",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 32,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        }
+      ],
+      "minorTicks": [
+        1789215300000,
+        1789216200000,
+        1789217100000,
+        1789218900000,
+        1789219800000,
+        1789220700000,
+        1789222500000,
+        1789223400000,
+        1789224300000,
+        1789226100000,
+        1789227000000,
+        1789227900000
+      ],
+      "horizontalOverflow": false,
+      "status": "Local snapshot / Read-only"
+    },
+    {
+      "name": "legacy-search",
+      "state": {
+        "providerKind": "local",
+        "executionMode": "worker",
+        "providerId": "local:bf26ebfd-f637-4754-8532-12acdc9eec70",
+        "generation": "38208784-7d15-4850-abfe-36c1ced231b3",
+        "sourceName": "Read-only legacy JSON",
+        "queryId": "6e5d9abe-ee4f-40be-9f56-d2ee00b5cd85",
+        "layoutId": "5c0a7010-0a4e-4f0e-aee9-6817a0dbd45b",
+        "mapId": "5c2ca386-c9d1-45db-8d27-c044ac26ae3f",
+        "fromMs": "1789214400000",
+        "toMs": "1789228800000",
+        "domain": {
+          "from": "2026-09-11T14:00:00.000Z",
+          "to": "2026-09-13T14:00:00.000Z"
+        },
+        "startRow": 0,
+        "endRow": 9,
+        "totalRows": 9,
+        "loadedCount": 42,
+        "detailTotal": 42,
+        "overviewTotal": 383,
+        "pageCapacity": 20,
+        "layoutWidth": 2000,
+        "overviewMatched": 1,
+        "search": "Kilauea",
+        "scaleMode": "uniform",
+        "dirty": false,
+        "view": "timeline",
+        "modelId": "legacy-presentation-a86935198f785e2624830c81db0490ec",
+        "modelVersion": 1,
+        "theme": "light",
+        "rowHeight": 32,
+        "effectiveRowHeight": 32,
+        "fontSize": 12,
+        "timeZone": "UTC",
+        "interactionMode": "navigate",
+        "navigationPhase": "idle",
+        "navigationOffset": 0,
+        "changeMode": "pinned",
+        "changePending": false,
+        "changeRequired": null,
+        "queryRevision": 1,
+        "queryGeneration": "38208784-7d15-4850-abfe-36c1ced231b3"
+      },
+      "overlaps": [],
+      "canvases": [
+        {
+          "selector": ".plot-wrap canvas",
+          "width": 2000,
+          "height": 713,
+          "colorCount": 2
+        },
+        {
+          "selector": ".overview-plot canvas",
+          "width": 2000,
+          "height": 203,
+          "colorCount": 3
+        }
+      ],
+      "namespaceLabels": [],
+      "hazards": [
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-volcano-active",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 32,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-volcano-active",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 32,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        }
+      ],
+      "minorTicks": [
+        1789215300000,
+        1789216200000,
+        1789217100000,
+        1789218900000,
+        1789219800000,
+        1789220700000,
+        1789222500000,
+        1789223400000,
+        1789224300000,
+        1789226100000,
+        1789227000000,
+        1789227900000
+      ],
+      "horizontalOverflow": false,
+      "status": "Local snapshot / Read-only"
+    },
+    {
+      "name": "legacy-descriptor",
+      "state": {
+        "providerKind": "local",
+        "executionMode": "worker",
+        "providerId": "local:bf26ebfd-f637-4754-8532-12acdc9eec70",
+        "generation": "38208784-7d15-4850-abfe-36c1ced231b3",
+        "sourceName": "Read-only legacy JSON",
+        "queryId": "54816ffc-092a-4132-b976-d55bf0eb5de5",
+        "layoutId": "3b557d6f-874d-47e0-aaed-33d461a642e3",
+        "mapId": "90eb7204-687e-4a95-a149-be1951a25fa3",
+        "fromMs": "1789214400000",
+        "toMs": "1789228800000",
+        "domain": {
+          "from": "2026-09-11T14:00:00.000Z",
+          "to": "2026-09-13T14:00:00.000Z"
+        },
+        "startRow": 0,
+        "endRow": 11,
+        "totalRows": 11,
+        "loadedCount": 42,
+        "detailTotal": 42,
+        "overviewTotal": 383,
+        "pageCapacity": 20,
+        "layoutWidth": 1688,
+        "overviewMatched": 383,
+        "selectedId": "2f7b520c-3171-50ed-8b75-6f4deb625f70",
+        "search": "",
+        "scaleMode": "uniform",
+        "dirty": false,
+        "view": "timeline",
+        "modelId": "legacy-presentation-a86935198f785e2624830c81db0490ec",
+        "modelVersion": 1,
+        "theme": "light",
+        "rowHeight": 32,
+        "effectiveRowHeight": 32,
+        "fontSize": 12,
+        "timeZone": "UTC",
+        "interactionMode": "navigate",
+        "navigationPhase": "idle",
+        "navigationOffset": 0,
+        "changeMode": "pinned",
+        "changePending": false,
+        "changeRequired": null,
+        "queryRevision": 1,
+        "queryGeneration": "38208784-7d15-4850-abfe-36c1ced231b3"
+      },
+      "overlaps": [],
+      "canvases": [
+        {
+          "selector": ".plot-wrap canvas",
+          "width": 1688,
+          "height": 713,
+          "colorCount": 6
+        },
+        {
+          "selector": ".overview-plot canvas",
+          "width": 1688,
+          "height": 203,
+          "colorCount": 9
+        }
+      ],
+      "namespaceLabels": [],
+      "hazards": [
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-volcano-active",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 32,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-volcano-active",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 32,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        }
+      ],
+      "minorTicks": [
+        1789215300000,
+        1789216200000,
+        1789217100000,
+        1789218900000,
+        1789219800000,
+        1789220700000,
+        1789222500000,
+        1789223400000,
+        1789224300000,
+        1789226100000,
+        1789227000000,
+        1789227900000
+      ],
+      "horizontalOverflow": false,
+      "status": "Local snapshot / Read-only"
+    },
+    {
+      "name": "legacy-namespace-mobile",
+      "state": {
+        "providerKind": "local",
+        "executionMode": "worker",
+        "providerId": "local:bf26ebfd-f637-4754-8532-12acdc9eec70",
+        "generation": "38208784-7d15-4850-abfe-36c1ced231b3",
+        "sourceName": "Read-only legacy JSON",
+        "queryId": "54816ffc-092a-4132-b976-d55bf0eb5de5",
+        "layoutId": "b722acdc-3f17-4e64-a064-c6a0cf57ed6e",
+        "mapId": "90eb7204-687e-4a95-a149-be1951a25fa3",
+        "fromMs": "1789214400000",
+        "toMs": "1789228800000",
+        "domain": {
+          "from": "2026-09-11T14:00:00.000Z",
+          "to": "2026-09-13T14:00:00.000Z"
+        },
+        "startRow": 0,
+        "endRow": 10,
+        "totalRows": 42,
+        "loadedCount": 10,
+        "detailTotal": 42,
+        "overviewTotal": 383,
+        "pageCapacity": 10,
+        "layoutWidth": 366,
+        "overviewMatched": 383,
+        "search": "",
+        "scaleMode": "uniform",
+        "dirty": false,
+        "view": "timeline",
+        "modelId": "legacy-presentation-a86935198f785e2624830c81db0490ec",
+        "modelVersion": 1,
+        "theme": "light",
+        "rowHeight": 32,
+        "effectiveRowHeight": 32,
+        "fontSize": 12,
+        "timeZone": "UTC",
+        "interactionMode": "navigate",
+        "navigationPhase": "idle",
+        "navigationOffset": 0,
+        "changeMode": "pinned",
+        "changePending": false,
+        "changeRequired": null,
+        "queryRevision": 1,
+        "queryGeneration": "38208784-7d15-4850-abfe-36c1ced231b3"
+      },
+      "overlaps": [],
+      "canvases": [
+        {
+          "selector": ".plot-wrap canvas",
+          "width": 366,
+          "height": 388,
+          "colorCount": 7
+        },
+        {
+          "selector": ".overview-plot canvas",
+          "width": 366,
+          "height": 90,
+          "colorCount": 9
+        }
+      ],
+      "namespaceLabels": [],
+      "hazards": [
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-yellow-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        },
+        {
+          "icon": "legacy-green-flag",
+          "complete": true,
+          "width": 16,
+          "naturalWidth": 225,
+          "embedded": true
+        }
+      ],
+      "minorTicks": [
+        1789215300000,
+        1789216200000,
+        1789217100000,
+        1789218900000,
+        1789219800000,
+        1789220700000,
+        1789222500000,
+        1789223400000,
+        1789224300000,
+        1789226100000,
+        1789227000000,
+        1789227900000
+      ],
+      "horizontalOverflow": false,
+      "status": "Local snapshot / Read-only"
+    }
+  ],
+  "errors": [],
+  "queries": [],
+  "standaloneBundleSha256": "738d811266304f8444978ed7d0a121f8031b93fecb03f608efcfc1cbb422e42a",
+  "loadedBundleSha256": "738d811266304f8444978ed7d0a121f8031b93fecb03f608efcfc1cbb422e42a",
+  "visibleSearchMatches": 1,
+  "searchMatched": 1,
+  "drag": {
+    "status": "passed",
+    "before": {
+      "fromMs": "1789214400000",
+      "toMs": "1789228800000"
+    },
+    "after": {
+      "fromMs": "1789213708800",
+      "toMs": "1789228108800"
+    },
+    "heldOffsets": [
+      96,
+      96
+    ],
+    "pinnedQuery": true,
+    "pinnedMap": true,
+    "dirty": false
+  },
+  "status": "passed"
+}

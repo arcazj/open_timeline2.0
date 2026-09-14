@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "dataset": "religions",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "horizontalOverflow": false,
+  "buildSha256": "7c5c88efee8e9345f168f2e90c3e29249cc3b849e6c867eaf37807f17240eea8"
+}

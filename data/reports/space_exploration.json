@@ -1,0 +1,27 @@
+{
+  "datePolicy": "Proleptic Gregorian; 1 BC = astronomical 0000; year-only = January 1 UTC; explicit EST=-05:00/EDT=-04:00; trailing ? retained as approximateYear with nominal year position",
+  "dateReview": [
+    {
+      "reason": "Literal source year retained; possible source typo",
+      "recordId": "c5c56816-4203-5193-aba7-08c0ed11e49a",
+      "start": "0201-05-03T05:00:00.000Z",
+      "title": ", SpaceX launched"
+    }
+  ],
+  "diagnostics": [],
+  "domain": {
+    "from": "0201-05-03T05:00:00.000Z",
+    "to": "2020-03-18T04:00:00.000Z"
+  },
+  "droppedRecords": 0,
+  "generatedTitles": [],
+  "id": "space_exploration",
+  "inputFormat": "json",
+  "inputRecords": 1287,
+  "inputSha256": "5bd62b34ade6f13c265b4fc41488af5d773b7a0e15df1ec868a107ddc9f850bd",
+  "outputRecords": 1287,
+  "referenceStatus": "unapproved-baseline",
+  "sourceAssignment": "space_exploration",
+  "unbundledOriginalAssets": [],
+  "uncertainRecords": 0
+}

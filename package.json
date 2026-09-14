@@ -1,0 +1,42 @@
+{
+  "name": "openbexi-timeline2.0",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "JSON-backed and standalone temporal workspace",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build-standalone.mjs",
+    "build:standalone": "node scripts/build-standalone.mjs",
+    "build:demo": "node scripts/prepare-demo.mjs",
+    "measure:demo": "node scripts/measure-demo.mjs",
+    "check:repo": "node scripts/check-repository.mjs",
+    "dev": "node scripts/dev.mjs",
+    "test": "node --test tests/client/*.test.mjs",
+    "test:e2e": "playwright test",
+    "test:matrix": "playwright test --config playwright.matrix.config.mjs",
+    "test:parity": "node --test tests/integration/*.test.mjs",
+    "test:demo": "playwright test --config playwright.demo.config.mjs"
+  },
+  "dependencies": {
+    "@fontsource/noto-sans": "5.3.0",
+    "@js-temporal/polyfill": "0.5.1",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "decimal.js": "10.6.0",
+    "dompurify": "3.4.15",
+    "fast-json-patch": "3.1.1",
+    "html-to-image": "1.11.13",
+    "jsonc-parser": "3.3.1",
+    "lucide": "1.45.0",
+    "marked": "18.0.13",
+    "swagger-ui-dist": "5.32.15",
+    "three": "0.186.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "esbuild": "0.28.2"
+  }
+}

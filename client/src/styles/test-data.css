@@ -1,0 +1,33 @@
+.test-data-section {border-top:1px solid var(--line);margin-top:20px;padding-top:4px}
+.test-data-section select {max-width:100%;min-width:160px}
+.test-data-section details {margin:10px 0}
+.test-data-summary {overflow-wrap:anywhere}
+.source-record-details {margin:12px 16px;font-size:12px}
+.source-record-details pre {white-space:pre-wrap;overflow-wrap:anywhere;max-height:280px;overflow:auto}
+.reference-bands {display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+.reference-bands .plot-wrap {margin:0;min-height:0;grid-column:1}
+.reference-bands .main-axis {margin:0;height:24px;grid-column:1}
+.reference-bands .overview-section {height:auto;min-height:0;display:flex;flex-direction:column;padding:0;grid-column:1;overflow:hidden}
+.reference-bands .overview-section[hidden] {display:none}
+.reference-bands .overview-heading {display:none}
+.reference-bands .overview-plot {height:auto;flex:1;min-height:25px;overflow:hidden}
+.reference-bands .overview-axis {margin:0;height:24px}
+.reference-bands .axis span,.additional-band .axis span {transform:none;top:5px}
+.reference-bands .scale-guide {grid-column:1}
+.reference-bands .scale-guide {height:var(--reference-guide-height,38px);min-height:0}
+.reference-bands .scale-guide .scale-map {left:0;right:0;top:36px}
+.reference-bands .scale-guide.adaptive-guide {padding-bottom:26px}
+.reference-bands .scale-piece {height:26px}
+.reference-bands .overview-section[data-fixed=true]::before {content:'Magnified overview';position:absolute;right:8px;top:2px;font-size:10px;z-index:3;background:#ffffffce;padding:2px 4px;pointer-events:none}
+.reference-bands .overview-section {position:relative}
+@media(max-width:700px){.reference-bands .scale-guide .scale-map{top:24px}}
+.additional-band {position:relative;min-height:0;display:flex;flex-direction:column;overflow:hidden;border-bottom:1px solid #cacaca;grid-column:1}
+.band-plot {position:relative;flex:1;min-height:0;overflow:hidden}
+.band-plot>canvas {position:absolute;inset:0}
+.additional-band .axis {height:24px;margin:0}
+.band-pager {position:absolute;right:6px;bottom:24px;display:flex;align-items:center;background:#ffffffed;font-size:11px;z-index:4}
+.band-pager[hidden] {display:none}
+.band-pager button {min-width:26px;min-height:26px;padding:4px}
+.band-error {position:absolute;bottom:30px;left:8px;color:#9b322a;font-size:12px}
+.relative-axis {position:absolute;top:0;left:0;right:0;height:24px;background:#ffd38c;pointer-events:none;color:#463c25;z-index:2;font-size:11px;overflow:hidden}
+.relative-axis span {position:absolute;top:4px;white-space:nowrap}

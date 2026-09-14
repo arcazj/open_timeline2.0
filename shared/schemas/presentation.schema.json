@@ -1,0 +1,336 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openbexi.local/schemas/presentation.schema.json",
+  "title": "Versioned timeline presentation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version"
+  ],
+  "properties": {
+    "compact": {"type": "boolean"},
+    "durationLabels": {"enum": ["above", "inside-when-fitting"]},
+    "bandLayout": {
+      "type": "array", "minItems": 1, "maxItems": 6,
+      "items": {"$ref": "#/definitions/layoutBand"}
+    },
+    "version": {
+      "const": 1
+    },
+    "bands": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "primary": {
+          "$ref": "#/definitions/band"
+        },
+        "overview": {
+          "$ref": "#/definitions/band"
+        }
+      }
+    },
+    "grouping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field"
+      ],
+      "properties": {
+        "field": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "direction": {
+          "enum": [
+            "asc",
+            "desc"
+          ]
+        }
+      }
+    },
+    "sourceStyles": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceId"
+        ],
+        "properties": {
+          "sourceId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "namespace": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "backgroundColor": {
+            "type": "string",
+            "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+          },
+          "textColor": {
+            "type": "string",
+            "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+          },
+          "dateColor": {
+            "type": "string",
+            "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+          },
+          "sessionColor": {
+            "type": "string",
+            "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+          },
+          "eventColor": {
+            "type": "string",
+            "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+          }
+        }
+      }
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        },
+        "fontSize": {
+          "type": "integer",
+          "minimum": 11,
+          "maximum": 24
+        },
+        "fontWeight": {
+          "enum": [
+            400,
+            700
+          ]
+        },
+        "fontStyle": {
+          "enum": [
+            "normal",
+            "italic"
+          ]
+        },
+        "maxLines": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "backgroundColor": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "inspector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fields"
+      ],
+      "properties": {
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 24,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "field",
+              "label"
+            ],
+            "properties": {
+              "field": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              }
+            }
+          }
+        }
+      }
+    },
+    "nesting": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "color": {
+          "type": "string",
+          "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "opacity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.35
+        }
+      }
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "color": {
+          "type": "string",
+          "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "range": {
+      "type": "object", "additionalProperties": false, "required": ["from", "to"],
+      "properties": {"from": {"type": "string", "format": "timeline-instant"}, "to": {"type": "string", "format": "timeline-instant"}}
+    },
+    "scaleInterval": {
+      "type": "object", "additionalProperties": false, "required": ["from", "to", "ratio"],
+      "properties": {"from": {"type": "string", "format": "timeline-instant"}, "to": {"type": "string", "format": "timeline-instant"}, "ratio": {"type": "number", "minimum": 1, "maximum": 10000}}
+    },
+    "layoutBand": {
+      "type": "object", "additionalProperties": false, "required": ["id", "role", "height"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]{0,63}$"},
+        "role": {"enum": ["primary", "overview", "detail", "context"]},
+        "height": {"type": "number", "minimum": 1, "maximum": 100},
+        "range": {"$ref": "#/definitions/range"},
+        "sourceIds": {"type": "array", "minItems": 1, "maxItems": 100, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 128}},
+        "backgroundColor": {"type": "string", "pattern": "^#[0-9a-fA-F]{6}$"},
+        "fixedScale": {"type": "array", "maxItems": 32, "items": {"$ref": "#/definitions/scaleInterval"}},
+        "relativeAxis": {"type": "object", "additionalProperties": false, "required": ["origin", "stepYears", "label"], "properties": {"origin": {"type": "string", "format": "timeline-instant"}, "stepYears": {"type": "integer", "minimum": 1, "maximum": 1000}, "label": {"type": "string", "minLength": 1, "maxLength": 50}}}
+      }
+    },
+    "band": {
+      "type": "object",
+      "additionalProperties": false,
+      "allOf": [{
+        "if": { "required": ["minorDivisions"], "properties": { "minorDivisions": { "minimum": 2 } } },
+        "then": { "required": ["intervalUnit"], "properties": { "intervalUnit": { "enum": ["MILLISECOND", "SECOND", "MINUTE", "HOUR"] } } }
+      }],
+      "properties": {
+        "backgroundColor": {
+          "type": "string",
+          "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "textColor": {
+          "type": "string",
+          "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "dateColor": {
+          "type": "string",
+          "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "sessionColor": {
+          "type": "string",
+          "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "eventColor": {
+          "type": "string",
+          "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "barHeight": {
+          "type": "number",
+          "minimum": 2,
+          "maximum": 20
+        },
+        "pointRadius": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "axisPosition": {
+          "enum": [
+            "top",
+            "bottom"
+          ]
+        },
+        "minorDivisions": { "type": "integer", "minimum": 1, "maximum": 12 },
+        "intervalUnit": {
+          "enum": [
+            "MILLISECOND",
+            "SECOND",
+            "MINUTE",
+            "HOUR",
+            "DAY",
+            "WEEK",
+            "MONTH",
+            "YEAR",
+            "DECADE",
+            "CENTURY",
+            "MILLENNIUM"
+          ]
+        },
+        "dateFormat": {
+          "enum": [
+            "DEFAULT",
+            "MM/dd/yyyy/hh:mm",
+            "MM/dd/yyyy-hh:mm",
+            "MM-dd-yyyy hh:mm",
+            "dd/MM/yyyy/hh:mm",
+            "dd/MM/yyyy-hh:mm",
+            "dd/MM/yyyy hh:mm",
+            "MM/dd/hh:mm",
+            "MM/dd-hh:mm",
+            "MM/dd",
+            "mmm dd",
+            "mmm/dd",
+            "dd hh:mm",
+            "dd/hh:mm",
+            "dd-hh:mm",
+            "ddd dd hh:mm",
+            "ddd dd/hh:mm",
+            "ddd dd-hh:mm",
+            "mmm/dd/hh:mm",
+            "mmm/dd-hh:mm",
+            "dd/MM/hh:mm",
+            "dd/MM-hh:mm",
+            "mmm",
+            "MM",
+            "yyyy MM",
+            "yyyy/MM",
+            "yyyy-MM",
+            "yyyy mmm dd",
+            "yyyy/mmm/dd",
+            "yyyy-mmm-dd",
+            "yyyy mmm",
+            "yyyy/mmm",
+            "yyyy-mmm",
+            "yyyy",
+            "UTC",
+            "ISO"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openbexi.local/schemas/record-render.schema.json",
+  "title": "Approved record render overrides",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "color": {
+      "type": "string",
+      "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "textColor": {
+      "type": "string",
+      "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "backgroundColor": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 7, "maxLength": 7, "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "fontSize": {
+      "type": "integer",
+      "minimum": 11,
+      "maximum": 24
+    },
+    "fontWeight": {
+      "enum": [
+        400,
+        700
+      ]
+    },
+    "fontStyle": {
+      "enum": [
+        "normal",
+        "italic"
+      ]
+    },
+    "barHeight": {
+      "type": "number",
+      "minimum": 2,
+      "maximum": 20
+    },
+    "pointRadius": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "icon": {
+      "enum": [
+        "circle",
+        "check",
+        "alert-triangle",
+        "info",
+        "flag",
+        "radio",
+        "clock",
+        "file-text",
+        "star",
+        "legacy-green-flag", "legacy-yellow-flag", "legacy-red-flag", "legacy-orange-flag",
+        "legacy-volcano", "legacy-volcano-active", "legacy-volcano-inactive", "legacy-volcano-very-active"
+      ]
+    }
+  }
+}

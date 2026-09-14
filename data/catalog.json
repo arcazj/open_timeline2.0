@@ -1,0 +1,391 @@
+{
+  "version": 1,
+  "datasets": [
+    {
+      "id": "default-dataset",
+      "title": "Default dataset",
+      "settings": {},
+      "file": "data/default-dataset.json",
+      "yaml": "yaml/test-data/default-dataset.yml",
+      "original": "data/original/default-dataset.json",
+      "report": "data/reports/default-dataset.json"
+    },
+    {
+      "id": "ephemeris",
+      "title": "Ephemeris",
+      "settings": {
+        "range": {
+          "from": "2020-04-21T00:00:00.000Z",
+          "to": "2020-04-22T00:00:00.000Z"
+        },
+        "overview": {
+          "from": "2020-04-18T00:00:00.000Z",
+          "to": "2020-04-25T00:00:00.000Z"
+        },
+        "referenceTime": "2020-04-21T12:00:00.000Z",
+        "displayUnit": "HOUR",
+        "scaleMode": "uniform",
+        "fontSize": 11,
+        "rowHeight": 32,
+        "groupBy": "none",
+        "theme": "light",
+        "presentation": {
+          "version": 1,
+          "compact": true,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#eeeeee",
+              "textColor": "#121212",
+              "dateColor": "#9099a0",
+              "intervalUnit": "HOUR",
+              "pointRadius": 4,
+              "barHeight": 6
+            },
+            "overview": {
+              "backgroundColor": "#dddddd",
+              "intervalUnit": "YEAR"
+            }
+          },
+          "labels": {
+            "fontSize": 11,
+            "maxLines": 1
+          },
+          "bandLayout": [
+            {
+              "id": "main",
+              "role": "primary",
+              "height": 76
+            },
+            {
+              "id": "overview",
+              "role": "overview",
+              "height": 24
+            }
+          ]
+        }
+      },
+      "file": "data/ephemeris.json",
+      "yaml": "yaml/test-data/ephemeris.yml",
+      "original": "data/original/ephemeris.json",
+      "report": "data/reports/ephemeris.json"
+    },
+    {
+      "id": "jfk",
+      "title": "JFK",
+      "reference": "data/jfk.png",
+      "settings": {
+        "range": {
+          "from": "1963-11-22T18:00:00.000Z",
+          "to": "1963-11-22T20:00:00.000Z"
+        },
+        "overview": {
+          "from": "1963-08-25T00:00:00.000Z",
+          "to": "1963-11-23T06:00:00.000Z"
+        },
+        "referenceTime": "1963-11-22T18:30:00.000Z",
+        "timeZone": "America/Chicago",
+        "displayUnit": "MINUTE",
+        "scaleMode": "uniform",
+        "fontSize": 11,
+        "rowHeight": 32,
+        "groupBy": "none",
+        "theme": "light",
+        "presentation": {
+          "version": 1,
+          "compact": true,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#eeeeee",
+              "textColor": "#121212",
+              "dateColor": "#9099a0",
+              "intervalUnit": "MINUTE",
+              "pointRadius": 4,
+              "barHeight": 6,
+              "minorDivisions": 1
+            },
+            "overview": {
+              "backgroundColor": "#dddddd",
+              "intervalUnit": "YEAR"
+            }
+          },
+          "labels": {
+            "fontSize": 11,
+            "maxLines": 1
+          },
+          "bandLayout": [
+            {
+              "id": "main",
+              "role": "primary",
+              "height": 76
+            },
+            {
+              "id": "overview",
+              "role": "overview",
+              "height": 24,
+              "fixedScale": [
+                {
+                  "from": "1963-11-01T00:00:00.000Z",
+                  "to": "1963-11-23T06:00:00.000Z",
+                  "ratio": 4
+                },
+                {
+                  "from": "1963-11-22T16:00:00.000Z",
+                  "to": "1963-11-23T06:00:00.000Z",
+                  "ratio": 900
+                },
+                {
+                  "from": "1963-11-22T18:00:00.000Z",
+                  "to": "1963-11-22T19:00:00.000Z",
+                  "ratio": 2700
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "zones": [
+        {
+          "id": "jfk-shot-zone",
+          "title": "shot / t.o.d.",
+          "start": "1963-11-22T18:30:00.000Z",
+          "end": "1963-11-22T19:00:00.000Z",
+          "color": "#ffac46",
+          "opacity": 0.32
+        }
+      ],
+      "file": "data/jfk.json",
+      "yaml": "yaml/test-data/jfk.yml",
+      "original": "data/original/jfk.json",
+      "report": "data/reports/jfk.json"
+    },
+    {
+      "id": "monet",
+      "title": "Monet",
+      "reference": "data/monet.png",
+      "settings": {
+        "range": {
+          "from": "1824-01-01T00:00:00.000Z",
+          "to": "1916-01-01T00:00:00.000Z"
+        },
+        "overview": {
+          "from": "1824-01-01T00:00:00.000Z",
+          "to": "1930-01-01T00:00:00.000Z"
+        },
+        "referenceTime": "1840-11-14T00:00:00.000Z",
+        "displayUnit": "DECADE",
+        "scaleMode": "uniform",
+        "fontSize": 11,
+        "rowHeight": 32,
+        "groupBy": "none",
+        "theme": "light",
+        "presentation": {
+          "version": 1,
+          "compact": true,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#eeeeee",
+              "textColor": "#121212",
+              "dateColor": "#9099a0",
+              "intervalUnit": "DECADE",
+              "pointRadius": 4,
+              "barHeight": 6
+            },
+            "overview": {
+              "backgroundColor": "#dddddd",
+              "intervalUnit": "YEAR"
+            }
+          },
+          "labels": {
+            "fontSize": 11,
+            "maxLines": 1
+          },
+          "bandLayout": [
+            {
+              "id": "main",
+              "role": "primary",
+              "height": 100,
+              "relativeAxis": {
+                "origin": "1840-11-14T00:00:00.000Z",
+                "stepYears": 10,
+                "label": "Age"
+              }
+            }
+          ]
+        }
+      },
+      "file": "data/monet.json",
+      "yaml": "yaml/test-data/monet.yml",
+      "original": "data/original/monet.json",
+      "report": "data/reports/monet.json"
+    },
+    {
+      "id": "religions",
+      "title": "Religions",
+      "reference": "data/religions.png",
+      "settings": {
+        "range": {
+          "from": "-000364-01-01T00:00:00.000Z",
+          "to": "0036-01-01T00:00:00.000Z"
+        },
+        "overview": {
+          "from": "-001309-01-01T00:00:00.000Z",
+          "to": "0256-01-01T00:00:00.000Z"
+        },
+        "referenceTime": "0001-01-01T00:00:00.000Z",
+        "displayUnit": "CENTURY",
+        "scaleMode": "uniform",
+        "fontSize": 11,
+        "rowHeight": 32,
+        "groupBy": "none",
+        "theme": "light",
+        "presentation": {
+          "version": 1,
+          "compact": true,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#e8e8f4",
+              "textColor": "#121212",
+              "dateColor": "#9099a0",
+              "intervalUnit": "CENTURY",
+              "pointRadius": 4,
+              "barHeight": 6
+            },
+            "overview": {
+              "backgroundColor": "#d3d1e8",
+              "intervalUnit": "YEAR"
+            }
+          },
+          "labels": {
+            "fontSize": 11,
+            "maxLines": 1
+          },
+          "durationLabels": "inside-when-fitting",
+          "bandLayout": [
+            {
+              "id": "judaism-context",
+              "role": "context",
+              "height": 10,
+              "sourceIds": [
+                "judaism"
+              ],
+              "range": {
+                "from": "-001309-01-01T00:00:00.000Z",
+                "to": "0256-01-01T00:00:00.000Z"
+              },
+              "backgroundColor": "#cfccc8",
+              "fixedScale": [
+                {
+                  "from": "0000-01-01T00:00:00.000Z",
+                  "to": "9999-12-31T23:59:59.999Z",
+                  "ratio": 5
+                }
+              ]
+            },
+            {
+              "id": "judaism-detail",
+              "role": "detail",
+              "height": 30,
+              "sourceIds": [
+                "judaism"
+              ],
+              "backgroundColor": "#e6e0d7"
+            },
+            {
+              "id": "main",
+              "role": "primary",
+              "height": 42,
+              "sourceIds": [
+                "christianity"
+              ],
+              "fixedScale": [
+                {
+                  "from": "0000-01-01T00:00:00.000Z",
+                  "to": "9999-12-31T23:59:59.999Z",
+                  "ratio": 10
+                }
+              ]
+            },
+            {
+              "id": "overview",
+              "role": "overview",
+              "height": 18,
+              "sourceIds": [
+                "christianity"
+              ],
+              "fixedScale": [
+                {
+                  "from": "0000-01-01T00:00:00.000Z",
+                  "to": "9999-12-31T23:59:59.999Z",
+                  "ratio": 5
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "file": "data/religions.json",
+      "yaml": "yaml/test-data/religions.yml",
+      "original": "data/original/religions.json",
+      "report": "data/reports/religions.json"
+    },
+    {
+      "id": "space_exploration",
+      "title": "Space exploration",
+      "settings": {
+        "range": {
+          "from": "1957-01-01T00:00:00.000Z",
+          "to": "1977-01-01T00:00:00.000Z"
+        },
+        "overview": {
+          "from": "1899-01-01T00:00:00.000Z",
+          "to": "2021-01-01T00:00:00.000Z"
+        },
+        "referenceTime": "1969-07-20T20:17:00.000Z",
+        "displayUnit": "YEAR",
+        "scaleMode": "uniform",
+        "fontSize": 11,
+        "rowHeight": 32,
+        "groupBy": "none",
+        "theme": "light",
+        "presentation": {
+          "version": 1,
+          "compact": true,
+          "bands": {
+            "primary": {
+              "backgroundColor": "#eeeeee",
+              "textColor": "#121212",
+              "dateColor": "#9099a0",
+              "intervalUnit": "YEAR",
+              "pointRadius": 4,
+              "barHeight": 6
+            },
+            "overview": {
+              "backgroundColor": "#dddddd",
+              "intervalUnit": "YEAR"
+            }
+          },
+          "labels": {
+            "fontSize": 11,
+            "maxLines": 1
+          },
+          "bandLayout": [
+            {
+              "id": "main",
+              "role": "primary",
+              "height": 76
+            },
+            {
+              "id": "overview",
+              "role": "overview",
+              "height": 24
+            }
+          ]
+        }
+      },
+      "file": "data/space_exploration.json",
+      "yaml": "yaml/test-data/space_exploration.yml",
+      "original": "data/original/space_exploration.json",
+      "report": "data/reports/space_exploration.json"
+    }
+  ]
+}

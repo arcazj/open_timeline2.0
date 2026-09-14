@@ -1,0 +1,56 @@
+# Dependencies and interpreter caches
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+
+# Generated builds, local archives, credentials, and test scratch space
+/dist/
+/runtime/
+/var/
+/tmp/
+/artifacts/
+/test-results/
+/playwright-report/
+/coverage/
+.coverage
+.coverage.*
+htmlcov/
+*.log
+.env
+.env.*
+!.env.example
+local-browser-key.json
+**/control/identities.json
+*.pem
+*.key
+*.p12
+*.pfx
+/yaml/local/
+/config/local/
+
+# Keep reviewed, linked documentation PDFs, not raw source exports/test dumps.
+/output/*
+!/output/pdf/
+/output/pdf/*
+!/output/pdf/OpenBEXI_Timeline_Implementation_Preview.pdf
+!/output/pdf/OpenBEXI_Local_Source_Paths.pdf
+!/output/pdf/OpenBEXI_Legacy_JSON_Preview.pdf
+!/output/pdf/OpenBEXI_Hazard_Comparison.pdf
+!/output/pdf/local-test-data.pdf
+
+# Machine-specific editor/OS state. Shared .run templates remain versioned.
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~

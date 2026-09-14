@@ -1,0 +1,12 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://openbexi.local/schemas/configuration-state.schema.json",
+  "type":"object","additionalProperties":false,
+  "required":["sources","groups","schemas","filters","views","defaults","preferences"],
+  "properties": {
+    "sources":{"$ref":"#/$defs/catalog"},"groups":{"$ref":"#/$defs/catalog"},"schemas":{"$ref":"#/$defs/catalog"},"filters":{"$ref":"#/$defs/catalog"},"views":{"$ref":"#/$defs/catalog"},
+    "defaults":{"type":"object","additionalProperties":false,"required":["revision","values"],"properties":{"revision":{"$ref":"#/$defs/revision"},"values":{"$ref":"configuration-definition.schema.json#/$defs/settings"}}},
+    "preferences":{"type":"array","maxItems":100,"items":{"type":"object","additionalProperties":false,"required":["principalId","revision","values"],"properties":{"principalId":{"type":"string","minLength":1,"maxLength":128},"revision":{"$ref":"#/$defs/revision"},"values":{"$ref":"configuration-definition.schema.json#/$defs/settings"}}}}
+  },
+  "$defs":{"catalog":{"type":"array","maxItems":100,"items":{"$ref":"configuration-resource.schema.json"}},"revision":{"type":"integer","minimum":1,"maximum":9007199254740991}}
+}
