@@ -151,3 +151,10 @@ Linux Python 3.13 reported 955 passed and 2 failed, with no skips. The correctio
 gives these tests a temporary client fixture and separately checks the actionable
 404 when a build is missing; real application browser tests remain unchanged.
 The full matrix must pass on the corrected commit before publishing a prerelease.
+
+The same initial run reported the two missing-build fixture failures on both
+Windows versions. Linux Python 3.12 also exposed a filter test that read an
+asynchronous query-preparation response as a completed result. That test now polls
+the documented 202 response through the existing bounded helper and exercises
+both default and forced-asynchronous preparation, retaining the pinned-revision
+and search assertions. No production response timing was changed to satisfy it.
