@@ -197,3 +197,38 @@ All ten repeated touch cases then passed with zero retries and the same short-pa
 environment (`artifacts/hosted-publication/touch-regression.log`). The original
 full-run failure remains in `artifacts/browser/results.json`; the focused rerun
 uses a separate output directory and is not presented as a full-suite pass.
+
+## Toolbar Click Stability
+
+The protected run for `4b4bfc8a80065f4550ec4fad83a107d43efd3247` passed the
+complete Linux/Python 3.13 job. Linux/Python 3.12 passed all server, provider and
+160 full-browser cases, then failed one of 56 matrix cases: opening Help in a
+Firefox mobile dataset test. Its trace is preserved in
+`artifacts/github-pr5/4b4bfc8-linux312.zip`.
+
+Investigation found that repeated Lucide initialization replaced already-rendered
+SVG nodes during layout refresh. A deterministic Firefox regression reproduced
+both removal of the pressed icon and loss of the Help click. The correction
+removes the initialization marker from rendered SVGs, preserving existing nodes
+while still initializing new toolbar, descriptor, and dialog icons. No failed
+click is hidden by retrying the command or extending its timeout.
+
+The new press-during-layout test passed three repetitions each in Chromium,
+Firefox and Edge. Ten repeated Firefox mobile dataset cases, all 11 Help/boot
+cases and all 231 client unit cases also passed. Fresh mobile Help and desktop
+timeline screenshots were inspected. Focused evidence is under
+`artifacts/hosted-publication/toolbar-after`, `firefox-mobile-after`, and
+`help-after`; each has a separate log. The new toolbar case is included in both
+the full suite and cross-browser matrix for subsequent candidate verification.
+
+The updated Linux Docker Chromium/Firefox matrix then passed all 58 cases without
+skips or retries (`artifacts/hosted-publication/linux-toolbar-matrix.json`), with
+captures preserved under `linux-toolbar-captures` in the same directory.
+
+The preceding Windows/Python 3.12 CI job passed 159 browser cases but its remaining
+case never reached the UI: the fixture stopped polling just as cold JSON storage
+recovery finished at 12.05 seconds. The fixture now uses a monotonic 30-second
+readiness deadline and still requires a successful health response; individual
+UI test timeouts and application behavior are unchanged. All seven native Windows
+table cases passed afterward (`artifacts/hosted-publication/table-readiness-after.log`).
+This is test-server provisioning tolerance, not a passed production startup budget.
