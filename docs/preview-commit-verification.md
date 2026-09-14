@@ -186,3 +186,14 @@ Both verification and runtime images build successfully with `LICENSE` included.
 The runtime was checked as UID 10001: the GPL text exists in `/app/LICENSE` and
 the self-contained HTML, and the Python application imports successfully. These
 local image checks do not publish an image or certify production deployment.
+
+The updated Linux Docker image subsequently passed all 967 server cases without
+skips (`artifacts/hosted-publication/linux-server-gpl.xml`). A separate full native
+Windows/Edge run with 8.3 temporary paths reported 159 browser passes and one test
+race. Its trace showed the imported touch target being replaced between lookup
+and bounding-box measurement. The touch test now reacquires a non-null box with
+a bounded assertion, without changing the application or its gesture assertions.
+All ten repeated touch cases then passed with zero retries and the same short-path
+environment (`artifacts/hosted-publication/touch-regression.log`). The original
+full-run failure remains in `artifacts/browser/results.json`; the focused rerun
+uses a separate output directory and is not presented as a full-suite pass.
