@@ -34,11 +34,14 @@ docker run --rm openbexi-timeline:verification
 docker run --rm openbexi-timeline:verification npm test
 docker run --rm openbexi-timeline:verification npm run test:parity
 docker run --rm --shm-size=1g openbexi-timeline:verification npm run test:e2e
-docker run --rm --shm-size=1g openbexi-timeline:verification npm run test:matrix
+docker run --rm --init --shm-size=1g openbexi-timeline:verification xvfb-run -a npm run test:matrix
 ```
 
-The separate target contains test dependencies and Linux Chromium/Firefox. Its
-temporary fixture roots are not the production volume. Preserve reports by copying
+The separate target contains test dependencies and Linux Chromium/Firefox.
+The Firefox matrix uses Xvfb and Mesa for WebGL2; `--init` lets the virtual-display
+launcher receive its startup signals correctly when invoked directly as the
+container command. Chromium remains headless. The canvas checks are not skipped.
+Temporary fixture roots are not the production volume. Preserve reports by copying
 `/app/artifacts` from an explicitly named test container before deleting that
 container; `--rm` examples intentionally discard reports. Passing these commands
 is evidence for that image only, not a Windows, screen-reader, power-loss or

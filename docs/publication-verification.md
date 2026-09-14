@@ -2,6 +2,8 @@
 
 Checked on 13 September 2026, Windows, before the first commit. This is repository/package verification, not full release certification or a report of a successful public deployment.
 
+This is the earlier preparation record. See [preview commit verification](preview-commit-verification.md) for the subsequent local commit, broader testing, regression fixes, packaging, and repository settings.
+
 ## Completed Checks
 
 | Check | Result |

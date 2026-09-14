@@ -682,7 +682,7 @@ function readableTicks(from, to, unit, width, mapper, format = 'DEFAULT', adapti
   let ticks;
   try { ticks = adaptive ? adaptiveTicks({ map, from, to, width, project: mapper, timeZone: state.timeZone || 'UTC' }) : generateTicks(from, to, unit, { maxTicks: margin ? 600 : 200, timeZone: state.timeZone || 'UTC' }); } catch { ticks = []; }
   if (!adaptive && (ticks.length >= (margin ? 600 : 200) || ticks.length < 2 || (ticks.length > 1 && Math.abs(mapper(ticks[1].timeMs) - mapper(ticks[0].timeMs)) < 65))) {
-    try { ticks = adaptiveTicks({ map, from, to, width, project: mapper, timeZone: state.timeZone || 'UTC' }); format = 'DEFAULT'; } catch { /* Boundary dates keep the valid calendar ticks. */ }
+    try { ticks = adaptiveTicks({ map, from, to, width, project: mapper, timeZone: state.timeZone || 'UTC' }); } catch { /* Boundary dates keep the valid calendar ticks. */ }
   }
   if (!ticks?.length) ticks = [{ timeMs: from, label: dateLabel(toIso(from)) }, { timeMs: to, label: dateLabel(toIso(to)) }];
   const context = document.createElement('canvas').getContext('2d'); context.font = '11px "Noto Sans"';

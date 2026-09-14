@@ -27,6 +27,8 @@ COPY package.json package-lock.json ./
 RUN npm ci --ignore-scripts
 RUN uv sync --locked --no-install-project
 RUN npx playwright install --with-deps chromium firefox
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends libegl1 libgl1 xauth xvfb
 COPY --from=client-build /app/dist/ dist/
 COPY client/ client/
 COPY data/ data/

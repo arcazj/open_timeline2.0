@@ -156,6 +156,10 @@ test('four-line 24px labels retain a complete row, overview and table in narrow 
   expect(bounds['.overview-section'].bottom).toBeLessThanOrEqual(bounds['.table-view'].top + 1); expect(bounds['.table-view'].bottom).toBeLessThanOrEqual(bounds.footer.top + 1); expect(bounds.footer.bottom).toBeLessThanOrEqual(845);
   const tableRow = await page.evaluate(() => { const row = document.querySelector('.table-scroll tbody tr').getBoundingClientRect(), scroll = document.querySelector('.table-scroll').getBoundingClientRect(), head = document.querySelector('.table-scroll thead').getBoundingClientRect(); return { top: row.top, bottom: row.bottom, headBottom: head.bottom, visibleBottom: scroll.bottom }; });
   expect(tableRow.top).toBeGreaterThanOrEqual(tableRow.headBottom); expect(tableRow.bottom).toBeLessThanOrEqual(tableRow.visibleBottom);
+  expect(await page.locator('.filter-strip').evaluate(node => node.scrollHeight > node.clientHeight)).toBe(true);
+  await page.locator('#auto-scale').scrollIntoViewIfNeeded();
+  await expect(page.locator('#auto-scale')).toBeInViewport();
+  await page.locator('.range-button').scrollIntoViewIfNeeded();
   const dateControl = await page.locator('.range-button').evaluate(node => {
     const box = node.getBoundingClientRect(), grouping = document.querySelector('#grouping-mode').getBoundingClientRect();
     return { clipped: node.scrollWidth > node.clientWidth + 1, outside: box.right > innerWidth,

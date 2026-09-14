@@ -9,7 +9,7 @@ export default defineConfig({
   use: { ...base.use, launchOptions: {} },
   projects: [
     { name: 'chromium', use: { browserName: 'chromium' } },
-    { name: 'firefox', use: { browserName: 'firefox' } },
+    { name: 'firefox', use: { browserName: 'firefox', headless: process.platform !== 'linux' } },
     ...(process.platform === 'win32' ? [{ name: 'edge', use: { browserName: 'chromium', launchOptions: base.use.launchOptions } }] : []),
   ],
 });

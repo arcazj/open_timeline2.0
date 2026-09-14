@@ -10,7 +10,7 @@ A JavaScript and Three.js timeline with a Python API, JSON-file storage, and a c
 
 *Actual application capture using the bundled operations dataset, not a design mockup.*
 
-> **Status: development preview, version 0.1.0.** Useful, tested workflows are implemented, but full legacy parity, production hardening, and all release qualification gates are not complete. See [implementation status](docs/implementation-status.md) and [verification evidence](docs/local-test-data-verification.md).
+> **Status: development preview, version 0.1.0.** Useful, tested workflows are implemented, but full legacy parity, production hardening, and all release qualification gates are not complete. See [implementation status](docs/implementation-status.md) and [verification evidence](docs/preview-commit-verification.md).
 
 ## Live Demo
 

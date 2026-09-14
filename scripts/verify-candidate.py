@@ -174,7 +174,10 @@ def main():
         ("browser", [node, "node_modules/@playwright/test/cli.js", "test"]),
     ]
     if options.matrix:
-        checks.append(("matrix", [node, "node_modules/@playwright/test/cli.js", "test", "--config", "playwright.matrix.config.mjs"]))
+        matrix = [node, "node_modules/@playwright/test/cli.js", "test", "--config", "playwright.matrix.config.mjs"]
+        if sys.platform.startswith("linux"):
+            matrix = ["xvfb-run", "-a", *matrix]
+        checks.append(("matrix", matrix))
     before = source_inventory(ROOT)
     report = {"format": "openbexi-candidate-verification", "formatVersion": 1, "startedAt": stamp(),
               "releaseApproved": False, "scope": "Implemented automated checks; not full G0-G5 or manual qualification",

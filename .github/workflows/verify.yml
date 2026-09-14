@@ -40,7 +40,9 @@ jobs:
           npm ci --ignore-scripts
       - name: Install Linux test browsers
         if: runner.os == 'Linux'
-        run: npx playwright install --with-deps chromium firefox
+        run: |
+          npx playwright install --with-deps chromium firefox
+          sudo apt-get install -y --no-install-recommends libegl1 libgl1 xauth xvfb
       - name: Install Windows test browsers
         if: runner.os == 'Windows'
         run: npx playwright install chromium firefox

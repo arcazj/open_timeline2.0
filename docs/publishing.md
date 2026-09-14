@@ -2,7 +2,7 @@
 
 Target repository: [arcazj/open_timeline2.0](https://github.com/arcazj/open_timeline2.0).
 
-See [publication verification](publication-verification.md) for the checks actually run during preparation and the work not yet performed.
+See [preview commit verification](preview-commit-verification.md) for current results and [earlier publication verification](publication-verification.md) for the initial preparation record. Both distinguish completed checks from work not yet performed.
 
 ## Publication Boundaries
 
@@ -71,6 +71,14 @@ The workflow uses GitHub's documented [custom Pages workflow](https://docs.githu
 `npm run build:demo` and `npm run test:demo` exercise this packaging locally under `/open_timeline2.0/`. Browser evidence goes to ignored `artifacts/browser/`; it does not overwrite the documentation captures.
 
 ## Release Versus Demo
+
+Linux Firefox verification runs with a virtual display so WebGL2 can use the
+installed Mesa libraries. The verification image and CI install `libegl1`,
+`libgl1`, `xauth`, and `xvfb`; `verify-candidate.py --matrix` wraps the matrix in
+`xvfb-run -a`. For a manual headless-Linux run, use
+`xvfb-run -a npm run test:matrix`. Windows Firefox remains headless. This follows
+[Playwright's Linux CI setup](https://playwright.dev/docs/ci); canvas assertions
+remain mandatory rather than being skipped when graphics initialization fails.
 
 A green static-demo build is not a full Python/API or production release certificate. The separate [Candidate Verification workflow](../.github/workflows/verify.yml), [release checklist](release-checklist.md), [implementation status](implementation-status.md), and platform evidence retain their independent scope. Do not tag a stable release until its required gates and licensing work are closed.
 

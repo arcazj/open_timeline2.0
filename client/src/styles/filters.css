@@ -2,3 +2,4 @@
 @media(max-width:600px){.search-options,.search-fields>div{grid-template-columns:1fr}.filter-node{padding-left:4px}.filter-rule{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 44px 44px}.filter-node button,.filter-heading button{min-width:44px;min-height:44px}.filter-group-tools{flex-wrap:wrap}.filter-group-tools select{flex-basis:100%}}
 .tall-rows .plot-wrap{min-height:var(--minimum-plot-height,246px)}
 @media(max-width:850px){.tall-rows .split-view .table-view{flex:0 0 180px;min-height:180px;max-height:180px}}
+@media(max-width:850px){.tall-rows:has(.split-view) .filter-strip{min-height:0;max-height:120px;overflow-y:auto;overflow-x:hidden;align-content:flex-start;overscroll-behavior:contain}}

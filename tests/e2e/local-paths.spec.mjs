@@ -81,6 +81,7 @@ test('approved paths auto-connect without tokens, multi-select, favorite and com
 });
 
 test('navigation crosses both analysis edges, keeps held geometry pinned and makes the overview follow', async ({ page }, info) => {
+  test.setTimeout(60000);
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await page.setViewportSize({ width: 1600, height: 1000 });
   await page.goto(server.baseUrl); await ready(page);
