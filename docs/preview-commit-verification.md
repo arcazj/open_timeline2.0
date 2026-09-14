@@ -232,3 +232,18 @@ readiness deadline and still requires a successful health response; individual
 UI test timeouts and application behavior are unchanged. All seven native Windows
 table cases passed afterward (`artifacts/hosted-publication/table-readiness-after.log`).
 This is test-server provisioning tolerance, not a passed production startup budget.
+
+## Hosted Windows Graphics
+
+Candidate `383bd56bf5e418501e1b2e36c5094c510d77bad5` passed both complete Linux
+jobs. Both Windows jobs passed 231 client, 969 server, 42 provider parity, and
+161 full-browser cases, plus Chromium and Edge matrix cases. Their 29 Firefox
+matrix cases all failed before timeline readiness: each preserved trace reports
+`AllowWebgl2:false restricts context creation on this system`. This is not a green
+qualification run; its reports remain in `artifacts/github-pr5/383bd56-*.zip`.
+
+The isolated Windows CI Firefox profile now enables its software WebGL2 path,
+as described in [Mozilla issue 1970486](https://bugzilla.mozilla.org/show_bug.cgi?id=1970486).
+Installed user profiles and application code are unchanged. All matrix cases,
+canvas checks, zero retries, and existing timeouts remain required. A new complete
+candidate run is required before the protected merge.

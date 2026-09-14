@@ -9,7 +9,11 @@ export default defineConfig({
   use: { ...base.use, launchOptions: {} },
   projects: [
     { name: 'chromium', use: { browserName: 'chromium' } },
-    { name: 'firefox', use: { browserName: 'firefox', headless: process.platform !== 'linux' } },
+    { name: 'firefox', use: {
+      browserName: 'firefox', headless: process.platform !== 'linux',
+      // Hosted Windows runners need Firefox's software WebGL path without a GPU.
+      launchOptions: { firefoxUserPrefs: process.platform === 'win32' && process.env.CI ? { 'webgl.force-enabled': true } : {} },
+    } },
     ...(process.platform === 'win32' ? [{ name: 'edge', use: { browserName: 'chromium', launchOptions: base.use.launchOptions } }] : []),
   ],
 });
