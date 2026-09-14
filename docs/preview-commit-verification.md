@@ -107,7 +107,7 @@ The [startup measurements](demo-performance.md) remain small-sample local
 observations: about 1.1 seconds on desktop and 16.4-16.7 seconds under slow-4G/mobile
 emulation. Hosted performance and production budgets have not been certified.
 
-## Publication State
+## Publication State Before Owner Approval
 
 Private vulnerability reporting was enabled on GitHub and read back successfully.
 Dependabot configuration and required-check policies are committed, with no
@@ -120,3 +120,9 @@ license selection and historical-data/image redistribution still require owner
 confirmation. The README keeps the demo marked pending; publication approval
 variables remain unset. Follow [publishing](publishing.md) and
 [the data/asset review](data-licensing.md) before activating those workflows.
+
+On September 14, 2026, the owner subsequently selected GPL-3.0 and approved the
+prepared datasets/images for redistribution and GitHub publication. The
+[approval record](data-licensing.md) supersedes the licensing gate above, not the
+historical test results. GitHub Actions remains responsible for verifying the
+pushed candidate before a preview release can be published.

@@ -59,22 +59,40 @@ def main():
     parser.add_argument("--security", action="store_true")
     parser.add_argument("--protection", action="store_true")
     parser.add_argument("--pages", action="store_true")
+    parser.add_argument("--approve-demo", action="store_true")
+    parser.add_argument("--approve-preview", action="store_true")
     parser.add_argument("--publication-approved", action="store_true",
                         help="Explicit owner confirmation of project/data/asset redistribution review")
     parser.add_argument("--apply", action="store_true", help="Apply settings; otherwise print intended changes")
     args = parser.parse_args()
-    if not any((args.security, args.protection, args.pages)):
-        parser.error("Select --security, --protection, or --pages")
-    if args.pages and not args.publication_approved:
-        parser.error("Pages requires the owner's explicit --publication-approved confirmation")
+    if not any((args.security, args.protection, args.pages, args.approve_demo, args.approve_preview)):
+        parser.error("Select --security, --protection, --pages, --approve-demo, or --approve-preview")
+    if any((args.pages, args.approve_demo, args.approve_preview)) and not args.publication_approved:
+        parser.error("Publication requires the owner's explicit --publication-approved confirmation")
+    variables = [name for name, selected in (("PUBLIC_DEMO_APPROVED", args.approve_demo),
+                                             ("PUBLIC_RELEASE_APPROVED", args.approve_preview)) if selected]
     policy = json.loads((ROOT / "config/github-protection.json").read_text())
     if not args.apply:
         print(json.dumps({"repository": REPOSITORY, "apply": False,
                           "privateVulnerabilityReporting": args.security,
                           "mainProtection": policy if args.protection else None,
-                          "pages": "workflow" if args.pages else None}, indent=2))
+                          "pages": "workflow" if args.pages else None,
+                          "approvalVariables": variables}, indent=2))
         return
     token = credential()
+    for name in variables:
+        path = f"/actions/variables/{name}"
+        try:
+            api(token, "GET", path)
+        except RuntimeError as error:
+            if "HTTP 404" not in str(error):
+                raise
+            api(token, "POST", "/actions/variables", {"name": name, "value": "true"})
+        else:
+            api(token, "PATCH", path, {"name": name, "value": "true"})
+        if api(token, "GET", path).get("value") != "true":
+            raise RuntimeError(f"Approval variable could not be verified: {name}")
+        print(f"{name}: enabled and verified; automated checks remain required")
     if args.security:
         api(token, "PUT", "/private-vulnerability-reporting")
         verified = api(token, "GET", "/private-vulnerability-reporting")

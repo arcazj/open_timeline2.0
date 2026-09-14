@@ -17,10 +17,14 @@ closing or reloading. Read-only historical snapshots and linked legacy archives
 are not writable. Local changes never upload or synchronize automatically.
 
 This is a development preview, not a production-qualified server release. Read
-`RELEASE-NOTES.md`, `DATA-NOTICES.md`, and `THIRD-PARTY-NOTICES.json`. Dependency
-notices do not assign a project license or clear third-party historical records.
+`RELEASE-NOTES.md`, `DATA-NOTICES.md`, `LICENSE`, and `THIRD-PARTY-NOTICES.json`.
+Project code uses GPL-3.0-only; existing third-party terms remain unchanged.
 
 Source and documentation: https://github.com/arcazj/open_timeline2.0
+
+Matching source is available from the same release page's **Source code** archives,
+or by checking out the exact commit in `release-manifest.json`. The source includes
+the modular client, build scripts, lockfiles, and build instructions in `README.md`.
 
 Verify the downloaded archive against the separately supplied `SHA256SUMS`:
 

@@ -21,6 +21,7 @@ def fixture(root):
     (root / "dist").mkdir()
     (root / "docs/releases").mkdir(parents=True)
     (root / "package.json").write_text('{"version":"0.1.0"}')
+    (root / "LICENSE").write_text('GNU GENERAL PUBLIC LICENSE fixture\n')
     html = b'<!doctype html><title>Fixture</title>'
     (root / "dist/index.html").write_bytes(html)
     (root / "dist/build-manifest.json").write_text(json.dumps({
@@ -40,11 +41,33 @@ def test_preview_archive_is_reproducible_complete_and_checksummed(tmp_path):
     assert archive.read_bytes() == original
     with zipfile.ZipFile(archive) as bundle:
         assert bundle.testzip() is None
-        assert set(bundle.namelist()) == {"index.html", "THIRD-PARTY-NOTICES.json", "README-OFFLINE.md", "RELEASE-NOTES.md", "DATA-NOTICES.md"}
+        assert set(bundle.namelist()) == {"index.html", "THIRD-PARTY-NOTICES.json", "README-OFFLINE.md", "RELEASE-NOTES.md", "DATA-NOTICES.md", "LICENSE"}
         assert bundle.read("index.html") == (tmp_path / "dist/index.html").read_bytes()
     for line in (archive.parent / "SHA256SUMS").read_text().splitlines():
         checksum, name = line.split("  ")
         assert hashlib.sha256((archive.parent / name).read_bytes()).hexdigest() == checksum
+
+
+def test_owner_publication_approval_does_not_claim_production_qualification(tmp_path):
+    fixture(tmp_path)
+    build = module("package-preview")
+    archive = build.package_preview(tmp_path, "v0.1.0-preview.1")
+    manifest = json.loads((archive.parent / "release-manifest.json").read_text())
+    assert manifest["publicationReviewRequired"] is True
+    assert manifest["ownerPublicationApproved"] is False
+    build.package_preview(tmp_path, "v0.1.0-preview.1", publication_approved=True)
+    manifest = json.loads((archive.parent / "release-manifest.json").read_text())
+    assert manifest["publicationReviewRequired"] is False
+    assert manifest["ownerPublicationApproved"] is True
+    assert manifest["releaseApproved"] is False
+    assert manifest["license"] == "GPL-3.0-only"
+
+
+def test_preview_requires_project_license(tmp_path):
+    fixture(tmp_path)
+    (tmp_path / "LICENSE").unlink()
+    with pytest.raises(FileNotFoundError):
+        module("package-preview").package_preview(tmp_path, "v0.1.0-preview.1")
 
 
 @pytest.mark.parametrize("tag", ["v0.1.0", "v0.2.0-preview.1", "../private", "v0.1.0-preview.0", "v0.1.0-preview.1/extra"])
@@ -109,10 +132,28 @@ def test_github_private_reporting_is_read_back_without_exposing_credentials(monk
     assert 'synthetic-test' not in capsys.readouterr().out
 
 
-def test_pages_requires_explicit_publication_review_before_authentication(monkeypatch):
+@pytest.mark.parametrize("option", ["--pages", "--approve-demo", "--approve-preview"])
+def test_pages_requires_explicit_publication_review_before_authentication(monkeypatch, option):
     admin = module('configure-github')
-    monkeypatch.setattr('sys.argv', ['configure-github.py', '--pages', '--apply'])
+    monkeypatch.setattr('sys.argv', ['configure-github.py', option, '--apply'])
     monkeypatch.setattr(admin, 'credential', lambda: pytest.fail('Authentication must not run'))
     with pytest.raises(SystemExit) as error:
         admin.main()
     assert error.value.code == 2
+
+
+@pytest.mark.parametrize("exists", [False, True])
+def test_publication_variable_is_written_and_read_back(monkeypatch, exists):
+    admin = module('configure-github')
+    calls = []
+    monkeypatch.setattr(admin, 'credential', lambda: 'synthetic-test')
+    def api(token, method, path, value=None):
+        calls.append((method, path, value))
+        if len(calls) == 1 and not exists:
+            raise RuntimeError('GitHub GET variable: HTTP 404')
+        return {'value': 'true'}
+    monkeypatch.setattr(admin, 'api', api)
+    monkeypatch.setattr('sys.argv', ['configure-github.py', '--approve-demo', '--publication-approved', '--apply'])
+    admin.main()
+    assert [call[0] for call in calls] == ['GET', 'PATCH' if exists else 'POST', 'GET']
+    assert calls[1][2] == {'name': 'PUBLIC_DEMO_APPROVED', 'value': 'true'}

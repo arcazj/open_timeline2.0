@@ -35,11 +35,12 @@ export async function collectThirdPartyNotices(root) {
     packages.push({ name: metadata.name, version: metadata.version, license, directory, integrity: locked.integrity ?? null, notices });
   }
   const assets = [
+    { name: 'OpenBEXI Timeline project code and authored documentation', license: 'GPL-3.0-only', source: 'https://github.com/arcazj/open_timeline2.0', notices: [await textFile('LICENSE')] },
     { name: 'Unmodified legacy hazard PNG icons', license: 'GPL-3.0-or-later', source: 'https://github.com/arcazj/openbexi_timeline', notices: [await textFile('client/assets/legacy-hazards/LEGACY-LICENSE.txt')] },
     { name: 'Embedded Noto Sans font files and derived measurement tables', license: 'OFL-1.1', notices: [await textFile('client/assets/FONT-LICENSE.txt')] },
     { name: 'Unicode 15.1 case-folding data and derived lookup tables', license: 'Unicode-3.0', source: 'https://www.unicode.org/license.txt', notices: [await textFile('docs/licenses/UNICODE-LICENSE.txt')] },
   ];
-  const document = { format: 'openbexi-third-party-notices', formatVersion: 1, scope: 'Standalone runtime dependencies and embedded data/assets; not a project source-code license', packages, assets };
+  const document = { format: 'openbexi-third-party-notices', formatVersion: 1, scope: 'Project GPL-3.0 license, standalone runtime dependencies and embedded asset notices; third-party terms remain distinct', packages, assets };
   return { document, inputs };
 }
 

@@ -41,7 +41,7 @@ jobs:
       - name: Package the validated preview
         env:
           TAG: ${{ github.ref_name }}
-        run: python scripts/package-preview.py --tag "$TAG"
+        run: python scripts/package-preview.py --tag "$TAG" --publication-approved
       - name: Publish a prerelease, never a stable latest release
         env:
           GH_TOKEN: ${{ github.token }}
