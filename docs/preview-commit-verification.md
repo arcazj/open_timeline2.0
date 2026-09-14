@@ -126,3 +126,28 @@ prepared datasets/images for redistribution and GitHub publication. The
 [approval record](data-licensing.md) supersedes the licensing gate above, not the
 historical test results. GitHub Actions remains responsible for verifying the
 pushed candidate before a preview release can be published.
+
+## First GitHub Push and Hosted Demo
+
+Commit `e5af7cbbe3f531766b4523e49849bd6e65de6100` was pushed to `main` on
+September 14, 2026. GPL-3.0, the redistribution record, and the existing third-party
+notices were included. Branch protection and private vulnerability reporting were
+applied and read-back verified. Force-pushes and deletion are disabled; required
+checks also apply to administrators.
+
+[Standalone Demo run 34821760189](https://github.com/arcazj/open_timeline2.0/actions/runs/34821760189)
+passed and deployed the [live application](https://arcazj.github.io/open_timeline2.0/).
+Independent hosted-browser checks at 1600 x 900 and 390 x 844 verified nonblank
+canvases, all six datasets/2,349 records, search findings in the overview, stable
+vertical pagination, and continued navigation with networking disabled. Dataset
+switches and offline navigation made no HTTP requests. Screenshots were inspected;
+the local report is `artifacts/hosted-publication/verification.json`.
+The downloaded HTML hash matched the clean-checkout build recorded in
+[hosted startup measurements](demo-performance.md).
+
+The first [Candidate Verification run](https://github.com/arcazj/open_timeline2.0/actions/runs/34821760244)
+found that two server startup tests assumed an existing generated client file.
+Linux Python 3.13 reported 955 passed and 2 failed, with no skips. The correction
+gives these tests a temporary client fixture and separately checks the actionable
+404 when a build is missing; real application browser tests remain unchanged.
+The full matrix must pass on the corrected commit before publishing a prerelease.

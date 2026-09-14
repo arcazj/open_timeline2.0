@@ -12,6 +12,14 @@ from server.app.repositories.legacy_repository import LegacyRepository
 from server.app.services.startup import StartupStatus
 
 
+@pytest.fixture
+def client_html(tmp_path, monkeypatch):
+    path = tmp_path / 'index.html'
+    path.write_text('<!doctype html><title>Startup client fixture</title>', encoding='utf-8')
+    monkeypatch.setattr('server.app.main.CLIENT_HTML', path)
+    return path
+
+
 def wait_state(client, status):
     deadline = time.monotonic() + 10
     while time.monotonic() < deadline:
@@ -22,7 +30,7 @@ def wait_state(client, status):
     pytest.fail(response.text)
 
 
-def test_client_available_while_complete_archive_is_loading(legacy, tmp_path, monkeypatch):
+def test_client_available_while_complete_archive_is_loading(legacy, tmp_path, monkeypatch, client_html):
     options, first, second = legacy
     original_files = [first.read_bytes(), second.read_bytes()]
     started, release = threading.Event(), threading.Event()
@@ -40,7 +48,8 @@ def test_client_available_while_complete_archive_is_loading(legacy, tmp_path, mo
     app = create_app(tmp_path / 'state', TOKEN, legacy_config=options, background_startup=True)
     with TestClient(app) as client:
         assert started.wait(2)
-        assert client.get('/').status_code == 200
+        response = client.get('/')
+        assert response.status_code == 200 and response.text == client_html.read_text()
         assert client.get('/health/live').status_code == 200
         progress = client.get('/health/ready')
         assert progress.status_code == 503
@@ -63,7 +72,7 @@ def test_client_available_while_complete_archive_is_loading(legacy, tmp_path, mo
 
 
 @pytest.mark.parametrize('background', [True, False])
-def test_failed_startup_never_exposes_partial_data(legacy, tmp_path, monkeypatch, background):
+def test_failed_startup_never_exposes_partial_data(legacy, tmp_path, monkeypatch, background, client_html):
     def fail(self, **kwargs):
         raise DomainError('bad_legacy', 'Private internal path', 409)
 
@@ -77,9 +86,20 @@ def test_failed_startup_never_exposes_partial_data(legacy, tmp_path, monkeypatch
     with TestClient(app) as client:
         response = wait_state(client, 'failed')
         assert response.status_code == 503 and 'Private internal path' not in response.text
-        assert client.get('/').status_code == 200
+        response = client.get('/')
+        assert response.status_code == 200 and response.text == client_html.read_text()
         assert client.get(BASE).json()['code'] == 'startup_failed'
         assert not hasattr(app.state, 'queries')
+
+
+def test_missing_client_build_returns_actionable_404(legacy, tmp_path, client_html):
+    client_html.unlink()
+    app = create_app(tmp_path / 'state', TOKEN, legacy_config=legacy[0])
+    with TestClient(app) as client:
+        response = client.get('/')
+        assert response.status_code == 404
+        assert response.json() == {'message': 'Client build is missing; run npm run build.'}
+        assert client.get('/health/ready').status_code == 200
 
 
 def test_shutdown_drains_loader_before_closing_repository(legacy, tmp_path, monkeypatch):

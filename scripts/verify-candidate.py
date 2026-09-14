@@ -20,7 +20,7 @@ SOURCE_DIRS = ("client", "server", "shared", "scripts", "tests", ".github", "dat
 SOURCE_FILES = ("package.json", "package-lock.json", "pyproject.toml", "uv.lock",
                 "playwright.config.mjs", "playwright.matrix.config.mjs", "playwright.demo.config.mjs", "Dockerfile",
                 ".dockerignore", ".gitignore", ".gitattributes", ".editorconfig", "README.md",
-                "CONTRIBUTING.md", "SECURITY.md", "OpenBEXI_Timeline_Rebuild_Prompt.md")
+                "CONTRIBUTING.md", "SECURITY.md", "LICENSE", "OpenBEXI_Timeline_Rebuild_Prompt.md")
 
 
 def stamp():
