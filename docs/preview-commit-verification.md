@@ -335,3 +335,11 @@ All 240 client tests and 21 configuration/slow-bootstrap browser cases across
 Chromium, Firefox and Edge passed locally after these corrections. The browser
 report is `artifacts/hosted-publication/bootstrap-matrix.json`; this focused run
 does not replace the complete hosted candidate checks.
+
+The Windows/Python 3.13 run on `4c84633` passed all 970 server cases and 89 of 90
+matrix cases. Only the new delayed-bootstrap case failed: its trace shows that
+the route callback itself arrived late, then the test added another 2.5 seconds,
+exceeding the application's five-second deadline. The test now holds the response
+until at least 2.5 seconds from the browser probe's start, counting dispatch time
+in that total. The real HTTP response, no-premature-records assertion and
+five-second application bound are unchanged.

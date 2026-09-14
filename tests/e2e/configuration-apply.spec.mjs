@@ -70,17 +70,23 @@ async function exportJson(page) {
 const filter = { sourceIds: ['operations'], kinds: ['session'], schemaRefs: [], expression: null, search: { text: 'gate', mode: 'any', caseSensitive: false, fields: ['/title'] } };
 
 test('cold bootstrap can take more than two seconds without premature sample data', async ({ page }) => {
-  let entered;
+  let entered, release;
   const requested = new Promise(resolve => { entered = resolve; });
+  const inspected = new Promise(resolve => { release = resolve; });
   await page.route('**/api/v1/bootstrap', async route => {
     entered();
-    await new Promise(resolve => setTimeout(resolve, 2500));
+    await inspected;
+    const elapsed = await page.evaluate(() => performance.now() - window.__bootstrapDiagnostic[0].startedAt);
+    // Browser dispatch is part of the probe budget, not an additional delay.
+    if (elapsed < 2500) await new Promise(resolve => setTimeout(resolve, Math.ceil(2500 - elapsed)));
     await route.continue();
   });
   const opening = open(page, 'local');
-  await requested;
-  expect(await page.evaluate(() => Boolean(window.__timelineDebug?.queryId))).toBe(false);
-  await expect(page.locator('.record-label')).toHaveCount(0);
+  try {
+    await requested;
+    expect(await page.evaluate(() => Boolean(window.__timelineDebug?.queryId))).toBe(false);
+    await expect(page.locator('.record-label')).toHaveCount(0);
+  } finally { release(); }
   expect(await opening).toEqual([]);
   const [probe] = await page.evaluate(() => window.__bootstrapDiagnostic);
   expect(probe.status).toBe(404);
