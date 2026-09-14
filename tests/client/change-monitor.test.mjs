@@ -56,3 +56,37 @@ test('an authorization or generation boundary takes precedence over a read alrea
     assert.equal(f.monitor.state.required, required); assert.equal(f.monitor.state.baseline, 1); assert.equal(f.monitor.state.inFlight, false); assert.deepEqual(f.calls, [event.type]); f.monitor.dispose();
   }
 });
+
+test('explicit refreshes during layout work coalesce and run once when unblocked in Pinned mode', async () => {
+  const f = fixture(); f.block(true);
+  const first = f.monitor.reload(), second = f.monitor.reload();
+  await pause(20); assert.equal(f.reloads, 0);
+  f.block(false);
+  const third = f.monitor.reload();
+  assert.deepEqual(await Promise.all([first, second, third]), [true, true, true]);
+  assert.equal(f.reloads, 1); f.monitor.dispose();
+});
+
+test('queued explicit refreshes cannot cross source, authorization, generation or outage boundaries', async () => {
+  for (const boundary of ['source', 'dispose', 'cancel', 'authorization-lost', 'generation-changed', 'server-unavailable']) {
+    const f = fixture(); f.block(true); const pending = f.monitor.reload();
+    if (boundary === 'source') f.monitor.start({ subscribeChanges: () => () => {} }, { generation: 'two', revision: 8 });
+    else if (boundary === 'dispose') f.monitor.dispose();
+    else if (boundary === 'cancel') f.monitor.cancelQueuedReload();
+    else f.emit({ type: boundary, code: 'generation_mismatch' });
+    assert.equal(await pending, false); f.block(false); await pause(20);
+    assert.equal(f.reloads, 0); f.monitor.dispose();
+  }
+});
+
+test('an explicit refresh requested during another read waits without concurrent or repeated reloads', async () => {
+  const completions = [];
+  const f = fixture({ reload: () => new Promise(resolve => completions.push(resolve)) });
+  const first = f.monitor.reload(), second = f.monitor.reload(), third = f.monitor.reload();
+  assert.equal(completions.length, 1);
+  completions[0]({ generation: 'one', revision: 2 }); assert.equal(await first, true);
+  await pause(20); assert.equal(completions.length, 2);
+  completions[1]({ generation: 'one', revision: 3 });
+  assert.deepEqual(await Promise.all([second, third]), [true, true]);
+  await pause(20); assert.equal(completions.length, 2); f.monitor.dispose();
+});

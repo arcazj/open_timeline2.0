@@ -471,6 +471,7 @@ function showError(error) {
   updateStatus();
 }
 function clearUnauthorized() {
+  changeMonitor?.cancelQueuedReload();
   bandStack?.configure(null);
   ++state.epoch; ++layoutIntent; state.authRequired = true; state.selected = null; state.rows = null; state.overview = null;
   state.queryLoading = false; state.query = null; state.map = null; state.layout = null; state.zones = []; clearTimeout(searchTimer); state.searchPending = false;

@@ -262,3 +262,32 @@ canvases, many-color vertical grids, a solid bar without antialiasing, and missi
 WebGL2. Existing complete-data, all-band, offline, descriptor and screenshot
 checks remain. Application rendering code is unchanged. Reports from the failed
 candidate are retained in `artifacts/github-pr5/3ab403a-*.zip`.
+
+## Explicit Refresh During Layout
+
+On `ef761ec`, both Linux jobs and all dataset pixel regressions passed. Initial
+Windows Firefox configuration cases sometimes stopped at bootstrap discovery;
+one unchanged-source rerun was requested and the first-attempt evidence retained.
+That rerun found a separate Windows/Edge interaction failure in the revoked-access
+case: no 401 request had actually been sent. Opening the descriptor had started a
+layout update, and the change monitor silently discarded the user's Refresh while
+the layout was busy. The old module reproduces this with zero reloads after it is
+unblocked.
+
+Explicit refresh requests now coalesce into one deferred read in Pinned or Live
+mode. Source changes, authorization/generation boundaries, outages and disposal
+cancel queued requests; automatic failures do not start retry loops. Three unit
+regressions cover queuing, cancellation and concurrent requests. The browser case
+now deliberately holds the descriptor's layout response, clicks Refresh, then
+releases the response and requires the subsequent 401 to clear protected visuals.
+All ten change-monitor unit cases and three browser repetitions passed locally.
+The complete client suite passed 238 cases; all 17 verification-tool tests and all
+11 server/change-monitor browser cases passed. Three additional Firefox
+repetitions of the held-layout/401 case also passed. The final integration report
+is `artifacts/hosted-publication/queued-refresh-final.json`.
+
+Candidate verification now runs the focused engine matrix before the longer full
+browser suite, after the same backend, parity and reproducible-build checks. No
+required case is removed. The intermittent Windows Firefox bootstrap observation
+remains explicitly recorded; this is preview qualification, not a claim of
+production startup performance or flawless first-pass CI.

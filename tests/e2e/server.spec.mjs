@@ -116,12 +116,22 @@ test('an open server draft cannot be saved into the fallback Local source', asyn
 
 test('revoked server access clears protected visuals and does not silently switch to Local', async ({ page }, info) => {
   await openApp(page); await connect(page);
-  await page.locator('.record-label').first().click();
-  await expect(page.locator('.descriptor')).toBeVisible();
-  await page.route('**/api/v1/workspaces/default/query-sessions', route => route.fulfill({
-    status: 401, contentType: 'application/json', body: JSON.stringify({ code: 'authentication_required', message: 'Access was revoked for this test.' }),
-  }));
-  await page.locator('[data-action=refresh]').first().click();
+  await expect.poll(() => page.evaluate(() => window.__timelineDebug.ready)).toBe(true);
+  let releaseLayout, layoutRequested = false, revokedRequests = 0;
+  const heldLayout = new Promise(resolve => { releaseLayout = resolve; });
+  await page.route('**/query-sessions/*/layouts', async route => { layoutRequested = true; await heldLayout; await route.continue(); });
+  try {
+    await page.locator('.record-label').first().click();
+    await expect(page.locator('.descriptor')).toBeVisible();
+    await expect.poll(() => layoutRequested).toBe(true);
+    await page.route('**/api/v1/workspaces/default/query-sessions', route => {
+      revokedRequests++;
+      return route.fulfill({ status: 401, contentType: 'application/json', body: JSON.stringify({ code: 'authentication_required', message: 'Access was revoked for this test.' }) });
+    });
+    await page.locator('[data-action=refresh]').first().click();
+    expect(revokedRequests).toBe(0);
+  } finally { releaseLayout(); }
+  await expect.poll(() => revokedRequests).toBe(1);
   await expect(page.locator('.record-label')).toHaveCount(0);
   await expect(page.locator('.descriptor')).not.toBeVisible();
   expect(await page.evaluate(() => window.__timelineDebug.providerKind)).toBe('server');

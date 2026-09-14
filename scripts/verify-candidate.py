@@ -171,13 +171,13 @@ def main():
         ("datasets", [python, "scripts/normalize-test-data.py", "--check"]),
         ("build", [node, "scripts/build-standalone.mjs"]),
         ("rebuild", [node, "scripts/build-standalone.mjs"]),
-        ("browser", [node, "node_modules/@playwright/test/cli.js", "test"]),
     ]
     if options.matrix:
         matrix = [node, "node_modules/@playwright/test/cli.js", "test", "--config", "playwright.matrix.config.mjs"]
         if sys.platform.startswith("linux"):
             matrix = ["xvfb-run", "-a", *matrix]
         checks.append(("matrix", matrix))
+    checks.append(("browser", [node, "node_modules/@playwright/test/cli.js", "test"]))
     before = source_inventory(ROOT)
     report = {"format": "openbexi-candidate-verification", "formatVersion": 1, "startedAt": stamp(),
               "releaseApproved": False, "scope": "Implemented automated checks; not full G0-G5 or manual qualification",
