@@ -4,6 +4,7 @@ import path from 'node:path';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { startSnapshotServer } from '../integration/snapshot-server-fixture.mjs';
+import { canvasMetrics } from '../helpers/canvas-metrics.mjs';
 
 const datasets = [['default-dataset',48,2],['ephemeris',127,2],['jfk',130,2],['monet',27,1],['religions',730,4],['space_exploration',1287,2]];
 const file = pathToFileURL(path.resolve('dist/index.html')).href;
@@ -30,12 +31,9 @@ for (const [id, count, bands] of datasets) test(`complete ${id} fixture works di
   const state = await page.evaluate(() => window.__timelineDebug);
   expect(state.recordCount).toBe(count); expect(state.bandCount).toBe(bands);
   await expect(page.locator('.plot-wrap .record-label').first()).toBeVisible();
-  const pixels = await page.locator('.plot-wrap canvas').evaluate(canvas => {
-    const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
-    const pixels = new Uint8Array(canvas.width*canvas.height*4); gl.readPixels(0,0,canvas.width,canvas.height,gl.RGBA,gl.UNSIGNED_BYTE,pixels);
-    const colors = new Set(); for(let i=0;i<pixels.length;i+=4) colors.add(`${pixels[i]},${pixels[i+1]},${pixels[i+2]}`); return colors.size;
-  });
-  expect(pixels).toBeGreaterThan(4);
+  const pixels = await page.locator('.plot-wrap canvas').evaluate(canvasMetrics);
+  expect(pixels.colors).toBeGreaterThan(1);
+  expect(pixels.detailPixels).toBeGreaterThan(0);
   expect(await page.locator('.timeline-view canvas').evaluateAll(canvases => canvases.filter(canvas => canvas.getBoundingClientRect().height > 0).every(canvas => {
     const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
     const data = new Uint8Array(canvas.width * canvas.height * 4); gl.readPixels(0,0,canvas.width,canvas.height,gl.RGBA,gl.UNSIGNED_BYTE,data);
@@ -50,7 +48,7 @@ for (const [id, count, bands] of datasets) test(`complete ${id} fixture works di
   await page.locator('.timeline-view').screenshot({path:`${captures}/${id}-timeline.png`});
   await page.locator('.plot-wrap .record-label').first().click(); await expect(page.locator('.descriptor')).toBeVisible();
   expect(errors).toEqual([]); expect(requests).toEqual([]);
-  await writeFile(`${captures}/${id}.verification.json`, JSON.stringify({status:'passed',dataset:id,recordCount:count,bandCount:bands,viewport:page.viewportSize(),canvasColors:pixels,errors,httpRequests:requests,buildSha256:createHash('sha256').update(await readFile('dist/index.html')).digest('hex')},null,2)+'\n');
+  await writeFile(`${captures}/${id}.verification.json`, JSON.stringify({status:'passed',dataset:id,recordCount:count,bandCount:bands,viewport:page.viewportSize(),canvasColors:pixels.colors,canvasDetailPixels:pixels.detailPixels,errors,httpRequests:requests,buildSha256:createHash('sha256').update(await readFile('dist/index.html')).digest('hex')},null,2)+'\n');
 });
 
 test('source switching resets leaked search, preserves complete datasets and restores reference view', async ({page}) => {

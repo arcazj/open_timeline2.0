@@ -247,3 +247,18 @@ as described in [Mozilla issue 1970486](https://bugzilla.mozilla.org/show_bug.cg
 Installed user profiles and application code are unchanged. All matrix cases,
 canvas checks, zero retries, and existing timeouts remain required. A new complete
 candidate run is required before the protected merge.
+
+The next run (`3ab403a`) rendered successfully in Windows Firefox: 27 of its 29
+matrix cases passed, while both complete Linux jobs and all other Windows checks
+passed. The remaining two cases were Ephemeris and Space Exploration. Their
+preserved screenshots show the expected bars and overview, but the GPU-less
+renderer supplied exactly four canvas colors, failing the test's arbitrary
+greater-than-four palette threshold. Both Windows runners reproduced this result.
+
+The fixture check now requires nonuniform pixels along canvas columns, detecting
+record detail independently of antialiasing shades. A canvas containing only
+vertical grids and zones does not satisfy this check. Four unit tests cover blank
+canvases, many-color vertical grids, a solid bar without antialiasing, and missing
+WebGL2. Existing complete-data, all-band, offline, descriptor and screenshot
+checks remain. Application rendering code is unchanged. Reports from the failed
+candidate are retained in `artifacts/github-pr5/3ab403a-*.zip`.
