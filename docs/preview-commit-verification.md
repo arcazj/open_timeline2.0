@@ -291,3 +291,10 @@ browser suite, after the same backend, parity and reproducible-build checks. No
 required case is removed. The intermittent Windows Firefox bootstrap observation
 remains explicitly recorded; this is preview qualification, not a claim of
 production startup performance or flawless first-pass CI.
+
+The second Windows/Python 3.13 attempt on `ef761ec` passed all 161 full-browser
+cases but again failed the six Firefox configuration cases before initial query
+readiness. The bounded bootstrap probe now has a test-only diagnostic attachment
+on startup failure, recording response status or error and elapsed time, never
+credentials, request headers or dataset contents. This is evidence collection,
+not a retry or a relaxed startup assertion.
