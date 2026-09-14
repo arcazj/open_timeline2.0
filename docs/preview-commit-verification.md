@@ -158,3 +158,31 @@ asynchronous query-preparation response as a completed result. That test now pol
 the documented 202 response through the existing bounded helper and exercises
 both default and forced-asynchronous preparation, retaining the pinned-revision
 and search assertions. No production response timing was changed to satisfy it.
+
+## Windows Path and Container Qualification
+
+On commit `c3be71f9fe96d9e6af3ea3d0af6bbd5f4d44eb3c`, Windows Python 3.13
+CI passed all 960 server cases without skips, then exposed a real legacy-reader
+failure in provider integration: Windows temporary directories used 8.3 names
+such as `RUNNER~1`, while the opened file handle reported the long name.
+Model loading also expanded only the configured root, causing a false containment
+failure when the model filename still used its short spelling.
+
+The correction expands short names with `GetLongPathNameW` when the opened path
+differs, preserves drive/UNC identity, and retains file-identity, modification,
+allowlist, and reparse-point checks. Model loading keeps the configured root's
+spelling until those checks run. Native Windows regression cases cover file reads
+and model/namespace loading; expansion failures remain fail-closed.
+
+Local checks after this correction passed 176 focused Python cases and all 42
+provider integration cases with `TEMP` and `TMP` deliberately set to an actual
+8.3 directory alias. The latter report is
+`artifacts/hosted-publication/windows-short-parity.xml`, with no failures or skips.
+These are focused working-copy results, not a replacement for the protected
+Windows/Linux candidate matrix.
+
+The new mandatory root license also required Docker context/stage updates.
+Both verification and runtime images build successfully with `LICENSE` included.
+The runtime was checked as UID 10001: the GPL text exists in `/app/LICENSE` and
+the self-contained HTML, and the Python application imports successfully. These
+local image checks do not publish an image or certify production deployment.

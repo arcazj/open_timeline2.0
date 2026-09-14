@@ -14,7 +14,7 @@ import time
 import uuid
 from collections import OrderedDict
 from dataclasses import dataclass, field
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 
 from ..models.domain import DomainError, instant_ms, iso_from_ms, json_bytes, now_iso, validate_snapshot
 from .legacy_json import legacy_instant, parse_legacy_json
@@ -106,6 +106,24 @@ def _path_guard(path, root):
     return path
 
 
+def _windows_path(value):
+    value = "\\\\" + value[8:] if value.startswith("\\\\?\\UNC\\") else value.removeprefix("\\\\?\\")
+    return PureWindowsPath(value)
+
+
+def _windows_long_path(path):
+    import ctypes
+    from ctypes import wintypes
+    expand = ctypes.windll.kernel32.GetLongPathNameW
+    expand.argtypes = [wintypes.LPCWSTR, wintypes.LPWSTR, wintypes.DWORD]
+    expand.restype = wintypes.DWORD
+    buffer = ctypes.create_unicode_buffer(32768)
+    count = expand(str(path), buffer, len(buffer))
+    if not count or count >= len(buffer):
+        raise DomainError("legacy_path", "Cannot verify the long form of the legacy file path.", 403)
+    return _windows_path(buffer.value)
+
+
 def safe_read(path, root, maximum):
     """Read an ordinary file, binding its opened handle to the approved path."""
     path = _path_guard(path, root)
@@ -128,9 +146,9 @@ def safe_read(path, root, maximum):
             count = final_path(msvcrt.get_osfhandle(descriptor), buffer, len(buffer), 0)
             if not count or count >= len(buffer):
                 raise DomainError("legacy_path", "Cannot verify the opened legacy file path.", 403)
-            actual = buffer.value
-            actual = "\\\\" + actual[8:] if actual.startswith("\\\\?\\UNC\\") else actual.removeprefix("\\\\?\\")
-            if Path(actual) != path:
+            actual = _windows_path(buffer.value)
+            # Expand 8.3 names, without using resolve() to follow a reparse point.
+            if actual != _windows_path(str(path)) and actual != _windows_long_path(path):
                 raise DomainError("legacy_path", "Opened legacy file resolved to an unexpected path.", 403)
         with os.fdopen(descriptor, "rb", closefd=False) as handle:
             raw = handle.read(maximum + 1)

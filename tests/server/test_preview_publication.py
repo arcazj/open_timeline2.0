@@ -70,6 +70,14 @@ def test_preview_requires_project_license(tmp_path):
         module("package-preview").package_preview(tmp_path, "v0.1.0-preview.1")
 
 
+def test_docker_build_context_and_both_build_stages_include_project_license():
+    assert '!LICENSE' in (ROOT / '.dockerignore').read_text().splitlines()
+    docker = (ROOT / 'Dockerfile').read_text()
+    client, python = docker.split(' AS python-base', 1)
+    assert 'COPY README.md LICENSE ./' in client
+    assert 'COPY pyproject.toml uv.lock LICENSE ./' in python
+
+
 @pytest.mark.parametrize("tag", ["v0.1.0", "v0.2.0-preview.1", "../private", "v0.1.0-preview.0", "v0.1.0-preview.1/extra"])
 def test_packager_refuses_stable_mismatched_and_unsafe_tags(tmp_path, tag):
     fixture(tmp_path)

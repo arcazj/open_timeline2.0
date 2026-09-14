@@ -1,5 +1,6 @@
 import hashlib
 import json
+import sys
 import time
 import uuid
 from pathlib import Path
@@ -196,11 +197,23 @@ def test_state_cannot_overlap_legacy_authority(legacy):
     assert not (first.parent / "state").exists()
 
 
-def test_model_and_namespace_bindings_are_served(legacy, tmp_path):
+@pytest.mark.parametrize("short_name", [False, True] if sys.platform == "win32" else [False])
+def test_model_and_namespace_bindings_are_served(legacy, tmp_path, short_name):
     options, _, _ = legacy
     model = Path(__file__).parents[1] / "client/fixtures/legacy-test-regular.json"
     target = Path(options["legacyRoot"]) / "model.json"
     target.write_bytes(model.read_bytes())
+    if short_name:
+        import ctypes
+        from ctypes import wintypes
+        shorten = ctypes.windll.kernel32.GetShortPathNameW
+        shorten.argtypes = [wintypes.LPCWSTR, wintypes.LPWSTR, wintypes.DWORD]
+        shorten.restype = wintypes.DWORD
+        buffer = ctypes.create_unicode_buffer(32768)
+        count = shorten(str(target), buffer, len(buffer))
+        assert 0 < count < len(buffer)
+        target = Path(buffer.value)
+        options = {**options, "legacyRoot": str(target.parent)}
     app = create_app(tmp_path / "state", TOKEN, legacy_config={**options, "model": str(target), "namespaceGrouping": True})
     with TestClient(app, headers={"Authorization": "Bearer " + TOKEN}) as client:
         response = client.get(BASE)

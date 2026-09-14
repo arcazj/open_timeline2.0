@@ -247,8 +247,19 @@ def test_reparse_ancestry_is_rejected_before_read(tmp_path, monkeypatch):
     assert error.value.code == "legacy_path"
 
 
-def test_safe_read_binds_unchanged_file_and_rejects_growth(tmp_path, monkeypatch):
+@pytest.mark.parametrize('short_name', [False, True] if sys.platform == 'win32' else [False])
+def test_safe_read_binds_unchanged_file_and_rejects_growth(tmp_path, monkeypatch, short_name):
     path = write(tmp_path, "events.json", {"events": [event()]})
+    if short_name:
+        import ctypes
+        from ctypes import wintypes
+        short = ctypes.windll.kernel32.GetShortPathNameW
+        short.argtypes = [wintypes.LPCWSTR, wintypes.LPWSTR, wintypes.DWORD]
+        short.restype = wintypes.DWORD
+        buffer = ctypes.create_unicode_buffer(32768)
+        assert 0 < short(str(path), buffer, len(buffer)) < len(buffer)
+        path = Path(buffer.value)
+        tmp_path = path.parent
     assert safe_read(path, tmp_path, 10000) == path.read_bytes()
     original = legacy_reader.os.fstat
     calls = 0
@@ -265,6 +276,35 @@ def test_safe_read_binds_unchanged_file_and_rejects_growth(tmp_path, monkeypatch
     with pytest.raises(DomainError) as error:
         safe_read(path, tmp_path, 10000)
     assert error.value.code == "legacy_file_changed"
+
+
+@pytest.mark.parametrize('count', [0, 32768, 32769])
+def test_windows_short_name_expansion_fails_closed(tmp_path, monkeypatch, count):
+    import ctypes
+    def expand(path, buffer, size):
+        return count
+    monkeypatch.setattr(ctypes, 'windll', SimpleNamespace(kernel32=SimpleNamespace(GetLongPathNameW=expand)), raising=False)
+    with pytest.raises(DomainError) as error:
+        legacy_reader._windows_long_path(tmp_path / 'source.json')
+    assert error.value.code == 'legacy_path' and error.value.status == 403
+
+
+@pytest.mark.parametrize('actual,expected', [
+    ('C:/Users/RunnerAdmin/source.json', 'c:/users/runneradmin/source.json'),
+    ('\\\\?\\C:\\Users\\RunnerAdmin\\source.json', 'C:/Users/RunnerAdmin/source.json'),
+    ('\\\\?\\UNC\\server\\share\\source.json', '//server/share/source.json'),
+])
+def test_windows_long_names_preserve_drive_and_unc_authorities(monkeypatch, actual, expected):
+    import ctypes
+    def expand(path, buffer, size):
+        assert path == 'C:/Users/RUNNER~1/source.json'
+        buffer.value = actual
+        return len(actual)
+    monkeypatch.setattr(ctypes, 'windll', SimpleNamespace(kernel32=SimpleNamespace(GetLongPathNameW=expand)), raising=False)
+    result = legacy_reader._windows_long_path('C:/Users/RUNNER~1/source.json')
+    assert result == legacy_reader._windows_path(expected)
+    assert result != legacy_reader._windows_path('D:/Users/RunnerAdmin/source.json')
+    assert result != legacy_reader._windows_path('//different-server/share/source.json')
 
 
 @pytest.mark.parametrize(("limits", "code"), [
