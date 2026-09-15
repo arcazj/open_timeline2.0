@@ -2,7 +2,9 @@
 
 Both providers apply one query contract to the complete selected data source. Filters determine the base set. Search produces a matching subset without deleting context from the main timeline. Density uses the base set, not only matches or a vertical page. The overview shows matches when search is active; the table explicitly chooses context or findings.
 
-The Filters dialog includes a nested condition editor and Any term, All terms, or Exact phrase search. Search fields and case sensitivity are explicit. These controls are temporary query settings; saved-filter catalog CRUD and custom-schema field registration are not implemented in this increment.
+The Filters dialog includes a nested condition editor and Any term, All terms, or Exact phrase search. Search fields and case sensitivity are explicit. The canonical provider also supports revisioned saved-filter catalogs and published custom-schema fields; see [configuration integration](configuration-ui-integration.md). Legacy-source configuration remains read-only, and nonempty legacy YAML filters are currently rejected rather than silently ignored.
+
+The [sorting and filtering specification](../OpenBEXI_Timeline_Sorting_Filtering_Prompt.md) proposes safe regex, explicit legacy migration and an improved saved-view workflow. Those additions are not implemented by that documentation change; the version-1 behavior described here remains current.
 
 ## Structured Expressions
 

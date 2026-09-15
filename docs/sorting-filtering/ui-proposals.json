@@ -1,0 +1,30 @@
+{
+  "kind": "documentation-only design proposals",
+  "implementationVerified": false,
+  "captures": [
+    {
+      "file": "ui-simple.png",
+      "width": 1360,
+      "height": 860,
+      "sha256": "29e9e5f9249062b913ff1608c19fd2b85d0ca634056fb743beff80f92958a412",
+      "documentOverflow": false,
+      "clippedControls": 0
+    },
+    {
+      "file": "ui-advanced.png",
+      "width": 1360,
+      "height": 860,
+      "sha256": "7b587f2b1c63773b1df9b5d25e2125eb823861d0eec08f5c9b065fc7a3631259",
+      "documentOverflow": false,
+      "clippedControls": 0
+    },
+    {
+      "file": "ui-mobile.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "2e76fca2542a1b2c9552482465db33f1ad1db335880219105b6139faadc11a63",
+      "documentOverflow": false,
+      "clippedControls": 0
+    }
+  ]
+}
