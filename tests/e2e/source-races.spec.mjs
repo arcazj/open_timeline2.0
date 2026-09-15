@@ -42,16 +42,17 @@ async function boot(page) {
         super(url, options); this.probeIndex = probe.workers.length; this.methods = new Map(); probe.workers.push(this);
       }
       postMessage(message, ...rest) {
-        if (message.type === 'request') this.methods.set(message.id, message.method);
+        if (message.type === 'request') this.methods.set(message.id, { method: message.method, args: message.args });
         return super.postMessage(message, ...rest);
       }
       addEventListener(type, listener, options) {
         if (type !== 'message') return super.addEventListener(type, listener, options);
         return super.addEventListener(type, event => {
-          const candidate = probe.workerGate;
-          const held = candidate?.armed && candidate.worker === this.probeIndex && event.data?.type === 'response' && this.methods.get(event.data.id) === candidate.method ? candidate : null;
+          const candidate = probe.workerGate, request = this.methods.get(event.data?.id);
+          const held = candidate?.armed && candidate.worker === this.probeIndex && event.data?.type === 'response' && request?.method === candidate.method
+            && (candidate.queryId === undefined || request.args?.[0] === candidate.queryId) ? candidate : null;
           if (!held) { listener.call(this, event); return; }
-          held.armed = false; held.captured = true;
+          held.armed = false; held.captured = true; held.capturedQueryId = request.args?.[0];
           held.promise.then(() => { held.delivered = true; listener.call(this, event); });
         }, options);
       }
@@ -194,13 +195,19 @@ test('a delayed Local query release cannot let an obsolete Server switch replace
   const errors = await boot(page);
   const local = await page.evaluate(() => window.__timelineDebug);
   const delayedSwitch = async () => {
-    await page.evaluate(() => window.__sourceRace.armWorker({ worker: 0, method: 'releaseQuery' }));
+    const queryId = await page.evaluate(() => {
+      const queryId = window.__timelineDebug.queryId;
+      window.__sourceRace.armWorker({ worker: 0, method: 'releaseQuery', queryId });
+      return queryId;
+    });
+    expect(queryId).toBeTruthy();
     await page.locator('[data-action=sources]').first().click();
     await page.locator('#server-form [name=baseUrl]').fill(server.baseUrl);
     await page.locator('#server-form [name=token]').fill(server.token);
     await page.locator('#server-form [type=submit]').click();
     await page.locator('#switch-source').click();
     await captured(page, 'worker');
+    expect(await page.evaluate(() => window.__sourceRace.workerGate.capturedQueryId)).toBe(queryId);
   };
   await delayedSwitch();
   expect((await page.evaluate(() => window.__timelineDebug)).providerId).toBe(local.providerId);

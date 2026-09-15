@@ -57,6 +57,7 @@ class _Preparation:
     captured: dict
     placeholder: dict
     deadline: float
+    preferences: dict | None = None
     cancelled: threading.Event = field(default_factory=threading.Event)
     done: threading.Event = field(default_factory=threading.Event)
     active: bool = False
@@ -64,10 +65,13 @@ class _Preparation:
 
 class QueryPreparationCoordinator:
     def __init__(self, engine, access, *, workers=2, queue_capacity=8, deadline_seconds=30,
-                 ready_wait_seconds=0.1, preparation_allowance_bytes=8 * 1024 * 1024):
+                 ready_wait_seconds=0.1, release_wait_seconds=5,
+                 preparation_allowance_bytes=8 * 1024 * 1024, preferences=None):
         self.engine, self.access = engine, access
+        self.preferences = preferences
         self.worker_limit, self.queue_capacity = workers, queue_capacity
         self.deadline_seconds, self.ready_wait_seconds = deadline_seconds, ready_wait_seconds
+        self.release_wait_seconds = release_wait_seconds
         self.preparation_allowance_bytes = preparation_allowance_bytes
         self.condition = threading.Condition(engine.mutex)
         self.jobs, self.queue, self.active_principals = {}, [], set()
@@ -94,6 +98,8 @@ class QueryPreparationCoordinator:
             self._expire_queued()
         if operation == "query_records":
             return self._table(identity, *args)
+        if operation in ("release_query", "release_layout", "release_snapshot"):
+            return self._release(identity, operation, args)
         started = operation in ("create_query", "create_layout")
         if started:
             job = self._submit(identity, operation, args)
@@ -104,9 +110,44 @@ class QueryPreparationCoordinator:
         result = self.access.query(identity, operation, *args)
         if started and not prefer_async and result.get("state") == "failed":
             failure = result["error"]
-            self.access.query(identity, "release_query" if job.kind == "query" else "release_layout", *args)
-            raise DomainError(failure["code"], failure["message"], failure["status"])
+            self._release(identity, "release_query" if job.kind == "query" else "release_layout", args)
+            error = DomainError(failure["code"], failure["message"], failure["status"])
+            if 'diagnostic' in failure:
+                error.diagnostic = copy.deepcopy(failure['diagnostic'])
+            raise error
         return result
+
+    def _release(self, identity, operation, args):
+        try:
+            result = self.access.query(identity, operation, *args)
+        except DomainError as error:
+            if error.status in (404, 410):
+                self._wait_released(identity, operation, args)
+            raise
+        self._wait_released(identity, operation, args)
+        return result
+
+    def _wait_released(self, identity, operation, args):
+        def matches(query_id, layout_id, snapshot_id):
+            if operation == "release_snapshot":
+                return snapshot_id == args[0]
+            return query_id == args[0] and (operation == "release_query" or layout_id == args[1])
+
+        # A removed handle can still own a running job. Retain only completion
+        # events, then release all authority/engine locks before waiting.
+        with self.condition:
+            completions = [job.done for job in self.jobs.values()
+                           if job.scope["principalId"] == identity["id"] and
+                           matches(job.query_id, job.key if job.kind == "layout" else None,
+                                   (job.placeholder if job.kind == "query" else job.captured)["manifest"]["snapshotId"])]
+            completions.extend(work["done"] for work in self.synchronous.values()
+                               if work["principalId"] == identity["id"] and
+                               matches(work["queryId"], None, work["snapshotId"]))
+        deadline = time.monotonic() + self.release_wait_seconds
+        for done in completions:
+            if not done.wait(max(0, deadline - time.monotonic())):
+                raise DomainError("preparation_release_timeout",
+                                  "The handle is released but preparation cleanup is still running; retry the same DELETE.", 503)
 
     def _table(self, identity, query_id, request):
         if not isinstance(request, dict) or len(json_bytes(request)) > 64 * 1024:
@@ -116,17 +157,18 @@ class QueryPreparationCoordinator:
                 raise DomainError("query_service_closed", "Query service is closed.", 503)
             scope = self.access._scope(self.access._current(identity, "records.read"))
             with query_access(scope):
-                self.engine._query(query_id)
+                snapshot_id = self.engine._query(query_id)["manifest"]["snapshotId"]
                 if self.engine.has_table(query_id, request):
                     # The lock covers lookup and read, so another request cannot evict this index between them.
                     return self.engine.query_records(query_id, request)
             principal = scope["principalId"]
             if principal in self.active_principals or len(self.active_principals) >= self.worker_limit or self.queue:
                 raise DomainError("preparation_capacity", "Preparation capacity is in use; retry after the current preparation.", 429)
-            key, cancelled = str(uuid.uuid4()), threading.Event()
+            key, cancelled, done = str(uuid.uuid4()), threading.Event(), threading.Event()
             self.engine.resources.reserve(("table-preparation", key), {"request": request, "scope": scope}, overhead=self.preparation_allowance_bytes)
             self.active_principals.add(principal)
-            self.synchronous[key] = {"queryId": query_id, "cancelled": cancelled}
+            self.synchronous[key] = {"queryId": query_id, "snapshotId": snapshot_id,
+                                     "principalId": principal, "cancelled": cancelled, "done": done}
         try:
             with preparation_control(cancelled, time.monotonic() + self.deadline_seconds):
                 return self.access.query(identity, "query_records", query_id, request)
@@ -135,6 +177,7 @@ class QueryPreparationCoordinator:
                 self.engine.resources.release(("table-preparation", key))
                 self.synchronous.pop(key, None)
                 self.active_principals.discard(principal)
+                done.set()
                 self.condition.notify_all()
 
     def _submit(self, identity, operation, args):
@@ -154,6 +197,7 @@ class QueryPreparationCoordinator:
             if len(self.queue) >= self.queue_capacity:
                 raise DomainError("preparation_capacity", "Preparation queue is full; retry after releasing unneeded handles.", 429)
             key = str(uuid.uuid4())
+            preferences = None
             if kind == "query":
                 self.engine.invalidate_principal(scope["principalId"], scope["fingerprint"])
                 owned = sum(value.get("access", {}).get("principalId") == scope["principalId"] for value in self.engine.queries.values())
@@ -161,22 +205,28 @@ class QueryPreparationCoordinator:
                     raise DomainError("query_capacity", "Release an existing query before creating another.", 429)
                 query_id = key
                 # Charge bounded request/container space before copying metadata or record references.
-                self.engine.resources.reserve(("capture", key), {"scope": scope, "request": request, "metadata": self.access.repository.meta},
-                                              overhead=self.preparation_allowance_bytes + 16 * len(self.access.repository.records))
+                preference_source, preference_copy_allowance = self.preferences.capture_admission() if self.preferences else (None, 0)
+                self.engine.resources.reserve(("capture", key), {"scope": scope, "request": request, "metadata": self.access.repository.meta, "preferences": preference_source},
+                                              overhead=self.preparation_allowance_bytes + 16 * len(self.access.repository.records) + preference_copy_allowance)
                 try:
                     repository = self.access.repository
                     captured = (repository.capture_query_snapshot() if getattr(repository, "deferred_capture", False)
                                 else repository.capture_query_domain(request) if hasattr(repository, "capture_query_domain")
                                 else repository.capture_query_snapshot())
+                    if self.preferences:
+                        preferences = self.preferences.capture()
+                        captured = self.preferences.apply(captured, preferences)
                     if hasattr(repository, "project_scope"):
                         captured = repository.project_scope(captured, scope["sourceIds"])
-                    self.engine.resources.replace(("capture", key), {"captured": captured, "scope": scope, "request": request},
+                    self.engine.resources.replace(("capture", key), {"captured": captured, "preferences": preferences, "scope": scope, "request": request},
                                                   overhead=self.preparation_allowance_bytes)
                 except BaseException:
                     self.engine.resources.release(("capture", key))
                     raise
                 manifest = {"queryId": key, "snapshotId": str(uuid.uuid4()), "mapId": str(uuid.uuid4()),
                             "generation": captured["manifest"]["generation"], "revision": captured["manifest"]["revision"], "state": "preparing"}
+                if "preferencesRevision" in captured["manifest"]:
+                    manifest["preferencesRevision"] = captured["manifest"]["preferencesRevision"]
                 placeholder = {"manifest": manifest, "access": copy.deepcopy(scope), "expires": time.monotonic() + self.engine.ttl_seconds,
                                "layouts": {}, "tables": OrderedDict()}
             else:
@@ -190,11 +240,11 @@ class QueryPreparationCoordinator:
                             "generation": query["manifest"]["generation"], "revision": query["manifest"]["revision"], "state": "preparing"}
                 placeholder = {"manifest": manifest}
             job = _Preparation(kind, key, query_id, scope, copy.deepcopy(identity), copy.deepcopy(request), captured, placeholder,
-                               time.monotonic() + self.deadline_seconds)
+                               time.monotonic() + self.deadline_seconds, preferences=preferences)
             root_key = ("query", key) if kind == "query" else ("layout", query_id, key)
             try:
                 if kind == "query":
-                    self.engine.resources.replace(("capture", key), {"captured": captured, "request": job.request, "scope": scope},
+                    self.engine.resources.replace(("capture", key), {"captured": captured, "preferences": preferences, "request": job.request, "scope": scope},
                                                   overhead=self.preparation_allowance_bytes)
                     self.engine.resources.roots[("preparation", key)] = self.engine.resources.roots.pop(("capture", key))
                 else:
@@ -255,6 +305,8 @@ class QueryPreparationCoordinator:
         if not self._present(job):
             return
         manifest = {**job.placeholder["manifest"], "state": "failed", "error": {"code": error.code[:128], "message": error.message[:256], "status": error.status}}
+        if hasattr(error, 'diagnostic'):
+            manifest['error']['diagnostic'] = copy.deepcopy(error.diagnostic)
         replacement = {**job.placeholder, "manifest": manifest}
         root_key = ("query", job.query_id) if job.kind == "query" else ("layout", job.query_id, job.key)
         self.engine.resources.replace(root_key, retained_query(replacement) if job.kind == "query" else replacement)
@@ -295,7 +347,10 @@ class QueryPreparationCoordinator:
         with query_access(job.scope), preparation_control(job.cancelled, job.deadline):
             if job.kind == "query" and getattr(self.access.repository, "deferred_capture", False):
                 repository = self.access.repository
-                job.captured = repository.project_scope(repository.capture_query_domain(job.request), job.scope["sourceIds"])
+                captured = repository.capture_query_domain(job.request)
+                if self.preferences:
+                    captured = self.preferences.apply(captured, job.preferences)
+                job.captured = repository.project_scope(captured, job.scope["sourceIds"])
                 # Allocation identity remains fixed while file coverage is exposed
                 # separately on the ready query's coverage/indexVersion metadata.
                 job.captured["manifest"].update({key: job.placeholder["manifest"][key] for key in ("generation", "revision")})

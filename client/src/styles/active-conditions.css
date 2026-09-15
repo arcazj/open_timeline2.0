@@ -1,0 +1,5 @@
+.active-conditions { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; min-width: 0; max-width: 100%; max-height: 76px; overflow: auto; }
+.active-conditions[hidden] { display: none; }
+.active-condition, .active-condition-context { display: inline-flex; align-items: center; min-width: 0; max-width: 300px; border: 1px solid var(--border, #c6cdd1); border-radius: 4px; font-size: 12px; line-height: 1.4; }
+.active-condition > span, .active-condition-context { padding: 3px 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.active-condition button { width: 24px; height: 24px; min-width: 24px; padding: 4px; border: 0; background: transparent; }

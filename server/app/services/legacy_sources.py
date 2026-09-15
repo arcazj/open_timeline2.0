@@ -10,14 +10,14 @@ import hashlib
 import os
 import re
 import stat
-from dataclasses import dataclass
+from dataclasses import dataclass, field as dataclass_field
 from datetime import date, datetime, time, timedelta, timezone as dt_timezone
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 import yaml
 
-from ..models.domain import DomainError
+from ..models.domain import DomainError, json_bytes
 
 
 _MODELS = {"yyyy": 1, "yyyy/mm": 2, "yyyy/mm/dd": 3}
@@ -66,6 +66,7 @@ class LegacySourceConfiguration:
     diagnostics: list[dict]
     render_sources: list[dict]
     timezone: str
+    approved_predicates: dict = dataclass_field(default_factory=dict)
 
     def metadata(self):
         return {
@@ -76,6 +77,7 @@ class LegacySourceConfiguration:
                          "available": Path(source.root).is_dir()}
                         for source in self.sources],
             "diagnostics": list(self.diagnostics),
+            **({'sourcePredicates': self.approved_predicates} if self.approved_predicates else {}),
         }
 
 
@@ -212,7 +214,23 @@ def load_legacy_sources(config_path, *, legacy_root, allow_roots, path_maps=None
             report(index, "legacy_permission_unsupported", "error")
             continue
         filters = entry.get("filter", {})
-        if not isinstance(filters, dict) or any(value not in (None, "") for value in filters.values()):
+        approval = entry.get('approved_filter')
+        if approval is not None:
+            from .filters import FIELD_TYPES, compile_expression
+            if (not isinstance(filters, dict) or not isinstance(approval, dict) or
+                    set(approval) != {'definitionVersion', 'approved', 'originalSha256', 'expression'} or
+                    type(approval['definitionVersion']) is not int or approval['definitionVersion'] != 2 or approval['approved'] is not True or
+                    approval['originalSha256'] != hashlib.sha256(json_bytes(filters)).hexdigest() or
+                    not isinstance(approval['expression'], dict) or approval['expression'].get('version') != 2):
+                report(index, 'legacy_source_filter_approval_invalid', 'error')
+                continue
+            try:
+                compile_expression(approval['expression'], field_types={**FIELD_TYPES, '/data/namespace': 'string'})
+            except DomainError as error:
+                report(index, 'legacy_source_filter_approval_invalid', 'error', reason=error.code)
+                continue
+            report(index, 'legacy_source_filter_approved', 'info')
+        elif not isinstance(filters, dict) or any(value not in (None, "") for value in filters.values()):
             report(index, "legacy_source_filter_unsupported", "error")
             continue
         logical, model = split_data_model(entry.get("data_model"))
@@ -237,16 +255,16 @@ def load_legacy_sources(config_path, *, legacy_root, allow_roots, path_maps=None
         if entry.get("connector"):
             report(index, "legacy_connector_not_executed", "info")
         known = {"namespace", "type", "enable", "permission", "converter2events_class", "data_path",
-                 "data_model", "filter", "connector", "render"}
+                 "data_model", "filter", "approved_filter", "connector", "render"}
         for field in sorted(set(entry) - known):
             report(index, "legacy_source_option_unsupported", field=field[:64])
-        accepted.append((index, namespace, logical, root, model, colors))
+        accepted.append((index, namespace, logical, root, model, colors, approval))
 
     counts = {}
     for _, namespace, *_ in accepted:
         counts[namespace] = counts.get(namespace, 0) + 1
-    sources, styles, seen = [], [], set()
-    for index, namespace, logical, root, model, colors in accepted:
+    sources, styles, seen, approved_predicates = [], [], set(), {}
+    for index, namespace, logical, root, model, colors, approval in accepted:
         digest = hashlib.sha256((namespace + "\0" + logical + "/" + model).encode()).hexdigest()[:16]
         identity = (namespace[:100] if _SOURCE_ID.fullmatch(namespace) else "legacy") + "-" + digest
         authority = (namespace, root, model)
@@ -257,7 +275,9 @@ def load_legacy_sources(config_path, *, legacy_root, allow_roots, path_maps=None
             report(index, "legacy_namespace_multiple_sources", "info", sourceId=identity)
         sources.append(LegacySource(identity, root, namespace, timezone, dialect, data_model=model))
         styles.append({"sourceId": identity, "namespace": namespace, "render": colors})
-    return LegacySourceConfiguration(tuple(sources), diagnostics, styles, timezone)
+        if approval is not None:
+            approved_predicates[identity] = approval['expression']
+    return LegacySourceConfiguration(tuple(sources), diagnostics, styles, timezone, approved_predicates)
 
 
 def _relative_parts(relative):

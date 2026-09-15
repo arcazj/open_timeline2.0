@@ -14,6 +14,8 @@ from ..models.model_catalog import TIME_UNITS
 from ..models.presentation import MISSING, pointer_value, validate_presentation
 from .row_packer import pack_footprints
 from .preparation_control import checked, checkpoint
+from .string_order import compare_ordered_text, normalize_string_order
+from .group_pagination import collapsed_group_keys, paginate_group_rows
 
 HAZARD_ICONS = frozenset(json.loads((Path(__file__).resolve().parents[3] / "shared/legacy-hazard-icons.json").read_text(encoding="utf-8")).values())
 
@@ -166,12 +168,22 @@ def group_key(key):
     return prefix + ":" + text
 
 
+def compare_group_keys(left, right, direction='asc', ordering=None):
+    if left[0] != right[0]:
+        return -1 if left[0] < right[0] else 1
+    if left[0] >= 3:
+        return 0
+    result = compare_ordered_text(left[1], right[1], ordering) if left[0] == 1 else (left[1] > right[1]) - (left[1] < right[1])
+    return -result if direction == 'desc' else result
+
+
 def build_styled_layout(selected, request, width, requested_height, font_size, group_by, project, domain_end, metrics_for):
+    group_order = normalize_string_order(request.get('groupOrder', {}), request.get('definitionVersion', 1))
+    collapsed = collapsed_group_keys(request.get('collapsedGroups', []), request.get('definitionVersion', 1))
     presentation = resolved_presentation(request.get("presentation", {"version": 1}), font_size, request.get("theme", "light"),
                                          group_by, request.get("displayUnit", "HOUR"))
     grouping = presentation["grouping"]
     field = grouping["field"]
-    descending = grouping["direction"] == "desc"
     groups = {}
     band_sources = next((band.get("sourceIds") for band in presentation.get("bandLayout", []) if band["role"] == "primary"), None)
     for record in checked(selected):
@@ -181,10 +193,7 @@ def build_styled_layout(selected, request, width, requested_height, font_size, g
         groups.setdefault(key, {"name": name, "records": []})["records"].append(record)
 
     def compare_groups(left, right):
-        if left[0] != right[0]:
-            return -1 if left[0] < right[0] else 1
-        result = (left[1] > right[1]) - (left[1] < right[1])
-        return -result if descending and left[0] < 3 else result
+        return compare_group_keys(left, right, grouping['direction'], group_order)
 
     items, rows, enclosures, row_offset = [], [], [], 0
     effective_height = 21 if presentation.get("compact") else requested_height
@@ -193,8 +202,12 @@ def build_styled_layout(selected, request, width, requested_height, font_size, g
         if field:
             row = {"row": row_offset, "type": "group", "name": group["name"], "key": group_key(key),
                    "style": group_style(key[1], presentation)}
+            if request.get('definitionVersion') == 2:
+                row.update(collapsed=group_key(key) in collapsed, recordCount=len(group['records']))
             rows.append(row)
             row_offset += 1
+        if field and group_key(key) in collapsed:
+            continue
         records = sorted(group["records"], key=temporal_order)
         record_map = {record["id"]: record for record in records}
         ancestors, children = {}, {}
@@ -313,5 +326,10 @@ def build_styled_layout(selected, request, width, requested_height, font_size, g
     if effective_height > 192:
         raise DomainError("row_height_limit", "Resolved label and geometry exceed the 192-pixel row limit.")
     enclosures.sort(key=lambda value: (value["startRow"], -value["endRow"], value["parentId"]))
-    return {"items": items, "rows": rows, "enclosures": enclosures, "rowHeight": math.ceil(effective_height),
-            "totalRows": row_offset, "presentation": presentation}
+    result = {"items": items, "rows": rows, "enclosures": enclosures, "rowHeight": math.ceil(effective_height),
+              "totalRows": row_offset, "presentation": presentation}
+    if request.get('definitionVersion') == 2:
+        result['_groupRecords'] = {group_key(key): [record['id'] for record in group['records']] for key, group in groups.items()}
+        capacity = min(100, math.floor(request.get('availableHeight', 480) / result['rowHeight']))
+        return paginate_group_rows(result, capacity)
+    return result

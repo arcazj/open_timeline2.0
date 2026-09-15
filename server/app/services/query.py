@@ -20,13 +20,16 @@ import rfc8785
 
 from ..models.domain import DomainError, instant_ms, json_bytes, read_json
 from .query_configuration import resolve_query_configuration
+from .query_relationships import resolve_relationships, scoped_query_counts
+from .filters import compile_expression, compile_search, create_regex_budget
+from .legacy_filter_migration import migrate_legacy_filter
 from .presentation_layout import build_styled_layout
 from .query_access import current_query_access
 from .query_resources import QueryResourceLedger
 from .preparation_control import checked, checkpoint
 from .row_packer import pack_footprints
 from .fixed_scale import fixed_scale_map
-from .table_query import TABLE_CACHE_LIMIT, TABLE_RESPONSE_BYTES, normalize_table_input, prepare_table
+from .table_query import TABLE_CACHE_LIMIT, TABLE_RESPONSE_BYTES, normalize_table_input, prepare_table, table_item
 
 
 def number(value, name, minimum, maximum, integer=False):
@@ -334,17 +337,19 @@ class QueryEngine:
             resolved = resolve_query_configuration(bundle, request, access)
             search = resolved["search"]
             allowed_sources = set(access["sourceIds"]) if access is not None else None
-            records = [record for record in checked(bundle["records"]) if record["deletedAt"] is None
-                       and (allowed_sources is None or record["sourceId"] in allowed_sources)
-                       and resolved["predicate"](record)]
+            authorized = [record for record in checked(bundle["records"]) if record["deletedAt"] is None
+                          and (allowed_sources is None or record["sourceId"] in allowed_sources)]
+            relationships = resolve_relationships(authorized, resolved, start, end) if resolved['definitionVersion'] == 2 else None
+            records = relationships['records'] if relationships is not None else [record for record in checked(authorized) if resolved['predicate'](record)]
             records.sort(key=lambda record: record["id"])
             checkpoint()
             if len(records) > 100000 or len(json_bytes(bundle)) > 128 * 1024 * 1024:
                 raise DomainError("query_capacity", "Query exceeds the admitted in-memory preparation limit.", 413)
             cached_bounds = {record["id"]: record_bounds(record) for record in checked(records)}
-            match_ids = {record["id"] for record in checked(records) if search["matches"](record)}
+            match_ids = relationships['matches'] if relationships is not None else {record["id"] for record in checked(records) if search["matches"](record)}
             query_id, snapshot_id, map_id = getattr(self, "assigned_query_ids", None) or (str(uuid.uuid4()) for _ in range(3))
-            density = build_density(records, start, end, count, cached_bounds)
+            eligible_records = relationships['eligibleRecords'] if relationships is not None else records
+            density = build_density(eligible_records, start, end, count, cached_bounds)
             coverage = bundle["manifest"].get("legacy", {}).get("coverage")
             if coverage is not None:
                 density["complete"] = coverage["complete"]
@@ -355,23 +360,28 @@ class QueryEngine:
                 fixed = fixed_scale_map(copy.deepcopy(domain), request["fixedScale"], map_id, decimal_string)
                 if mode == "uniform":
                     mapping = fixed
-            overview_records = [record for record in records if bounds_intersect(cached_bounds[record["id"]], start, end)]
+            overview_records = [record for record in eligible_records if bounds_intersect(cached_bounds[record["id"]], start, end)]
+            if resolved['definitionVersion'] == 2:
+                overview_records.sort(key=lambda record: (cached_bounds[record["id"]][0], record["id"]))
             overview_matches = [record for record in overview_records if record["id"] in match_ids]
-            selected_sources = request.get("filters", {}).get("sourceIds")
-            selected_source = request.get("filters", {}).get("sourceId", "all")
-
             def selected_zone(zone):
                 source = zone.get("legacy", {}).get("sourceId")
                 return (not source or ((allowed_sources is None or source in allowed_sources)
-                                       and (selected_sources is None or source in selected_sources)
-                                       and (selected_source == "all" or source == selected_source)))
+                                       and resolved['sourceSelected'](source)))
             manifest = {"queryId": query_id, "snapshotId": snapshot_id, "mapId": map_id,
                         "generation": bundle["manifest"]["generation"], "revision": bundle["manifest"]["revision"],
-                        "baseTotal": len(records), "matchTotal": len(match_ids), "overviewTotal": len(overview_records),
+                        "baseTotal": len(eligible_records), "matchTotal": len(match_ids), "overviewTotal": len(overview_records),
                         "overviewMatchTotal": len(overview_matches), "fieldTypes": resolved["fieldTypes"], "state": "ready"}
             if coverage is not None:
                 manifest["coverage"] = copy.deepcopy(coverage)
-            query = {"manifest": manifest, "access": copy.deepcopy(access),
+            if 'preferencesRevision' in bundle['manifest']:
+                manifest['preferencesRevision'] = bundle['manifest']['preferencesRevision']
+            if relationships is not None:
+                manifest.update(definitionVersion=2, relationshipMode=resolved['relationshipMode'],
+                                counts=scoped_query_counts({**relationships, 'hasSearch': search['active']}, domain,
+                                                          manifest['revision'], manifest['generation'], density['complete']))
+            query = {**(relationships or {}), "manifest": manifest, "access": copy.deepcopy(access),
+                                      **({'explanationDefinition': resolved['explanationDefinition']} if relationships is not None else {}),
                                       "records": records, "matchIds": match_ids, "recordBounds": cached_bounds, "fieldTypes": resolved["fieldTypes"],
                                       "hasSearch": search["active"], "density": density, "map": mapping,
                                       "overviewRecords": overview_matches if search["active"] else overview_records,
@@ -388,6 +398,65 @@ class QueryEngine:
     def density(self, query_id):
         with self.mutex:
             return copy.deepcopy(self._query(query_id)["density"])
+
+    def query_record(self, query_id, record_id):
+        with self.mutex:
+            query = self._query(query_id)
+            by_id = {record['id']: record for record in query['records'] + query.get('contextRecords', [])}
+            record = by_id.get(record_id)
+            if record is None:
+                raise DomainError('record_not_found', 'Record is not available in this query.', 404)
+            ancestors, parent = [], by_id.get(record.get('parentSessionId'))
+            while parent and len(ancestors) < 32:
+                ancestors.append({key: parent[key] for key in ('id', 'title', 'kind', 'start', 'end')})
+                parent = by_id.get(parent.get('parentSessionId'))
+            explanation = None
+            if 'explanationDefinition' in query:
+                definition, budget = query['explanationDefinition'], create_regex_budget(check_cancelled=checkpoint)
+                reports = []
+                for expression in definition['expressions']:
+                    predicate = compile_expression(expression, field_types=query['fieldTypes'], regex_budget=budget)
+                    if hasattr(predicate, 'explain'):
+                        reports.append(predicate.explain(record))
+                if query['hasSearch'] and record_id in query['matchIds']:
+                    search = compile_search(definition['search'], field_types=query['fieldTypes'], regex_budget=budget)
+                    if 'explain' in search:
+                        reports.append(search['explain'](record))
+                rules = [rule for report in reports for rule in report['rules']]
+                explanation = {'rules': rules[:16], 'truncated': len(rules) > 16 or any(report['truncated'] for report in reports)}
+            return copy.deepcopy({'record': record, 'ancestors': ancestors, 'ancestorsTruncated': parent is not None, 'searchActive': query['hasSearch'],
+                                  **({'explanation': explanation} if explanation is not None else {}),
+                                  **({'provenance': query['provenance'][record_id]} if 'provenance' in query else {})})
+
+    def find_match(self, query_id, request):
+        with self.mutex:
+            query = self._query(query_id)
+            if (not isinstance(request, dict) or set(request) - {'afterId', 'direction'} or request.get('direction', 'next') not in ('next', 'previous')
+                    or (request.get('afterId') is not None and (not isinstance(request['afterId'], str) or len(request['afterId']) > 128))):
+                raise DomainError('invalid_find', 'Specify a finding identity and next or previous direction.')
+            records = sorted((record for record in query['records'] if record['id'] in query['matchIds']),
+                             key=lambda record: (instant_ms(record['start']), record['id'])) if query['hasSearch'] else []
+            current = next((index for index, record in enumerate(records) if record['id'] == request.get('afterId')), -1)
+            previous = request.get('direction') == 'previous'
+            position = (len(records) - 1 if previous else 0) if current < 0 else current + (-1 if previous else 1)
+            index = position % len(records) if records else -1
+            return copy.deepcopy({'queryId': query_id, 'record': records[index] if records else None, 'position': index + 1, 'total': len(records),
+                                  'wrapped': current >= 0 and (position < 0 or position >= len(records))})
+
+    def migrate_legacy_filter(self, query_id, request):
+        with self.mutex:
+            query = self._query(query_id)
+            report = migrate_legacy_filter(request, field_types=query['fieldTypes'])
+            return {**report, 'scope': {'queryId': query_id, 'generation': query['manifest']['generation'], 'revision': query['manifest']['revision'],
+                                      'domain': copy.deepcopy(query['map']['domain']), 'complete': query['density']['complete']}}
+
+    def _versioned_input(self, query, request):
+        if not isinstance(request, dict):
+            raise DomainError('invalid_query', 'Query input must be an object.')
+        version = query['manifest'].get('definitionVersion', 1)
+        if 'definitionVersion' in request and (type(request['definitionVersion']) is not int or request['definitionVersion'] != version):
+            raise DomainError('query_definition_mismatch', 'Layout and table definition must match the pinned query.', 409)
+        return {**request, 'definitionVersion': 2} if version == 2 else request
 
     def mapping(self, query_id, map_id):
         with self.mutex:
@@ -430,6 +499,7 @@ class QueryEngine:
         with self.mutex, localcontext() as context:
             context.prec = 50
             query = self._query(query_id)
+            request = self._versioned_input(query, request)
             if not isinstance(request, dict):
                 raise DomainError("invalid_layout", "Layout input must be an object.")
             if len(json_bytes(request)) > 64 * 1024:
@@ -455,7 +525,7 @@ class QueryEngine:
             knots = query["map"]["knots"]
             a, b = mapped(knots, start), mapped(knots, end)
             selected = [record for record in checked(query["records"]) if bounds_intersect(query["recordBounds"][record["id"]], start, end)]
-            if "presentation" in request or any(set(record["render"]) - {"color"} for record in selected):
+            if request.get('definitionVersion') == 2 or 'groupOrder' in request or "presentation" in request or any(set(record["render"]) - {"color"} for record in selected):
                 def project(timestamp):
                     clipped = max(knots[0]["timeMs"], min(knots[-1]["timeMs"], timestamp))
                     return float(Decimal(str(width)) * (mapped(knots, clipped) - a) / (b - a))
@@ -547,6 +617,8 @@ class QueryEngine:
         for item in items:
             record = item["record"]
             item["match"] = record["id"] in query["matchIds"]
+            if 'provenance' in query:
+                item['provenance'] = query['provenance'][record['id']]
             item["continuesBefore"] = instant_ms(record["start"]) < start
             item["continuesAfter"] = record["kind"] == "session" and (record["end"] is None or instant_ms(record["end"]) > end)
         layout_id = str(uuid.uuid4())
@@ -557,6 +629,13 @@ class QueryEngine:
                     "viewToMs": decimal_string(end), "width": width, "availableHeight": height,
                     "renderProfileId": self.metrics.profile["profileId"], "presentation": resolved["presentation"],
                     "enclosures": resolved["enclosures"]}
+        if request.get('definitionVersion') == 2:
+            detail_ids = [record_id for group in resolved['_groupRecords'].values() for record_id in group]
+            manifest.update(definitionVersion=2, detailTotal=len(detail_ids),
+                            detailMatchTotal=sum(record_id in query['matchIds'] for record_id in detail_ids),
+                            **{key: resolved[key] for key in ('logicalGroupTotal', 'collapsedGroupTotal', 'hiddenItemTotal')})
+            for row in resolved['rows']:
+                row['matchCount'] = sum(record_id in query['matchIds'] for record_id in resolved['_groupRecords'][row['key']])
         item_pages = self._page_buckets(items, capacity)
         row_pages = self._page_buckets(resolved["rows"], capacity)
         enclosure_pages = {}
@@ -634,12 +713,22 @@ class QueryEngine:
         except (ValueError, UnicodeError) as error:
             raise DomainError("invalid_cursor", "Cursor belongs to a different layout or has been altered.", 400) from error
 
-    def rows(self, query_id, layout_id, cursor=None):
+    def rows(self, query_id, layout_id, cursor=None, page_index=None):
         with self.mutex:
             layout = self._layout(query_id, layout_id)
             manifest = layout["manifest"]
             capacity, total = manifest["pageCapacity"], manifest["totalRows"]
-            start = self._offset(cursor, layout_id, capacity)
+            page_count = max(1, math.ceil(total / capacity))
+            if page_index is not None:
+                if cursor is not None:
+                    raise DomainError("invalid_pagination", "Specify either cursor or pageIndex, not both.", 422)
+                if type(page_index) is not int or not 0 <= page_index <= 9007199254740991:
+                    raise DomainError("invalid_page_index", "pageIndex must be a nonnegative safe integer.", 422)
+                if page_index >= page_count:
+                    raise DomainError("invalid_page_index", "pageIndex is outside this layout.", 400)
+                start = page_index * capacity
+            else:
+                start = self._offset(cursor, layout_id, capacity)
             if start >= total and start != 0:
                 raise DomainError("invalid_cursor", "Cursor points beyond the last row.", 400)
             end = min(total, start + capacity)
@@ -647,7 +736,7 @@ class QueryEngine:
             result = {"layoutId": layout_id, "mapId": manifest["mapId"], "items": copy.deepcopy(items),
                     "rows": copy.deepcopy([row for row in layout["rows"] if start <= row["row"] < end]),
                     "startRow": start, "endRow": end, "totalRows": total, "pageIndex": start // capacity,
-                    "pageCount": max(1, math.ceil(total / capacity)),
+                    "pageCount": page_count,
                     "previousCursor": self._cursor(layout_id, max(0, start - capacity)) if start else None,
                     "nextCursor": self._cursor(layout_id, end) if end < total else None,
                     "pageComplete": True, "loadedCount": len(items)}
@@ -689,6 +778,7 @@ class QueryEngine:
             raise DomainError("invalid_table_cursor", "Cursor is altered or belongs to another query, sort, scope or capacity.", 400) from error
 
     def _table_input(self, query_id, query, request):
+        request = self._versioned_input(query, request)
         if isinstance(request, dict) and len(json_bytes(request)) > 64 * 1024:
             raise DomainError("query_request_limit", "Table preparation requests are limited to 64 KiB.", 413)
         options, cursor = normalize_table_input(request, query["map"]["domain"], continuous, decimal_string, query.get("fieldTypes"))
@@ -719,12 +809,12 @@ class QueryEngine:
             if page_index >= len(starts) or starts[page_index] != offset:
                 raise DomainError("invalid_table_cursor", "Cursor does not identify a complete table page boundary.", 400)
             end = starts[page_index + 1] if page_index + 1 < len(starts) else len(table["records"])
-            items = [{"record": copy.deepcopy(record), "match": record["id"] in query["matchIds"]}
-                     for record in table["records"][offset:end]]
+            items = [copy.deepcopy(table_item(query, record)) for record in table["records"][offset:end]]
             result = {"queryId": query_id, "snapshotId": provenance["snapshotId"], "generation": provenance["generation"],
                       "revision": provenance["revision"], "tableId": table_id, **copy.deepcopy(options),
                       "baseTotal": table["baseTotal"], "total": len(table["records"]), "matchTotal": table["matchTotal"],
                       "matchActive": query["hasSearch"], "items": items, "startIndex": offset, "endIndex": end,
+                      **({'contextTotal': table['contextTotal']} if provenance.get('definitionVersion') == 2 else {}),
                       "pageIndex": page_index, "pageCount": len(starts), "previousCursor": self._table_cursor(table_id, starts[page_index - 1]) if page_index else None,
                       "nextCursor": self._table_cursor(table_id, end) if end < len(table["records"]) else None,
                       "pageComplete": True}

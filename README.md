@@ -39,12 +39,15 @@ The output is `artifacts/releases/v0.1.0-preview.1/`. Extract the ZIP and open `
 - **Navigate time naturally.** Drag with momentum, stop movement with a click, use the calendar, or move the overview's selected range. Browse past and future within the supported date domain.
 - **Keep crowded intervals readable.** Density-aware local magnification, manual 1x-32x controls, measured label placement, and vertical row pagination work together. Changing row pages preserves the time range.
 - **See context.** Duration bars, point markers, translucent zones, search highlights, and a right-hand descriptor keep individual records connected to the broader timeline.
+- **Filter precisely.** The opt-in version-2 workflow adds safe field-scoped regex, typed conditions, parent/family context, natural ordering, group collapse, reviewed migration and version-pinned saved views. [Workflow and qualification status](docs/sorting-filtering/implementation-status.md).
 - **Combine or separate sources.** Browse sources together with ALL, or organize lanes by NAMESPACE. Select multiple server paths and keep favorites in the toolbar.
 - **Customize the workspace.** Versioned visual models, schemas, filters, views, settings, and configurable bands share the same provider contracts.
 - **Work online or offline.** Use a Python-backed view, a complete bundled snapshot, or an imported JSON file. The source and snapshot status remain visible.
 - **Share a view.** Export a timeline PNG, share view settings, export a complete permitted snapshot, or inspect embedded documentation and OpenAPI help.
 
 Legacy archives remain **read-only**. The separate writable JSON workspace API supports event/session and configuration commands; it never turns a linked legacy directory into a write target.
+
+Legacy browsing can save application-owned filters, views and preferences in a separate JSON directory under the server state root. It cannot modify legacy records, models or descriptors. Selecting an item opens its metadata immediately and loads an available descriptor sidecar safely; missing sidecars do not block navigation.
 
 ## Quick Start
 
@@ -107,6 +110,8 @@ The supplied archive profiles are templates for the author's local layout, not b
 
 Legacy sources support `<path>/yyyy/mm/dd` partitions. The server reads the visible interval and a small buffer first, then loads more on navigation. Sessions overlapping the interval are included even when they begin earlier. Background discovery reports provisional coverage until older partitions are verified; it does not claim an incomplete window is a complete archive.
 
+Smart dragging prepares adjacent rows ahead of movement, with bounded, direction-aware caching. Rows and the time mapping stay fixed while you drag; partial or unavailable intervals are marked explicitly. Range-only navigation retains the selected descriptor and its expanded details. See [smart dragging](docs/smart-dragging.md) for behavior and limits, and [verification captures and results](docs/smart-drag-verification.md) for recorded evidence.
+
 Keep private launch overrides in `yaml/local/` or `config/local/`, which are excluded from Git. See [source paths and favorites](docs/local-source-paths.md), [legacy JSON compatibility](docs/legacy-json-sources.md), and [on-demand loading](docs/on-demand-loading.md).
 
 ### Writable Python API
@@ -136,6 +141,12 @@ These images were captured from the implemented application. Reference-inspired 
 ### Multiple Bands and Historical Scales
 
 [![Religions dataset showing separate bands, BC dates, duration bars, and a magnified overview](docs/ui/test-data/religions.png)](docs/ui/test-data/religions.png)
+
+### Legacy Record Descriptors
+
+[![Selected session with a read-only linked descriptor beside the timeline and overview](docs/ui/sorting-v2/descriptor-desktop.png)](docs/ui/sorting-v2/descriptor-desktop.png)
+
+The sorting/filtering candidate retains the legacy right-hand descriptor, including linked sidecar metadata. See the [desktop and offline mobile gallery](docs/sorting-filtering/implementation-status.md#actual-candidate-screenshots), [capture provenance](docs/ui/sorting-v2/screenshots.json), and [illustrated candidate guide (PDF)](output/pdf/sorting-filtering-candidate.pdf). These captures document the candidate build, not the currently deployed main-branch demo or a stable release.
 
 More: [six-dataset gallery and mobile captures](docs/local-test-data.md), [earthquake and volcano rendering](docs/hazard-rendering-parity.md), [namespace lanes and search](docs/legacy-json-preview.md), and [screenshot PDF](output/pdf/local-test-data.pdf). The screenshot PDF records its own capture build; rebuilding the application does not retroactively requalify that evidence.
 
@@ -185,6 +196,8 @@ The [initial measurements](docs/demo-performance.md) were about 1.1 seconds on d
 | --- | --- |
 | Architecture and data | [Architecture](docs/architecture.md), [data model](docs/data-model.md), [provider contracts](docs/provider-standalone-contract.md) |
 | Navigation and presentation | [Calendar and momentum](docs/calendar-navigation.md), [local scaling](docs/local-scaling.md), [models](docs/model-management.md), [filters and search](docs/filters-and-search.md) |
+| Sorting/filtering candidate | [Implemented workflow and descriptor gallery](docs/sorting-filtering/implementation-status.md), [candidate PDF](output/pdf/sorting-filtering-candidate.pdf), [read-only source preferences](docs/sorting-filtering/legacy-preferences.md), [regex qualification](docs/sorting-filtering/regex-qualification.md) |
+| Sorting/filtering design and evidence | [Illustrated implementation prompt](OpenBEXI_Timeline_Sorting_Filtering_Prompt.md), [legacy analysis and executable evidence](docs/sorting-filtering/analysis.md), [acceptance plan](docs/sorting-filtering/acceptance.md), [original design PDF](output/pdf/OpenBEXI_Timeline_Sorting_Filtering_Prompt.pdf) |
 | Data sources | [Standalone](docs/standalone-mode.md), [local datasets](docs/local-test-data.md), [legacy migration](docs/migration-from-tomcat.md) |
 | API and operations | [API](docs/api.md), [OpenAPI contract](docs/api-contract.md), [identity](docs/identity.md), [backup](docs/backup-restore.md) |
 | Project health | [Implementation status](docs/implementation-status.md), [performance](docs/performance.md), [release checklist](docs/release-checklist.md) |

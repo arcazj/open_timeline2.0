@@ -49,7 +49,20 @@ for (const viewport of [{ width: 1600, height: 900 }, { width: 390, height: 844 
     expect(layers[0]).toBeCloseTo(dx, 1); expect(layers[1]).toBeCloseTo(dx, 1);
     expect((await page.locator('.overview-window').boundingBox()).x).toBeLessThan(overview.x);
     expect((await pixels(page)).colors).toBeGreaterThan(8); expect((await pixels(page)).hash).not.toBe(beforePixels.hash);
-    await expect(page.locator('.navigation-pending-edge')).toBeVisible();
+    const coverage = await page.evaluate(() => {
+      const edge = document.querySelector('.navigation-pending-edge'), debug = window.__timelineDebug;
+      return { state: debug.navigationCoverage, hidden: edge.hidden, key: edge.dataset.coverage,
+        messages: [...edge.children].map(node => node.textContent), tiles: debug.navigationBuffer.tiles };
+    });
+    expect(['ready', 'partial', 'error']).toContain(coverage.state);
+    if (coverage.state === 'ready') {
+      expect(coverage.hidden).toBe(true); expect(coverage.key).toBe(''); expect(coverage.messages).toEqual([]);
+      expect(coverage.tiles.find(tile => tile.index === -1)?.status).toBe('ready');
+    } else {
+      expect(coverage.hidden).toBe(false); expect(coverage.messages.length).toBeGreaterThan(0);
+      expect(coverage.key).toMatch(/-1:(not-loaded|loading|partial|incompatible|error)/);
+      for (const message of coverage.messages) expect(message).toMatch(/Loading more records|Additional rows pending|Source changed; refresh pending|Data unavailable; retry pending/);
+    }
     await page.screenshot({ path: info.outputPath(`held-drag-${viewport.width}.png`), fullPage: true });
     await page.waitForTimeout(210);
     await page.mouse.up();

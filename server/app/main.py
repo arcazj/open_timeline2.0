@@ -15,7 +15,7 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.exceptions import HTTPException
 import rfc8785
 
-from .models.domain import DomainError, parse_json
+from .models.domain import DomainError, parse_json, read_json
 from .models.model_catalog import definition_errors
 from .services.query import QueryEngine
 from .services.query_preparation import QueryPreparationCoordinator
@@ -33,6 +33,8 @@ from .repositories.legacy_repository import LegacyRepository
 from .repositories.snapshot_file_repository import SnapshotFileRepository
 from .repositories.partitioned_legacy_repository import PartitionedLegacyRepository
 from .services.legacy_configuration import LegacyConfigurationService
+from .repositories.legacy_preferences import LegacyPreferencesRepository
+from .services.legacy_preferences import LegacyPreferencesConfigurationService
 from .services.identity import authorize
 from .services.local_browser import local_browser_key, require_local_browser, source_catalog, validate_local_origin
 from .services.startup import StartupStatus
@@ -54,11 +56,11 @@ def create_app(data_root=None, token=None, seed_path=None, metrics_path=None, le
 
     @asynccontextmanager
     async def lifespan(app):
-        repository = identities = None
+        repository = identities = preferences = None
         startup = app.state.startup = StartupStatus()
 
         def bootstrap():
-            nonlocal repository, identities
+            nonlocal repository, identities, preferences
             try:
                 legacy_type = SnapshotFileRepository if legacy_config and legacy_config.get("snapshotFile") else PartitionedLegacyRepository if legacy_config and legacy_config.get("lazy", False) else LegacyRepository
                 repository = legacy_type(legacy_config, root) if legacy_config else JsonRepository(root, seed)
@@ -73,13 +75,16 @@ def create_app(data_root=None, token=None, seed_path=None, metrics_path=None, le
                 identities = IdentityStore(root / "control", app.state.local_browser_secret or configured_token)
                 identities.open()
                 startup.update("loading-services")
+                if legacy_config and legacy_config.get("preferencesRoot"):
+                    preferences = LegacyPreferencesRepository(repository, legacy_config["preferencesRoot"])
+                app.state.preferences = preferences
                 app.state.repository = repository
                 app.state.identities = identities
                 app.state.queries = QueryEngine(repository, metrics)
                 app.state.access = WorkspaceAccess(identities, repository, app.state.queries)
-                app.state.preparations = QueryPreparationCoordinator(app.state.queries, app.state.access)
-                service = LegacyConfigurationService if legacy_config else ConfigurationService
-                app.state.configuration = service(identities, repository)
+                app.state.preparations = QueryPreparationCoordinator(app.state.queries, app.state.access, preferences=preferences)
+                service = LegacyPreferencesConfigurationService if preferences else LegacyConfigurationService if legacy_config else ConfigurationService
+                app.state.configuration = service(identities, preferences or repository)
                 app.state.audit = AuditService(identities, repository)
                 app.state.changes = ChangeService(identities, repository)
                 startup.complete()
@@ -111,6 +116,8 @@ def create_app(data_root=None, token=None, seed_path=None, metrics_path=None, le
                 app.state.queries.close()
             if identities:
                 identities.close()
+            if preferences:
+                preferences.close()
             if repository:
                 repository.close()
 
@@ -139,6 +146,7 @@ def create_app(data_root=None, token=None, seed_path=None, metrics_path=None, le
                              "title": error.code.replace("_", " ").capitalize(), "detail": error.message,
                              "instance": request.url.path, "requestId": getattr(request.state, "request_id", None),
                              **({"errors": error.errors} if hasattr(error, "errors") else {}),
+                             **({'diagnostic': error.diagnostic} if hasattr(error, 'diagnostic') else {}),
                              "status": error.status}, status_code=error.status,
                             media_type="application/problem+json", headers=headers)
 
@@ -233,7 +241,12 @@ def create_app(data_root=None, token=None, seed_path=None, metrics_path=None, le
             effective = app.state.configuration.get_effective(identity)
             result.update(settings=effective["values"], preferenceRevision=effective["preferenceRevision"],
                           defaultsRevision=effective["defaultsRevision"])
-            result["capabilities"]["configurationManagement"] = not bool(legacy_config)
+            result["capabilities"]["configurationManagement"] = not bool(legacy_config) or app.state.preferences is not None
+            if app.state.preferences:
+                result["legacy"].update(preferencesEnabled=True, preferencesSource="application-json",
+                                        preferencesRevision=app.state.preferences.revision)
+                result["preferencesRevision"] = app.state.preferences.revision
+            result['capabilities']['query'] = read_json(Path(__file__).resolve().parents[2] / 'shared/query-capabilities.json')
             return result
 
     async def query_call(request, operation, *args):
@@ -373,6 +386,18 @@ def create_app(data_root=None, token=None, seed_path=None, metrics_path=None, le
         result = await query_call(request, "query_records", query_id, await body(request, maximum=64 * 1024))
         return Response(content=rfc8785.dumps(result), media_type="application/json")
 
+    @app.get(query_base + "/records/{record_id}", dependencies=[Depends(authenticated)])
+    async def query_record(query_id: str, record_id: str, request: Request):
+        return await query_call(request, 'query_record', query_id, record_id)
+
+    @app.post(query_base + '/find', dependencies=[Depends(authenticated)])
+    async def find_match(query_id: str, request: Request):
+        return await query_call(request, 'find_match', query_id, await body(request, maximum=1024))
+
+    @app.post(query_base + '/legacy-filter-migration', dependencies=[Depends(authenticated)])
+    async def migrate_legacy_filter(query_id: str, request: Request):
+        return await query_call(request, 'migrate_legacy_filter', query_id, await body(request, maximum=16384))
+
     @app.post(query_base + "/layouts", dependencies=[Depends(authenticated)])
     async def layout_create(query_id: str, request: Request):
         return preparation_response(await query_call(request, "create_layout", query_id, await body(request, maximum=64 * 1024)))
@@ -382,8 +407,13 @@ def create_app(data_root=None, token=None, seed_path=None, metrics_path=None, le
         return preparation_response(await query_call(request, "get_layout", query_id, layout_id))
 
     @app.get(query_base + "/layouts/{layout_id}/rows", dependencies=[Depends(authenticated)])
-    async def rows(query_id: str, layout_id: str, request: Request, cursor: str | None = None):
-        return await query_call(request, "rows", query_id, layout_id, cursor)
+    async def rows(query_id: str, layout_id: str, request: Request, cursor: str | None = None, pageIndex: str | None = None):
+        if pageIndex is not None:
+            if cursor is not None:
+                raise DomainError("invalid_pagination", "Specify either cursor or pageIndex, not both.", 422)
+            if len(pageIndex) > 16 or not pageIndex.isascii() or not pageIndex.isdecimal() or int(pageIndex) > 9007199254740991:
+                raise DomainError("invalid_page_index", "pageIndex must be a nonnegative safe integer.", 422)
+        return await query_call(request, "rows", query_id, layout_id, cursor, int(pageIndex) if pageIndex is not None else None)
 
     @app.get(query_base + "/layouts/{layout_id}/placement/{record_id}", dependencies=[Depends(authenticated)])
     async def placement(query_id: str, layout_id: str, record_id: str, request: Request):

@@ -2,10 +2,29 @@ import { resolveQueryConfiguration } from './query-configuration.js';
 import { fixedScaleMap } from '../timeline/fixed-scale.js';
 export { foldText, parseSearch } from './filter-expression.js';
 import { ViewDecimal as D, toMs, toIso, decimalString } from '../timeline/time-scale.js';
-import { overlaps } from '../timeline/layout.js';
 import { ProviderError, uuid } from './data-provider.js';
+import { resolveRelationshipSteps } from './query-relationships.js';
+import { drainQuerySteps, drainQueryStepsAsync } from './query-work.js';
 
-export function createQueryData(snapshot, input) {
+export function createQueryData(snapshot, input, options = {}) {
+  return drainQuerySteps(createQueryDataSteps(snapshot, input, options), options);
+}
+
+export function createQueryDataAsync(snapshot, input, options = {}) {
+  return drainQueryStepsAsync(createQueryDataSteps(snapshot, input, options), options);
+}
+
+function bisect(edges, value, right = false) {
+  let low = 0, high = edges.length;
+  while (low < high) {
+    const middle = Math.floor((low + high) / 2);
+    if (edges[middle] < value || (right && edges[middle] === value)) low = middle + 1;
+    else high = middle;
+  }
+  return low;
+}
+
+export function* createQueryDataSteps(snapshot, input, options = {}) {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new ProviderError('invalid_query', 'Query input must be an object', 422);
   const from = toMs(input.domain?.from);
   const to = toMs(input.domain?.to);
@@ -15,42 +34,90 @@ export function createQueryData(snapshot, input) {
   const ratio = input.ratio === undefined ? 4 : input.ratio;
   const requestedBins = input.bins === undefined ? 128 : input.bins;
   if (!(ratio >= 1 && ratio <= 32) || !Number.isFinite(ratio) || !Number.isInteger(requestedBins) || requestedBins < 16 || requestedBins > 256) throw new ProviderError('invalid_density', 'Invalid density parameters');
-  const { predicate, search, fieldTypes } = resolveQueryConfiguration(snapshot, input);
+  const configuration = resolveQueryConfiguration(snapshot, input, undefined, options);
+  const { predicate, search, fieldTypes, definitionVersion, relationshipMode } = configuration;
+  const bounds = new WeakMap();
+  const recordBounds = record => {
+    if (!bounds.has(record)) {
+      const start = toMs(record.start), end = record.end === null ? null : toMs(record.end);
+      bounds.set(record, { start, end, point: record.kind === 'event' || end === start });
+    }
+    return bounds.get(record);
+  };
+  const inDomain = record => {
+    const { start, end, point } = recordBounds(record);
+    return point ? start >= from && start < to : start < to && (end === null || end > from);
+  };
+  let work = 0;
   let universe = snapshot.records;
-  if (snapshot.manifest?.legacy?.readOnly) {
-    const byId = new Map(universe.map(record => [record.id, record]));
-    const selected = new Set(universe.filter(record => overlaps(record, from, to)).map(record => record.id));
+  if (definitionVersion === 1 && snapshot.manifest?.legacy?.readOnly) {
+    const byId = new Map(), selected = new Set();
+    for (const record of universe) {
+      if (++work % 64 === 0) yield;
+      byId.set(record.id, record);
+      if (inDomain(record)) selected.add(record.id);
+    }
     for (const id of [...selected]) {
+      if (++work % 64 === 0) yield;
       let parent = byId.get(id).parentSessionId;
       while (parent && !selected.has(parent)) { selected.add(parent); parent = byId.get(parent)?.parentSessionId; }
     }
-    universe = universe.filter(record => selected.has(record.id));
+    const filtered = [];
+    for (const record of universe) {
+      if (++work % 64 === 0) yield;
+      if (selected.has(record.id)) filtered.push(record);
+    }
+    universe = filtered;
   }
-  const records = universe.filter(predicate);
-  const selectedSources = input.filters?.sourceIds, selectedSource = input.filters?.sourceId;
-  const zones = (snapshot.zones || []).filter(zone => !zone.legacy?.sourceId ||
-    ((!selectedSources || selectedSources.includes(zone.legacy.sourceId)) && (!selectedSource || selectedSource === 'all' || selectedSource === zone.legacy.sourceId)));
-  const matches = new Set(records.filter(record => search.matches(record)).map(r => r.id));
-  const overviewRecords = records.filter(r => overlaps(r, from, to));
+  const relationships = definitionVersion === 2 ? yield* resolveRelationshipSteps(universe, configuration, from, to, { inDomain }) : null;
+  const records = relationships?.records ?? [];
+  if (!relationships) for (const record of universe) {
+    if (++work % 64 === 0) yield;
+    if (predicate(record)) records.push(record);
+  }
+  const zones = (snapshot.zones || []).filter(zone => !zone.legacy?.sourceId || configuration.sourceSelected(zone.legacy.sourceId));
+  const matches = relationships?.matches ?? new Set();
+  if (!relationships) for (const record of records) {
+    if (++work % 64 === 0) yield;
+    if (search.matches(record)) matches.add(record.id);
+  }
+  const overviewRecords = [];
+  for (const record of relationships?.eligibleRecords ?? records) {
+    if (++work % 64 === 0) yield;
+    if (inDomain(record)) overviewRecords.push(record);
+  }
+  if (definitionVersion === 2) overviewRecords.sort((left, right) => recordBounds(left).start - recordBounds(right).start ||
+    (left.id < right.id ? -1 : left.id > right.id ? 1 : 0));
   const count = Math.min(requestedBins, to - from);
   const boundaries = Array.from({ length: count + 1 }, (_, i) => from + Number(BigInt(i) * BigInt(to - from) / BigInt(count)));
   const bins = boundaries.slice(0, -1).map((start, i) => ({ from: start, to: boundaries[i + 1], points: 0, overlap: 0n, endpoints: 0, records: 0, matches: 0 }));
+  const fullBins = Array(count + 1).fill(0), recordCounts = Array(count + 1).fill(0), matchCounts = Array(count + 1).fill(0);
   for (const record of overviewRecords) {
-    const start = toMs(record.start);
-    const end = record.end === null ? (record.kind === 'event' ? start : to) : toMs(record.end);
-    const point = record.kind === 'event' || end === start;
+    if (++work % 64 === 0) yield;
+    const { start, end: authoredEnd, point } = recordBounds(record), end = authoredEnd ?? (point ? start : to);
     const matching = matches.has(record.id);
-    for (const bin of bins) {
-      if (point) {
-        if (start >= bin.from && start < bin.to) { bin.points++; bin.records++; if (matching) bin.matches++; }
-      } else {
-        const overlap = Math.max(0, Math.min(end, bin.to) - Math.max(start, bin.from));
-        bin.overlap += BigInt(overlap);
-        if (overlap > 0) { bin.records++; if (matching) bin.matches++; }
-        if (start >= bin.from && start < bin.to) bin.endpoints++;
-        if (record.end !== null && end >= bin.from && end < bin.to) bin.endpoints++;
+    const lower = Math.max(from, start), upper = Math.min(to, end);
+    const first = Math.max(0, bisect(boundaries, lower, true) - 1);
+    const last = point ? first : Math.min(count - 1, bisect(boundaries, upper) - 1);
+    recordCounts[first]++; recordCounts[last + 1]--;
+    if (matching) { matchCounts[first]++; matchCounts[last + 1]--; }
+    if (point) bins[first].points++;
+    else {
+      if (start >= from && start < to) bins[bisect(boundaries, start, true) - 1].endpoints++;
+      if (authoredEnd !== null && end >= from && end < to) bins[bisect(boundaries, end, true) - 1].endpoints++;
+      if (first === last) bins[first].overlap += BigInt(upper - lower);
+      else {
+        bins[first].overlap += BigInt(boundaries[first + 1] - lower);
+        bins[last].overlap += BigInt(upper - boundaries[last]);
+        fullBins[first + 1]++; fullBins[last]--;
       }
     }
+  }
+  let active = 0, activeRecords = 0, activeMatches = 0;
+  for (let index = 0; index < count; index++) {
+    active += fullBins[index]; activeRecords += recordCounts[index]; activeMatches += matchCounts[index];
+    bins[index].overlap += BigInt(active) * BigInt(boundaries[index + 1] - boundaries[index]);
+    bins[index].records = activeRecords; bins[index].matches = activeMatches;
   }
   const densityBins = bins.map(bin => ({ from: bin.from, to: bin.to, points: bin.points, overlapMs: bin.overlap.toString(), endpoints: bin.endpoints, density: bin.points + Number(bin.overlap) / (bin.to - bin.from) + 0.5 * bin.endpoints }));
   const maximum = Math.max(0, ...densityBins.map(bin => bin.density));
@@ -66,5 +133,5 @@ export function createQueryData(snapshot, input) {
   const mapId = uuid();
   const fixed = input.fixedScale === undefined ? null : fixedScaleMap({ from: toIso(from), to: toIso(to) }, input.fixedScale, mapId);
   const overviewBins = bins.map(bin => ({ from: bin.from, to: bin.to, total: bin.records, matched: bin.matches }));
-  return { records, zones, matches, overviewRecords, overviewBins, fieldTypes, hasSearch: search.active, map: mode === 'uniform' && fixed ? fixed : { mapId, domain: { from: toIso(from), to: toIso(to) }, knots, mode, ratio }, density: { bins: densityBins, complete: true, total: overviewRecords.length } };
+  return { ...(relationships ?? {}), ...(definitionVersion === 2 ? { explanationDefinition: configuration.explanationDefinition } : {}), definitionVersion, relationshipMode, records, zones, matches, overviewRecords, overviewBins, fieldTypes, hasSearch: search.active, map: mode === 'uniform' && fixed ? fixed : { mapId, domain: { from: toIso(from), to: toIso(to) }, knots, mode, ratio }, density: { bins: densityBins, complete: true, total: overviewRecords.length } };
 }

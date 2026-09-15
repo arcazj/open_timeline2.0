@@ -3,6 +3,7 @@ import { instantFormat, toMs } from './time-scale.js';
 import presentationSchema from '../../../shared/schemas/presentation.schema.json' with { type: 'json' };
 import renderSchema from '../../../shared/schemas/record-render.schema.json' with { type: 'json' };
 import hazardIcons from '../../../shared/legacy-hazard-icons.json' with { type: 'json' };
+import { compareOrderedText } from '../data/string-order.js';
 
 const ajv = new Ajv({ allErrors: true, strict: false, coerceTypes: false });
 ajv.addFormat('timeline-instant', instantFormat);
@@ -151,18 +152,9 @@ export function groupValue(record, presentation) {
   throw failure('invalid_group_value', 'Grouping requires a primitive value, null or missing field');
 }
 
-function codepointCompare(a, b) {
-  const aa = Array.from(a), bb = Array.from(b);
-  for (let i = 0; i < Math.min(aa.length, bb.length); i++) {
-    const delta = aa[i].codePointAt(0) - bb[i].codePointAt(0);
-    if (delta) return Math.sign(delta);
-  }
-  return Math.sign(aa.length - bb.length);
-}
-
-export function compareGroups(a, b, direction = 'asc') {
+export function compareGroups(a, b, direction = 'asc', ordering = {}) {
   if (a.rank !== b.rank) return a.rank - b.rank;
   if (a.rank >= 3 || a.rank < 0) return 0;
-  const order = a.rank === 1 ? codepointCompare(a.value, b.value) : Number(a.value) - Number(b.value);
+  const order = a.rank === 1 ? compareOrderedText(a.value, b.value, ordering) : Number(a.value) - Number(b.value);
   return direction === 'desc' ? -order : order;
 }

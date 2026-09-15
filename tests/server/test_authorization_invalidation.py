@@ -1,4 +1,5 @@
 import os
+import threading
 import uuid
 
 import pytest
@@ -7,12 +8,46 @@ from conftest import BASE, TOKEN
 from server.app.models.domain import DomainError, instant_ms, iso_from_ms, now_iso
 from server.app.services import identity as identity_module
 from test_identity_api import create_identity
+from test_api import prepared
 
 
 def prepare(client, bundle, headers):
     response = client.post(BASE + "/query-sessions", json={"domain": bundle["settings"]["overview"]}, headers=headers)
-    assert response.status_code == 200, response.text
-    return response.json()
+    return prepared(client, response, headers=headers).json()
+
+
+def test_prepare_polls_delayed_query_with_original_identity(client, app, bundle, monkeypatch):
+    _, _, headers = create_identity(client, ["operations"])
+    release = threading.Event()
+    calculate, post, get = app.state.preparations._calculate, client.post, client.get
+    statuses, polls = [], []
+
+    def held(job, resources):
+        assert release.wait(5), "Test did not release query preparation"
+        return calculate(job, resources)
+
+    def observed_post(*args, **kwargs):
+        response = post(*args, **kwargs)
+        statuses.append(response.status_code)
+        return response
+
+    def observed_get(*args, **kwargs):
+        assert kwargs.get("headers") == headers
+        polls.append(args[0])
+        release.set()
+        return get(*args, **kwargs)
+
+    monkeypatch.setattr(app.state.preparations, "_calculate", held)
+    monkeypatch.setattr(client, "post", observed_post)
+    monkeypatch.setattr(client, "get", observed_get)
+    try:
+        query = prepare(client, bundle, headers)
+    finally:
+        release.set()
+    assert statuses == [202]
+    assert polls and all(url == BASE + "/query-sessions/" + query["queryId"] for url in polls)
+    assert query["baseTotal"] == sum(record["sourceId"] == "operations" and record["deletedAt"] is None for record in bundle["records"])
+    assert get(BASE + "/query-sessions/" + query["queryId"]).status_code == 404
 
 
 def change(client, principal_id, payload):

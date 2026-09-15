@@ -1,6 +1,8 @@
 import baseFieldTypes from '../../../shared/fixtures/filter-fields.json' with { type: 'json' };
 import casefold from '../../../shared/fixtures/casefold.json' with { type: 'json' };
 import { ProviderError } from './data-provider.js';
+import { compileRegex, createRegexBudget, regexCapabilities, regexError } from './safe-regex.js';
+export { createRegexBudget, regexCapabilities } from './safe-regex.js';
 import { toMs } from '../timeline/time-scale.js';
 import { overlaps } from '../timeline/layout.js';
 
@@ -34,13 +36,23 @@ function ordered(left, right) {
   for (let i = 0; i < Math.min(a.length, b.length); i++) if (a[i] !== b[i]) return a[i].codePointAt(0) - b[i].codePointAt(0);
   return a.length - b.length;
 }
-export function compileExpression(expression, { fieldTypes = baseFieldTypes } = {}) {
+export function compileExpression(expression, { fieldTypes = baseFieldTypes, regexBudget = createRegexBudget() } = {}) {
   if (expression === undefined || expression === null) return () => true;
-  if (!plain(expression) || expression.version !== 1 || Object.keys(expression).some(key => !['version', 'root'].includes(key))) error('Expected a version 1 filter expression');
-  let count = 0;
+  if (!plain(expression) || ![1, 2].includes(expression.version) || Object.keys(expression).some(key => !['version', 'root'].includes(key))) error('Expected a version 1 or 2 filter expression');
+  let count = 0, regexCount = 0;
+  const ruleIds = new Set(), explanationNodes = [];
   function compile(node, depth = 1) {
+    const ordinal = count + 1, evaluate = compileNode(node, depth);
+    if (expression.version === 2) explanationNodes.push({ ruleId: node.ruleId ?? `$node-${ordinal}`, field: node.field, op: node.op, evaluate });
+    return evaluate;
+  }
+  function compileNode(node, depth) {
     if (!plain(node) || typeof node.op !== 'string' || depth > 8 || ++count > 100) error('Filter exceeds its structure, depth 8, or 100-node limit');
-    const keys = allowed => { if (Object.keys(node).some(key => !allowed.includes(key))) error(`Unknown field in ${node.op}`); };
+    if (expression.version === 2 && node.ruleId !== undefined) {
+      if (typeof node.ruleId !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$/.test(node.ruleId) || ruleIds.has(node.ruleId)) error('Rule IDs must be unique 1-64 character identifiers');
+      ruleIds.add(node.ruleId);
+    }
+    const keys = allowed => { if (Object.keys(node).some(key => !allowed.includes(key) && !(expression.version === 2 && key === 'ruleId'))) error(`Unknown field in ${node.op}`); };
     if (['and', 'or'].includes(node.op)) {
       keys(['op', 'args']);
       if (!Array.isArray(node.args) || !node.args.length || node.args.length > 100) error('Boolean groups require 1-100 expressions');
@@ -58,6 +70,13 @@ export function compileExpression(expression, { fieldTypes = baseFieldTypes } = 
     if (typeof node.field !== 'string' || !Object.hasOwn(fieldTypes, node.field)) error('Unknown or undeclared filter field');
     const type = fieldTypes[node.field];
     if (node.op === 'exists') { keys(['op', 'field', 'value']); if (typeof node.value !== 'boolean') error('Exists requires a boolean value'); return record => (fieldValue(record, node.field) !== undefined) === node.value; }
+    if (node.op === 'regex' && expression.version === 2) {
+      keys(['op', 'field', 'pattern', 'flags', 'matchMode', 'dialect']);
+      if (++regexCount > regexCapabilities.regexNodes) regexError('regex_resource_limit', 'Filter exceeds eight regex nodes', { status: 413 });
+      if (type !== 'string') error('Regex requires a declared string field');
+      const compiled = compileRegex(node.pattern, { flags: node.flags, matchMode: node.matchMode, dialect: node.dialect, budget: regexBudget, field: node.field, ruleId: node.ruleId });
+      return record => { const raw = fieldValue(record, node.field); return raw === undefined || raw === null ? null : compiled.test(typed(raw, type, node.field)); };
+    }
     if (!['eq', 'ne', 'lt', 'lte', 'gt', 'gte', 'in', 'contains'].includes(node.op)) error('Unsupported filter operator');
     keys(node.op === 'in' ? ['op', 'field', 'values'] : node.op === 'contains' ? ['op', 'field', 'value', 'caseSensitive'] : ['op', 'field', 'value']);
     if (type === 'strings' && node.op !== 'contains') error('Array fields support contains and exists only');
@@ -90,7 +109,13 @@ export function compileExpression(expression, { fieldTypes = baseFieldTypes } = 
     };
   }
   const predicate = compile(expression.root);
-  return record => predicate(record) === true;
+  const result = record => predicate(record) === true;
+  if (expression.version === 2) result.explain = record => {
+    if (!result(record)) return { matched: false, rules: [], truncated: false };
+    const hits = explanationNodes.filter(node => node.evaluate(record) === true);
+    return { matched: true, rules: hits.slice(0, 16).map(({ ruleId, field, op }) => ({ ruleId, ...(field === undefined ? {} : { field }), op })), truncated: hits.length > 16 };
+  };
+  return result;
 }
 
 export function parseSearch(text, mode = 'any', caseSensitive = false) {
@@ -109,15 +134,43 @@ export function parseSearch(text, mode = 'any', caseSensitive = false) {
   if (terms.length > 20) throw new ProviderError('invalid_search', 'Search exceeds 20 terms', 422);
   return terms.map(caseSensitive ? value => value.normalize('NFC') : foldText);
 }
-export function compileSearch(input, { fieldTypes = baseFieldTypes } = {}) {
+export function compileSearch(input, { fieldTypes = baseFieldTypes, regexBudget = createRegexBudget() } = {}) {
+  const version = input.definitionVersion === undefined ? 1 : input.definitionVersion;
+  if (![1, 2].includes(version)) throw new ProviderError('invalid_search', 'Unsupported query definition version', 422);
+  if (version === 1 && (input.searchMode === 'regex' || ['searchFlags', 'searchMatchMode', 'searchDialect'].some(key => Object.hasOwn(input, key)))) throw new ProviderError('invalid_search', 'Regex search requires query definition version 2', 422);
+  if (input.searchMode === 'regex') {
+    const fields = input.searchFields === undefined ? defaultSearchFields : input.searchFields;
+    if (!Array.isArray(fields) || !fields.length || fields.length > 16 || new Set(fields).size !== fields.length || fields.some(field => typeof field !== 'string' || !Object.hasOwn(fieldTypes, field) || fieldTypes[field] !== 'string')) throw new ProviderError('invalid_search', 'Regex search fields must be 1-16 unique declared string fields', 422);
+    if (input.searchCaseSensitive !== undefined) throw new ProviderError('invalid_search', 'Regex search uses explicit flags instead of searchCaseSensitive', 422);
+    const compiled = compileRegex(input.search, { flags: input.searchFlags, matchMode: input.searchMatchMode, dialect: input.searchDialect, budget: regexBudget, ruleId: 'search' });
+    const matchFields = record => fields.filter(field => {
+      const value = fieldValue(record, field);
+      if (value === undefined || value === null) return false;
+      if (typeof value !== 'string') throw new ProviderError('invalid_search', 'Regex search field has an incompatible value type', 422);
+      return compiled.test(value, { field });
+    });
+    return { active: true, terms: [input.search], regex: { dialect: compiled.dialect, flags: compiled.flags, matchMode: compiled.matchMode, emptyMatch: compiled.emptyMatch },
+      matches: record => matchFields(record).length > 0,
+      explain: record => { const hits = matchFields(record); return { matched: hits.length > 0, rules: hits.map(field => ({ ruleId: 'search', field, op: 'regex' })), truncated: false }; } };
+  }
+  if (version === 2 && ['searchFlags', 'searchMatchMode', 'searchDialect'].some(key => Object.hasOwn(input, key))) throw new ProviderError('invalid_search', 'Regex options require regex search mode', 422);
   const mode = input.searchMode === undefined ? 'any' : input.searchMode, caseSensitive = input.searchCaseSensitive === undefined ? false : input.searchCaseSensitive;
   const terms = parseSearch(input.search === undefined ? '' : input.search, mode, caseSensitive), fields = input.searchFields === undefined ? defaultSearchFields : input.searchFields;
   if (!Array.isArray(fields) || !fields.length || fields.length > 16 || new Set(fields).size !== fields.length || fields.some(field => typeof field !== 'string' || !Object.hasOwn(fieldTypes, field) || fieldTypes[field] === 'strings')) throw new ProviderError('invalid_search', 'Search fields must be 1-16 unique declared scalar fields', 422);
   const normalize = caseSensitive ? value => value.normalize('NFC') : foldText;
-  return { active: terms.length > 0, terms, matches(record) {
+  const matches = record => {
     if (!terms.length) return true;
     const values = fields.map(field => fieldValue(record, field)).filter(value => ['string', 'number', 'boolean'].includes(typeof value)).map(value => normalize(String(value)));
     const hits = terms.map(term => values.some(value => value.includes(term)));
     return mode === 'all' ? hits.every(Boolean) : hits.some(Boolean);
+  };
+  return { active: terms.length > 0, terms, matches, explain(record) {
+    if (!terms.length || !matches(record)) return { matched: false, rules: [], truncated: false };
+    const rules = [];
+    for (const [index, term] of terms.entries()) for (const field of fields) {
+      const value = fieldValue(record, field);
+      if (['string', 'number', 'boolean'].includes(typeof value) && normalize(String(value)).includes(term)) rules.push({ ruleId: `search-term-${index + 1}`, field, op: 'literal' });
+    }
+    return { matched: true, rules: rules.slice(0, 16), truncated: rules.length > 16 };
   } };
 }

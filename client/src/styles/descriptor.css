@@ -1,0 +1,13 @@
+.descriptor h4 { margin: 20px 0 8px; font-size: 13px; }
+.descriptor .record-facts { display: grid; grid-template-columns: minmax(0, 94px) minmax(0, 1fr); gap: 8px 10px; }
+.descriptor .record-facts dt { margin: 0; overflow-wrap: anywhere; line-height: 1.5; }
+.descriptor .record-facts dd { margin: 0; white-space: pre-wrap; }
+.descriptor .descriptor-data, .descriptor .configured-fields, .descriptor .descriptor-context, .descriptor .descriptor-parent-facts { margin-top: 16px; }
+.descriptor .record-facts details { white-space: normal; }
+.descriptor pre { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; margin: 8px 0; }
+.descriptor summary { cursor: pointer; overflow-wrap: anywhere; }
+.descriptor-load { border: 1px solid var(--line); font-size: 12px; }
+.descriptor-parent { text-align: left; white-space: normal; overflow-wrap: anywhere; justify-content: flex-start; padding-left: 0; color: var(--accent); }
+.descriptor .legacy-descriptor { border-top: 1px solid var(--line); margin-top: 18px; }
+.descriptor .legacy-descriptor .subtle { white-space: normal; }
+.descriptor .descriptor-actions { padding-bottom: 8px; }

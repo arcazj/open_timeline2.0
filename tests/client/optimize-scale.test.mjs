@@ -39,6 +39,30 @@ test('manual mode applies the selected ratio without optimization', async () => 
   const result = await prepareScaledQuery(m.provider, input, m.layout, { optimize: false });
   assert.deepEqual(m.tried, [32]); assert.equal(result.map.ratio, 32);
 });
+
+test('candidate preparation waits for cleanup and rechecks navigation intent', async () => {
+  const m = mock({}); let finish, current = true;
+  m.provider.awaitPreparationCleanup = () => new Promise(resolve => { finish = resolve; });
+  const pending = prepareScaledQuery(m.provider, input, m.layout, { isCurrent: () => current });
+  await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(m.tried, []);
+  current = false; finish();
+  assert.equal(await pending, null);
+  assert.equal(m.live.size, 0);
+});
+
+test('every candidate drains cleanup left by a retryable layout error', async () => {
+  const m = mock({ 8: 1 }); let pendingCleanup = false, drains = 0;
+  const createQuery = m.provider.createQuery;
+  m.provider.createQuery = request => { assert.equal(pendingCleanup, false); return createQuery(request); };
+  m.provider.awaitPreparationCleanup = async () => { pendingCleanup = false; drains++; };
+  const result = await prepareScaledQuery(m.provider, input, async query => {
+    if (query.queryId === '4') { pendingCleanup = true; throw Object.assign(new Error('Wide label'), { code: 'label_width_limit' }); }
+    return m.layout(query);
+  });
+  assert.equal(result.map.ratio, 8); assert.equal(drains, 2);
+  assert.deepEqual([...m.live.keys()], ['8']);
+});
 test('canceled preparations release every unpublished query', async () => {
   const m = mock({}); let active = true;
   const result = await prepareScaledQuery(m.provider, input, async q => { active = false; return m.layout(q); }, { isCurrent: () => active });

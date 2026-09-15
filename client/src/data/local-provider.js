@@ -1,6 +1,10 @@
 import { ProviderError, abortIfNeeded, clone, freeze, uuid, sha256, canonicalJson } from './data-provider.js';
 import { validateSnapshot, validateRecord, validateRelationships, normalizedTimes, LOCAL_LIMITS } from './snapshot.js';
-import { createQueryData } from './query-core.js';
+import { createQueryDataAsync } from './query-core.js';
+import { scopedQueryCounts } from './query-relationships.js';
+import { compileExpression, compileSearch, createRegexBudget } from './filter-expression.js';
+import queryCapabilities from '../../../shared/query-capabilities.json' with { type: 'json' };
+import { migrateLegacyFilter } from './legacy-filter-migration.js';
 import { buildLayout } from '../timeline/layout.js';
 import { toMs } from '../timeline/time-scale.js';
 import { validateDefinition, findModel, modelUsage, applyModelCommand } from './model-catalog.js';
@@ -12,6 +16,7 @@ import { applySettingsCommand } from './settings-commands.js';
 import { assertSourceWritable, validateRecordData } from './record-schema.js';
 import { snapshotContent } from './snapshot-content.js';
 import { prepareRecordBatch } from './record-batch.js';
+import { validateRowPageOptions } from './row-pagination.js';
 
 import { MUTABLE_RECORD_FIELDS, patchRecord, recordReplacement, partialUpdatePatch } from './record-commands.js';
 const MUTABLE = new Set(MUTABLE_RECORD_FIELDS);
@@ -42,7 +47,16 @@ export class LocalProvider {
       const snapshot = await validateSnapshot(this.input);
       this._assert();
       abortIfNeeded(options.signal);
+      const localPrincipal = snapshot.manifest.localPreferencesPrincipalId;
+      if (localPrincipal !== undefined) {
+        if (typeof localPrincipal !== 'string' || !localPrincipal.trim() || [...localPrincipal].length > 128) throw new ProviderError('invalid_snapshot', 'Local preference principal must be a bounded nonempty string', 422);
+        this.actor = Object.freeze({ ...this.actor, id: localPrincipal });
+      }
       this.snapshot = freeze(snapshot);
+      this.legacyImportedIds = Object.fromEntries(['filters', 'views'].map(family => {
+        const owned = new Set(snapshot.manifest.legacy?.preferencesCatalogIds?.[family] ?? []);
+        return [family, new Set(snapshot[family].filter(resource => !owned.has(resource.id)).map(resource => resource.id))];
+      }));
       this.input = null;
     }
     return this.getStatus();
@@ -51,6 +65,23 @@ export class LocalProvider {
   _assert() { if (this.disposed) throw new ProviderError('provider_disposed', 'Source is no longer active', 409); }
 
   _legacyReadOnly() { return this.snapshot?.manifest.legacy?.readOnly === true; }
+
+  _legacyPreferencesEnabled() { return this._legacyReadOnly() && this.snapshot.manifest.legacy.preferencesEnabled === true; }
+
+  _configurationActions(family, resource) {
+    if (!this._legacyReadOnly()) return configurationActions(resource, this.actor, family);
+    if (!this._legacyPreferencesEnabled() || !['filters', 'views'].includes(family)) return [];
+    const actions = configurationActions(resource, this.actor, family);
+    return this.legacyImportedIds[family].has(resource.id) ? actions.filter(action => ['duplicate', 'apply'].includes(action)) : actions;
+  }
+
+  _assertConfigurationWritable(kind, command) {
+    if (!this._legacyReadOnly()) return;
+    if (!this._legacyPreferencesEnabled()) return this._assertWritable();
+    if (kind === 'settings') return;
+    if (!['filters', 'views'].includes(command.family)) throw new ProviderError('legacy_read_only', 'Only app-owned filters and views can be changed; legacy data and models remain read-only.', 403);
+    if (this.legacyImportedIds[command.family].has(command.resourceId) && !['duplicate', 'apply'].includes(command.type)) throw new ProviderError('legacy_read_only', 'Duplicate an imported legacy definition before editing it.', 403);
+  }
 
   _assertWritable() {
     if (this._legacyReadOnly()) throw new ProviderError('legacy_read_only', 'Legacy snapshots are read-only; records, models and configuration cannot be changed.', 403);
@@ -62,8 +93,9 @@ export class LocalProvider {
     const m = this.snapshot.manifest;
     const effective = effectiveSettings(this.snapshot, { principalId: this.actor.id });
     const readOnly = this._legacyReadOnly();
-    const actor = readOnly ? { ...this.actor, name: 'Local reader', capabilities: ['records.read', 'configuration.read', 'export'] } : this.actor;
-    return clone({ identity: this.identity, providerId: this.identity, sourceName: m.sourceName, sourceKind: m.sourceKind === 'sample' ? 'sample' : 'local', workspaceId: m.workspaceId, generation: this.generation, revision: this.revision, snapshotAt: m.snapshotAt, origin: m, ...(m.legacy ? { legacy: m.legacy } : {}), recordCount: this.snapshot.records.filter(r => !r.deletedAt).length, completeness: m.completeness, modified: this.modified, durability: readOnly ? 'read-only-snapshot' : 'memory-only', settings: effective.values, preferenceRevision: effective.preferenceRevision, defaultsRevision: this.snapshot.defaults.revision, actor: { ...actor, sourceIds: m.scope.sourceIds }, models: this.snapshot.models, sourceIds: m.scope.sourceIds, capabilities: { recordCrud: !readOnly, importExport: true, modelManagement: !readOnly, modelPublication: !readOnly, configurationManagement: !readOnly, serverAdministration: false, limits: LOCAL_LIMITS } });
+    const preferences = this._legacyPreferencesEnabled();
+    const actor = readOnly ? { ...this.actor, name: preferences ? 'Local preferences author' : 'Local reader', capabilities: ['records.read', 'configuration.read', 'export', ...(preferences ? ['configuration.personal'] : [])] } : this.actor;
+    return clone({ identity: this.identity, providerId: this.identity, sourceName: m.sourceName, sourceKind: m.sourceKind === 'sample' ? 'sample' : 'local', workspaceId: m.workspaceId, generation: this.generation, revision: this.revision, snapshotAt: m.snapshotAt, origin: m, ...(m.legacy ? { legacy: m.legacy } : {}), ...(preferences ? { preferencesDurability: 'memory-only' } : {}), recordCount: this.snapshot.records.filter(r => !r.deletedAt).length, completeness: m.completeness, modified: this.modified, durability: readOnly ? 'read-only-snapshot' : 'memory-only', settings: effective.values, preferenceRevision: effective.preferenceRevision, defaultsRevision: this.snapshot.defaults.revision, actor: { ...actor, sourceIds: m.scope.sourceIds }, models: this.snapshot.models, sourceIds: m.scope.sourceIds, capabilities: { query: queryCapabilities, recordCrud: !readOnly, importExport: true, modelManagement: !readOnly, modelPublication: !readOnly, configurationManagement: !readOnly || preferences, serverAdministration: false, limits: LOCAL_LIMITS } });
   }
 
   _query(id) {
@@ -79,16 +111,61 @@ export class LocalProvider {
   async createQuery(input, options = {}) {
     this._assert(); abortIfNeeded(options.signal);
     for (const [id, query] of this.queries) if (Date.now() > query.expiresAt) this.queries.delete(id);
-    if (this.queries.size >= 2) throw new ProviderError('query_capacity', 'Release an old query before creating another', 429);
-    const data = createQueryData(this.snapshot, clone(input));
-    abortIfNeeded(options.signal);
-    const queryId = uuid();
-    const manifest = { queryId, snapshotId: uuid(), mapId: data.map.mapId, providerId: this.identity, generation: this.generation, revision: this.revision, baseTotal: data.records.length, matchTotal: data.matches.size, overviewTotal: data.overviewRecords.length, overviewMatchTotal: data.overviewRecords.filter(r => data.matches.has(r.id)).length, fieldTypes: data.fieldTypes, state: 'ready' };
-    this.queries.set(queryId, { ...data, manifest, layouts: new Map(), tables: new Map(), expiresAt: Date.now() + 300000 });
-    return clone(manifest);
+    if (this.queries.size + (this.pendingQueries ?? 0) >= 2) throw new ProviderError('query_capacity', 'Release an old query before creating another', 429);
+    const snapshot = this.snapshot, revision = this.revision, generation = this.generation;
+    this.pendingQueries = (this.pendingQueries ?? 0) + 1;
+    try {
+      const data = await createQueryDataAsync(snapshot, clone(input), { signal: options.signal });
+      this._assert(); abortIfNeeded(options.signal);
+      const queryId = uuid();
+      const manifest = { queryId, snapshotId: uuid(), mapId: data.map.mapId, providerId: this.identity, generation, revision, baseTotal: data.records.length, matchTotal: data.matches.size, overviewTotal: data.overviewRecords.length, overviewMatchTotal: data.overviewRecords.filter(r => data.matches.has(r.id)).length, fieldTypes: data.fieldTypes, state: 'ready' };
+      if (data.definitionVersion === 2) Object.assign(manifest, { definitionVersion: 2, relationshipMode: data.relationshipMode,
+        baseTotal: data.eligibleIds.size, counts: scopedQueryCounts(data, data.map.domain, revision, generation, data.density.complete) });
+      this.queries.set(queryId, { ...data, manifest, layouts: new Map(), tables: new Map(), expiresAt: Date.now() + 300000 });
+      return clone(manifest);
+    } finally { this.pendingQueries--; }
   }
 
   async getQuery(id) { return clone(this._query(id).manifest); }
+  async migrateLegacyFilter(queryId, input, options = {}) {
+    const query = this._query(queryId); abortIfNeeded(options.signal);
+    return clone({ ...migrateLegacyFilter(input, { fieldTypes: query.fieldTypes }), scope: {
+      queryId, generation: query.manifest.generation, revision: query.manifest.revision, domain: query.map.domain, complete: query.density.complete,
+    } });
+  }
+  async findMatch(queryId, input = {}, options = {}) {
+    const query = this._query(queryId); abortIfNeeded(options.signal);
+    if (!input || typeof input !== 'object' || Array.isArray(input) || Object.keys(input).some(key => !['afterId', 'direction'].includes(key)) ||
+        !['next', 'previous'].includes(input.direction ?? 'next') || (input.afterId != null && (typeof input.afterId !== 'string' || input.afterId.length > 128))) throw new ProviderError('invalid_find', 'Specify a finding identity and next or previous direction', 422);
+    const records = query.hasSearch ? query.records.filter(record => query.matches.has(record.id)).sort((a, b) => toMs(a.start) - toMs(b.start) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)) : [];
+    const current = records.findIndex(record => record.id === input.afterId), previous = input.direction === 'previous';
+    const next = current < 0 ? (previous ? records.length - 1 : 0) : current + (previous ? -1 : 1);
+    const index = records.length ? (next + records.length) % records.length : -1;
+    return clone({ queryId, record: index < 0 ? null : records[index], position: index + 1, total: records.length, wrapped: current >= 0 && (next < 0 || next >= records.length) });
+  }
+  async getQueryRecord(queryId, recordId, options = {}) {
+    const query = this._query(queryId); abortIfNeeded(options.signal);
+    const byId = new Map([...query.records, ...(query.contextRecords || [])].map(record => [record.id, record]));
+    const record = byId.get(recordId);
+    if (!record) throw new ProviderError('record_not_found', 'Record is not available in this query', 404);
+    const ancestors = [];
+    let parent = byId.get(record.parentSessionId);
+    while (parent && ancestors.length < 32) {
+      const { id, title, kind, start, end } = parent;
+      ancestors.push({ id, title, kind, start, end }); parent = byId.get(parent.parentSessionId);
+    }
+    let explanation;
+    if (query.explanationDefinition) {
+      const regexBudget = createRegexBudget({ signal: options.signal }), settings = { fieldTypes: query.fieldTypes, regexBudget };
+      const compiled = query.explanationDefinition.expressions.map(expression => compileExpression(expression, settings));
+      if (query.hasSearch && query.matches.has(recordId)) compiled.push(compileSearch(query.explanationDefinition.search, settings));
+      const reports = compiled.filter(item => typeof item.explain === 'function').map(item => item.explain(record));
+      const rules = reports.flatMap(report => report.rules);
+      explanation = { rules: rules.slice(0, 16), truncated: rules.length > 16 || reports.some(report => report.truncated) };
+    }
+    return clone({ record, ancestors, ancestorsTruncated: !!parent, searchActive: query.hasSearch,
+      ...(explanation ? { explanation } : {}), ...(query.provenance ? { provenance: query.provenance[recordId] } : {}) });
+  }
   async getDensity(id) { return clone(this._query(id).density); }
   async getMap(id, mapId) {
     const map = this._query(id).map;
@@ -114,12 +191,15 @@ export class LocalProvider {
 
   async createLayout(queryId, input, options = {}) {
     const query = this._query(queryId); abortIfNeeded(options.signal);
+    input = this._versionedInput(query, input);
     if (input.mapId && input.mapId !== query.map.mapId) throw new ProviderError('map_mismatch', 'Map belongs to a different query', 409);
     if (query.layouts.size >= 2) throw new ProviderError('layout_capacity', 'Release an old layout before creating another', 429);
     const layout = buildLayout(query.records, query.map, input, query.matches);
+    if (query.provenance) for (const item of layout.items) item.provenance = query.provenance[item.record.id];
     abortIfNeeded(options.signal);
     const layoutId = uuid();
     const manifest = { layoutId, mapId: query.map.mapId, totalRows: layout.totalRows, detailTotal: layout.detailTotal, detailMatchTotal: layout.detailMatchTotal, renderInstanceTotal: layout.renderInstanceTotal, rowHeight: layout.rowHeight, pageCapacity: layout.pageCapacity, from: layout.from, to: layout.to, width: layout.width };
+    if (query.definitionVersion === 2) Object.assign(manifest, { definitionVersion: 2, logicalGroupTotal: layout.logicalGroupTotal, collapsedGroupTotal: layout.collapsedGroupTotal, hiddenItemTotal: layout.hiddenItemTotal });
     if (layout.presentation) manifest.presentation = layout.presentation;
     query.layouts.set(layoutId, { ...layout, manifest, cursors: new Map() });
     return clone(manifest);
@@ -135,7 +215,13 @@ export class LocalProvider {
 
   async getRows(queryId, layoutId, options = {}) {
     const layout = this._layout(queryId, layoutId); abortIfNeeded(options.signal);
+    validateRowPageOptions(options);
+    const pageCount = Math.max(1, Math.ceil(layout.totalRows / layout.pageCapacity));
     let startRow = 0;
+    if (options.pageIndex !== undefined) {
+      if (options.pageIndex >= pageCount) throw new ProviderError('invalid_page_index', 'pageIndex is outside this layout', 400);
+      startRow = options.pageIndex * layout.pageCapacity;
+    }
     if (options.cursor) {
       if (!layout.cursors.has(options.cursor)) throw new ProviderError('cursor_mismatch', 'Cursor is stale or incompatible', 409);
       startRow = layout.cursors.get(options.cursor);
@@ -145,7 +231,7 @@ export class LocalProvider {
     const enclosureData = layout.enclosures ? { enclosures: layout.enclosures.filter(enclosure => enclosure.startRow < endRow && enclosure.endRow > startRow).map(enclosure => ({ ...enclosure, visibleStartRow: Math.max(startRow, enclosure.startRow), visibleEndRow: Math.min(endRow, enclosure.endRow), continuedBefore: enclosure.startRow < startRow, continuedAfter: enclosure.endRow > endRow })) } : {};
     if (items.length > 1000 || new TextEncoder().encode(JSON.stringify({ items, ...enclosureData })).length > 2 * 1024 * 1024) throw new ProviderError('row_payload_limit', 'This row range exceeds the first-slice payload limit; reduce row capacity', 413);
     const cursor = row => this._cursor(layout, row);
-    return clone({ ...layout.manifest, items, ...enclosureData, rows: layout.rows.filter(row => row.row >= startRow && row.row < endRow), startRow, endRow, pageIndex: Math.floor(startRow / layout.pageCapacity), pageCount: Math.max(1, Math.ceil(layout.totalRows / layout.pageCapacity)), previousCursor: startRow > 0 ? cursor(Math.max(0, startRow - layout.pageCapacity)) : null, nextCursor: endRow < layout.totalRows ? cursor(endRow) : null, pageComplete: true, loadedCount: items.length });
+    return clone({ ...layout.manifest, items, ...enclosureData, rows: layout.rows.filter(row => row.row >= startRow && row.row < endRow), startRow, endRow, pageIndex: Math.floor(startRow / layout.pageCapacity), pageCount, previousCursor: startRow > 0 ? cursor(Math.max(0, startRow - layout.pageCapacity)) : null, nextCursor: endRow < layout.totalRows ? cursor(endRow) : null, pageComplete: true, loadedCount: items.length });
   }
 
   async getPlacement(queryId, layoutId, recordId) {
@@ -173,6 +259,7 @@ export class LocalProvider {
 
   async queryRecords(queryId, input = {}, options = {}) {
     const query = this._query(queryId); abortIfNeeded(options.signal);
+    input = this._versionedInput(query, input);
     const parameters = normalizeTableInput(input, query.map.domain, query.fieldTypes), key = canonicalJson(parameters);
     const fingerprint = await sha256(key);
     query.tableCursorKey ??= createCursorKey();
@@ -198,8 +285,15 @@ export class LocalProvider {
     abortIfNeeded(options.signal); this._query(queryId);
     return clone({ queryId, snapshotId: query.manifest.snapshotId, generation: query.manifest.generation, revision: query.manifest.revision,
       tableId: table.tableId, ...parameters, total: table.total, baseTotal: table.baseTotal, matchTotal: table.matchTotal, matchActive: table.matchActive,
+      ...(query.definitionVersion === 2 ? { contextTotal: table.contextTotal } : {}),
       items: table.items.slice(startIndex, endIndex), startIndex, endIndex, pageIndex: page, pageCount,
       previousCursor, nextCursor, pageComplete: true });
+  }
+
+  _versionedInput(query, input) {
+    if (!input || typeof input !== 'object' || Array.isArray(input)) throw new ProviderError('invalid_query', 'Query input must be an object', 422);
+    if (input.definitionVersion !== undefined && input.definitionVersion !== (query.definitionVersion || 1)) throw new ProviderError('query_definition_mismatch', 'Layout and table definition must match the pinned query', 409);
+    return query.definitionVersion === 2 ? { ...input, definitionVersion: 2 } : input;
   }
 
   executeCommand(command, options = {}) {
@@ -342,14 +436,14 @@ export class LocalProvider {
     this._assert(); abortIfNeeded(options.signal);
     if (!CONFIGURATION_FAMILIES.includes(family)) throw new ProviderError('invalid_configuration', 'Unknown configuration family', 422);
     const items = this.snapshot[family].filter(resource => configurationReadable(resource, this.actor) && (input.includeArchived !== false || resource.lifecycle !== 'archived'))
-      .map(resource => ({ ...configurationSummary(resource, this.actor, family), ...(this._legacyReadOnly() ? { allowedActions: [] } : {}) })).sort(compareConfigurationNames);
+      .map(resource => ({ ...configurationSummary(resource, this.actor, family), allowedActions: this._configurationActions(family, resource) })).sort(compareConfigurationNames);
     return { ...this._configurationEnvelope(family), items, total: items.length };
   }
 
   async getConfiguration(family, id, options = {}) {
     this._assert(); abortIfNeeded(options.signal);
     const resource = configurationResource(this.snapshot, family, id, this.actor);
-    return { ...this._configurationEnvelope(family), resource: clone(resource), allowedActions: this._legacyReadOnly() ? [] : configurationActions(resource, this.actor, family) };
+    return { ...this._configurationEnvelope(family), resource: clone(resource), allowedActions: this._configurationActions(family, resource) };
   }
 
   async validateConfiguration(family, definition, context = {}, options = {}) {
@@ -397,7 +491,7 @@ export class LocalProvider {
 
   async _executeConfiguration(kind, command, options) {
     this._assert(); abortIfNeeded(options.signal);
-    this._assertWritable();
+    this._assertConfigurationWritable(kind, command);
     if (!command.generation || !command.clientCommandId) throw new ProviderError('precondition_required', 'Source generation and command identity are required', 428);
     assertCommandId(command.clientCommandId);
     if (command.generation !== this.generation) throw new ProviderError('generation_mismatch', 'Command belongs to a different source generation', 409);
@@ -410,6 +504,14 @@ export class LocalProvider {
     const input = { ...this.snapshot, manifest: { ...this.snapshot.manifest, generation: this.generation } };
     const next = kind === 'configuration' ? applyConfigurationCommand(input, command, { actor: this.actor }) : applySettingsCommand(input, command, this.actor);
     const candidate = normalizeConfiguration(next.snapshot, this.actor);
+    if (this._legacyPreferencesEnabled()) {
+      const revision = (this.snapshot.manifest.preferencesRevision ?? 0) + 1;
+      if (!Number.isSafeInteger(revision)) throw new ProviderError('revision_capacity', 'Preferences revision capacity reached', 413);
+      candidate.manifest.preferencesRevision = revision;
+      candidate.manifest.legacy = { ...candidate.manifest.legacy, preferencesSource: 'local-memory', preferencesRevision: revision,
+        ...(this.snapshot.manifest.legacy.preferencesSource === 'application-json' ? { serverPreferencesRevision: this.snapshot.manifest.legacy.preferencesRevision ?? 0 } : {}),
+        preferencesCatalogIds: Object.fromEntries(['filters', 'views'].map(family => [family, candidate[family].filter(resource => !this.legacyImportedIds[family].has(resource.id)).map(resource => resource.id)])) };
+    }
     if (new TextEncoder().encode(JSON.stringify(candidate)).length > LOCAL_LIMITS.bundleBytes) throw new ProviderError('snapshot_size_limit', 'Configuration would exceed the Local snapshot limit', 413);
     abortIfNeeded(options.signal); this._assert();
     this.snapshot = freeze(candidate); this.revision++; this.modified = true; this.configurationCursors?.clear();

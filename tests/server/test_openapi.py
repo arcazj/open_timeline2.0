@@ -14,6 +14,7 @@ from referencing.jsonschema import DRAFT202012
 
 from server.app.api.openapi import BASE, DIALECT, SCHEMA_NAMES, build_contract, route_inventory
 from server.app.main import create_app
+from test_api import prepared
 
 ROOT = Path(__file__).resolve().parents[2]
 TOKEN = "openapi-test-credential-not-for-deployment"
@@ -149,8 +150,8 @@ def test_read_and_query_http_responses_conform_to_declared_schemas(app, contract
             assert response.status_code == 200, response.text
             response_matches(contract, path, "GET", response)
         query = client.post(BASE + "/query-sessions", json=contract["components"]["schemas"]["QueryRequest"]["examples"][0])
-        assert query.status_code == 200
         response_matches(contract, BASE + "/query-sessions", "POST", query)
+        query = prepared(client, query)
         q = query.json()
         prefix = BASE + f'/query-sessions/{q["queryId"]}'
         for endpoint in ["density", "overview", "zones"]:
@@ -160,6 +161,7 @@ def test_read_and_query_http_responses_conform_to_declared_schemas(app, contract
         layout_input["mapId"] = q["mapId"]
         response = client.post(prefix + "/layouts", json=layout_input)
         response_matches(contract, BASE + "/query-sessions/{query_id}/layouts", "POST", response)
+        response = prepared(client, response)
         layout = response.json()
         inspected = client.get(prefix + f'/layouts/{layout["layoutId"]}')
         response_matches(contract, BASE + "/query-sessions/{query_id}/layouts/{layout_id}", "GET", inspected)

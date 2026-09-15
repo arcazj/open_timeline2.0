@@ -11,6 +11,11 @@ export function createChangeMonitor(host, { delay = 250 } = {}) {
     const waiters = explicitWaiters; explicitWaiters = [];
     waiters.forEach(resolve => resolve(false));
   }
+  function markBoundary(provider, value) {
+    if (!['authorization-lost', 'generation-changed', 'replay-gap'].includes(value)) throw new TypeError('Invalid change-monitor boundary');
+    if (disposed || !source || source !== provider || required === 'authorization-lost' && value !== required) return false;
+    required = value; cancelTimer(); cancelExplicit(); paint(); return true;
+  }
   function schedule() {
     if (disposed || !source || inFlight || timer || !explicitPending && (required || mode !== 'live' || latest <= baseline)) return;
     timer = setTimeout(() => {
@@ -61,10 +66,12 @@ export function createChangeMonitor(host, { delay = 250 } = {}) {
     unsubscribe = provider.subscribeChanges(event => {
       if (disposed || ticket !== session || source !== provider) return;
       if (event.type === 'authorization-lost') {
-        required = 'authorization-lost'; cancelTimer(); cancelExplicit(); paint(); host.authorizationLost(event); return;
+        if (markBoundary(provider, 'authorization-lost')) host.authorizationLost(event);
+        return;
       }
       if (event.type === 'generation-changed') {
-        required = event.code === 'replay_gap' ? 'replay-gap' : 'generation-changed'; cancelTimer(); cancelExplicit(); paint(); host.refreshRequired(event); return;
+        if (markBoundary(provider, event.code === 'replay_gap' ? 'replay-gap' : 'generation-changed')) host.refreshRequired(event);
+        return;
       }
       if (event.type === 'server-unavailable') { cancelTimer(); cancelExplicit(); host.unavailable(event); return; }
       if (event.type !== 'changed' || event.generation !== generation) return;
@@ -74,6 +81,7 @@ export function createChangeMonitor(host, { delay = 250 } = {}) {
   }
   return {
     start,
+    markBoundary,
     stop() { stop(); generation = null; baseline = 0; latest = 0; required = null; mode = 'pinned'; paint(); },
     acknowledge(query) {
       if (!source || boundaryRequired() || query?.generation !== generation || !Number.isSafeInteger(query.revision)) return;

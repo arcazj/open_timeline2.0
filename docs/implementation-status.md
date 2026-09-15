@@ -4,6 +4,8 @@ OpenBEXI Timeline 2.0 is undergoing full-release implementation. The revision 2.
 
 ## Implemented and Exercised
 
+The [sorting/filtering and descriptor candidate](sorting-filtering/implementation-status.md) adds opt-in v2 safe regex, exact relationship/search provenance, natural ordering, typed group collapse, application-owned legacy preferences, reviewed migration, and automatic safe descriptor sidecars. Its focused evidence supersedes the older absence notes below; it does not close the full-release gates.
+
 - One modular JavaScript application builds into a self-contained HTML file. Three.js, CSS, the font, icons and all 48 sample records are embedded. The generated file opens from a different local directory with HTTP requests blocked.
 - A large orthographic detail timeline sits above a synchronized overview. Events, duration sessions, compact labels, translucent zones, selection and a right-side descriptor render from actual generic records.
 - Navigation, overview range movement, manual zoom, uniform/adaptive maps and global vertical row pages share one time-mapping contract. Density is computed from the full filtered analysis range, not the loaded page.
@@ -46,7 +48,7 @@ These are follow-on implementation tasks, not features to delete from the prompt
 
 1. Close the remaining implementation rows in the legacy inventory. Inventory coverage is not runtime compatibility certification, and original artifacts remain authoritative. Unsupported migration semantics produce explicit diagnostics rather than being silently discarded.
 2. Complete workspace administration, the full model/reference-upgrade graph and dependency-aware legacy migration. Catalog/schema/filter/source authoring now exists, but that does not close every resource or migration clause. Additional detail bands, broader approved assets/fonts, optional source-backed camera compatibility and legacy fixed geometry/spacing still need implementation; the default remains orthographic.
-3. Add large-overview drill-down, authorized ancestor/footprint-only context and oversized-page fragmentation; finish preparation latency/resource qualification. Custom-schema-declared filter and table-sort fields now work; group-collapse application and all navigation variants remain incomplete.
+3. Add large-overview drill-down, footprint-only context and oversized-page fragmentation; finish preparation latency/resource qualification. Authorized ancestor context and typed group collapse now work in the version-2 workflow; all navigation variants are not certified.
 4. Complete remaining interaction/accessibility variants and broader registered fonts/glyphs. Full historical/calendar behavior across all browser time-zone databases is not certified.
 5. Certify the full large-dataset performance/resource budgets. Shard startup has improved in exploratory measurements, but the required controlled cold/warm distributions and concurrency/RSS evidence remain absent. Worker-denied Local execution is not yet cooperatively sliced throughout all algorithms. Limits reject unsupported sizes rather than silently dropping data.
 6. Complete adaptive geometry hysteresis/provenance, live timing qualification, conflict comparison/reapply, conditional undo/redo, trash/bulk workflows, field-level permission contracts, tracked import/backup jobs, retention/checkpoint policy and deployment hardening. Scoped authorization, atomic batches, backup primitives and reload-safe record/model/configuration recovery are implemented, not replacements for these remaining clauses.

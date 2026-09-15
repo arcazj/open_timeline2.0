@@ -6,7 +6,7 @@ import stateSchema from '../../../shared/schemas/configuration-state.schema.json
 import builtInFields from '../../../shared/fixtures/filter-fields.json' with { type: 'json' };
 import { ProviderError, clone, inspectJson, canonicalJson, uuid } from './data-provider.js';
 import { DEFAULT_DEFINITION, normalizeSnapshotModels, validateDefinition } from './model-catalog.js';
-import { parseSearch, compileExpression } from './filter-expression.js';
+import { parseSearch, compileExpression, compileSearch } from './filter-expression.js';
 import { validatePresentation } from '../timeline/presentation.js';
 import { toMs, instantFormat } from '../timeline/time-scale.js';
 
@@ -141,6 +141,7 @@ export function filterFieldTypes(snapshot, schemaRefs = []) {
 
 function validateExpression(expression, registry) {
   if (expression === null) return;
+  if (expression?.version === 2) { compileExpression(expression, { fieldTypes: registry }); return; }
   if (!plain(expression) || expression.version !== 1 || Object.keys(expression).some(key => !['version', 'root'].includes(key))) bad('Expected a version 1 filter expression');
   let count = 0;
   function visit(node, depth = 1) {
@@ -166,7 +167,13 @@ function validateExpression(expression, registry) {
   }
   visit(expression.root);
 }
-function validateSearch(search, registry, partial = false) {
+function validateSearch(search, registry, partial = false, definitionVersion = 1) {
+  if (definitionVersion === 2) {
+    const value = search.mode === 'regex' || !partial ? search : { text: '', mode: 'any', caseSensitive: false, fields: ['/title'], ...search };
+    const input = { definitionVersion, search: value.text, searchMode: value.mode, searchFields: value.fields };
+    for (const [source, target] of [['caseSensitive', 'searchCaseSensitive'], ['flags', 'searchFlags'], ['matchMode', 'searchMatchMode'], ['dialect', 'searchDialect']]) if (own(value, source)) input[target] = value[source];
+    compileSearch(input, { fieldTypes: registry }); return;
+  }
   const value = partial ? { text: '', mode: 'any', caseSensitive: false, fields: ['/title'], ...search } : search;
   parseSearch(value.text, value.mode, value.caseSensitive);
   if (!Array.isArray(value.fields) || !value.fields.length || value.fields.length > 16 || new Set(value.fields).size !== value.fields.length || value.fields.some(field => !own(registry, field) || registry[field] === 'strings')) bad('Search requires declared scalar fields');
@@ -210,9 +217,13 @@ function validateSettings(values, context = {}, allowPins = true) {
     const fields = values[key].map(item => item.field);
     if (new Set(fields).size !== fields.length || fields.some(field => !own(registry, field.startsWith('/') ? field : `/${field.replace(/^data\./, 'data/')}`))) bad('Table fields must be unique declared fields');
     if (key === 'sort' && fields.some(field => registry[field.startsWith('/') ? field : `/${field.replace(/^data\./, 'data/')}`] === 'strings')) bad('Table sort requires scalar fields');
+    if (key === 'sort' && values.definitionVersion === 2 && values.sort.some(item => (own(item, 'order') || own(item, 'caseSensitive')) && registry[item.field.startsWith('/') ? item.field : `/${item.field.replace(/^data\./, 'data/')}`] !== 'string')) bad('Natural ordering and case options require declared string fields');
   }
-  if (values.search) validateSearch(values.search, registry, true);
-  for (const id of values.collapsedGroups ?? []) if (context.snapshot) resourceAt(context.snapshot, 'groups', id, context);
+  if (values.search) validateSearch(values.search, registry, true, values.definitionVersion ?? 1);
+  if (values.definitionVersion === 2) {
+    const keys = values.collapsedGroups ?? [];
+    if (keys.some(key => key !== key.normalize('NFC')) || new Set(keys.map(key => key.normalize('NFC'))).size !== keys.length) bad('Collapsed group keys must be distinct NFC identities');
+  } else for (const id of values.collapsedGroups ?? []) if (context.snapshot) resourceAt(context.snapshot, 'groups', id, context);
 }
 
 export function validateResourceDefinition(family, definition, context = {}) {
@@ -230,11 +241,12 @@ export function validateResourceDefinition(family, definition, context = {}) {
       for (const pin of definition.schemaRefs) reference('schemas', pin);
       if (definition.schemaRefs.length && !context.snapshot) bad('Schema-scoped validation requires the catalog context');
       const registry = filterFieldTypes(context.snapshot, definition.schemaRefs);
-      validateExpression(definition.expression, registry); validateSearch(definition.search, registry);
+      validateExpression(definition.expression, registry); validateSearch(definition.search, registry, false, definition.definitionVersion ?? 1);
     }
     if (family === 'views') {
       reference('models', definition.model);
       const filter = definition.filter && reference('filters', definition.filter);
+      if ((definition.definitionVersion ?? 1) === 1 && filter?.definitionVersion === 2) bad('A version 1 view cannot pin a version 2 filter; explicitly upgrade the view');
       validateSettings(definition.settings, { ...context, registry: filter ? filterFieldTypes(context.snapshot, filter.schemaRefs) : registryBase }, false);
     }
   } catch (error) { errors.push(...(error.errors ?? [{ path: '/', code: error.code ?? 'invalid_configuration', message: error.message }])); }
@@ -319,7 +331,7 @@ export function configurationUsage(snapshot, family, id, version) {
   }
   const fromSettings = (values, descriptor) => {
     for (const { family: target, pin } of settingsPins(values)) add(target, pin, { ...descriptor, path: `/${target === 'models' ? 'model' : target === 'filters' ? 'filter' : 'view'}Id` });
-    for (const groupId of values.collapsedGroups ?? []) add('groups', { id: groupId }, { ...descriptor, path: '/collapsedGroups' });
+    if (values.definitionVersion !== 2) for (const groupId of values.collapsedGroups ?? []) add('groups', { id: groupId }, { ...descriptor, path: '/collapsedGroups' });
   };
   for (const sourceFamily of CONFIGURATION_FAMILIES) for (const resource of snapshot[sourceFamily] ?? []) {
     const versions = [...resource.versions.map(item => ({ version: item.version, definition: item.definition })), ...(resource.draft === null ? [] : [{ version: null, definition: resource.draft }])];
@@ -343,13 +355,17 @@ export function configurationUsage(snapshot, family, id, version) {
   return references;
 }
 
-const MERGED_SETTINGS = new Set(['range', 'overview', 'search']);
+const MERGED_SETTINGS = new Set(['range', 'overview', 'search', 'table']);
 function mergeSettings(target, source, origins, origin) {
   function record(value, path) {
     if (plain(value)) for (const [key, child] of Object.entries(value)) record(child, `${path}/${pointer(key)}`);
     else origins[path] = origin;
   }
   for (const [key, value] of Object.entries(source)) {
+    if (key === 'search' && plain(value) && (value.mode === 'regex' || target.search?.mode === 'regex' && value.mode !== undefined && value.mode !== 'regex')) {
+      for (const path of Object.keys(origins)) if (path.startsWith('/search/')) delete origins[path];
+      target.search = clone(value); record(value, '/search'); continue;
+    }
     if (MERGED_SETTINGS.has(key) && plain(value)) {
       target[key] = { ...target[key], ...clone(value) };
       for (const [child, item] of Object.entries(value)) record(item, `/${pointer(key)}/${pointer(child)}`);
@@ -383,8 +399,11 @@ export function effectiveSettings(snapshot, { viewId, viewVersion, principalId, 
   mergeSettings(values, snapshot.settings, origins, 'workspace-active');
   mergeSettings(values, snapshot.defaults?.values ?? {}, origins, 'workspace-defaults');
   mergeSettings(values, model, origins, `model:${modelPin.id}@${modelPin.version}`);
-  if (selectedFilter) mergeSettings(values, { search: selectedFilter.search }, origins, `filter:${filterPin.id}@${filterPin.version}`);
-  if (view) mergeSettings(values, view.settings, origins, `view:${selector.viewId}@${selector.viewVersion}`);
+  if (selectedFilter) mergeSettings(values, { ...(selectedFilter.definitionVersion === 2 ? { definitionVersion: 2, relationshipMode: selectedFilter.relationshipMode ?? 'independent' } : {}), search: selectedFilter.search }, origins, `filter:${filterPin.id}@${filterPin.version}`);
+  if (view) {
+    if ((view.definitionVersion ?? 1) === 1 && selectedFilter?.definitionVersion === 2) bad('A version 1 view cannot pin a version 2 filter; explicitly upgrade the view');
+    mergeSettings(values, { ...(view.definitionVersion === 2 ? { definitionVersion: 2 } : {}), ...view.settings }, origins, `view:${selector.viewId}@${selector.viewVersion}`);
+  }
   mergeSettings(values, personal, origins, `personal:${principalId}`);
   mergeSettings(values, transient, origins, 'transient');
   const pins = { modelId: modelPin.id, modelVersion: modelPin.version };
@@ -496,7 +515,7 @@ export function applyConfigurationCommand(input, inputCommand, { actor, now = ne
   if (command.type === 'apply') {
     result.effectiveSettings = effectiveSettings(snapshot, { principalId: actor.id });
     const definition = resource.versions.find(version => version.version === payload.version).definition;
-    result.resetTransientKeys = family === 'filters' ? ['filterId', 'filterVersion', 'viewId', 'viewVersion', 'search'] : [...new Set(['modelId', 'modelVersion', 'filterId', 'filterVersion', 'viewId', 'viewVersion', ...(definition.filter ? ['search'] : []), ...Object.keys(definition.settings)])];
+    result.resetTransientKeys = family === 'filters' ? ['filterId', 'filterVersion', 'viewId', 'viewVersion', 'search', ...(definition.definitionVersion === 2 ? ['definitionVersion', 'relationshipMode'] : [])] : [...new Set(['modelId', 'modelVersion', 'filterId', 'filterVersion', 'viewId', 'viewVersion', ...(definition.filter ? ['search'] : []), ...Object.keys(definition.settings)])];
   }
   return result;
 }

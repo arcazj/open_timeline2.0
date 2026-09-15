@@ -16,6 +16,7 @@ from server.app.main import create_app
 from server.app.models.domain import DomainError
 from test_audit import create
 from test_identity_api import create_identity
+from test_api import prepared
 
 
 def poll(client, metadata, after=None, **kwargs):
@@ -27,7 +28,7 @@ def test_snapshot_resume_batch_replay_and_concurrent_pinned_queries(client, app,
     metadata = client.get(BASE).json()
     first = poll(client, metadata).json()
     assert first["changes"] == [] and first["nextRevision"] == metadata["revision"]
-    query = client.post(BASE + "/query-sessions", json={"domain": bundle["settings"]["overview"]}).json()
+    query = prepared(client, client.post(BASE + "/query-sessions", json={"domain": bundle["settings"]["overview"]})).json()
     headers = {**write_headers, "Idempotency-Key": str(uuid.uuid4())}
     body = {"operations": [{"type": "create", "payload": {"title": "Never exposed one"}}, {"type": "create", "payload": {"title": "Never exposed two"}}]}
     batch = client.post(BASE + "/records/batch", headers=headers, json=body)

@@ -10,6 +10,7 @@ from server.app.repositories.json_repository import JsonRepository
 from server.app.services.presentation_layout import full_label, wrap_label
 from server.app.services.query import FontMetrics, QueryEngine
 from test_models import DEFINITION, command, created_model
+from test_api import prepared
 
 
 class SnapshotRepository:
@@ -279,7 +280,7 @@ def test_presentation_model_publish_apply_remove_and_export(client, app, write_h
 
 def test_record_style_http_write_roundtrip_and_pinned_overview(client, app, write_headers, bundle):
     existing = bundle["records"][0]
-    query = client.post(BASE + "/query-sessions", json={"domain": bundle["settings"]["overview"]}).json()
+    query = prepared(client, client.post(BASE + "/query-sessions", json={"domain": bundle["settings"]["overview"]})).json()
     result = client.patch(BASE + "/records/" + existing["id"], json=[{"op": "replace", "path": "/render", "value": {"color": "#112233", "icon": "flag", "fontWeight": 700}}],
                           headers={**write_headers, "Content-Type": "application/json-patch+json", "If-Match": f'"{write_headers["X-Workspace-Generation"]}:{existing["version"]}"'})
     assert result.status_code == 200, result.text

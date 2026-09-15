@@ -4,6 +4,7 @@ from __future__ import annotations
 import copy
 import json
 import re
+import unicodedata
 import uuid
 from functools import lru_cache
 from pathlib import Path
@@ -13,7 +14,7 @@ import rfc8785
 from .domain import DomainError, MAX_SAFE_INT, _compile_schema, instant_ms, now_iso, read_json, validate_json
 from .model_catalog import definition_errors, integer, normalize_catalog
 from .presentation import presentation_errors
-from ..services.filters import FIELD_TYPES, compile_expression, parse_search
+from ..services.filters import FIELD_TYPES, compile_expression, compile_search, parse_search
 
 FAMILIES = ("sources", "groups", "schemas", "filters", "views")
 LIMITS = {"resources": 100, "versions": 32, "definitionBytes": 65536, "schemaNodes": 256, "schemaDepth": 16}
@@ -237,6 +238,9 @@ def filter_field_types(snapshot, schema_refs=None):
 def _validate_expression(expression, registry):
     if expression is None:
         return
+    if isinstance(expression, dict) and expression.get("version") == 2:
+        compile_expression(expression, field_types=registry)
+        return
     if not isinstance(expression, dict) or not integer(expression.get("version"), 1, 1) or set(expression) - {"version", "root"}:
         _bad("Expected a version 1 filter expression")
     count = 0
@@ -279,7 +283,15 @@ def _validate_expression(expression, registry):
     visit(expression.get("root"))
 
 
-def _validate_search(search, registry, partial=False):
+def _validate_search(search, registry, partial=False, definition_version=1):
+    if definition_version == 2:
+        value = search if search.get("mode") == "regex" or not partial else {"text": "", "mode": "any", "caseSensitive": False, "fields": ["/title"], **search}
+        request = {"definitionVersion": definition_version, "search": value.get("text", ""), "searchMode": value.get("mode", "any"), "searchFields": value.get("fields", ["/title"])}
+        for source, target in (("caseSensitive", "searchCaseSensitive"), ("flags", "searchFlags"), ("matchMode", "searchMatchMode"), ("dialect", "searchDialect")):
+            if source in value:
+                request[target] = value[source]
+        compile_search(request, field_types=registry)
+        return
     value = {"text": "", "mode": "any", "caseSensitive": False, "fields": ["/title"], **search} if partial else search
     parse_search(value["text"], value["mode"], value["caseSensitive"])
     fields = value["fields"]
@@ -351,11 +363,19 @@ def _validate_settings(values, context=None, allow_pins=True):
             _bad("Table fields must be unique declared fields")
         if key == "sort" and any(registry[path] == "strings" for path in paths):
             _bad("Table sort requires scalar fields")
+        if key == "sort" and values.get("definitionVersion") == 2 and any(("order" in item or "caseSensitive" in item) and registry[path] != "string" for item, path in zip(values["sort"], paths)):
+            _bad("Natural ordering and case options require declared string fields")
     if "search" in values:
-        _validate_search(values["search"], registry, True)
-    for group_id in values.get("collapsedGroups", []):
-        if context.get("snapshot") is not None:
-            _resource_at(context["snapshot"], "groups", group_id, context)
+        _validate_search(values["search"], registry, True, values.get("definitionVersion", 1))
+    if values.get("definitionVersion") == 2:
+        keys = values.get("collapsedGroups", [])
+        normalized = [unicodedata.normalize("NFC", key) for key in keys]
+        if keys != normalized or len(set(normalized)) != len(keys):
+            _bad("Collapsed group keys must be distinct NFC identities")
+    else:
+        for group_id in values.get("collapsedGroups", []):
+            if context.get("snapshot") is not None:
+                _resource_at(context["snapshot"], "groups", group_id, context)
 
 
 def validate_resource_definition(family, definition, context=None):
@@ -387,10 +407,12 @@ def validate_resource_definition(family, definition, context=None):
                 _bad("Schema-scoped validation requires the catalog context")
             registry = filter_field_types(context.get("snapshot"), definition["schemaRefs"])
             _validate_expression(definition["expression"], registry)
-            _validate_search(definition["search"], registry)
+            _validate_search(definition["search"], registry, definition_version=definition.get("definitionVersion", 1))
         if family == "views":
             reference("models", definition["model"])
             saved_filter = reference("filters", definition["filter"]) if definition["filter"] is not None else None
+            if definition.get("definitionVersion", 1) == 1 and saved_filter and saved_filter.get("definitionVersion") == 2:
+                _bad("A version 1 view cannot pin a version 2 filter; explicitly upgrade the view")
             registry = filter_field_types(context["snapshot"], saved_filter["schemaRefs"]) if saved_filter else REGISTRY_BASE
             _validate_settings(definition["settings"], {**context, "registry": registry}, False)
     except DomainError as error:
@@ -538,8 +560,9 @@ def configuration_usage(snapshot, family, resource_id, version=None):
     def from_settings(values, descriptor):
         for target, pin in _settings_pins(values):
             add(target, pin, {**descriptor, "path": {"models": "/modelId", "filters": "/filterId", "views": "/viewId"}[target]})
-        for group_id in values.get("collapsedGroups", []):
-            add("groups", {"id": group_id}, {**descriptor, "path": "/collapsedGroups"})
+        if values.get("definitionVersion") != 2:
+            for group_id in values.get("collapsedGroups", []):
+                add("groups", {"id": group_id}, {**descriptor, "path": "/collapsedGroups"})
 
     for source_family in FAMILIES:
         for resource in snapshot.get(source_family, []):
@@ -574,7 +597,14 @@ def _merge_settings(target, source, origins, origin):
             origins[path] = origin
 
     for key, value in source.items():
-        if key in ("range", "overview", "search") and isinstance(value, dict):
+        if key == "search" and isinstance(value, dict) and (value.get("mode") == "regex" or target.get("search", {}).get("mode") == "regex" and "mode" in value and value["mode"] != "regex"):
+            for path in list(origins):
+                if path.startswith("/search/"):
+                    del origins[path]
+            target["search"] = copy.deepcopy(value)
+            record(value, "/search")
+            continue
+        if key in ("range", "overview", "search", "table") and isinstance(value, dict):
             target[key] = {**target.get(key, {}), **copy.deepcopy(value)}
             for child, item in value.items():
                 record(item, "/" + _pointer(key) + "/" + _pointer(child))
@@ -613,9 +643,13 @@ def effective_settings(snapshot, *, view_id=_UNSET, view_version=_UNSET, princip
     _merge_settings(values, snapshot.get("defaults", {}).get("values", {}), origins, "workspace-defaults")
     _merge_settings(values, model, origins, f"model:{model_pin['id']}@{model_pin['version']}")
     if selected_filter:
-        _merge_settings(values, {"search": selected_filter["search"]}, origins, f"filter:{filter_pin['id']}@{filter_pin['version']}")
+        versioned = {"definitionVersion": 2, "relationshipMode": selected_filter.get("relationshipMode", "independent")} if selected_filter.get("definitionVersion") == 2 else {}
+        _merge_settings(values, {**versioned, "search": selected_filter["search"]}, origins, f"filter:{filter_pin['id']}@{filter_pin['version']}")
     if view:
-        _merge_settings(values, view["settings"], origins, f"view:{selector['viewId']}@{selector['viewVersion']}")
+        if view.get("definitionVersion", 1) == 1 and selected_filter and selected_filter.get("definitionVersion") == 2:
+            _bad("A version 1 view cannot pin a version 2 filter; explicitly upgrade the view")
+        versioned = {"definitionVersion": 2} if view.get("definitionVersion") == 2 else {}
+        _merge_settings(values, {**versioned, **view["settings"]}, origins, f"view:{selector['viewId']}@{selector['viewVersion']}")
     _merge_settings(values, personal, origins, f"personal:{principal_id}")
     _merge_settings(values, transient, origins, "transient")
     pins = {"modelId": model_pin["id"], "modelVersion": model_pin["version"]}
@@ -774,6 +808,6 @@ def apply_configuration_command(input_snapshot, input_command, *, actor, now=Non
     if operation == "apply":
         result["effectiveSettings"] = effective_settings(snapshot, principal_id=actor["id"])
         definition = next(item["definition"] for item in resource["versions"] if item["version"] == payload["version"])
-        keys = ["filterId", "filterVersion", "viewId", "viewVersion", "search"] if family == "filters" else ["modelId", "modelVersion", "filterId", "filterVersion", "viewId", "viewVersion", *(["search"] if definition["filter"] else []), *definition["settings"]]
+        keys = ["filterId", "filterVersion", "viewId", "viewVersion", "search", *(["definitionVersion", "relationshipMode"] if definition.get("definitionVersion") == 2 else [])] if family == "filters" else ["modelId", "modelVersion", "filterId", "filterVersion", "viewId", "viewVersion", *(["search"] if definition["filter"] else []), *definition["settings"]]
         result["resetTransientKeys"] = list(dict.fromkeys(keys))
     return result

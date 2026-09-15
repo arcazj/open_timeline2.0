@@ -175,6 +175,8 @@ class LegacyRepository:
                 configuration["sources"] = [source for source in configuration["sources"]
                                             if source.get("sourceId", source.get("id")) in allowed]
                 configuration["diagnostics"] = []
+                if 'sourcePredicates' in configuration:
+                    configuration['sourcePredicates'] = {identity: expression for identity, expression in configuration['sourcePredicates'].items() if identity in allowed}
 
         for name in ("settings", "models", "model", "defaults", "preferences", "views", "values", "layers"):
             if name in value:

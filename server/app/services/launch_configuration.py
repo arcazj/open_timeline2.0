@@ -32,7 +32,7 @@ def load_launch_configuration(filename):
                         ("version", "server"))
     if type(document["version"]) is not int or document["version"] != 1:
         raise ValueError("Profile version must be 1")
-    server = _mapping(document["server"], "server", {"host", "port", "local_browser", "state_root", "startup_mode", "data_loading"},
+    server = _mapping(document["server"], "server", {"host", "port", "local_browser", "state_root", "preferences_root", "startup_mode", "data_loading"},
                       ("host", "port", "local_browser", "state_root"))
     if "snapshot" in document and any(key in document for key in ("legacy", "data_sources", "loading")):
         raise ValueError("snapshot cannot be combined with partitioned legacy sources or loading settings")
@@ -40,6 +40,14 @@ def load_launch_configuration(filename):
     def resolve(value, name, base=path.parent):
         selected = Path(_text(value, name))
         return _guard_path(base / selected)
+
+    state_root = _guard_path(resolve(server["state_root"], "server.state_root").resolve())
+    preferences_root = (state_root / "preferences" if "preferences_root" not in server else
+                        None if server["preferences_root"] is None else resolve(server["preferences_root"], "server.preferences_root"))
+    if preferences_root is not None:
+        preferences_root = _guard_path(_guard_path(preferences_root).resolve())
+    if preferences_root is not None and (preferences_root == state_root or not preferences_root.is_relative_to(state_root)):
+        raise ValueError("server.preferences_root must be a dedicated child of server.state_root, or null to disable preferences")
 
     host = _text(server["host"], "server.host")
     port = server["port"]
@@ -51,10 +59,10 @@ def load_launch_configuration(filename):
         raise ValueError("server.local_browser requires host 127.0.0.1")
     if "snapshot" in document:
         source = _mapping(document["snapshot"], "snapshot", {"file"}, ("file",))
-        if set(server) - {"host", "port", "local_browser", "state_root"}:
+        if set(server) - {"host", "port", "local_browser", "state_root", "preferences_root"}:
             raise ValueError("Snapshot profiles use background startup and a bounded complete JSON source")
         return {"source_yaml": path, "snapshot_file": resolve(source["file"], "snapshot.file"),
-                "state_root": resolve(server["state_root"], "server.state_root"), "host": host, "port": port,
+                "state_root": state_root, "preferences_root": preferences_root, "host": host, "port": port,
                 "local_browser": server["local_browser"], "background_startup": True, "lazy": False,
                 "source_document": {}, "loading": {}}
     legacy = _mapping(document.get("legacy"), "legacy", {"root", "allow_roots", "path_maps", "model", "timezone", "dialect", "namespace_grouping"},
@@ -107,7 +115,7 @@ def load_launch_configuration(filename):
         "path_map": [f"{_text(prefix, 'legacy.path_maps key')}={resolve(target, 'legacy.path_maps target')}" for prefix, target in maps.items()],
         "model": resolve(legacy["model"], "legacy.model", root) if "model" in legacy else None,
         "namespace_grouping": grouping, "timezone": timezone, "dialect": dialect,
-        "state_root": resolve(server["state_root"], "server.state_root"),
+        "state_root": state_root, "preferences_root": preferences_root,
         "host": host, "port": port, "local_browser": server["local_browser"],
         "background_startup": startup_mode == "background",
         "lazy": data_loading == "lazy", "loading": normalized_loading,

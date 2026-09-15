@@ -113,25 +113,64 @@ for (const mode of ['local', 'server']) {
     await expect(page.locator('#app')).toHaveClass(/dark/); await expect(page.locator('#auto-scale')).toBeChecked();
     const snapshot = await exportJson(page), principal = snapshot.preferences.find(entry => entry.values.viewId === viewId);
     expect(principal).toBeTruthy(); expect(principal.values.range).toEqual({ from: '2026-09-12T10:00:00.000Z', to: '2026-09-12T13:00:00.000Z' }); expect(principal.values.scaleMode).toBe('adaptive');
+    expect(snapshot.manifest.localPreferencesPrincipalId).toBe(principal.principalId);
+    if (mode === 'server') expect(principal.principalId).not.toBe('local');
+    const imported = new LocalProvider(snapshot);
+    try {
+      const metadata = await imported.initialize();
+      expect(metadata.actor.id).toBe(principal.principalId);
+      expect(metadata.actor.verified).toBe(false);
+    } finally { await imported.dispose(); }
     expect(snapshot.settings.viewId).not.toBe(viewId); expect(snapshot.settings.filterId).not.toBe(filterId);
     expect(snapshot.manifest.contentSha256).toBe(await sha256(snapshotContent(snapshot)));
     await page.screenshot({ path: info.outputPath(`configuration-apply-${mode}.png`) });
     await page.locator('[data-action=sources]').first().click(); await page.locator('#json-file').setInputFiles({ name: 'configuration-export.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(snapshot)) }); await ready(page);
     await expect.poll(() => page.evaluate(() => window.__timelineDebug.providerKind)).toBe('local');
-    if (mode === 'local') { await expect(page.locator('.table-view tbody tr')).toHaveCount(expected.length); await expect(page.locator('#app')).toHaveClass(/dark/); }
-    else { expect(principal.principalId).not.toBe('local'); await expect(page.locator('#app')).not.toHaveClass(/dark/); }
+    await expect(page.locator('.table-view tbody tr')).toHaveCount(expected.length);
+    await expect(page.locator('#app')).toHaveClass(/dark/);
+    await expect(page.locator('#search')).toHaveValue('gate');
+    await expect(page.locator('#auto-scale')).toBeChecked();
+    expect(await page.evaluate(() => ({ fromMs: window.__timelineDebug.fromMs, toMs: window.__timelineDebug.toMs }))).toEqual(window);
+    const roundTrip = await exportJson(page);
+    expect(roundTrip.manifest.localPreferencesPrincipalId).toBe(principal.principalId);
+    expect(roundTrip.preferences.map(({ revision, ...entry }) => entry)).toEqual(snapshot.preferences.map(({ revision, ...entry }) => entry));
+    expect(roundTrip.preferences.find(entry => entry.principalId === principal.principalId).revision).toBeGreaterThanOrEqual(principal.revision);
+    expect(roundTrip.preferences.filter(entry => entry.principalId !== principal.principalId)).toEqual(snapshot.preferences.filter(entry => entry.principalId !== principal.principalId));
+    expect(roundTrip.records).toEqual(snapshot.records);
     expect(errors).toEqual([]);
   });
 }
 
-test('unsupported canonical group collapse is rejected before Apply changes preference state', async ({ page }) => {
+test('version 1 catalog group collapse is rejected before Apply changes preference state', async ({ page }) => {
   const errors = await open(page, 'local'); await manager(page);
   await page.locator('[data-cfg-family=groups]').click(); await page.locator('[name=cfgName]').fill('Future collapse group'); await page.locator('[data-cfg-action=save]').click(); await expect(page.locator('.cfg-message')).toContainText('Configuration committed');
   const groupId = (await page.locator('.cfg-version-bar > span').textContent()).split(' / revision ')[0];
   await create(page, 'views', 'Collapse review', { model: { id: 'light', version: 1 }, filter: null, settings: { collapsedGroups: [groupId] } });
   const before = await page.evaluate(() => window.__timelineDebug.queryId); await page.locator('[data-cfg-action=apply]').click();
-  await expect(page.locator('.cfg-message')).toContainText('not implemented yet'); expect(await page.evaluate(() => window.__timelineDebug.queryId)).toBe(before);
+  await expect(page.locator('.cfg-message')).toContainText('Group collapse requires a version 2 view with typed group keys'); expect(await page.evaluate(() => window.__timelineDebug.queryId)).toBe(before);
   await page.locator('[data-cfg-action=close]').click(); const snapshot = await exportJson(page); expect(snapshot.preferences).toHaveLength(0); expect(errors).toEqual([]);
+});
+
+test('version 2 saved views apply typed group collapse without dropping records or changing temporal focus', async ({ page }) => {
+  const errors = await open(page, 'local'); await manager(page);
+  const definition = { definitionVersion: 2, model: { id: 'light', version: 1 }, filter: null,
+    settings: { definitionVersion: 2, mode: 'timeline', groupBy: 'sourceId', collapsedGroups: ['string:operations'] } };
+  const viewId = await create(page, 'views', 'Collapsed operations review', definition);
+  const range = await page.evaluate(() => ({ fromMs: window.__timelineDebug.fromMs, toMs: window.__timelineDebug.toMs }));
+  await apply(page); await page.locator('[data-cfg-action=close]').click();
+  const group = page.locator('.plot-wrap [data-group-key="string:operations"]');
+  await expect(group).toHaveAttribute('aria-expanded', 'false');
+  const collapsed = await page.evaluate(() => window.__timelineDebug);
+  const snapshot = await exportJson(page);
+  expect(snapshot.records).toHaveLength(fixture.records.length);
+  expect(snapshot.preferences.some(entry => entry.values.viewId === viewId)).toBe(true);
+  await group.click(); await expect(group).toHaveAttribute('aria-expanded', 'true'); await ready(page);
+  const expanded = await page.evaluate(() => window.__timelineDebug);
+  expect(expanded.queryId).toBe(collapsed.queryId); expect(expanded.mapId).toBe(collapsed.mapId);
+  expect(expanded.detailTotal).toBe(collapsed.detailTotal); expect(expanded.overviewTotal).toBe(collapsed.overviewTotal);
+  expect(expanded.totalRows).toBeGreaterThan(collapsed.totalRows);
+  expect(await page.evaluate(() => ({ fromMs: window.__timelineDebug.fromMs, toMs: window.__timelineDebug.toMs }))).toEqual(range);
+  expect(errors).toEqual([]);
 });
 
 test('schema-typed table columns display Boolean and array values with global numeric multi-sort', async ({ page }, info) => {

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { navigatePan, navigateZoom, followingOverview, createPanProjector, MIN_TIME, MAX_TIME } from '../../client/src/timeline/navigation-domain.js';
+import { navigatePan, navigateZoom, followingOverview, createPanProjector, navigationQueryDomain, rangeInside, MIN_TIME, MAX_TIME } from '../../client/src/timeline/navigation-domain.js';
 import { toIso, toMs } from '../../client/src/timeline/time-scale.js';
 import { loadPathPreferences, savePathPreferences, groupedPresentation, groupingMode } from '../../client/src/ui/source-paths.js';
 import { validatePresentation } from '../../client/src/timeline/presentation.js';
@@ -8,6 +8,24 @@ import { validatePresentation } from '../../client/src/timeline/presentation.js'
 const start = Date.UTC(2024, 0, 1), end = start + 86400000;
 const map = { knots: [{ timeMs: start, u: '0' }, { timeMs: end, u: '1' }] };
 const domain = { from: toIso(start), to: toIso(end) };
+
+test('neighbor query timestamps enclose fractional view bounds without changing the displayed range', () => {
+  for (const range of [
+    { fromMs: `${start}.25`, toMs: `${end}.75` },
+    { fromMs: '-1000.25', toMs: '-0.01' },
+    { fromMs: String(MIN_TIME), toMs: String(MIN_TIME + 1000) },
+    { fromMs: String(MAX_TIME - 1000), toMs: String(MAX_TIME) },
+  ]) {
+    const before = JSON.stringify(range), query = navigationQueryDomain(range);
+    assert.equal(rangeInside(query, range), true);
+    assert.equal(JSON.stringify(range), before);
+    assert.ok(Number(range.fromMs) - Number(toMs(query.from)) < 1);
+    assert.ok(Number(toMs(query.to)) - Number(range.toMs) < 1);
+  }
+  assert.throws(() => navigationQueryDomain({ fromMs: 0, toMs: 0 }), RangeError);
+  assert.throws(() => navigationQueryDomain({ fromMs: MIN_TIME - 1, toMs: 0 }), RangeError);
+  assert.throws(() => navigationQueryDomain({ fromMs: 0, toMs: MAX_TIME + 1 }), RangeError);
+});
 
 test('compiled gesture projection matches the canonical map through adaptive sections and calendar bounds', () => {
   const dense = { knots: [{ timeMs: start, u: '0' }, { timeMs: start + 3600000, u: '0.6' }, { timeMs: end, u: '1' }] };

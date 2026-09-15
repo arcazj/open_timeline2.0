@@ -42,6 +42,13 @@ export function rangeInside(domain, range) {
   return new D(range.fromMs).gte(toMs(domain.from)) && new D(range.toMs).lte(toMs(domain.to));
 }
 
+export function navigationQueryDomain(range) {
+  const from = new D(range.fromMs), to = new D(range.toMs);
+  if (!from.isFinite() || !to.isFinite() || from.lt(MIN_TIME) || to.gt(MAX_TIME) || !to.gt(from)) throw new RangeError('Invalid navigation query range');
+  // Query timestamps use integer milliseconds; keep fractional viewport bounds inside them.
+  return { from: toIso(from.floor()), to: toIso(to.ceil()) };
+}
+
 export function followingOverview(domain, range) {
   const from = new D(range.fromMs), to = new D(range.toMs), span = to.minus(from);
   const low = new D(toMs(domain.from)), high = new D(toMs(domain.to)), oldSpan = high.minus(low);

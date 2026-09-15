@@ -2,10 +2,13 @@ import { LocalProvider } from './local-provider.js';
 
 const METHODS = new Set(['getStatus', 'createQuery', 'getQuery', 'getDensity', 'getMap', 'getZones', 'getOverview', 'createLayout', 'getLayout', 'getRows', 'getPlacement', 'getRecord', 'queryRecords', 'executeCommand', 'executeBatch', 'getCommandOutcome', 'listModels', 'getModel', 'validateModel', 'executeModelCommand', 'exportSnapshot', 'releaseQuery', 'releaseLayout', 'listConfiguration', 'getConfiguration', 'validateConfiguration', 'configurationUsage', 'mutateConfiguration', 'getEffectiveSettings', 'mutateSettings', 'previewSchemaImpact']);
 const active = new Map();
+METHODS.add('getQueryRecord');
+METHODS.add('findMatch');
+METHODS.add('migrateLegacyFilter');
 let provider;
 
 const metadata = () => provider ? { identity: provider.identity, generation: provider.generation, revision: provider.revision, modified: provider.modified } : null;
-const errorData = error => ({ name: error.name, code: error.code, message: error.message, status: error.status, errors: error.errors });
+const errorData = error => ({ name: error.name, code: error.code, message: error.message, status: error.status, errors: error.errors, diagnostic: error.diagnostic });
 
 self.addEventListener('message', async ({ data }) => {
   if (data?.type === 'cancel') { active.get(data.id)?.abort(); return; }

@@ -56,6 +56,58 @@ async function csv(page) {
   return { rows: JSON.parse(parsed), name: download.suggestedFilename() };
 }
 
+test('foreground preparation, queued table sort and next refresh share FIFO admission', async ({ page }) => {
+  const errors = await open(page, 'server');
+  await settled(page, 48);
+  const original = await page.evaluate(() => window.__timelineDebug), sequence = [], capacityErrors = [];
+  let enteredForeground, enteredTable, releaseForeground = () => {}, releaseTable = () => {};
+  const foregroundEntered = new Promise(resolve => { enteredForeground = resolve; });
+  const tableEntered = new Promise(resolve => { enteredTable = resolve; });
+  const foregroundGate = new Promise(resolve => { releaseForeground = resolve; });
+  const tableGate = new Promise(resolve => { releaseTable = resolve; });
+  page.on('response', response => {
+    if (response.status() === 429 && response.url().includes('/query-sessions')) capacityErrors.push(response.url());
+  });
+  await page.route('**/query-sessions', async route => {
+    const request = route.request();
+    if (request.method() !== 'POST') return route.continue();
+    const input = request.postDataJSON();
+    if (input.ratio === 1) return route.continue();
+    if (input.filters.sourceId === 'operations') {
+      sequence.push('first-query');
+      const response = await route.fetch(); enteredForeground(); await foregroundGate;
+      sequence.push('first-reply'); await route.fulfill({ response });
+    } else {
+      sequence.push('next-query'); await route.continue();
+    }
+  });
+  await page.route(`**/query-sessions/${original.queryId}/records/query`, async route => {
+    if (route.request().method() !== 'POST') return route.continue();
+    sequence.push('table-read');
+    const response = await route.fetch(); enteredTable(); await tableGate;
+    sequence.push('table-reply'); await route.fulfill({ response });
+  });
+  try {
+    await page.locator('#source-filter').selectOption('operations'); await foregroundEntered;
+    await table(page).locator('[data-table-sort=title]').click();
+    await expect(table(page)).toHaveAttribute('aria-busy', 'true');
+    await page.locator('#source-filter').selectOption('verification');
+    expect(sequence).toEqual(['first-query']);
+    releaseForeground(); await tableEntered;
+    expect(sequence).toEqual(['first-query', 'first-reply', 'table-read']);
+    expect((await page.evaluate(() => window.__timelineDebug)).queryId).toBe(original.queryId);
+    releaseTable();
+    const expected = fixture.records.filter(record => record.sourceId === 'verification').map(record => record.id).sort();
+    await expect(table(page).locator('.table-caption')).toContainText(`${expected.length} records`);
+    await settled(page, expected.length);
+    expect(await page.locator('#source-filter').inputValue()).toBe('verification');
+    expect((await rowIds(page)).sort()).toEqual(expected);
+    expect((await page.evaluate(() => window.__timelineDebug)).queryId).not.toBe(original.queryId);
+    expect(sequence).toEqual(['first-query', 'first-reply', 'table-read', 'table-reply', 'next-query']);
+    expect(capacityErrors).toEqual([]); expect(errors).toEqual([]);
+  } finally { releaseForeground(); releaseTable(); }
+});
+
 for (const mode of ['local', 'server']) {
   test(`${mode} Table browses all canonical records with global sorting and independent time scope`, async ({ page }, info) => {
     const errors = await open(page, mode);

@@ -10,6 +10,7 @@ const RESIZE_DELAY = 120;
 
 export function createModelPreview(options) {
   const { provider, generation, isCurrent, container, axis, definition, domain, fromMs, toMs, filters, search } = options;
+  const queryOptions = Object.fromEntries(['definitionVersion', 'relationshipMode', 'searchMode', 'searchCaseSensitive', 'searchFields', 'searchFlags', 'searchMatchMode', 'searchDialect'].filter(key => options[key] !== undefined).map(key => [key, options[key]]));
   const presentation = resolvePresentation(definition), band = presentation.bands.primary;
   if (band.axisPosition === 'top') container.before(axis);
   axis.style.color = band.dateColor;
@@ -37,13 +38,14 @@ export function createModelPreview(options) {
     running = true;
     const requestIntent = intent, { width, height } = requested;
     task = (async () => {
-      let candidateId = null;
+      let candidateId = null, releasePreparation;
       try {
         check();
+        if (!queryId) { await previous?.dispose(); check(); }
+        releasePreparation = await options.beforePrepare?.({ signal: controller.signal }); check();
         if (!queryId) {
-          await previous?.dispose(); check();
           // Let allocations return their IDs even after Close so they can be released.
-          const query = await provider.createQuery({ domain, filters, search, ...(options.searchMode ? { searchMode: options.searchMode } : {}), ...(options.searchCaseSensitive !== undefined ? { searchCaseSensitive: options.searchCaseSensitive } : {}), ...(options.searchFields ? { searchFields: options.searchFields } : {}), scaleMode: definition.scaleMode, ratio: definition.ratio, bins: definition.bins }, { timeout: 10000 });
+          const query = await provider.createQuery({ domain, filters, search, ...queryOptions, scaleMode: definition.scaleMode, ratio: definition.ratio, bins: definition.bins }, { timeout: 10000 });
           queryId = query.queryId; check();
           map = await provider.getMap(queryId, query.mapId, { signal: controller.signal }); check();
           zones = await provider.getZones(queryId, { signal: controller.signal }); check();
@@ -79,9 +81,11 @@ export function createModelPreview(options) {
         if (!disposed && error.name !== 'AbortError') { container.dataset.previewState = 'error'; publish({ error }); }
         if (!renderer) await releaseQuery();
       } finally {
-        await releaseLayout(candidateId);
-        running = false;
-        if (!disposed && requestIntent !== intent) { clearTimeout(timer); timer = setTimeout(pump, RESIZE_DELAY); }
+        try { await releaseLayout(candidateId); }
+        finally {
+          releasePreparation?.(); running = false;
+          if (!disposed && requestIntent !== intent) { clearTimeout(timer); timer = setTimeout(pump, RESIZE_DELAY); }
+        }
       }
     })();
   }

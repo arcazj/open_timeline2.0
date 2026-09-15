@@ -1,0 +1,65 @@
+{
+  "format": "sorting-acceptance-legacy-fixture",
+  "version": 1,
+  "purpose": "Reviewed T01-T15 oracle normalized through the real read-only legacy reader; aliases are test-only.",
+  "domain": {"from":"2024-03-18T00:00:00.000Z","to":"2024-03-19T00:00:00.000Z"},
+  "recordsBySource": {
+    "SOURCE1": {"2024/03/18": [
+      {"id":"E1","start":"Mar 18 2024 11:00:00 GMT+0000","data":{"title":"Activity_5_1","namespace":"SOURCE1","type":"type0","status":"SCHEDULE","description":"Telemetry"},"render":{"backgroundColor":"#ffffff"}},
+      {"id":"P1","start":"Mar 18 2024 09:00:00 GMT+0000","end":"Mar 18 2024 13:00:00 GMT+0000","data":{"title":"Parent session","namespace":"SOURCE1","status":"SCHEDULE"},"render":{},"activities":[
+        {"id":"C1","start":"Mar 18 2024 11:00:00 GMT+0000","data":{"title":"Activity_5_1","namespace":"SOURCE1","type":"type9","status":"FAILED"},"render":{}},
+        {"id":"C2","start":"Mar 18 2024 11:10:00 GMT+0000","data":{"title":"Nominal child","namespace":"SOURCE1","status":"STARTED"},"render":{}}
+      ]},
+      {"id":"Z1","zone":true,"start":"Mar 18 2024 10:30:00 GMT+0000","end":"Mar 18 2024 12:30:00 GMT+0000","data":{"title":"Review interval"},"render":{"color":"#D88A3B"}}
+    ]},
+    "SOURCE2": {"2024/03/18": [
+      {"id":"E2","start":"Mar 18 2024 11:00:00 GMT+0000","data":{"title":"Activity_0_3","namespace":"SOURCE2","type":"type1","status":"STARTED"},"render":{"backgroundColor":"#F8DF09"}}
+    ]},
+    "SOURCE10": {"2024/03/18": [
+      {"id":"E3","start":"Mar 18 2024 11:30:00 GMT+0000","data":{"title":"Activity_0_3_read_descriptor","namespace":"SOURCE10","type":"type2","status":"SCHEDULE"},"render":{}}
+    ]}
+  },
+  "canonicalIds": {
+    "E1":"d886ce68-c188-539c-b213-81f9e81b3b31",
+    "E2":"4cb65f58-4dee-5521-b806-395317ac2c92",
+    "E3":"81edb2f6-96fc-5401-9845-ea5dbdf5ce5a",
+    "P1":"6f445ad3-901e-5339-993e-b522206a54b6",
+    "C1":"f2f0b8fd-b3a1-5336-8b67-b17be15e576a",
+    "C2":"cfb93664-cdab-5ce0-ba90-c9f11e17ee67",
+    "D1":"2f74be78-cdd4-55e3-b368-edab94d6e025",
+    "D2":"3fac20d5-6588-5a75-aebc-181b1e4a0669",
+    "D3":"64d4712b-8b78-59ff-9a5d-014d5dd4651e",
+    "D4":"a521a6be-2a68-5659-b984-d298838257c1",
+    "D5":"7eef54b4-8ac6-5361-ac44-69a3148500d5",
+    "D6":"de1149eb-d925-5cad-b1ec-aadae92d4617"
+  },
+  "fieldSchema":{"type":"object","properties":{"type":{"type":"string"},"status":{"type":"string"},"namespace":{"type":"string"}}},
+  "overviewTemporalOrder":["P1","E2","E1","C1","C2","E3"],
+  "expected": {
+    "T01":{"eligible":["E1","E2","E3","P1","C1","C2"],"ancestors":[]},
+    "T02":{"eligible":["E1","E2"],"ancestors":[]},
+    "T03":{"eligible":["E1","E3","P1"],"ancestors":[],"migrationDiagnostic":"intent_repair_required"},
+    "T04":{"eligible":["E1"],"ancestors":[]},
+    "T05":{"eligible":["C1"],"ancestors":["P1"]},
+    "T06":{"eligible":["P1","C1","C2"],"ancestors":[],"direct":["C1"],"family":["P1","C2"]},
+    "T07":{"eligible":["E1","E2","E3","P1","C1","C2"],"matches":["E1","C1"]},
+    "T08":{"matches":["E1","E3","P1"]},
+    "T09":{"matches":["E1","E2","C1"],"pattern":"^Activity_(5_1|0_3)$"},
+    "T10":{"eligible":["E1","E2","E3","P1","C1","C2"],"activeSearch":false},
+    "T11":{"groups":["SOURCE1","SOURCE10","SOURCE2"]},
+    "T12":{"groups":["SOURCE1","SOURCE2","SOURCE10"]},
+    "T13":{"eligible":["D1","D2","D3","D6"]},
+    "T14":{"eligible":["E1","P1","C1","C2"]},
+    "T15":{"matches":[],"eligible":["E1","E2","E3","P1","C1","C2"]}
+  },
+  "groupMembers":{"SOURCE1":["E1","P1","C1","C2"],"SOURCE2":["E2"],"SOURCE10":["E3"]},
+  "dateDomain":{"from":"2024-03-18T10:00:00.000Z","to":"2024-03-18T12:00:00.000Z"},
+  "dateRecordsBySource":{"DATE":{"2024/03/18":[
+    {"id":"D1","start":"Mar 18 2024 08:00:00 GMT+0000","end":"Mar 18 2024 18:00:00 GMT+0000","data":{"title":"Crossing session"}},
+    {"id":"D2","start":"Mar 18 2024 10:00:00 GMT+0000","data":{"title":"At left boundary"}},
+    {"id":"D3","start":"Mar 18 2024 11:00:00 GMT+0000","data":{"title":"Inside interval"}},
+    {"id":"D4","start":"Mar 18 2024 09:00:00 GMT+0000","end":"Mar 18 2024 10:00:00 GMT+0000","data":{"title":"Ends at left boundary"}},
+    {"id":"D5","start":"Mar 18 2024 12:00:00 GMT+0000","data":{"title":"At right boundary"}},
+    {"id":"D6","start":"Mar 18 2024 09:00:00 GMT+0000","end":"Mar 18 2024 12:00:00 GMT+0000","data":{"title":"Ends at right boundary"}}
+  ]}}
+}

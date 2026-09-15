@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "cases": [
+    {"id":"empty","input":{},"classification":"exact","publishable":true,"root":null},
+    {"id":"literal-review","input":{"include":"status:SCHEDULE"},"classification":"intent-repair","publishable":false,"root":"contains"},
+    {"id":"literal-approved","input":{"include":"status:SCHEDULE","acknowledgements":["typed-field-repair"]},"classification":"intent-repair","publishable":true,"root":"contains"},
+    {"id":"help-equality","input":{"include":"status=SCHEDULE","acknowledgements":["help-equality-repair"]},"classification":"intent-repair","publishable":true,"root":"eq"},
+    {"id":"and-or","input":{"include":"type:type0+status:SCHEDULE;type:type1","acknowledgements":["typed-field-repair"]},"classification":"intent-repair","publishable":true,"root":"or"},
+    {"id":"exclude","input":{"exclude":"status:SCHEDULE","acknowledgements":["typed-field-repair"]},"classification":"intent-repair","publishable":true,"root":"not"},
+    {"id":"regex-class","input":{"include":"type:type[01]","acknowledgements":["typed-field-repair"]},"classification":"intent-repair","publishable":true,"root":"regex"},
+    {"id":"regex-grouped-alternative","input":{"include":"title:^Activity_(5_1|0_3)$","acknowledgements":["typed-field-repair"]},"classification":"intent-repair","publishable":true,"root":"regex"},
+    {"id":"namespace-group","input":{"sortBy":"namespace","acknowledgements":["deterministic-group-order"]},"classification":"intent-repair","publishable":true,"root":null},
+    {"id":"family-explicit","input":{"include":"type:type9","relationshipMode":"family","acknowledgements":["typed-field-repair","explicit-family-context"]},"classification":"intent-repair","publishable":true,"root":"contains"},
+    {"id":"ambiguous-pipe","input":{"include":"status:SCHEDULE|status:FAILED"},"classification":"blocked","publishable":false},
+    {"id":"ambiguous-repetition","input":{"include":"title:Activity+"},"classification":"blocked","publishable":false},
+    {"id":"malformed-class","input":{"include":"type:["},"classification":"blocked","publishable":false},
+    {"id":"unknown-field","input":{"include":"secret:value"},"classification":"blocked","publishable":false},
+    {"id":"unsafe-path","input":{"include":"constructor:value"},"classification":"blocked","publishable":false},
+    {"id":"unscoped","input":{"include":"SCHEDULE"},"classification":"blocked","publishable":false},
+    {"id":"lookahead","input":{"include":"title:(?=Activity)"},"classification":"blocked","publishable":false},
+    {"id":"numeric-colon","input":{"include":"order:2"},"classification":"blocked","publishable":false},
+    {"id":"all-is-not-empty","input":{"include":"ALL"},"classification":"blocked","publishable":false}
+  ]
+}

@@ -1,0 +1,2 @@
+.group-toggle{display:flex;align-items:center;gap:6px;min-width:0;min-height:0;padding:0 5px;border:0;border-radius:0;line-height:normal;text-align:left;background:transparent;overflow:hidden}
+.group-toggle svg{width:16px;height:16px;flex:none}.group-toggle .group-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.group-count{font-size:11px;font-weight:400;font-variant-numeric:tabular-nums}.group-continued{font-size:10px;font-weight:400;font-style:italic}.group-toggle:focus-visible{outline-offset:-2px}

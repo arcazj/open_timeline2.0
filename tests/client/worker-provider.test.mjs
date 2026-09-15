@@ -11,16 +11,23 @@ const tick = () => new Promise(resolve => setTimeout(resolve, 0));
 class LoopbackWorker {
   constructor() {
     this.listeners = new Map(); this.sent = []; this.held = []; this.hold = new Set();
+    this.deferred = []; this.defer = new Set(); this.canceled = new Set();
     queueMicrotask(() => this.emit('message', { data: { type: 'ready' } }));
   }
   addEventListener(type, handler) { this.listeners.set(type, handler); }
   emit(type, event) { this.listeners.get(type)?.(event); }
   postMessage(message) {
     this.sent.push(structuredClone(message));
+    if (message.type === 'cancel') { this.canceled.add(message.id); return; }
     if (message.type !== 'request') return;
+    if (this.defer.has(message.method)) { this.deferred.push(message); return; }
+    this.dispatch(message);
+  }
+  dispatch(message) {
     queueMicrotask(async () => {
       let result, error;
       try {
+        if (this.canceled.has(message.id)) throw new DOMException('Canceled before execution', 'AbortError');
         if (message.method === 'initialize') { this.core = new LocalProvider(message.args[0]); result = await this.core.initialize(); }
         else result = await this.core[message.method](...message.args, message.options);
       } catch (caught) { error = { name: caught.name, code: caught.code, message: caught.message, status: caught.status }; }
@@ -30,6 +37,7 @@ class LoopbackWorker {
     });
   }
   flush() { for (const data of this.held.splice(0)) this.emit('message', { data }); }
+  flushDeferred() { for (const message of this.deferred.splice(0)) this.dispatch(message); }
   terminate() { this.terminated = true; }
 }
 
@@ -140,12 +148,126 @@ test('late successful aborted query allocation is released instead of leaking qu
     const controller = new AbortController();
     const operation = provider.createQuery({ domain: snapshot.settings.overview }, { signal: controller.signal });
     const rejection = assert.rejects(operation, { name: 'AbortError' });
-    await tick(); controller.abort(); await rejection;
+    await tick(); controller.abort();
     assert.equal(worker().core.queries.size, 1);
     worker().flush(); await tick();
+    await rejection;
     assert.equal(worker().core.queries.size, 0);
     assert.equal(worker().sent.filter(message => message.method === 'releaseQuery').length, 1);
   } finally { provider.dispose(); }
+});
+
+test('canceled warm allocations wait for acknowledged cleanup before foreground query or layout admission', async () => {
+  const { provider, worker } = fixture();
+  try {
+    await provider.initialize();
+    const visible = await provider.createQuery({ domain: snapshot.settings.overview });
+    for (const method of ['createQuery', 'createLayout']) {
+      const release = method === 'createQuery' ? 'releaseQuery' : 'releaseLayout';
+      const args = method === 'createQuery' ? [{ domain: snapshot.settings.overview }] : [visible.queryId, {
+        ...snapshot.settings.range, mapId: visible.mapId, width: 1000, availableHeight: 128,
+      }];
+      let visibleLayout;
+      if (method === 'createLayout') visibleLayout = await provider.createLayout(...args);
+      worker().hold.add(method); worker().hold.add(release);
+      const controller = new AbortController(); let settled = false;
+      const canceled = provider[method](...args, { signal: controller.signal }).catch(error => { settled = true; return error; });
+      await tick(); controller.abort(); await tick();
+      assert.equal(settled, false, 'allocation cancellation must wait for its response');
+      worker().hold.delete(method); worker().flush(); await tick();
+      assert.equal(settled, false, 'allocation cancellation must wait for the release acknowledgement');
+      worker().hold.delete(release); worker().flush();
+      assert.equal((await canceled).name, 'AbortError');
+      const foreground = await provider[method](...args);
+      if (method === 'createQuery') await provider.releaseQuery(foreground.queryId);
+      else { await provider.releaseLayout(visible.queryId, foreground.layoutId); await provider.releaseLayout(visible.queryId, visibleLayout.layoutId); }
+      assert.equal(provider.pending.size, 0);
+    }
+    await provider.releaseQuery(visible.queryId);
+  } finally { provider.dispose(); }
+});
+
+test('allocation cleanup waits are bounded by the RPC deadline without reopening occupied capacity', async () => {
+  const { provider, worker } = fixture();
+  try {
+    await provider.initialize();
+    worker().hold.add('createQuery'); worker().hold.add('releaseQuery');
+    const controller = new AbortController();
+    const operation = provider.createQuery({ domain: snapshot.settings.overview }, { signal: controller.signal, timeout: 30 });
+    const result = operation.catch(error => error);
+    await tick(); controller.abort();
+    assert.equal((await result).code, 'local_allocation_pending');
+    await assert.rejects(provider.createQuery({ domain: snapshot.settings.overview }), { code: 'local_allocation_pending' });
+    assert.equal((await provider.getStatus()).recordCount, 48, 'ordinary reads remain available');
+    worker().hold.delete('createQuery'); worker().flush(); await tick();
+    await assert.rejects(provider.createQuery({ domain: snapshot.settings.overview }), { code: 'local_allocation_pending' });
+    worker().hold.delete('releaseQuery'); worker().flush(); await tick();
+    assert.equal(provider.pending.size, 0);
+    const query = await provider.createQuery({ domain: snapshot.settings.overview });
+    await provider.releaseQuery(query.queryId);
+  } finally { provider.dispose(); }
+});
+
+test('cleanup acknowledgement deadlines never cancel a release waiting to execute', async () => {
+  const { provider, worker } = fixture();
+  try {
+    await provider.initialize();
+    const visible = await provider.createQuery({ domain: snapshot.settings.overview });
+    worker().hold.add('createQuery'); worker().defer.add('releaseQuery');
+    const controller = new AbortController();
+    const operation = provider.createQuery({ domain: snapshot.settings.overview }, { signal: controller.signal, timeout: 60 }).catch(error => error);
+    await tick(); controller.abort(); worker().hold.delete('createQuery'); worker().flush(); await tick();
+    const release = worker().deferred.find(message => message.method === 'releaseQuery');
+    assert.ok(release);
+    assert.equal((await operation).code, 'local_allocation_pending');
+    await tick();
+    assert.equal(worker().canceled.has(release.id), false, 'a cleanup deadline cannot cancel the release operation');
+    assert.equal(worker().core.queries.size, 2);
+    await assert.rejects(provider.createQuery({ domain: snapshot.settings.overview }), { code: 'local_allocation_pending' });
+    worker().defer.delete('releaseQuery'); worker().flushDeferred(); await tick();
+    assert.equal(worker().core.queries.size, 1); assert.equal(provider.pending.size, 0);
+    const foreground = await provider.createQuery({ domain: snapshot.settings.overview });
+    await provider.releaseQuery(foreground.queryId); await provider.releaseQuery(visible.queryId);
+  } finally { provider.dispose(); }
+});
+
+test('negative cleanup acknowledgement reports a terminal failure instead of promising eventual progress', async () => {
+  const { provider, worker } = fixture();
+  try {
+    await provider.initialize(); worker().hold.add('createQuery'); worker().defer.add('releaseQuery');
+    const controller = new AbortController();
+    const operation = provider.createQuery({ domain: snapshot.settings.overview }, { signal: controller.signal }).catch(error => error);
+    await tick(); controller.abort(); worker().hold.delete('createQuery'); worker().flush(); await tick();
+    const release = worker().deferred.shift();
+    worker().emit('message', { data: { type: 'response', id: release.id, error: { code: 'release_failed', message: 'Controlled cleanup failure', status: 503 } } });
+    const error = await operation;
+    assert.equal(error.code, 'local_allocation_cleanup_failed');
+    assert.match(error.message, /Export unsaved changes/);
+    await assert.rejects(provider.createQuery({ domain: snapshot.settings.overview }), { code: 'local_allocation_cleanup_failed' });
+    assert.equal((await provider.getStatus()).execution.allocationCleanup, 'failed');
+    assert.equal((await provider.exportSnapshot()).records.length, 48, 'unsaved source remains accessible for explicit export');
+  } finally { provider.dispose(); }
+});
+
+test('an acknowledged failed allocation needs no release and canceled allocations settle on worker loss or disposal', async () => {
+  for (const outcome of ['error', 'lost', 'disposed']) {
+    const { provider, worker } = fixture();
+    try {
+      await provider.initialize(); worker().hold.add('createQuery');
+      const controller = new AbortController();
+      const operation = provider.createQuery({ domain: outcome === 'error' ? { from: 'invalid', to: 'invalid' } : snapshot.settings.overview }, { signal: controller.signal });
+      const result = operation.catch(error => error);
+      await tick(); controller.abort();
+      if (outcome === 'error') worker().flush();
+      else if (outcome === 'lost') worker().emit('error', { preventDefault() {} });
+      else provider.dispose();
+      const error = await result;
+      if (outcome === 'lost') assert.equal(error.code, 'local_worker_lost');
+      else assert.equal(error.name, 'AbortError');
+      assert.equal(provider.pending.size, 0);
+      assert.equal(worker().sent.some(message => message.method === 'releaseQuery'), false);
+    } finally { provider.dispose(); }
+  }
 });
 
 test('only worker startup failures fall back; runtime failure and disposal never reopen old data', async () => {
