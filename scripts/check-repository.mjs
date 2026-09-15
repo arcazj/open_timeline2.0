@@ -12,6 +12,7 @@ const documentationPdfs = new Set([
   'output/pdf/OpenBEXI_Legacy_JSON_Preview.pdf',
   'output/pdf/OpenBEXI_Hazard_Comparison.pdf',
   'output/pdf/local-test-data.pdf',
+  'output/pdf/OpenBEXI_Timeline_Sorting_Filtering_Prompt.pdf',
 ]);
 const credentialPatterns = [
   /-----BEGIN (?:RSA |OPENSSH |EC |DSA )?PRIVATE KEY-----/,

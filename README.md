@@ -185,6 +185,7 @@ The [initial measurements](docs/demo-performance.md) were about 1.1 seconds on d
 | --- | --- |
 | Architecture and data | [Architecture](docs/architecture.md), [data model](docs/data-model.md), [provider contracts](docs/provider-standalone-contract.md) |
 | Navigation and presentation | [Calendar and momentum](docs/calendar-navigation.md), [local scaling](docs/local-scaling.md), [models](docs/model-management.md), [filters and search](docs/filters-and-search.md) |
+| Sorting/filtering design (not yet implemented) | [Illustrated implementation prompt](OpenBEXI_Timeline_Sorting_Filtering_Prompt.md), [legacy analysis and executable evidence](docs/sorting-filtering/analysis.md), [acceptance plan](docs/sorting-filtering/acceptance.md), [PDF](output/pdf/OpenBEXI_Timeline_Sorting_Filtering_Prompt.pdf) |
 | Data sources | [Standalone](docs/standalone-mode.md), [local datasets](docs/local-test-data.md), [legacy migration](docs/migration-from-tomcat.md) |
 | API and operations | [API](docs/api.md), [OpenAPI contract](docs/api-contract.md), [identity](docs/identity.md), [backup](docs/backup-restore.md) |
 | Project health | [Implementation status](docs/implementation-status.md), [performance](docs/performance.md), [release checklist](docs/release-checklist.md) |

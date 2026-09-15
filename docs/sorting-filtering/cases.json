@@ -1,0 +1,43 @@
+{
+  "format": "sorting-filtering-audit-cases",
+  "version": 1,
+  "purpose": "Synthetic method-level legacy observations, not a production dataset or target compatibility oracle",
+  "records": [
+    {"id":"E1","start":"Mar 18 2024 11:00:00 GMT+0000","data":{"title":"Activity_5_1","namespace":"SOURCE1","type":"type0","status":"SCHEDULE","description":"Telemetry"},"render":{"backgroundColor":"#ffffff"}},
+    {"id":"E2","start":"Mar 18 2024 11:00:00 GMT+0000","data":{"title":"Activity_0_3","namespace":"SOURCE2","type":"type1","status":"STARTED"},"render":{"backgroundColor":"#F8DF09"}},
+    {"id":"E3","start":"Mar 18 2024 11:30:00 GMT+0000","data":{"title":"Activity_0_3_read_descriptor","namespace":"SOURCE10","type":"type2","status":"SCHEDULE"},"render":{}},
+    {"id":"P1","start":"Mar 18 2024 09:00:00 GMT+0000","end":"Mar 18 2024 13:00:00 GMT+0000","data":{"title":"Parent session","namespace":"SOURCE1","status":"SCHEDULE"},"render":{},"activities":[
+      {"id":"C1","start":"Mar 18 2024 11:00:00 GMT+0000","data":{"title":"Activity_5_1","type":"type9","status":"FAILED"},"render":{}},
+      {"id":"C2","start":"Mar 18 2024 11:10:00 GMT+0000","data":{"title":"Nominal child","status":"STARTED"},"render":{}}
+    ]}
+  ],
+  "filters": [
+    {"id":"L01","include":"","exclude":"","expectedIds":["E1","E2","E3","P1"]},
+    {"id":"L02","include":"type:type0;type:type1","exclude":"","expectedIds":["E1","E2"]},
+    {"id":"L03","include":"status=SCHEDULE","exclude":"","expectedIds":[]},
+    {"id":"L04","include":"status:SCHEDULE","exclude":"","expectedIds":["E1","E3","P1"]},
+    {"id":"L05","include":"type:type0+status:SCHEDULE;namespace:SOURCE1+type:type0","exclude":"","expectedIds":["E1","E1"]},
+    {"id":"L06","include":"type:type[01]","exclude":"","expectedIds":["E1","E2"]},
+    {"id":"L07","include":"type:type9","exclude":"","expectedIds":["P1"]},
+    {"id":"L08","include":"","exclude":"status:SCHEDULE+type:type0;type:type1","expectedIds":["E3","P1"]},
+    {"id":"L09","include":"[","exclude":"","expectedError":"PatternSyntaxException"}
+  ],
+  "searches": [
+    {"id":"L10","search":"5_1","expectedIds":["E1","E2","E3","P1"],"expectedYellowIds":["E1","E2","C1"]},
+    {"id":"L11","search":"SCHEDULE","expectedIds":["E1","E2","E3","P1"],"expectedYellowIds":["E1","E2","E3"]},
+    {"id":"L12","search":"*","expectedIds":["E1","E2","E3","P1"],"expectedYellowIds":["E2"]},
+    {"id":"L13","search":"nominal","expectedIds":["E1","E2","E3","P1"],"expectedYellowIds":["E2"]}
+  ],
+  "dates": {
+    "id":"L14","from":"2024-03-18T10:00:00Z","to":"2024-03-18T12:00:00Z",
+    "records":[
+      {"id":"D1","start":"Mar 18 2024 08:00:00 GMT+0000","end":"Mar 18 2024 18:00:00 GMT+0000"},
+      {"id":"D2","start":"Mar 18 2024 10:00:00 GMT+0000"},
+      {"id":"D3","start":"Mar 18 2024 11:00:00 GMT+0000"},
+      {"id":"D4","start":"Mar 18 2024 09:00:00 GMT+0000","end":"Mar 18 2024 10:00:00 GMT+0000"},
+      {"id":"D5","start":"Mar 18 2024 12:00:00 GMT+0000"},
+      {"id":"D6","start":"Mar 18 2024 09:00:00 GMT+0000","end":"Mar 18 2024 12:00:00 GMT+0000"}
+    ],
+    "expectedLegacyIds":["D3"],"requiredHalfOpenIds":["D1","D2","D3","D6"]
+  }
+}

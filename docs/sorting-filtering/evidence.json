@@ -1,0 +1,208 @@
+{
+  "format": "sorting-filtering-method-evidence",
+  "version": 1,
+  "status": "passed",
+  "evidenceType": "extracted unchanged method execution, not full legacy application qualification",
+  "currentBaseline": "2c3b0c17e3167577c00951ee456588c8ed9cd521",
+  "caseSha256": "bc28e1095f4f60491d3e4f05ac4dba42d07577e82cdb7ce6b95fb2240bf2f6d5",
+  "javaRuntime": "openjdk 17.0.19 2026-04-21",
+  "nodeRuntime": "v24.13.0",
+  "legacySources": {
+    "src/openbexi_timeline.js": "d3d1450ef3ba10dc7aac321e28a1135a312d78f15b2998a8bbabc1da9f850503",
+    "src/com/openbexi/timeline/data_browser/json_files_manager.java": "6e508e0b201bab42d5aa646254a9e8ae90c1d26bc09e52aa2782c04ecf43473a",
+    "src/com/openbexi/timeline/data_browser/data_manager.java": "a21c291cc792359fce3c376ba5fb665c91e7447cdd284dbb2be2e869c4c4caf3",
+    "src/com/openbexi/timeline/data_browser/data_configuration.java": "eac41d0ad01426e897014eb0919237dbc6a4520b215a3f5a96f45d837893eaca",
+    "src/com/openbexi/timeline/data_browser/data_sources.java": "0549ee880843f7a64d158a81a6a23b1e32ce7884b7ac6c90aec0cc5deacac455",
+    "src/com/openbexi/timeline/servlets/ob_handle_http_requests.java": "91772fbfdc6fea3104f524778a51bbd30833b2d0f9fde8410b493111a27a5e48",
+    "openbexi_test_timeline.html": "141beac225a081f94f1fc7d441307884c069e721a157f4274a4cb5bcc8137ac9",
+    "openbexi_timeline_earthquake.html": "2eb1ee86cd51ee8e79ce598b9a9ea8dfb81c076b2b6f0d6e9bc5842cca2b216f",
+    "yaml/sources_default_test.yml": "83d3efcafddaee7b865f4ab038dbe41af2b0962a81ee99d0c346e75a8f447a56",
+    "yaml/sources_earthquake.yml": "e7d20d740f3e395bb77ec32c0b991d658fa74099fa8390cc0f2d86510ccec47f",
+    "filters/test_ob_timeline_2_filter_setting.json": "a44b63bcda8ba31a9b9c59370c4f0cba4f31bfcf234942d422b8980797c2e71e",
+    "models/MCC_timeline.json": "7bef6d54ae2f8215c0690419edc285f6b930b373c135557922ea19be73e88674",
+    "models/regular_timeline.json": "78d6615b85ac69adee0ee27b5e79bc34f085d0b2476d37b384379ec40a389862",
+    "models/regular_timeline_earthquake.json": "157640266c98cb76c19b1b5f99c9b631099f60c7ed7efa0ee4c1f90d82d0e872",
+    "models/regular_timeline_esoc.json": "57695d8194c5860e0846695210c57afe49baa50b229de78eaf713bfdcc002fd6",
+    "models/regular_timeline_mcc.json": "99453c81683697110776f432d9c8b31638d53445b667c34074f1c64fc48c157f",
+    "models/regular_timeline_pov.json": "de3d92b2c4708a4a85733b79838c37ecde316bbbe7f0611696ee02f5047ae541",
+    "models/SOC_timeline.json": "80aa6cfc8d8511c172e485b4982c503e1bb7e59ddb26f54798e771ae259283d5",
+    "tests/models/regular_timeline.json": "8abd39f44bc38ba9a14cfd9914d87eb7e764a2c5d35a964e6a1c1f2c54377322"
+  },
+  "currentSources": {
+    "client/src/data/filter-expression.js": "e36e8356b31e250bcbe57e77897c342e92adee992bf36024cf01558f4e00f082",
+    "client/src/data/query-configuration.js": "793bfe8901db6597aeda5bb8e0cf8133baf633589794cb11fa177de1b547c123",
+    "client/src/ui/filter-editor.js": "5c4abf3aef9281ad2d1ede93ccfb4199281f0e16312ca5e460cb34993507c0e4",
+    "server/app/services/filters.py": "e4212466703c2c0757ecf53b9c75ce3d1fe10799149e693c6f8f27ed96f6cb6e",
+    "server/app/services/table_query.py": "02d3189088a2dc81366c9cc11a538c2c4076a1d0964c1185a79c2e84c2c97a07",
+    "server/app/services/legacy_sources.py": "5fd62ad97f06ae0701f6aff18ad31bbf13baa40776a022513f9957a9864591df",
+    "server/app/services/legacy_configuration.py": "88ef4fb1d1217150d0be8a5e76b3e8cf592d17f2950ab8ab68e7e5e9fd27828a"
+  },
+  "methods": {
+    "filterEvents": {
+      "startLine": 579,
+      "sha256": "85226fd1973e5aa898bc7f23a956b01dbb26a58c02d5dc617bc46a6d15f0645b"
+    },
+    "filterDates": {
+      "startLine": 389,
+      "sha256": "d8dbed8742e1aeb692fa778eb1d81bf724f95cc1ffc86924abe51d77197f4068"
+    },
+    "searchEvents": {
+      "startLine": 418,
+      "sha256": "6818491f615ca567abaaa8467b6c6672049df6bde702847fd72bcdaad22a211c"
+    },
+    "ob_get_filter_value": {
+      "startLine": 512,
+      "sha256": "064f54471a423c9b8643bfbe5b3db8657707867080fbe7a83c7a65976bb37ba5"
+    },
+    "ob_get_all_sorting_options": {
+      "startLine": 473,
+      "sha256": "7c5bce7fa804e8fddfb185f35c76503538d23b1e9c0e961542a324cecb18fd20"
+    },
+    "build_sessions_filter": {
+      "startLine": 3647,
+      "sha256": "b40a260fea511f5239caba23ee0f7beb321d7819924e93dbd2efb638ac2402f6"
+    },
+    "create_new_bands": {
+      "startLine": 2248,
+      "sha256": "dde3897b7403eaf81f0616fb585c21371854eef5021353290fa12e8e11d4d1d3"
+    }
+  },
+  "legacyResults": [
+    {
+      "ids": [
+        "E1",
+        "E2",
+        "E3",
+        "P1"
+      ],
+      "id": "L01"
+    },
+    {
+      "ids": [
+        "E1",
+        "E2"
+      ],
+      "id": "L02"
+    },
+    {
+      "ids": [],
+      "id": "L03"
+    },
+    {
+      "ids": [
+        "E1",
+        "E3",
+        "P1"
+      ],
+      "id": "L04"
+    },
+    {
+      "ids": [
+        "E1",
+        "E1"
+      ],
+      "id": "L05"
+    },
+    {
+      "ids": [
+        "E1",
+        "E2"
+      ],
+      "id": "L06"
+    },
+    {
+      "ids": [
+        "P1"
+      ],
+      "id": "L07"
+    },
+    {
+      "ids": [
+        "E3",
+        "P1"
+      ],
+      "id": "L08"
+    },
+    {
+      "id": "L09",
+      "error": "PatternSyntaxException"
+    },
+    {
+      "ids": [
+        "E1",
+        "E2",
+        "E3",
+        "P1"
+      ],
+      "yellowIds": [
+        "E1",
+        "E2",
+        "C1"
+      ],
+      "id": "L10"
+    },
+    {
+      "ids": [
+        "E1",
+        "E2",
+        "E3",
+        "P1"
+      ],
+      "yellowIds": [
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "id": "L11"
+    },
+    {
+      "ids": [
+        "E1",
+        "E2",
+        "E3",
+        "P1"
+      ],
+      "yellowIds": [
+        "E2"
+      ],
+      "id": "L12"
+    },
+    {
+      "ids": [
+        "E1",
+        "E2",
+        "E3",
+        "P1"
+      ],
+      "yellowIds": [
+        "E2"
+      ],
+      "id": "L13"
+    },
+    {
+      "ids": [
+        "D3"
+      ],
+      "id": "L14"
+    }
+  ],
+  "clientResults": {
+    "sanitized": "Activity__PARL_5_1_PIPE_0_3_PARR_",
+    "narrow": "^(?=.*(?:alpha))(?!.*(?:beta)).*$",
+    "plainString": "^(?=.*(?:--|--))(?!.*(?:__|__)).*$",
+    "inactive": null,
+    "fifteenValues": "<option value='NONE'>NONE</option>\n",
+    "groupOrder": [
+      "SOURCE2",
+      "SOURCE1",
+      "SOURCE10"
+    ]
+  },
+  "caseCount": 20,
+  "limitations": [
+    "No full legacy Tomcat/UI execution",
+    "No production data copied or modified",
+    "No pathological regex execution",
+    "Future regex and UX requirements are not implemented"
+  ]
+}
