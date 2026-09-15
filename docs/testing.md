@@ -40,6 +40,12 @@ never passed. A timed-out owned command tree is stopped before proceeding.
 
 The focused matrix currently exercises standalone and configuration Apply workflows
 on Chromium/Firefox and Windows Edge; it is not every G3/G4 case on every engine.
+Linux Firefox uses Xvfb with Mesa/EGL. On GPU-less Windows CI runners, its isolated
+test profile enables `webgl.force-enabled` so Firefox can use software WebGL2
+([Mozilla issue 1970486](https://bugzilla.mozilla.org/show_bug.cgi?id=1970486)).
+This CI-only setting does not modify installed browser profiles, bypass canvas
+assertions, or establish that default Firefox settings work on every GPU-less
+computer. The application requires an available WebGL2 implementation.
 The [container target](container.md) provides isolated Linux execution. The checked-in
 GitHub workflow runs Windows/Linux and Python 3.12/3.13 with immutable action pins,
 read-only repository permission and no publishing step. It has not been remotely

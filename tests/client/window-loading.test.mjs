@@ -39,3 +39,32 @@ test('file mode performs no HTTP discovery; configured failure never becomes dem
   const target = { mode: 'configured-server', localBrowser: true, sourceName: 'REAL' };
   assert.deepEqual(await startupTarget({ protocol: 'http:', fetcher: async () => ({ ok: true, json: async () => target }) }), target);
 });
+
+test('bootstrap accepts a cold response after two seconds without waiting the full deadline', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const target = { mode: 'configured-server', localBrowser: true, sourceName: 'REAL' };
+  let signal;
+  const pending = startupTarget({ protocol: 'http:', fetcher: (_url, options) => new Promise((resolve, reject) => {
+    signal = options.signal;
+    signal.addEventListener('abort', () => reject(new DOMException('Aborted', 'AbortError')), { once: true });
+    setTimeout(() => resolve({ ok: true, json: async () => target }), 2500);
+  }) });
+  t.mock.timers.tick(2500);
+  assert.deepEqual(await pending, target);
+  t.mock.timers.tick(5000);
+  assert.equal(signal.aborted, false);
+});
+
+test('bootstrap still aborts a stalled request at its five-second deadline', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  let signal;
+  const pending = startupTarget({ protocol: 'http:', fetcher: (_url, options) => new Promise((_resolve, reject) => {
+    signal = options.signal;
+    signal.addEventListener('abort', () => reject(new DOMException('Aborted', 'AbortError')), { once: true });
+  }) });
+  t.mock.timers.tick(4999);
+  assert.equal(signal.aborted, false);
+  t.mock.timers.tick(1);
+  assert.equal(signal.aborted, true);
+  assert.equal((await pending).mode, 'unavailable');
+});

@@ -58,6 +58,11 @@ After completing that review:
 
 Expected address: [https://arcazj.github.io/open_timeline2.0/](https://arcazj.github.io/open_timeline2.0/). The URL is a deployment target until the workflow succeeds. A custom domain or changed repository name changes it.
 
+The first approved deployment succeeded on September 14, 2026:
+[workflow run 34821760189](https://github.com/arcazj/open_timeline2.0/actions/runs/34821760189).
+Pages uses workflow publishing and `PUBLIC_DEMO_APPROVED=true`; both settings were
+read back from GitHub. The live URL returned HTTP 200 and was exercised in a browser.
+
 The workflow uses GitHub's documented [custom Pages workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages), with pinned action commits and write/OIDC permissions confined to the deployment job. Pull requests never deploy. With the approval variable absent, the build/download remains available and the deploy job is skipped.
 
 ## Verify the Hosted Site
@@ -93,6 +98,18 @@ uv run python scripts/configure-github.py --protection --apply
 ```
 
 It requires the `Candidate checks` and `Standalone demo checks` aggregate jobs, including for administrators. Force-pushes and branch deletion are disabled. Linear history and conversation resolution are required; an additional human reviewer is not mandatory for this single-maintainer repository. Each aggregate fails if its required jobs fail, cancel, or skip. Repository settings are read back after applying them.
+
+This policy was applied and read-back verified after the first push on September
+14, 2026. Subsequent changes must pass the required checks before merging. Owner
+approval variables can be configured with the same credential-safe helper:
+
+```sh
+uv run python scripts/configure-github.py --approve-demo --publication-approved --apply
+uv run python scripts/configure-github.py --approve-preview --publication-approved --apply
+```
+
+These flags authorize publication only. They neither skip CI nor mark a preview
+production-ready. The helper uses GitHub's [repository variables API](https://docs.github.com/en/rest/actions/variables).
 
 The helper uses an existing Git credential or `GH_TOKEN`/`GITHUB_TOKEN` in memory, never writes it to a file, and refuses credential-bearing redirects. Without `--apply`, it only prints the intended policy. It does not push code, select a license, or invent publication approval.
 

@@ -40,6 +40,15 @@ def test_inventory_covers_fixtures_and_profiles_but_not_private_overrides(tmp_pa
     assert "yaml/test-data/example.yml" in before["files"]
 
 
+def test_inventory_detects_changes_to_the_embedded_project_license(tmp_path):
+    license_file = tmp_path / "LICENSE"
+    license_file.write_text('GNU GPL version 3', encoding="utf-8")
+    before = module.source_inventory(tmp_path)
+    assert "LICENSE" in before["files"]
+    license_file.write_text('changed', encoding="utf-8")
+    assert module.source_inventory(tmp_path)["sha256"] != before["sha256"]
+
+
 def test_check_records_exit_failure_and_scrubs_production_configuration(tmp_path, monkeypatch):
     monkeypatch.setenv("OPENBEXI_API_TOKEN", "must-not-enter-test-process")
     monkeypatch.setenv("OPENBEXI_DATA_ROOT", "must-not-enter-test-process")

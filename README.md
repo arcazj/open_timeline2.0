@@ -16,7 +16,7 @@ A JavaScript and Three.js timeline with a Python API, JSON-file storage, and a c
 
 **Demo address:** [arcazj.github.io/open_timeline2.0](https://arcazj.github.io/open_timeline2.0/)
 
-**Deployment pending:** this address becomes available after the repository owner enables GitHub Pages and approves the first deployment. The included [demo workflow](.github/workflows/demo.yml) builds and tests the real application, then publishes it without a Python server. See the [publishing guide](docs/publishing.md) for activation and data/license review.
+**Live on GitHub Pages.** The [first deployment](https://github.com/arcazj/open_timeline2.0/actions/runs/34821760189) passed on September 14, 2026. The [demo workflow](.github/workflows/demo.yml) builds and tests the real application, then publishes it without a Python server. A working demo is not full production qualification; see the [publishing guide](docs/publishing.md) and [verification evidence](docs/preview-commit-verification.md).
 
 The demo is the standalone application, not a video or a server-backed service. It includes six complete local datasets. Open **Help and sharing > Test local data**, select a dataset, and choose **Open dataset**. Importing JSON is local to the browser; connecting to a server is an explicit, separate action. Changes to editable snapshots live in memory: export JSON before closing. Historical fixture snapshots are read-only.
 

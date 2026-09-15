@@ -11,7 +11,7 @@ import uvicorn
 from fastapi.testclient import TestClient
 
 from conftest import BASE, TOKEN
-from server.app.api.changes import BoundedStreamResponse
+from server.app.api.changes import BoundedStreamResponse, frame
 from server.app.main import create_app
 from server.app.models.domain import DomainError
 from test_audit import create
@@ -190,6 +190,32 @@ def event(lines):
     raise AssertionError("Stream ended before an event")
 
 
+def active_event(lines, generation, revision):
+    # Idle frames can already be buffered while a separate HTTP mutation runs.
+    deadline = time.monotonic() + 5
+    while time.monotonic() < deadline:
+        name, data = event(lines)
+        if name == "error" or (name == "changes" and data["changes"]):
+            return name, data
+        assert name in ("changes", "heartbeat")
+        assert data["generation"] == generation
+        assert data["revision" if name == "heartbeat" else "nextRevision"] == revision
+        if name == "changes":
+            assert data["changes"] == [] and not data["hasMore"]
+    raise AssertionError("Stream did not deliver the expected change or authorization error")
+
+
+def test_active_event_drains_only_unchanged_idle_frames():
+    idle = frame("changes", {"generation": "test", "nextRevision": 4, "changes": [], "hasMore": False})
+    idle += frame("heartbeat", {"generation": "test", "revision": 4})
+    failure = {"code": "unauthorized", "status": 401, "message": "Revoked"}
+    assert active_event(iter((idle + frame("error", failure)).splitlines()), "test", 4) == ("error", failure)
+    unexpected = {"generation": "test", "nextRevision": 5, "changes": [{"id": "unexpected"}]}
+    assert active_event(iter((idle + frame("changes", unexpected)).splitlines()), "test", 4) == ("changes", unexpected)
+    with pytest.raises(AssertionError):
+        active_event(iter(idle.splitlines()), "test", 3)
+
+
 def test_real_http_sse_heartbeat_revocation_disconnect_and_resume(live_changes):
     client, app = live_changes
     _, token, reader = create_identity(client)
@@ -202,13 +228,13 @@ def test_real_http_sse_heartbeat_revocation_disconnect_and_resume(live_changes):
         assert name == "changes" and initial["changes"] == []
         assert event(lines)[0] == "heartbeat"
         create(client, {"X-Workspace-Generation": metadata["generation"]})
-        name, changed = event(lines)
+        name, changed = active_event(lines, metadata["generation"], metadata["revision"])
         assert name == "changes" and len(changed["changes"]) == 1
         assert event(lines)[0] == "heartbeat"
         current = client.get("/api/v1/tokens")
         revoked = client.delete("/api/v1/tokens/" + token["token"]["id"], headers={"X-Identity-Generation": current.json()["generation"], "If-Match": f'"{current.json()["generation"]}:{token["token"]["revision"]}"', "Idempotency-Key": uuid.uuid4().hex})
         assert revoked.status_code == 200, revoked.text
-        name, failure = event(lines)
+        name, failure = active_event(lines, metadata["generation"], changed["nextRevision"])
         assert name == "error" and failure["status"] == 401
         assert set(failure) == {"code", "status", "message"}
     deadline = time.monotonic() + 2

@@ -47,7 +47,7 @@ export function createWindowLoader(provider, { ratio = .25, delayMs = 180, ttlMs
   };
 }
 
-export async function startupTarget({ protocol = location.protocol, fetcher = fetch, timeoutMs = 2000 } = {}) {
+export async function startupTarget({ protocol = location.protocol, fetcher = fetch, timeoutMs = 5000 } = {}) {
   if (protocol === 'file:') return { mode: 'standalone' };
   const controller = new AbortController(), timer = setTimeout(() => controller.abort(), timeoutMs);
   try {

@@ -20,6 +20,26 @@ Navigation timings include browser-driver overhead and are not frame-time metric
 The slower mobile result is a limitation. Three samples do not establish p95/p99
 performance. No hard performance gate is declared passed by this report.
 
+## Hosted Measurement: September 14, 2026
+
+The actual [GitHub Pages demo](https://arcazj.github.io/open_timeline2.0/) was also
+measured after [deployment 34821760189](https://github.com/arcazj/open_timeline2.0/actions/runs/34821760189).
+Three fresh-context samples used the same desktop/mobile emulation profiles:
+
+| Profile | First-ready samples | Navigation round trip |
+| --- | --- | --- |
+| Desktop | 2.43 s, 1.71 s, 2.24 s | 149-151 ms |
+| Mobile slow-4G, 4x CPU | 16.77 s, 17.03 s, 16.96 s | 2.22-2.41 s |
+
+The downloaded HTML was 8,833,809 bytes (2,310,258 encoded transfer bytes).
+Its SHA-256 was `70d1bbfb766d0fcb4a6cff0fcbf7aea5b8454b9ecc76af54c52aedc15c63914d`,
+matching the clean build from commit `e5af7cbbe3f531766b4523e49849bd6e65de6100`.
+Every sample checked nonblank canvas pixels, Local mode, and absence of horizontal
+overflow. The raw local benchmark report is
+`artifacts/performance/demo-startup-hosted.json`; its `localBundleSha256` field
+describes the separate working-copy reference, not the hosted response.
+These are observations, not a passed performance budget or a real-device test.
+
 ## Reproduce
 
 ```sh

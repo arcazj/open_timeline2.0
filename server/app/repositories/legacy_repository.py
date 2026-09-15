@@ -6,6 +6,7 @@ import copy
 import threading
 import bisect
 import math
+import os
 from pathlib import Path
 
 from ..models.domain import DomainError, instant_ms, iso_from_ms, MIN_INSTANT_MS
@@ -45,7 +46,8 @@ class LegacyRepository:
                                    limits=LegacyLimits(max_seconds=options.get("maxSeconds", 300)))
         self.presentation = None
         if options.get("model"):
-            legacy_root = Path(options["legacyRoot"]).resolve()
+            # Keep the configured path spelling; safe_read checks aliases and reparse points.
+            legacy_root = Path(os.path.abspath(options["legacyRoot"]))
             model_path = Path(options["model"])
             if not model_path.is_absolute():
                 model_path = legacy_root / model_path

@@ -126,3 +126,220 @@ prepared datasets/images for redistribution and GitHub publication. The
 [approval record](data-licensing.md) supersedes the licensing gate above, not the
 historical test results. GitHub Actions remains responsible for verifying the
 pushed candidate before a preview release can be published.
+
+## First GitHub Push and Hosted Demo
+
+Commit `e5af7cbbe3f531766b4523e49849bd6e65de6100` was pushed to `main` on
+September 14, 2026. GPL-3.0, the redistribution record, and the existing third-party
+notices were included. Branch protection and private vulnerability reporting were
+applied and read-back verified. Force-pushes and deletion are disabled; required
+checks also apply to administrators.
+
+[Standalone Demo run 34821760189](https://github.com/arcazj/open_timeline2.0/actions/runs/34821760189)
+passed and deployed the [live application](https://arcazj.github.io/open_timeline2.0/).
+Independent hosted-browser checks at 1600 x 900 and 390 x 844 verified nonblank
+canvases, all six datasets/2,349 records, search findings in the overview, stable
+vertical pagination, and continued navigation with networking disabled. Dataset
+switches and offline navigation made no HTTP requests. Screenshots were inspected;
+the local report is `artifacts/hosted-publication/verification.json`.
+The downloaded HTML hash matched the clean-checkout build recorded in
+[hosted startup measurements](demo-performance.md).
+
+The first [Candidate Verification run](https://github.com/arcazj/open_timeline2.0/actions/runs/34821760244)
+found that two server startup tests assumed an existing generated client file.
+Linux Python 3.13 reported 955 passed and 2 failed, with no skips. The correction
+gives these tests a temporary client fixture and separately checks the actionable
+404 when a build is missing; real application browser tests remain unchanged.
+The full matrix must pass on the corrected commit before publishing a prerelease.
+
+The same initial run reported the two missing-build fixture failures on both
+Windows versions. Linux Python 3.12 also exposed a filter test that read an
+asynchronous query-preparation response as a completed result. That test now polls
+the documented 202 response through the existing bounded helper and exercises
+both default and forced-asynchronous preparation, retaining the pinned-revision
+and search assertions. No production response timing was changed to satisfy it.
+
+## Windows Path and Container Qualification
+
+On commit `c3be71f9fe96d9e6af3ea3d0af6bbd5f4d44eb3c`, Windows Python 3.13
+CI passed all 960 server cases without skips, then exposed a real legacy-reader
+failure in provider integration: Windows temporary directories used 8.3 names
+such as `RUNNER~1`, while the opened file handle reported the long name.
+Model loading also expanded only the configured root, causing a false containment
+failure when the model filename still used its short spelling.
+
+The correction expands short names with `GetLongPathNameW` when the opened path
+differs, preserves drive/UNC identity, and retains file-identity, modification,
+allowlist, and reparse-point checks. Model loading keeps the configured root's
+spelling until those checks run. Native Windows regression cases cover file reads
+and model/namespace loading; expansion failures remain fail-closed.
+
+Local checks after this correction passed 176 focused Python cases and all 42
+provider integration cases with `TEMP` and `TMP` deliberately set to an actual
+8.3 directory alias. The latter report is
+`artifacts/hosted-publication/windows-short-parity.xml`, with no failures or skips.
+These are focused working-copy results, not a replacement for the protected
+Windows/Linux candidate matrix.
+
+The new mandatory root license also required Docker context/stage updates.
+Both verification and runtime images build successfully with `LICENSE` included.
+The runtime was checked as UID 10001: the GPL text exists in `/app/LICENSE` and
+the self-contained HTML, and the Python application imports successfully. These
+local image checks do not publish an image or certify production deployment.
+
+The updated Linux Docker image subsequently passed all 967 server cases without
+skips (`artifacts/hosted-publication/linux-server-gpl.xml`). A separate full native
+Windows/Edge run with 8.3 temporary paths reported 159 browser passes and one test
+race. Its trace showed the imported touch target being replaced between lookup
+and bounding-box measurement. The touch test now reacquires a non-null box with
+a bounded assertion, without changing the application or its gesture assertions.
+All ten repeated touch cases then passed with zero retries and the same short-path
+environment (`artifacts/hosted-publication/touch-regression.log`). The original
+full-run failure remains in `artifacts/browser/results.json`; the focused rerun
+uses a separate output directory and is not presented as a full-suite pass.
+
+## Toolbar Click Stability
+
+The protected run for `4b4bfc8a80065f4550ec4fad83a107d43efd3247` passed the
+complete Linux/Python 3.13 job. Linux/Python 3.12 passed all server, provider and
+160 full-browser cases, then failed one of 56 matrix cases: opening Help in a
+Firefox mobile dataset test. Its trace is preserved in
+`artifacts/github-pr5/4b4bfc8-linux312.zip`.
+
+Investigation found that repeated Lucide initialization replaced already-rendered
+SVG nodes during layout refresh. A deterministic Firefox regression reproduced
+both removal of the pressed icon and loss of the Help click. The correction
+removes the initialization marker from rendered SVGs, preserving existing nodes
+while still initializing new toolbar, descriptor, and dialog icons. No failed
+click is hidden by retrying the command or extending its timeout.
+
+The new press-during-layout test passed three repetitions each in Chromium,
+Firefox and Edge. Ten repeated Firefox mobile dataset cases, all 11 Help/boot
+cases and all 231 client unit cases also passed. Fresh mobile Help and desktop
+timeline screenshots were inspected. Focused evidence is under
+`artifacts/hosted-publication/toolbar-after`, `firefox-mobile-after`, and
+`help-after`; each has a separate log. The new toolbar case is included in both
+the full suite and cross-browser matrix for subsequent candidate verification.
+
+The updated Linux Docker Chromium/Firefox matrix then passed all 58 cases without
+skips or retries (`artifacts/hosted-publication/linux-toolbar-matrix.json`), with
+captures preserved under `linux-toolbar-captures` in the same directory.
+
+The preceding Windows/Python 3.12 CI job passed 159 browser cases but its remaining
+case never reached the UI: the fixture stopped polling just as cold JSON storage
+recovery finished at 12.05 seconds. The fixture now uses a monotonic 30-second
+readiness deadline and still requires a successful health response; individual
+UI test timeouts and application behavior are unchanged. All seven native Windows
+table cases passed afterward (`artifacts/hosted-publication/table-readiness-after.log`).
+This is test-server provisioning tolerance, not a passed production startup budget.
+
+## Hosted Windows Graphics
+
+Candidate `383bd56bf5e418501e1b2e36c5094c510d77bad5` passed both complete Linux
+jobs. Both Windows jobs passed 231 client, 969 server, 42 provider parity, and
+161 full-browser cases, plus Chromium and Edge matrix cases. Their 29 Firefox
+matrix cases all failed before timeline readiness: each preserved trace reports
+`AllowWebgl2:false restricts context creation on this system`. This is not a green
+qualification run; its reports remain in `artifacts/github-pr5/383bd56-*.zip`.
+
+The isolated Windows CI Firefox profile now enables its software WebGL2 path,
+as described in [Mozilla issue 1970486](https://bugzilla.mozilla.org/show_bug.cgi?id=1970486).
+Installed user profiles and application code are unchanged. All matrix cases,
+canvas checks, zero retries, and existing timeouts remain required. A new complete
+candidate run is required before the protected merge.
+
+The next run (`3ab403a`) rendered successfully in Windows Firefox: 27 of its 29
+matrix cases passed, while both complete Linux jobs and all other Windows checks
+passed. The remaining two cases were Ephemeris and Space Exploration. Their
+preserved screenshots show the expected bars and overview, but the GPU-less
+renderer supplied exactly four canvas colors, failing the test's arbitrary
+greater-than-four palette threshold. Both Windows runners reproduced this result.
+
+The fixture check now requires nonuniform pixels along canvas columns, detecting
+record detail independently of antialiasing shades. A canvas containing only
+vertical grids and zones does not satisfy this check. Four unit tests cover blank
+canvases, many-color vertical grids, a solid bar without antialiasing, and missing
+WebGL2. Existing complete-data, all-band, offline, descriptor and screenshot
+checks remain. Application rendering code is unchanged. Reports from the failed
+candidate are retained in `artifacts/github-pr5/3ab403a-*.zip`.
+
+## Explicit Refresh During Layout
+
+On `ef761ec`, both Linux jobs and all dataset pixel regressions passed. Initial
+Windows Firefox configuration cases sometimes stopped at bootstrap discovery;
+one unchanged-source rerun was requested and the first-attempt evidence retained.
+That rerun found a separate Windows/Edge interaction failure in the revoked-access
+case: no 401 request had actually been sent. Opening the descriptor had started a
+layout update, and the change monitor silently discarded the user's Refresh while
+the layout was busy. The old module reproduces this with zero reloads after it is
+unblocked.
+
+Explicit refresh requests now coalesce into one deferred read in Pinned or Live
+mode. Source changes, authorization/generation boundaries, outages and disposal
+cancel queued requests; automatic failures do not start retry loops. Three unit
+regressions cover queuing, cancellation and concurrent requests. The browser case
+now deliberately holds the descriptor's layout response, clicks Refresh, then
+releases the response and requires the subsequent 401 to clear protected visuals.
+All ten change-monitor unit cases and three browser repetitions passed locally.
+The complete client suite passed 238 cases; all 17 verification-tool tests and all
+11 server/change-monitor browser cases passed. Three additional Firefox
+repetitions of the held-layout/401 case also passed. The final integration report
+is `artifacts/hosted-publication/queued-refresh-final.json`.
+
+Candidate verification now runs the focused engine matrix before the longer full
+browser suite, after the same backend, parity and reproducible-build checks. No
+required case is removed. The intermittent Windows Firefox bootstrap observation
+remains explicitly recorded; this is preview qualification, not a claim of
+production startup performance or flawless first-pass CI.
+
+The second Windows/Python 3.13 attempt on `ef761ec` passed all 161 full-browser
+cases but again failed the six Firefox configuration cases before initial query
+readiness. The bounded bootstrap probe now has a test-only diagnostic attachment
+on startup failure, recording response status or error and elapsed time, never
+credentials, request headers or dataset contents. This is evidence collection,
+not a retry or a relaxed startup assertion.
+
+## Async And Stream Test Ordering
+
+The Windows/Python 3.13 job on `75ffdef` found two server-test scheduling
+assumptions before reaching the browser matrix. The filter test requested async
+preparation but could receive an already-ready 200 before asserting 202. It now
+holds the calculation until that assertion, then releases it and checks every
+filtered artifact and pinned revision as before.
+
+The real HTTP stream test could receive an already-buffered idle change frame
+before the revocation error. It now drains only empty frames with the unchanged
+generation/revision, within a bounded wait. Unexpected record changes are not
+discarded; the final error must still be 401 with the restricted error shape, and
+lease release and resume assertions remain. A focused regression verifies idle
+draining, preservation of unexpected changes, and rejection of a wrong revision.
+Neither correction changes server behavior or authorization policy.
+
+## Cold Bootstrap Deadline
+
+The `75ffdef` Windows/Python 3.12 diagnostic captured `AbortError` after 2214 ms
+and 2011 ms in the two failed Firefox configuration cases. The application's
+two-second discovery deadline, rather than a configuration action, ended both
+requests. Initial HTTP discovery now permits up to five seconds without adding
+a fixed delay or retry. File-mode startup still performs no discovery request,
+and a failed configured-server probe still cannot silently activate sample data.
+
+Fake-clock tests cover success at 2.5 seconds, cleared timers after success, and
+abort at exactly five seconds. A browser regression delays bootstrap beyond two
+seconds, checks that records are not shown prematurely, then requires readiness.
+The full local server suite passed 969 tests; one native symlink test was skipped
+because this Windows account lacks symlink privilege. Hosted qualification still
+requires that test without a skip.
+
+All 240 client tests and 21 configuration/slow-bootstrap browser cases across
+Chromium, Firefox and Edge passed locally after these corrections. The browser
+report is `artifacts/hosted-publication/bootstrap-matrix.json`; this focused run
+does not replace the complete hosted candidate checks.
+
+The Windows/Python 3.13 run on `4c84633` passed all 970 server cases and 89 of 90
+matrix cases. Only the new delayed-bootstrap case failed: its trace shows that
+the route callback itself arrived late, then the test added another 2.5 seconds,
+exceeding the application's five-second deadline. The test now holds the response
+until at least 2.5 seconds from the browser probe's start, counting dispatch time
+in that total. The real HTTP response, no-premature-records assertion and
+five-second application bound are unchanged.

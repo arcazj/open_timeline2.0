@@ -176,7 +176,17 @@ test('offline Local touch threshold and DPR2 time edits export canonical JSON wi
     const prior = await page.evaluate(() => window.__timelineDebug.providerId);
     await page.locator('[data-action=settings]').click(); await page.locator('#source-command').click(); await page.locator('#json-file').setInputFiles({ name: 'Touch snapshot.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(await remote.exportSnapshot())) }); await expect.poll(() => page.evaluate(() => window.__timelineDebug.providerId)).not.toBe(prior); await ready(page); await editMode(page);
     const touch = await context.newCDPSession(page);
-    const gesture = async dx => { const box = await label(page, records.point).boundingBox(), x = box.x + Math.min(20, box.width / 2), y = box.y + box.height / 2; await touch.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x, y }] }); await touch.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x + dx, y }] }); if (dx >= 8) await expect(page.locator('.record-time-ghost')).toHaveCount(1); else await expect(page.locator('.record-time-ghost')).toHaveCount(0); await touch.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); };
+    const gesture = async dx => {
+      // Imported layouts can replace a label between lookup and measurement.
+      let box;
+      await expect.poll(async () => { box = await label(page, records.point).boundingBox(); return box; }).not.toBeNull();
+      const x = box.x + Math.min(20, box.width / 2), y = box.y + box.height / 2;
+      await touch.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x, y }] });
+      await touch.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x + dx, y }] });
+      if (dx >= 8) await expect(page.locator('.record-time-ghost')).toHaveCount(1);
+      else await expect(page.locator('.record-time-ghost')).toHaveCount(0);
+      await touch.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    };
     await gesture(7); await expect(page.locator('.descriptor')).toBeVisible(); await page.locator('[data-action=close-descriptor]').click(); await ready(page);
     await gesture(8); await expect(page.locator('.descriptor')).toContainText('Version'); await expect(page.locator('.descriptor dd').filter({ hasText: /^2$/ })).toHaveCount(1); await ready(page);
     const canvas = await page.locator('.plot-wrap canvas').evaluate(node => ({ css: node.getBoundingClientRect().width, intrinsic: node.width, plot: node.parentElement.clientWidth })); expect(canvas.css).toBe(canvas.plot); expect(canvas.intrinsic).toBe(canvas.css * 2);
