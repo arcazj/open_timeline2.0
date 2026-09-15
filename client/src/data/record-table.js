@@ -2,6 +2,7 @@ import { ProviderError, canonicalJson } from './data-provider.js';
 import { decimalString, timeDecimal, toIso, toMs } from '../timeline/time-scale.js';
 import { overlaps } from '../timeline/layout.js';
 import { fieldValue } from './filter-expression.js';
+import { compareCodepoints, compareOrderedText, normalizeStringOrder } from './string-order.js';
 
 export const TABLE_FIELDS = ['start', 'end', 'title', 'kind', 'sourceId', 'order', 'version', 'createdAt', 'updatedAt', 'data.status'];
 const DATE_FIELDS = new Set(['start', 'end', 'createdAt', 'updatedAt']);
@@ -13,27 +14,29 @@ const ITEM_BUDGET = 2 * 1024 * 1024 - 16 * 1024;
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const invalid = (message, code = 'invalid_table_query') => { throw new ProviderError(code, message, 422); };
 
-export function compareText(left, right) {
-  const a = [...left.normalize('NFC')], b = [...right.normalize('NFC')];
-  for (let i = 0; i < Math.min(a.length, b.length); i++) {
-    const difference = a[i].codePointAt(0) - b[i].codePointAt(0);
-    if (difference) return difference;
-  }
-  return a.length - b.length;
-}
+export const compareText = compareCodepoints;
 
 export function normalizeTableInput(input = {}, domain, fieldTypes = DEFAULT_TYPES) {
-  if (!object(input) || Object.keys(input).some(key => !['scope', 'window', 'projection', 'sort', 'limit', 'cursor'].includes(key))) invalid('Unknown table query field');
+  if (!object(input) || Object.keys(input).some(key => !['definitionVersion', 'scope', 'window', 'projection', 'sort', 'limit', 'cursor'].includes(key))) invalid('Unknown table query field');
+  const definitionVersion = input.definitionVersion ?? 1;
+  if (input.definitionVersion === null || ![1, 2].includes(definitionVersion)) invalid('Table definition version must be 1 or 2');
   const scope = input.scope ?? 'all', projection = input.projection ?? 'context', limit = input.limit ?? 100;
   if (!['all', 'window'].includes(scope) || !['context', 'matches'].includes(projection)) invalid('Invalid table scope or projection');
   if (!Number.isInteger(limit) || limit < 1 || limit > 1000) invalid('Table limit must be an integer from 1 to 1000');
   if (input.cursor !== undefined && input.cursor !== null && (typeof input.cursor !== 'string' || !input.cursor || input.cursor.length > 4096)) invalid('Invalid table cursor');
   const sort = input.sort ?? [{ field: 'start', direction: 'asc' }];
   if (!Array.isArray(sort) || !sort.length || sort.length > 3) invalid('Specify one to three sort fields', 'invalid_table_sort');
-  const seen = new Set();
+  const seen = new Set(), normalizedSort = [];
   for (const item of sort) {
-    if (!object(item) || Object.keys(item).some(key => !['field', 'direction'].includes(key)) || typeof item.field !== 'string' || !Object.hasOwn(fieldTypes, pointer(item.field)) || fieldTypes[pointer(item.field)] === 'strings' || !['asc', 'desc'].includes(item.direction) || seen.has(pointer(item.field))) invalid('Invalid or repeated sort field', 'invalid_table_sort');
+    const keys = definitionVersion === 2 ? ['field', 'direction', 'order', 'caseSensitive'] : ['field', 'direction'];
+    if (!object(item) || Object.keys(item).some(key => !keys.includes(key)) || typeof item.field !== 'string' || !Object.hasOwn(fieldTypes, pointer(item.field)) || fieldTypes[pointer(item.field)] === 'strings' || !['asc', 'desc'].includes(item.direction) || seen.has(pointer(item.field))) invalid('Invalid or repeated sort field', 'invalid_table_sort');
     seen.add(pointer(item.field));
+    const normalized = { field: canonicalField(item.field), direction: item.direction };
+    if (definitionVersion === 2 && fieldTypes[pointer(item.field)] === 'string') {
+      try { Object.assign(normalized, normalizeStringOrder(Object.fromEntries(Object.entries(item).filter(([key]) => ['order', 'caseSensitive'].includes(key))), 2)); }
+      catch (error) { invalid(error.message, 'invalid_table_sort'); }
+    } else if (Object.hasOwn(item, 'order') || Object.hasOwn(item, 'caseSensitive')) invalid('Text ordering options apply only to string fields', 'invalid_table_sort');
+    normalizedSort.push(normalized);
   }
   let window = null;
   if (scope === 'window') {
@@ -46,7 +49,7 @@ export function normalizeTableInput(input = {}, domain, fieldTypes = DEFAULT_TYP
       window = { from: toIso(left.floor()), to: toIso(right.ceil()), viewFromMs: decimalString(left), viewToMs: decimalString(right) };
     } catch (error) { if (error instanceof ProviderError) throw error; invalid(error.message); }
   } else if (input.window !== undefined && input.window !== null) invalid('All scope does not accept a window');
-  return { scope, window, projection, sort: sort.map(item => ({ ...item, field: canonicalField(item.field) })), limit };
+  return { ...(definitionVersion === 2 ? { definitionVersion } : {}), scope, window, projection, sort: normalizedSort, limit };
 }
 
 function sortable(record, field, fieldTypes) {
@@ -68,6 +71,8 @@ function sortable(record, field, fieldTypes) {
 
 export function buildRecordTable(query, parameters) {
   const base = query.records.filter(record => parameters.scope === 'all' || overlaps(record, parameters.window.viewFromMs, parameters.window.viewToMs));
+  const version2 = query.definitionVersion === 2;
+  const baseTotal = version2 ? base.filter(record => query.eligibleIds.has(record.id)).length : base.length;
   const matchTotal = base.filter(record => query.matches.has(record.id)).length;
   const projected = parameters.projection === 'matches' ? base.filter(record => query.matches.has(record.id)) : base;
   const decorated = projected.map(record => ({ record, values: parameters.sort.map(item => sortable(record, item.field, query.fieldTypes ?? DEFAULT_TYPES)) }));
@@ -76,12 +81,12 @@ export function buildRecordTable(query, parameters) {
       const a = left.values[i], b = right.values[i];
       if (a.rank !== b.rank) return a.rank - b.rank;
       if (a.rank) continue;
-      const comparison = typeof a.value === 'string' ? compareText(a.value, b.value) : a.value - b.value;
+      const comparison = typeof a.value === 'string' ? parameters.definitionVersion === 2 ? compareOrderedText(a.value, b.value, parameters.sort[i]) : compareText(a.value, b.value) : a.value - b.value;
       if (comparison) return parameters.sort[i].direction === 'desc' ? -comparison : comparison;
     }
     return compareText(left.record.id, right.record.id);
   });
-  const items = decorated.map(({ record }) => ({ record, match: query.matches.has(record.id) }));
+  const items = decorated.map(({ record }) => ({ record, match: query.matches.has(record.id), ...(version2 ? { provenance: query.provenance[record.id] } : {}) }));
   const boundaries = [0];
   let count = 0, bytes = 0;
   for (let index = 0; index < items.length; index++) {
@@ -91,5 +96,5 @@ export function buildRecordTable(query, parameters) {
     count++; bytes += cost;
   }
   if (items.length) boundaries.push(items.length);
-  return { parameters, key: canonicalJson(parameters), items, boundaries, total: items.length, baseTotal: base.length, matchTotal, matchActive: query.hasSearch };
+  return { parameters, key: canonicalJson(parameters), items, boundaries, total: items.length, baseTotal, ...(version2 ? { contextTotal: base.length - baseTotal } : {}), matchTotal, matchActive: query.hasSearch };
 }

@@ -39,7 +39,9 @@ def apply_settings_command(input_snapshot, command, actor):
         settings["values"] = copy.deepcopy(payload)
     elif command["type"] == "patch":
         for key, value in payload.items():
-            if key in ("range", "overview", "search") and isinstance(value, dict):
+            if key == "search" and isinstance(value, dict) and (value.get("mode") == "regex" or settings["values"].get("search", {}).get("mode") == "regex" and "mode" in value and value["mode"] != "regex"):
+                settings["values"][key] = copy.deepcopy(value)
+            elif key in ("range", "overview", "search", "table") and isinstance(value, dict):
                 settings["values"][key] = {**settings["values"].get(key, {}), **copy.deepcopy(value)}
             else:
                 settings["values"][key] = copy.deepcopy(value)
@@ -56,9 +58,12 @@ def apply_settings_command(input_snapshot, command, actor):
                 if not path.startswith("/") or re.search(r"~(?![01])", path):
                     raise DomainError("invalid_settings", "Reset requires valid JSON pointers.")
                 parts = [part.replace("~1", "/").replace("~0", "~") for part in path[1:].split("/")]
-                if any(not part or part in ("__proto__", "prototype", "constructor") for part in parts) or len(parts) > 2 or (len(parts) == 2 and parts[0] not in ("range", "overview", "search")):
-                    raise DomainError("invalid_settings", "Reset requires a settings field or declared map member.")
                 maps = {"range": {"from", "to"}, "overview": {"from", "to"}, "search": {"text", "mode", "caseSensitive", "fields"}}
+                if settings["values"].get("definitionVersion") == 2:
+                    maps["search"].update({"flags", "matchMode", "dialect"})
+                    maps["table"] = {"scope", "projection", "limit"}
+                if any(not part or part in ("__proto__", "prototype", "constructor") for part in parts) or len(parts) > 2 or (len(parts) == 2 and parts[0] not in maps):
+                    raise DomainError("invalid_settings", "Reset requires a settings field or declared map member.")
                 if parts[0] not in DEFINITIONS["$defs"]["settings"]["properties"] or (len(parts) == 2 and parts[1] not in maps[parts[0]]):
                     raise DomainError("invalid_settings", "Reset requires a declared settings field.")
                 target = settings["values"]

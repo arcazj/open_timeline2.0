@@ -1,0 +1,2458 @@
+{
+  "format": "openbexi-legacy-migration-ledger-v1",
+  "scope": "Local filters/*.json, yaml/*.{yml,yaml}, tests/yaml/*.yml; no records, descriptors or remote connectors opened.",
+  "method": "Structured parsing only; bounded RE2 compilation, never evaluation of legacy patterns against records; no acknowledgements or publications performed.",
+  "files": [
+    {
+      "path": "filters/arcazj_ob_timeline_2_filter_setting.json",
+      "sha256": "0f31fac95e9ddf74971ba0e18ea487da00f443d5c65101f8c0265150b44db667",
+      "entries": 4,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "filters/default_filter_setting.json",
+      "sha256": "4b56ad08f99348e10d5f4d5fe9140d5068851175aebea5c9f2922a1a51b4a00a",
+      "entries": 2,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "filters/guest_ob_timeline_2_filter_setting.json",
+      "sha256": "1a8161dff7e53375c150b6aa2b55cb93fe5455c20457d554a8a47036fc3f0b16",
+      "entries": 4,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "filters/test_ob_timeline_2_filter_setting.json",
+      "sha256": "a44b63bcda8ba31a9b9c59370c4f0cba4f31bfcf234942d422b8980797c2e71e",
+      "entries": 5,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "tests/yaml/sources_default_test.yml",
+      "sha256": "a162bfa22768fecf733524873ef55eb69d04b46c4108b591cc50f3f31deb33cb",
+      "entries": 2,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/deployment.yaml",
+      "sha256": "08ac1da82fc33c1c0458d47aae5b5a35473f3c4e53c3fdf6f7cfa5b8f7890d06",
+      "entries": 0,
+      "status": "no-filter-entries",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/GNS_MCC_sources_startup.yml",
+      "sha256": "9c551c442dabc781e8b5d528152112771eb7788349d0dc84a49160f018836874",
+      "entries": 1,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/GNS_POV_sources_startup.yml",
+      "sha256": "a2471bdaef03c80847458dcdb31396e78c395636a30fb7156c8c66056285523f",
+      "entries": 1,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/GNS_SOC_sources_startup.yml",
+      "sha256": "462dbab6c8df2ea41154370941ca2672634df53b24834c130471500db4097aef",
+      "entries": 3,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/GNS_sources_startup.yml",
+      "sha256": "8c956b9e518067bf9c8a14a045b730041211347f3ae83b71ab27a90ff97895ac",
+      "entries": 1,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/ISAM_HTTP_sources_startup.yml",
+      "sha256": "77252929670920cf58ebe800e7469bec0e45b6c1d049940ceda6c8ee0703536c",
+      "entries": 1,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/ISAM_sources_startup.yml",
+      "sha256": "ee75e10cc111edc53ea9e07fa5fd6f7cba3e9da697bd301ef913311138cecdee",
+      "entries": 1,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/service.yaml",
+      "sha256": "f71ade71f6ee754ef21310edaf22dabde798de7cc062164c1091a0ae5847bf76",
+      "entries": 0,
+      "status": "no-filter-entries",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/sources_default.yml",
+      "sha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "entries": 15,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/sources_default_test.yml",
+      "sha256": "83d3efcafddaee7b865f4ab038dbe41af2b0962a81ee99d0c346e75a8f447a56",
+      "entries": 2,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/sources_earthquake.yml",
+      "sha256": "e7d20d740f3e395bb77ec32c0b991d658fa74099fa8390cc0f2d86510ccec47f",
+      "entries": 2,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/sources_MCC.yml",
+      "sha256": "37eb6d21147b83db81e78834153ec9ed908e62219b6442421dfa8c26e8a7fc6a",
+      "entries": 2,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/sources_SOC.yml",
+      "sha256": "702dfa41ccdc80a51d638ac39bf0337fccee743c02671fdaf4ed1f722488d7ac",
+      "entries": 5,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/sources_startup.yml",
+      "sha256": "c9704de43021237748687353d1cec519ffc78b20bad0981a2c5e0624af04cefc",
+      "entries": 1,
+      "status": "inspected",
+      "unchanged": true
+    },
+    {
+      "path": "yaml/tomcat.yml",
+      "sha256": "5dceea0aa3b9449a88bef4bf67bfbfb8f92da74a70ee1eb9d5d5921bc33c1bd4",
+      "entries": 0,
+      "status": "no-filter-entries",
+      "unchanged": true
+    }
+  ],
+  "fieldRegistries": {
+    "legacy-metadata-v1": {
+      "/id": "string",
+      "/title": "string",
+      "/kind": "string",
+      "/sourceId": "string",
+      "/start": "date",
+      "/end": "date",
+      "/originalStart": "date",
+      "/originalEnd": "date",
+      "/createdAt": "date",
+      "/updatedAt": "date",
+      "/parentSessionId": "string",
+      "/order": "number",
+      "/version": "number",
+      "/schemaId": "string",
+      "/schemaVersion": "number",
+      "/tags": "strings",
+      "/groupIds": "strings",
+      "/data/status": "string",
+      "/data/system": "string",
+      "/data/type": "string",
+      "/data/description": "string",
+      "/data/text": "string",
+      "/data/namespace": "string"
+    }
+  },
+  "modelRegistries": [
+    {
+      "path": "models/MCC_timeline.json",
+      "sha256": "7bef6d54ae2f8215c0690419edc285f6b930b373c135557922ea19be73e88674",
+      "fieldRegistry": "legacy-metadata-v1",
+      "rule": "Rendering models do not declare additional filter field types; require published schema pins for custom fields."
+    },
+    {
+      "path": "models/regular_timeline.json",
+      "sha256": "78d6615b85ac69adee0ee27b5e79bc34f085d0b2476d37b384379ec40a389862",
+      "fieldRegistry": "legacy-metadata-v1",
+      "rule": "Rendering models do not declare additional filter field types; require published schema pins for custom fields."
+    },
+    {
+      "path": "models/regular_timeline_earthquake.json",
+      "sha256": "157640266c98cb76c19b1b5f99c9b631099f60c7ed7efa0ee4c1f90d82d0e872",
+      "fieldRegistry": "legacy-metadata-v1",
+      "rule": "Rendering models do not declare additional filter field types; require published schema pins for custom fields."
+    },
+    {
+      "path": "models/regular_timeline_esoc.json",
+      "sha256": "57695d8194c5860e0846695210c57afe49baa50b229de78eaf713bfdcc002fd6",
+      "fieldRegistry": "legacy-metadata-v1",
+      "rule": "Rendering models do not declare additional filter field types; require published schema pins for custom fields."
+    },
+    {
+      "path": "models/regular_timeline_mcc.json",
+      "sha256": "99453c81683697110776f432d9c8b31638d53445b667c34074f1c64fc48c157f",
+      "fieldRegistry": "legacy-metadata-v1",
+      "rule": "Rendering models do not declare additional filter field types; require published schema pins for custom fields."
+    },
+    {
+      "path": "models/regular_timeline_pov.json",
+      "sha256": "de3d92b2c4708a4a85733b79838c37ecde316bbbe7f0611696ee02f5047ae541",
+      "fieldRegistry": "legacy-metadata-v1",
+      "rule": "Rendering models do not declare additional filter field types; require published schema pins for custom fields."
+    },
+    {
+      "path": "models/SOC_timeline.json",
+      "sha256": "80aa6cfc8d8511c172e485b4982c503e1bb7e59ddb26f54798e771ae259283d5",
+      "fieldRegistry": "legacy-metadata-v1",
+      "rule": "Rendering models do not declare additional filter field types; require published schema pins for custom fields."
+    },
+    {
+      "path": "tests/models/regular_timeline.json",
+      "sha256": "8abd39f44bc38ba9a14cfd9914d87eb7e764a2c5d35a964e6a1c1f2c54377322",
+      "fieldRegistry": "legacy-metadata-v1",
+      "rule": "Rendering models do not declare additional filter field types; require published schema pins for custom fields."
+    }
+  ],
+  "entries": [
+    {
+      "file": "filters/arcazj_ob_timeline_2_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/sources/0/filter",
+      "name": "SOURCE1",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "0f31fac95e9ddf74971ba0e18ea487da00f443d5c65101f8c0265150b44db667",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "filters/arcazj_ob_timeline_2_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/sources/1/filter",
+      "name": "SOURCE2",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "0f31fac95e9ddf74971ba0e18ea487da00f443d5c65101f8c0265150b44db667",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "filters/arcazj_ob_timeline_2_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/filters/0",
+      "name": "BY_NAMESPACE",
+      "legacyShape": "unsplit-client-filter-value",
+      "originalSha256": "0f31fac95e9ddf74971ba0e18ea487da00f443d5c65101f8c0265150b44db667",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "filters/arcazj_ob_timeline_2_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/filters/1",
+      "name": "ALL",
+      "legacyShape": "unsplit-client-filter-value",
+      "originalSha256": "0f31fac95e9ddf74971ba0e18ea487da00f443d5c65101f8c0265150b44db667",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "filters/default_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/filters/0",
+      "name": "ALL",
+      "legacyShape": "unsplit-client-filter-value",
+      "originalSha256": "4b56ad08f99348e10d5f4d5fe9140d5068851175aebea5c9f2922a1a51b4a00a",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "filters/default_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/filters/1",
+      "name": "BY_NAMESPACE",
+      "legacyShape": "unsplit-client-filter-value",
+      "originalSha256": "4b56ad08f99348e10d5f4d5fe9140d5068851175aebea5c9f2922a1a51b4a00a",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "namespace"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "intent-repair",
+        "publishable": false,
+        "diagnostics": [
+          {
+            "code": "deterministic-group-order",
+            "message": "Groups use deterministic codepoint order instead of legacy encounter order.",
+            "offset": 0,
+            "offsetUnit": "unicode-codepoint",
+            "severity": "warning"
+          },
+          {
+            "code": "intent_repair_required",
+            "message": "Review and acknowledge the proposed semantic repairs before using this draft.",
+            "offset": 0,
+            "offsetUnit": "unicode-codepoint",
+            "severity": "warning"
+          }
+        ],
+        "requiredAcknowledgements": [
+          "deterministic-group-order"
+        ],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": {
+            "field": "/data/namespace",
+            "direction": "asc"
+          },
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "namespace"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "filters/guest_ob_timeline_2_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/sources/0/filter",
+      "name": "SOURCE1",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "1a8161dff7e53375c150b6aa2b55cb93fe5455c20457d554a8a47036fc3f0b16",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "filters/guest_ob_timeline_2_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/sources/1/filter",
+      "name": "SOURCE2",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "1a8161dff7e53375c150b6aa2b55cb93fe5455c20457d554a8a47036fc3f0b16",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "filters/guest_ob_timeline_2_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/filters/0",
+      "name": "BY_NAMESPACE",
+      "legacyShape": "unsplit-client-filter-value",
+      "originalSha256": "1a8161dff7e53375c150b6aa2b55cb93fe5455c20457d554a8a47036fc3f0b16",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "namespace"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "intent-repair",
+        "publishable": false,
+        "diagnostics": [
+          {
+            "code": "deterministic-group-order",
+            "message": "Groups use deterministic codepoint order instead of legacy encounter order.",
+            "offset": 0,
+            "offsetUnit": "unicode-codepoint",
+            "severity": "warning"
+          },
+          {
+            "code": "intent_repair_required",
+            "message": "Review and acknowledge the proposed semantic repairs before using this draft.",
+            "offset": 0,
+            "offsetUnit": "unicode-codepoint",
+            "severity": "warning"
+          }
+        ],
+        "requiredAcknowledgements": [
+          "deterministic-group-order"
+        ],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": {
+            "field": "/data/namespace",
+            "direction": "asc"
+          },
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "namespace"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "filters/guest_ob_timeline_2_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/filters/1",
+      "name": "ALL",
+      "legacyShape": "unsplit-client-filter-value",
+      "originalSha256": "1a8161dff7e53375c150b6aa2b55cb93fe5455c20457d554a8a47036fc3f0b16",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "filters/test_ob_timeline_2_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/sources/0/filter",
+      "name": "earthquake",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "a44b63bcda8ba31a9b9c59370c4f0cba4f31bfcf234942d422b8980797c2e71e",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "filters/test_ob_timeline_2_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/sources/1/filter",
+      "name": "volcano",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "a44b63bcda8ba31a9b9c59370c4f0cba4f31bfcf234942d422b8980797c2e71e",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "filters/test_ob_timeline_2_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/filters/0",
+      "name": "ALL",
+      "legacyShape": "unsplit-client-filter-value",
+      "originalSha256": "a44b63bcda8ba31a9b9c59370c4f0cba4f31bfcf234942d422b8980797c2e71e",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "filters/test_ob_timeline_2_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/filters/1",
+      "name": "BY_NAMESPACE",
+      "legacyShape": "unsplit-client-filter-value",
+      "originalSha256": "a44b63bcda8ba31a9b9c59370c4f0cba4f31bfcf234942d422b8980797c2e71e",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "namespace"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "intent-repair",
+        "publishable": false,
+        "diagnostics": [
+          {
+            "code": "deterministic-group-order",
+            "message": "Groups use deterministic codepoint order instead of legacy encounter order.",
+            "offset": 0,
+            "offsetUnit": "unicode-codepoint",
+            "severity": "warning"
+          },
+          {
+            "code": "intent_repair_required",
+            "message": "Review and acknowledge the proposed semantic repairs before using this draft.",
+            "offset": 0,
+            "offsetUnit": "unicode-codepoint",
+            "severity": "warning"
+          }
+        ],
+        "requiredAcknowledgements": [
+          "deterministic-group-order"
+        ],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": {
+            "field": "/data/namespace",
+            "direction": "asc"
+          },
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "namespace"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "filters/test_ob_timeline_2_filter_setting.json",
+      "pointer": "/openbexi_timeline/0/filters/2",
+      "name": "By_STATUS",
+      "legacyShape": "unsplit-client-filter-value",
+      "originalSha256": "a44b63bcda8ba31a9b9c59370c4f0cba4f31bfcf234942d422b8980797c2e71e",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "status"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "intent-repair",
+        "publishable": false,
+        "diagnostics": [
+          {
+            "code": "deterministic-group-order",
+            "message": "Groups use deterministic codepoint order instead of legacy encounter order.",
+            "offset": 0,
+            "offsetUnit": "unicode-codepoint",
+            "severity": "warning"
+          },
+          {
+            "code": "intent_repair_required",
+            "message": "Review and acknowledge the proposed semantic repairs before using this draft.",
+            "offset": 0,
+            "offsetUnit": "unicode-codepoint",
+            "severity": "warning"
+          }
+        ],
+        "requiredAcknowledgements": [
+          "deterministic-group-order"
+        ],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": {
+            "field": "/data/status",
+            "direction": "asc"
+          },
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "status"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "tests/yaml/sources_default_test.yml",
+      "pointer": "/data_sources/0/filter",
+      "name": "SOURCE1",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "a162bfa22768fecf733524873ef55eb69d04b46c4108b591cc50f3f31deb33cb",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "tests/yaml/sources_default_test.yml",
+      "pointer": "/data_sources/1/filter",
+      "name": "SOURCE2",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "a162bfa22768fecf733524873ef55eb69d04b46c4108b591cc50f3f31deb33cb",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/GNS_MCC_sources_startup.yml",
+      "pointer": "/data_sources/0/filter",
+      "name": "MCC",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "9c551c442dabc781e8b5d528152112771eb7788349d0dc84a49160f018836874",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/GNS_POV_sources_startup.yml",
+      "pointer": "/data_sources/0/filter",
+      "name": "MCC",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "a2471bdaef03c80847458dcdb31396e78c395636a30fb7156c8c66056285523f",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/GNS_SOC_sources_startup.yml",
+      "pointer": "/data_sources/0/filter",
+      "name": "ESOC",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "462dbab6c8df2ea41154370941ca2672634df53b24834c130471500db4097aef",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/GNS_SOC_sources_startup.yml",
+      "pointer": "/data_sources/1/filter",
+      "name": "LSOC",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "462dbab6c8df2ea41154370941ca2672634df53b24834c130471500db4097aef",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/GNS_SOC_sources_startup.yml",
+      "pointer": "/data_sources/2/filter",
+      "name": "POV",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "462dbab6c8df2ea41154370941ca2672634df53b24834c130471500db4097aef",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/GNS_sources_startup.yml",
+      "pointer": "/data_sources/0/filter",
+      "name": "ISAM",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "8c956b9e518067bf9c8a14a045b730041211347f3ae83b71ab27a90ff97895ac",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/ISAM_HTTP_sources_startup.yml",
+      "pointer": "/data_sources/0/filter",
+      "name": "ISAM",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "77252929670920cf58ebe800e7469bec0e45b6c1d049940ceda6c8ee0703536c",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/ISAM_sources_startup.yml",
+      "pointer": "/data_sources/0/filter",
+      "name": "ISAM",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "ee75e10cc111edc53ea9e07fa5fd6f7cba3e9da697bd301ef913311138cecdee",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/0/filter",
+      "name": "TEST_SOURCE1",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/1/filter",
+      "name": "TEST_SOURCE1",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/2/filter",
+      "name": "<namespace_for_mongoDb>",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/3/filter",
+      "name": "<namespace_for_kafka>",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/4/filter",
+      "name": "<namespace_for_mqtt>",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/5/filter",
+      "name": "<namespace_for_elasticsearch>",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/7/filter",
+      "name": "<namespace_for_cassandra>",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/8/filter",
+      "name": "<namespace_for_hdfs>",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/9/filter",
+      "name": "<namespace_for_rest_api>",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/10/filter",
+      "name": "<namespace_for_apache_pulsar>",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/11/filter",
+      "name": "<namespace_for_snowflake>",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/12/filter",
+      "name": "<namespace_for_aws_iot_core>",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/13/filter",
+      "name": "<namespace_for_azure_event_hubs>",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/14/filter",
+      "name": "<namespace_for_neo4j>",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default.yml",
+      "pointer": "/data_sources/15/filter",
+      "name": "<namespace_for_solr>",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "198428ccada9fb1244472a894ab3a75bb6176fdd218e439344a36c42c64b8b58",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default_test.yml",
+      "pointer": "/data_sources/0/filter",
+      "name": "SOURCE1",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "83d3efcafddaee7b865f4ab038dbe41af2b0962a81ee99d0c346e75a8f447a56",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_default_test.yml",
+      "pointer": "/data_sources/1/filter",
+      "name": "SOURCE2",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "83d3efcafddaee7b865f4ab038dbe41af2b0962a81ee99d0c346e75a8f447a56",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_earthquake.yml",
+      "pointer": "/data_sources/0/filter",
+      "name": "earthquake",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "e7d20d740f3e395bb77ec32c0b991d658fa74099fa8390cc0f2d86510ccec47f",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_earthquake.yml",
+      "pointer": "/data_sources/1/filter",
+      "name": "volcano",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "e7d20d740f3e395bb77ec32c0b991d658fa74099fa8390cc0f2d86510ccec47f",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_MCC.yml",
+      "pointer": "/data_sources/0/filter",
+      "name": "MCC",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "37eb6d21147b83db81e78834153ec9ed908e62219b6442421dfa8c26e8a7fc6a",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_MCC.yml",
+      "pointer": "/data_sources/1/filter",
+      "name": "POV",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "37eb6d21147b83db81e78834153ec9ed908e62219b6442421dfa8c26e8a7fc6a",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_SOC.yml",
+      "pointer": "/data_sources/0/filter",
+      "name": "ESOC",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "702dfa41ccdc80a51d638ac39bf0337fccee743c02671fdaf4ed1f722488d7ac",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_SOC.yml",
+      "pointer": "/data_sources/1/filter",
+      "name": "LSOC",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "702dfa41ccdc80a51d638ac39bf0337fccee743c02671fdaf4ed1f722488d7ac",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_SOC.yml",
+      "pointer": "/data_sources/2/filter",
+      "name": "TEMPO",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "702dfa41ccdc80a51d638ac39bf0337fccee743c02671fdaf4ed1f722488d7ac",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_SOC.yml",
+      "pointer": "/data_sources/3/filter",
+      "name": "EPOCH",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "702dfa41ccdc80a51d638ac39bf0337fccee743c02671fdaf4ed1f722488d7ac",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_SOC.yml",
+      "pointer": "/data_sources/4/filter",
+      "name": "OTHERS",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "702dfa41ccdc80a51d638ac39bf0337fccee743c02671fdaf4ed1f722488d7ac",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    },
+    {
+      "file": "yaml/sources_startup.yml",
+      "pointer": "/data_sources/0/filter",
+      "name": "SOURCE2",
+      "legacyShape": "source-include-exclude",
+      "originalSha256": "c9704de43021237748687353d1cec519ffc78b20bad0981a2c5e0624af04cefc",
+      "original": {
+        "include": "",
+        "exclude": "",
+        "sortBy": "NONE"
+      },
+      "fieldRegistry": "legacy-metadata-v1",
+      "result": {
+        "format": "legacy-filter-migration",
+        "version": 1,
+        "classification": "exact",
+        "publishable": true,
+        "diagnostics": [],
+        "requiredAcknowledgements": [],
+        "draft": {
+          "definitionVersion": 2,
+          "relationshipMode": "independent",
+          "expression": null,
+          "grouping": null,
+          "groupOrder": {
+            "order": "codepoint",
+            "caseSensitive": true
+          },
+          "migration": {
+            "format": "legacy-filter-migration",
+            "version": 1,
+            "original": {
+              "include": "",
+              "exclude": "",
+              "sortBy": "NONE"
+            },
+            "acknowledged": []
+          }
+        }
+      }
+    }
+  ],
+  "summary": {
+    "files": 20,
+    "entries": 52,
+    "classifications": {
+      "exact": 48,
+      "intent-repair": 4
+    },
+    "diagnostics": {
+      "deterministic-group-order": 4,
+      "intent_repair_required": 4
+    },
+    "allFilesUnchanged": true
+  },
+  "limitations": [
+    "Empty predicates can be exact translations without qualifying their connector, source data or rendering.",
+    "Client filter_value is never guessed apart at a pipe; ambiguity is blocked for explicit review.",
+    "Grouping encounter-order changes require acknowledgement; naming a preset BY_NAMESPACE does not override its actual sortBy value.",
+    "Custom model fields are not inferred from labels or sample data.",
+    "No user approval, saved preset publication, full source equivalence test or performance claim is implied."
+  ]
+}

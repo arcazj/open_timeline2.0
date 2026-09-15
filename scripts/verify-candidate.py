@@ -169,6 +169,8 @@ def main():
         ("parity", node_tests("parity", "tests/integration")),
         ("openapi", [python, "scripts/export-openapi.py", "--check"]),
         ("datasets", [python, "scripts/normalize-test-data.py", "--check"]),
+        ("sorting-analysis", [node, "scripts/check-sorting-filtering-docs.mjs"]),
+        ("regex-offline", [node, "scripts/qualify-regex.mjs"]),
         ("build", [node, "scripts/build-standalone.mjs"]),
         ("rebuild", [node, "scripts/build-standalone.mjs"]),
     ]

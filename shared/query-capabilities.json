@@ -1,0 +1,9 @@
+{
+  "definitionVersions": [1, 2],
+  "expressionVersions": [1, 2],
+  "relationshipModes": ["independent", "family"],
+  "stringOrders": ["codepoint", "natural"],
+  "searchModes": ["any", "all", "phrase", "regex"],
+  "regexDialect": "re2-common-v1",
+  "contextDescriptors": true
+}

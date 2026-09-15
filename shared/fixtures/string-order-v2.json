@@ -1,0 +1,14 @@
+{
+  "definitionVersion": 2,
+  "cases": [
+    {"name": "source natural order", "options": {"order": "natural"}, "values": ["SOURCE2", "SOURCE10", "SOURCE1", "SOURCE02"], "expected": ["SOURCE1", "SOURCE2", "SOURCE02", "SOURCE10"]},
+    {"name": "unchanged codepoint order", "options": {"order": "codepoint"}, "values": ["SOURCE2", "SOURCE10", "SOURCE1", "SOURCE02"], "expected": ["SOURCE02", "SOURCE1", "SOURCE10", "SOURCE2"]},
+    {"name": "digit magnitude beyond safe integers", "options": {"order": "natural"}, "values": ["N9007199254740993", "N9007199254740992", "N10000000000000000", "N9999999999999999"], "expected": ["N9007199254740992", "N9007199254740993", "N9999999999999999", "N10000000000000000"]},
+    {"name": "equal magnitude digit run length", "options": {"order": "natural"}, "values": ["X002a", "X2z", "X02b", "X000", "X0", "X00"], "expected": ["X0", "X00", "X000", "X2z", "X02b", "X002a"]},
+    {"name": "pinned casefold and original spelling tiebreak", "options": {"order": "natural", "caseSensitive": false}, "values": ["Stra\u00dfe10", "Stra\u00dfe2", "STRASSE2"], "expected": ["STRASSE2", "Stra\u00dfe2", "Stra\u00dfe10"]},
+    {"name": "dotted and dotless I", "options": {"order": "natural", "caseSensitive": false}, "values": ["\u01302", "i2", "\u01312", "I2"], "expected": ["I2", "i2", "\u01302", "\u01312"]},
+    {"name": "unicode codepoints not UTF16 or locale collation", "options": {"order": "natural"}, "values": ["\ud800\udc002", "\ue0002", "\u00e92", "z2"], "expected": ["z2", "\u00e92", "\ue0002", "\ud800\udc002"]},
+    {"name": "only ASCII digits have numeric meaning", "options": {"order": "natural"}, "values": ["X\u0662", "X10", "X2", "X\uff12"], "expected": ["X2", "X10", "X\u0662", "X\uff12"]},
+    {"name": "repeated digit and non-digit runs", "options": {"order": "natural"}, "values": ["A2.B10", "A2.B02", "A2.B2", "A10.B1", "A2-A1"], "expected": ["A2-A1", "A2.B2", "A2.B02", "A2.B10", "A10.B1"]}
+  ]
+}

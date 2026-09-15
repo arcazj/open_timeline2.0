@@ -1,0 +1,4915 @@
+{
+  "format": "openbexi-model-coverage-v1",
+  "generatedAt": "2026-09-15T01:53:46.808Z",
+  "nodeVersion": "v24.13.0",
+  "pythonVersion": "3.12.14",
+  "qualification": "Runtime adapter parity and complete per-property disposition; not pixel-perfect historical rendering qualification.",
+  "expectedModelCount": 8,
+  "models": [
+    {
+      "path": "models/MCC_timeline.json",
+      "beforeSha256": "7bef6d54ae2f8215c0690419edc285f6b930b373c135557922ea19be73e88674",
+      "afterSha256": "7bef6d54ae2f8215c0690419edc285f6b930b373c135557922ea19be73e88674",
+      "unchanged": true,
+      "matchesEarlierAuditHash": true,
+      "catalogDryRun": {
+        "status": "blocked",
+        "canCreate": false,
+        "counts": {
+          "container": 8,
+          "preserved-alias": 3,
+          "mapped": 19,
+          "unsupported": 10,
+          "redacted": 3,
+          "preserved-inactive": 1
+        }
+      },
+      "clientRuntime": {
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "9c7455be7381da0eb2c5413115ac24d80aa0ffea2e9cc8a5a6d7ddc4a422bf05",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_default_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_sse_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "serverRuntime": {
+        "path": "models/MCC_timeline.json",
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "9c7455be7381da0eb2c5413115ac24d80aa0ffea2e9cc8a5a6d7ddc4a422bf05",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_default_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_sse_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "providerAdapterParity": true,
+      "propertyCounts": {
+        "derived-not-exact": 1,
+        "inactive": 1,
+        "mapped": 22,
+        "mapped-with-correction": 2,
+        "not-executed": 3,
+        "provenance-only": 1,
+        "responsive-replacement": 4,
+        "role-selection": 2
+      },
+      "properties": [
+        {
+          "pointer": "/params/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "provenance-only",
+            "detail": "Authored alias, not a catalog identity."
+          }
+        },
+        {
+          "pointer": "/params/0/title",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/name"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/name"
+          }
+        },
+        {
+          "pointer": "/params/0/date",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Reference dates belong to view state; no browser-dependent date parsing or implicit navigation"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/focus"
+          }
+        },
+        {
+          "pointer": "/params/0/timeZone",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/timeZone"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/timeZone"
+          }
+        },
+        {
+          "pointer": "/params/0/top",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/left",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/fontSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/fontSize"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/fontSize"
+          }
+        },
+        {
+          "pointer": "/params/0/width",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/data_default_port",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "1fb34678cd8a644bac1186726c7fafb09dd549eeb8ebdf625250fff84d30c290"
+        },
+        {
+          "pointer": "/params/0/data_sse_port",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "a16c5b00bf16bf31b3e093e8af1f5b139931f77e7fe9a90fe751babf2db91c45"
+        },
+        {
+          "pointer": "/params/0/data",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "pointer": "/bands/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/0/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/0/subIntervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "derived-not-exact",
+            "detail": "Four quarter-hour subdivisions, not arbitrary authored pixel divisions."
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnitPos",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Recognized axis-position enum only; no unknown-value fallback",
+            "target": "/definition/presentation/bands/primary/axisPosition"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/axisPosition"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/primary/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/dateColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/textColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/textColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/textColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/defaultEventSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/pointRadius"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/pointRadius"
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/sortBy",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Explicit NONE to none grouping",
+            "target": "/definition/groupBy"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "Primary safe JSON Pointer grouping, deterministic codepoint default."
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/alternateColor",
+          "catalogDryRun": {
+            "disposition": "preserved-inactive",
+            "reason": "Declared in the legacy templates but no consumer through band.model was found; retained as inactive provenance, not applied"
+          },
+          "runtime": {
+            "status": "inactive",
+            "detail": "No verified legacy consumer for band.model.alternateColor."
+          }
+        },
+        {
+          "pointer": "/bands/1/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/1/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/1/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/overview/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/1/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/dateColor"
+          }
+        }
+      ]
+    },
+    {
+      "path": "models/regular_timeline.json",
+      "beforeSha256": "78d6615b85ac69adee0ee27b5e79bc34f085d0b2476d37b384379ec40a389862",
+      "afterSha256": "78d6615b85ac69adee0ee27b5e79bc34f085d0b2476d37b384379ec40a389862",
+      "unchanged": true,
+      "matchesEarlierAuditHash": true,
+      "catalogDryRun": {
+        "status": "blocked",
+        "canCreate": false,
+        "counts": {
+          "container": 8,
+          "preserved-alias": 3,
+          "mapped": 19,
+          "unsupported": 10,
+          "redacted": 1,
+          "preserved-inactive": 1
+        }
+      },
+      "clientRuntime": {
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "c960db23c6f211eaba23dc455465d454815199177bf7917404393ef63a3c72f5",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "serverRuntime": {
+        "path": "models/regular_timeline.json",
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "c960db23c6f211eaba23dc455465d454815199177bf7917404393ef63a3c72f5",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "providerAdapterParity": true,
+      "propertyCounts": {
+        "derived-not-exact": 1,
+        "inactive": 1,
+        "mapped": 22,
+        "mapped-with-correction": 2,
+        "not-executed": 1,
+        "provenance-only": 1,
+        "responsive-replacement": 4,
+        "role-selection": 2
+      },
+      "properties": [
+        {
+          "pointer": "/params/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "provenance-only",
+            "detail": "Authored alias, not a catalog identity."
+          }
+        },
+        {
+          "pointer": "/params/0/title",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/name"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/name"
+          }
+        },
+        {
+          "pointer": "/params/0/date",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Reference dates belong to view state; no browser-dependent date parsing or implicit navigation"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/focus"
+          }
+        },
+        {
+          "pointer": "/params/0/timeZone",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/timeZone"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/timeZone"
+          }
+        },
+        {
+          "pointer": "/params/0/top",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/left",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/fontSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/fontSize"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/fontSize"
+          }
+        },
+        {
+          "pointer": "/params/0/width",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/data",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "pointer": "/bands/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/0/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/0/subIntervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "derived-not-exact",
+            "detail": "Four quarter-hour subdivisions, not arbitrary authored pixel divisions."
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnitPos",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Recognized axis-position enum only; no unknown-value fallback",
+            "target": "/definition/presentation/bands/primary/axisPosition"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/axisPosition"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/primary/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/dateColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/textColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/textColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/textColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/defaultEventSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/pointRadius"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/pointRadius"
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/sortBy",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Explicit NONE to none grouping",
+            "target": "/definition/groupBy"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "Primary safe JSON Pointer grouping, deterministic codepoint default."
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/alternateColor",
+          "catalogDryRun": {
+            "disposition": "preserved-inactive",
+            "reason": "Declared in the legacy templates but no consumer through band.model was found; retained as inactive provenance, not applied"
+          },
+          "runtime": {
+            "status": "inactive",
+            "detail": "No verified legacy consumer for band.model.alternateColor."
+          }
+        },
+        {
+          "pointer": "/bands/1/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/1/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/1/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/overview/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/1/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/dateColor"
+          }
+        }
+      ]
+    },
+    {
+      "path": "models/regular_timeline_earthquake.json",
+      "beforeSha256": "157640266c98cb76c19b1b5f99c9b631099f60c7ed7efa0ee4c1f90d82d0e872",
+      "afterSha256": "157640266c98cb76c19b1b5f99c9b631099f60c7ed7efa0ee4c1f90d82d0e872",
+      "unchanged": true,
+      "matchesEarlierAuditHash": true,
+      "catalogDryRun": {
+        "status": "blocked",
+        "canCreate": false,
+        "counts": {
+          "container": 8,
+          "preserved-alias": 3,
+          "mapped": 19,
+          "unsupported": 10,
+          "redacted": 1,
+          "preserved-inactive": 1
+        }
+      },
+      "clientRuntime": {
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "fe22a50574b986757b5707c931ca83dde5068c81bc4ad0d769347358c1da0cf5",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "serverRuntime": {
+        "path": "models/regular_timeline_earthquake.json",
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "fe22a50574b986757b5707c931ca83dde5068c81bc4ad0d769347358c1da0cf5",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "providerAdapterParity": true,
+      "propertyCounts": {
+        "derived-not-exact": 1,
+        "inactive": 1,
+        "mapped": 22,
+        "mapped-with-correction": 2,
+        "not-executed": 1,
+        "provenance-only": 1,
+        "responsive-replacement": 4,
+        "role-selection": 2
+      },
+      "properties": [
+        {
+          "pointer": "/params/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "provenance-only",
+            "detail": "Authored alias, not a catalog identity."
+          }
+        },
+        {
+          "pointer": "/params/0/title",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/name"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/name"
+          }
+        },
+        {
+          "pointer": "/params/0/date",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Reference dates belong to view state; no browser-dependent date parsing or implicit navigation"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/focus"
+          }
+        },
+        {
+          "pointer": "/params/0/timeZone",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/timeZone"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/timeZone"
+          }
+        },
+        {
+          "pointer": "/params/0/top",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/left",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/fontSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/fontSize"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/fontSize"
+          }
+        },
+        {
+          "pointer": "/params/0/width",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/data",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "pointer": "/bands/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/0/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/0/subIntervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "derived-not-exact",
+            "detail": "Four quarter-hour subdivisions, not arbitrary authored pixel divisions."
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnitPos",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Recognized axis-position enum only; no unknown-value fallback",
+            "target": "/definition/presentation/bands/primary/axisPosition"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/axisPosition"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/primary/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/dateColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/textColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/textColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/textColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/defaultEventSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/pointRadius"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/pointRadius"
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/sortBy",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Explicit NONE to none grouping",
+            "target": "/definition/groupBy"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "Primary safe JSON Pointer grouping, deterministic codepoint default."
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/alternateColor",
+          "catalogDryRun": {
+            "disposition": "preserved-inactive",
+            "reason": "Declared in the legacy templates but no consumer through band.model was found; retained as inactive provenance, not applied"
+          },
+          "runtime": {
+            "status": "inactive",
+            "detail": "No verified legacy consumer for band.model.alternateColor."
+          }
+        },
+        {
+          "pointer": "/bands/1/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/1/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/1/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/overview/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/1/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/dateColor"
+          }
+        }
+      ]
+    },
+    {
+      "path": "models/regular_timeline_esoc.json",
+      "beforeSha256": "57695d8194c5860e0846695210c57afe49baa50b229de78eaf713bfdcc002fd6",
+      "afterSha256": "57695d8194c5860e0846695210c57afe49baa50b229de78eaf713bfdcc002fd6",
+      "unchanged": true,
+      "matchesEarlierAuditHash": true,
+      "catalogDryRun": {
+        "status": "blocked",
+        "canCreate": false,
+        "counts": {
+          "container": 8,
+          "preserved-alias": 3,
+          "mapped": 19,
+          "unsupported": 10,
+          "redacted": 3,
+          "preserved-inactive": 1
+        }
+      },
+      "clientRuntime": {
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "5e20267cb5a008d86d1c80430f441e7fffa0df07a6559981d6a303b9dbe93233",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_default_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_sse_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "serverRuntime": {
+        "path": "models/regular_timeline_esoc.json",
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "5e20267cb5a008d86d1c80430f441e7fffa0df07a6559981d6a303b9dbe93233",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_default_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_sse_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "providerAdapterParity": true,
+      "propertyCounts": {
+        "derived-not-exact": 1,
+        "inactive": 1,
+        "mapped": 22,
+        "mapped-with-correction": 2,
+        "not-executed": 3,
+        "provenance-only": 1,
+        "responsive-replacement": 4,
+        "role-selection": 2
+      },
+      "properties": [
+        {
+          "pointer": "/params/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "provenance-only",
+            "detail": "Authored alias, not a catalog identity."
+          }
+        },
+        {
+          "pointer": "/params/0/title",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/name"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/name"
+          }
+        },
+        {
+          "pointer": "/params/0/date",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Reference dates belong to view state; no browser-dependent date parsing or implicit navigation"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/focus"
+          }
+        },
+        {
+          "pointer": "/params/0/timeZone",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/timeZone"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/timeZone"
+          }
+        },
+        {
+          "pointer": "/params/0/top",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/left",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/fontSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/fontSize"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/fontSize"
+          }
+        },
+        {
+          "pointer": "/params/0/width",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/data_default_port",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "1fb34678cd8a644bac1186726c7fafb09dd549eeb8ebdf625250fff84d30c290"
+        },
+        {
+          "pointer": "/params/0/data_sse_port",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "a16c5b00bf16bf31b3e093e8af1f5b139931f77e7fe9a90fe751babf2db91c45"
+        },
+        {
+          "pointer": "/params/0/data",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "pointer": "/bands/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/0/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/0/subIntervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "derived-not-exact",
+            "detail": "Four quarter-hour subdivisions, not arbitrary authored pixel divisions."
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnitPos",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Recognized axis-position enum only; no unknown-value fallback",
+            "target": "/definition/presentation/bands/primary/axisPosition"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/axisPosition"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/primary/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/dateColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/textColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/textColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/textColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/defaultEventSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/pointRadius"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/pointRadius"
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/sortBy",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Explicit NONE to none grouping",
+            "target": "/definition/groupBy"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "Primary safe JSON Pointer grouping, deterministic codepoint default."
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/alternateColor",
+          "catalogDryRun": {
+            "disposition": "preserved-inactive",
+            "reason": "Declared in the legacy templates but no consumer through band.model was found; retained as inactive provenance, not applied"
+          },
+          "runtime": {
+            "status": "inactive",
+            "detail": "No verified legacy consumer for band.model.alternateColor."
+          }
+        },
+        {
+          "pointer": "/bands/1/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/1/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/1/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/overview/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/1/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/dateColor"
+          }
+        }
+      ]
+    },
+    {
+      "path": "models/regular_timeline_mcc.json",
+      "beforeSha256": "99453c81683697110776f432d9c8b31638d53445b667c34074f1c64fc48c157f",
+      "afterSha256": "99453c81683697110776f432d9c8b31638d53445b667c34074f1c64fc48c157f",
+      "unchanged": true,
+      "matchesEarlierAuditHash": true,
+      "catalogDryRun": {
+        "status": "blocked",
+        "canCreate": false,
+        "counts": {
+          "container": 8,
+          "preserved-alias": 3,
+          "mapped": 19,
+          "unsupported": 10,
+          "redacted": 3,
+          "preserved-inactive": 1
+        }
+      },
+      "clientRuntime": {
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "a12eccee0eec0b41b298dcb73823e0c1b67c37ab454c897fb819fa619d5aac06",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_default_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_sse_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "serverRuntime": {
+        "path": "models/regular_timeline_mcc.json",
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "a12eccee0eec0b41b298dcb73823e0c1b67c37ab454c897fb819fa619d5aac06",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_default_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_sse_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "providerAdapterParity": true,
+      "propertyCounts": {
+        "derived-not-exact": 1,
+        "inactive": 1,
+        "mapped": 22,
+        "mapped-with-correction": 2,
+        "not-executed": 3,
+        "provenance-only": 1,
+        "responsive-replacement": 4,
+        "role-selection": 2
+      },
+      "properties": [
+        {
+          "pointer": "/params/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "provenance-only",
+            "detail": "Authored alias, not a catalog identity."
+          }
+        },
+        {
+          "pointer": "/params/0/title",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/name"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/name"
+          }
+        },
+        {
+          "pointer": "/params/0/date",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Reference dates belong to view state; no browser-dependent date parsing or implicit navigation"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/focus"
+          }
+        },
+        {
+          "pointer": "/params/0/timeZone",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/timeZone"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/timeZone"
+          }
+        },
+        {
+          "pointer": "/params/0/top",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/left",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/fontSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/fontSize"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/fontSize"
+          }
+        },
+        {
+          "pointer": "/params/0/width",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/data_default_port",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "1fb34678cd8a644bac1186726c7fafb09dd549eeb8ebdf625250fff84d30c290"
+        },
+        {
+          "pointer": "/params/0/data_sse_port",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "a16c5b00bf16bf31b3e093e8af1f5b139931f77e7fe9a90fe751babf2db91c45"
+        },
+        {
+          "pointer": "/params/0/data",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "pointer": "/bands/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/0/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/0/subIntervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "derived-not-exact",
+            "detail": "Four quarter-hour subdivisions, not arbitrary authored pixel divisions."
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnitPos",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Recognized axis-position enum only; no unknown-value fallback",
+            "target": "/definition/presentation/bands/primary/axisPosition"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/axisPosition"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/primary/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/dateColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/textColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/textColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/textColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/defaultEventSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/pointRadius"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/pointRadius"
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/sortBy",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Explicit NONE to none grouping",
+            "target": "/definition/groupBy"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "Primary safe JSON Pointer grouping, deterministic codepoint default."
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/alternateColor",
+          "catalogDryRun": {
+            "disposition": "preserved-inactive",
+            "reason": "Declared in the legacy templates but no consumer through band.model was found; retained as inactive provenance, not applied"
+          },
+          "runtime": {
+            "status": "inactive",
+            "detail": "No verified legacy consumer for band.model.alternateColor."
+          }
+        },
+        {
+          "pointer": "/bands/1/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/1/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/1/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/overview/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/1/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/dateColor"
+          }
+        }
+      ]
+    },
+    {
+      "path": "models/regular_timeline_pov.json",
+      "beforeSha256": "de3d92b2c4708a4a85733b79838c37ecde316bbbe7f0611696ee02f5047ae541",
+      "afterSha256": "de3d92b2c4708a4a85733b79838c37ecde316bbbe7f0611696ee02f5047ae541",
+      "unchanged": true,
+      "matchesEarlierAuditHash": true,
+      "catalogDryRun": {
+        "status": "blocked",
+        "canCreate": false,
+        "counts": {
+          "container": 8,
+          "preserved-alias": 3,
+          "mapped": 19,
+          "unsupported": 10,
+          "redacted": 3,
+          "preserved-inactive": 1
+        }
+      },
+      "clientRuntime": {
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "60ecf459d4dbacbb2d76970b033df635dd5b6f762133f7613e2a2e5338a7b005",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_default_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_sse_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "serverRuntime": {
+        "path": "models/regular_timeline_pov.json",
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "60ecf459d4dbacbb2d76970b033df635dd5b6f762133f7613e2a2e5338a7b005",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_default_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_sse_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "providerAdapterParity": true,
+      "propertyCounts": {
+        "derived-not-exact": 1,
+        "inactive": 1,
+        "mapped": 22,
+        "mapped-with-correction": 2,
+        "not-executed": 3,
+        "provenance-only": 1,
+        "responsive-replacement": 4,
+        "role-selection": 2
+      },
+      "properties": [
+        {
+          "pointer": "/params/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "provenance-only",
+            "detail": "Authored alias, not a catalog identity."
+          }
+        },
+        {
+          "pointer": "/params/0/title",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/name"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/name"
+          }
+        },
+        {
+          "pointer": "/params/0/date",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Reference dates belong to view state; no browser-dependent date parsing or implicit navigation"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/focus"
+          }
+        },
+        {
+          "pointer": "/params/0/timeZone",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/timeZone"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/timeZone"
+          }
+        },
+        {
+          "pointer": "/params/0/top",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/left",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/fontSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/fontSize"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/fontSize"
+          }
+        },
+        {
+          "pointer": "/params/0/width",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/data_default_port",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "1fb34678cd8a644bac1186726c7fafb09dd549eeb8ebdf625250fff84d30c290"
+        },
+        {
+          "pointer": "/params/0/data_sse_port",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "a16c5b00bf16bf31b3e093e8af1f5b139931f77e7fe9a90fe751babf2db91c45"
+        },
+        {
+          "pointer": "/params/0/data",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "pointer": "/bands/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/0/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/0/subIntervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "derived-not-exact",
+            "detail": "Four quarter-hour subdivisions, not arbitrary authored pixel divisions."
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnitPos",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Recognized axis-position enum only; no unknown-value fallback",
+            "target": "/definition/presentation/bands/primary/axisPosition"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/axisPosition"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/primary/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/dateColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/textColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/textColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/textColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/defaultEventSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/pointRadius"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/pointRadius"
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/sortBy",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Explicit NONE to none grouping",
+            "target": "/definition/groupBy"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "Primary safe JSON Pointer grouping, deterministic codepoint default."
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/alternateColor",
+          "catalogDryRun": {
+            "disposition": "preserved-inactive",
+            "reason": "Declared in the legacy templates but no consumer through band.model was found; retained as inactive provenance, not applied"
+          },
+          "runtime": {
+            "status": "inactive",
+            "detail": "No verified legacy consumer for band.model.alternateColor."
+          }
+        },
+        {
+          "pointer": "/bands/1/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/1/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/1/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/overview/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/1/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/dateColor"
+          }
+        }
+      ]
+    },
+    {
+      "path": "models/SOC_timeline.json",
+      "beforeSha256": "80aa6cfc8d8511c172e485b4982c503e1bb7e59ddb26f54798e771ae259283d5",
+      "afterSha256": "80aa6cfc8d8511c172e485b4982c503e1bb7e59ddb26f54798e771ae259283d5",
+      "unchanged": true,
+      "matchesEarlierAuditHash": true,
+      "catalogDryRun": {
+        "status": "blocked",
+        "canCreate": false,
+        "counts": {
+          "container": 8,
+          "preserved-alias": 3,
+          "mapped": 19,
+          "unsupported": 10,
+          "redacted": 3,
+          "preserved-inactive": 1
+        }
+      },
+      "clientRuntime": {
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "617e82ca2d14945807846c4810cf8f48ed5cd041edcbd70651f95e08be00e121",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_default_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_sse_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "serverRuntime": {
+        "path": "models/SOC_timeline.json",
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "617e82ca2d14945807846c4810cf8f48ed5cd041edcbd70651f95e08be00e121",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_default_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_sse_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "providerAdapterParity": true,
+      "propertyCounts": {
+        "derived-not-exact": 1,
+        "inactive": 1,
+        "mapped": 22,
+        "mapped-with-correction": 2,
+        "not-executed": 3,
+        "provenance-only": 1,
+        "responsive-replacement": 4,
+        "role-selection": 2
+      },
+      "properties": [
+        {
+          "pointer": "/params/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "provenance-only",
+            "detail": "Authored alias, not a catalog identity."
+          }
+        },
+        {
+          "pointer": "/params/0/title",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/name"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/name"
+          }
+        },
+        {
+          "pointer": "/params/0/date",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Reference dates belong to view state; no browser-dependent date parsing or implicit navigation"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/focus"
+          }
+        },
+        {
+          "pointer": "/params/0/timeZone",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/timeZone"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/timeZone"
+          }
+        },
+        {
+          "pointer": "/params/0/top",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/left",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/fontSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/fontSize"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/fontSize"
+          }
+        },
+        {
+          "pointer": "/params/0/width",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/data_default_port",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "1fb34678cd8a644bac1186726c7fafb09dd549eeb8ebdf625250fff84d30c290"
+        },
+        {
+          "pointer": "/params/0/data_sse_port",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "a16c5b00bf16bf31b3e093e8af1f5b139931f77e7fe9a90fe751babf2db91c45"
+        },
+        {
+          "pointer": "/params/0/data",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "pointer": "/bands/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/0/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/0/subIntervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "derived-not-exact",
+            "detail": "Four quarter-hour subdivisions, not arbitrary authored pixel divisions."
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnitPos",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Recognized axis-position enum only; no unknown-value fallback",
+            "target": "/definition/presentation/bands/primary/axisPosition"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/axisPosition"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/primary/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/dateColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/textColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/textColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/textColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/defaultEventSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/pointRadius"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/pointRadius"
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/sortBy",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Explicit NONE to none grouping",
+            "target": "/definition/groupBy"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "Primary safe JSON Pointer grouping, deterministic codepoint default."
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/alternateColor",
+          "catalogDryRun": {
+            "disposition": "preserved-inactive",
+            "reason": "Declared in the legacy templates but no consumer through band.model was found; retained as inactive provenance, not applied"
+          },
+          "runtime": {
+            "status": "inactive",
+            "detail": "No verified legacy consumer for band.model.alternateColor."
+          }
+        },
+        {
+          "pointer": "/bands/1/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/1/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/1/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/overview/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/1/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/dateColor"
+          }
+        }
+      ]
+    },
+    {
+      "path": "tests/models/regular_timeline.json",
+      "beforeSha256": "8abd39f44bc38ba9a14cfd9914d87eb7e764a2c5d35a964e6a1c1f2c54377322",
+      "afterSha256": "8abd39f44bc38ba9a14cfd9914d87eb7e764a2c5d35a964e6a1c1f2c54377322",
+      "unchanged": true,
+      "matchesEarlierAuditHash": true,
+      "catalogDryRun": {
+        "status": "blocked",
+        "canCreate": false,
+        "counts": {
+          "container": 8,
+          "preserved-alias": 3,
+          "mapped": 19,
+          "unsupported": 10,
+          "redacted": 3,
+          "preserved-inactive": 1
+        }
+      },
+      "clientRuntime": {
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "45d4433d3dab328fba0663bf948f7ae6721642a07bccdc2161f9b80f8ff7e9b5",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_default_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_sse_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "serverRuntime": {
+        "path": "tests/models/regular_timeline.json",
+        "status": "adapted-with-explicit-substitutions",
+        "canonicalResultSha256": "45d4433d3dab328fba0663bf948f7ae6721642a07bccdc2161f9b80f8ff7e9b5",
+        "diagnostics": [
+          {
+            "path": "/bands/0/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/bands/0/model/0/alternateColor",
+            "code": "inactive_legacy_property",
+            "severity": "notice",
+            "message": "No legacy consumer of model.alternateColor was found; this value is not applied as a lane palette."
+          },
+          {
+            "path": "/bands/1/dateFormat",
+            "code": "calendar_format_correction",
+            "severity": "notice",
+            "message": "Calendar months and 24-hour time are formatted correctly; legacy formatter defects are not reproduced."
+          },
+          {
+            "path": "/params/0/data",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_default_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/data_sse_port",
+            "code": "connector_not_activated",
+            "severity": "notice",
+            "message": "Legacy data paths and ports are not executed; only explicitly configured read-only sources are used."
+          },
+          {
+            "path": "/params/0/fontFamily",
+            "code": "measured_font_substitution",
+            "severity": "notice",
+            "message": "Embedded measured Noto Sans replaces the legacy browser font; exact historical glyph geometry is not claimed."
+          },
+          {
+            "path": "/params/0/width",
+            "code": "responsive_geometry",
+            "severity": "notice",
+            "message": "Authored band proportions and scale are retained; fixed page placement is replaced by responsive viewport dimensions."
+          }
+        ]
+      },
+      "providerAdapterParity": true,
+      "propertyCounts": {
+        "derived-not-exact": 1,
+        "inactive": 1,
+        "mapped": 22,
+        "mapped-with-correction": 2,
+        "not-executed": 3,
+        "provenance-only": 1,
+        "responsive-replacement": 4,
+        "role-selection": 2
+      },
+      "properties": [
+        {
+          "pointer": "/params/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "provenance-only",
+            "detail": "Authored alias, not a catalog identity."
+          }
+        },
+        {
+          "pointer": "/params/0/title",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/name"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/name"
+          }
+        },
+        {
+          "pointer": "/params/0/date",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Reference dates belong to view state; no browser-dependent date parsing or implicit navigation"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/focus"
+          }
+        },
+        {
+          "pointer": "/params/0/timeZone",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/timeZone"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/timeZone"
+          }
+        },
+        {
+          "pointer": "/params/0/top",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/left",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/fontSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/fontSize"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/fontSize"
+          }
+        },
+        {
+          "pointer": "/params/0/width",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "responsive-replacement",
+            "detail": "Responsive viewport, not authored fixed page geometry."
+          }
+        },
+        {
+          "pointer": "/params/0/data_default_port",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "1fb34678cd8a644bac1186726c7fafb09dd549eeb8ebdf625250fff84d30c290"
+        },
+        {
+          "pointer": "/params/0/data_sse_port",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "a16c5b00bf16bf31b3e093e8af1f5b139931f77e7fe9a90fe751babf2db91c45"
+        },
+        {
+          "pointer": "/params/0/data",
+          "catalogDryRun": {
+            "disposition": "redacted",
+            "reason": "Executable, network, credential or unrecognized text is excluded from the public report; only its hash is retained"
+          },
+          "runtime": {
+            "status": "not-executed",
+            "detail": "Only operator-selected read-only sources may provide data."
+          },
+          "restrictedValueSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "pointer": "/bands/0/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/0/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/0/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/primary/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/0/subIntervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "derived-not-exact",
+            "detail": "Four quarter-hour subdivisions, not arbitrary authored pixel divisions."
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnitPos",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Recognized axis-position enum only; no unknown-value fallback",
+            "target": "/definition/presentation/bands/primary/axisPosition"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/axisPosition"
+          }
+        },
+        {
+          "pointer": "/bands/0/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/primary/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/0/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/dateColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/textColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/textColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/textColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/0/defaultEventSize",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/primary/pointRadius"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/primary/pointRadius"
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/sortBy",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Explicit NONE to none grouping",
+            "target": "/definition/groupBy"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "Primary safe JSON Pointer grouping, deterministic codepoint default."
+          }
+        },
+        {
+          "pointer": "/bands/0/model/0/alternateColor",
+          "catalogDryRun": {
+            "disposition": "preserved-inactive",
+            "reason": "Declared in the legacy templates but no consumer through band.model was found; retained as inactive provenance, not applied"
+          },
+          "runtime": {
+            "status": "inactive",
+            "detail": "No verified legacy consumer for band.model.alternateColor."
+          }
+        },
+        {
+          "pointer": "/bands/1/name",
+          "catalogDryRun": {
+            "disposition": "preserved-alias",
+            "reason": "Authored name is provenance, never a catalog identity or deduplication key"
+          },
+          "runtime": {
+            "status": "role-selection",
+            "detail": "Primary/overview band identification, not an authored label."
+          }
+        },
+        {
+          "pointer": "/bands/1/height",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy fixed geometry is not equivalent to responsive runtime dimensions"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/heightFraction"
+          }
+        },
+        {
+          "pointer": "/bands/1/color",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/backgroundColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/backgroundColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalPixels",
+          "catalogDryRun": {
+            "disposition": "unsupported",
+            "reason": "Legacy per-unit pixel scale/subdivision preference is not equivalent to the current map/view range; preserve and review without inventing zoom"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/viewHints/bands/overview/intervalPixels"
+          }
+        },
+        {
+          "pointer": "/bands/1/intervalUnit",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/intervalUnit"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/intervalUnit"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateFormat",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateFormat"
+          },
+          "runtime": {
+            "status": "mapped-with-correction",
+            "detail": "/definition/presentation/bands/overview/dateFormat"
+          }
+        },
+        {
+          "pointer": "/bands/1/SessionColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/sessionColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/sessionColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/eventColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/eventColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/eventColor"
+          }
+        },
+        {
+          "pointer": "/bands/1/dateColor",
+          "catalogDryRun": {
+            "disposition": "mapped",
+            "reason": "Value copied without numeric coercion",
+            "target": "/definition/presentation/bands/overview/dateColor"
+          },
+          "runtime": {
+            "status": "mapped",
+            "detail": "/definition/presentation/bands/overview/dateColor"
+          }
+        }
+      ]
+    }
+  ],
+  "realSourceWindows": [
+    {
+      "profile": "multiple_sources_test.yml",
+      "probe": "latest-day",
+      "scope": "Bounded configured partitions, foreground-only, no archive reconciliation",
+      "archiveQualification": "not-performed",
+      "readOnly": true,
+      "metadataReadyMs": 21.47,
+      "recordFilesReadBeforeMetadataReady": 0,
+      "domain": {
+        "from": "2026-10-14T00:00:00Z",
+        "to": "2026-10-15T00:00:00Z"
+      },
+      "foregroundWindowMs": 180.85,
+      "records": 383,
+      "coverageComplete": false,
+      "recordKinds": {
+        "session": 277,
+        "event": 106
+      },
+      "configuredNamespaces": [
+        "SOURCE1",
+        "SOURCE2"
+      ],
+      "partitionModels": [
+        "yyyy/mm/dd"
+      ],
+      "logicalNamespaceGroups": 1,
+      "allConfiguredSourcesRepresented": false,
+      "namespaceCounts": [
+        {
+          "typedIdentitySha256": "5ef18adb6f3122100deeb15c46fe3bdfe824f18805b71e38c694b1e980f9b14f",
+          "records": 383
+        }
+      ],
+      "combinedViewUniqueIds": 383,
+      "combinedMembershipMatchesWindow": true,
+      "timestampValidity": true,
+      "sessionsCrossingStart": 2,
+      "descriptorSampleStatus": {
+        "missing": 5,
+        "current": 7
+      },
+      "descriptorSampleLimitPerSource": 12,
+      "status": "bounded-window-verified",
+      "readReceipts": [
+        {
+          "bytes": 471,
+          "beforeSha256": "18c6f9df024835ba0859d1058efc45b5129012c88f44288d9c685b9ff458affe",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "04af401af9ecd53b4d6555343bb41e7a6cb1475cc0aec78c82b41ea25d8d07d0",
+          "afterSha256": "18c6f9df024835ba0859d1058efc45b5129012c88f44288d9c685b9ff458affe",
+          "unchanged": true
+        },
+        {
+          "bytes": 334,
+          "beforeSha256": "95d14f7d941f27e3851093813e27b621682a630708f87e3a63d6a8848223ef42",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "2045bfcce6f753fd2e5b93000f1de3f1c89fa3bcea650f19065ecd05f0dc0b3a",
+          "afterSha256": "95d14f7d941f27e3851093813e27b621682a630708f87e3a63d6a8848223ef42",
+          "unchanged": true
+        },
+        {
+          "bytes": 471,
+          "beforeSha256": "6f8abafd57abb36fb5379165e7e4dc0b4436104a6c5d2d888500416c0437b317",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "4d78cb9807d87aebfc5e11e05487fcd55c71bb4c55944199544989cf5564c61b",
+          "afterSha256": "6f8abafd57abb36fb5379165e7e4dc0b4436104a6c5d2d888500416c0437b317",
+          "unchanged": true
+        },
+        {
+          "bytes": 162236,
+          "beforeSha256": "dd17f19b9642371eb36fc01679d1c287988c84e9ad440fc48a187301d44d0334",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "8022bfb804bcc707daf41f0945c69d7680410909cfa70b237c5c83535bf91d37",
+          "afterSha256": "dd17f19b9642371eb36fc01679d1c287988c84e9ad440fc48a187301d44d0334",
+          "unchanged": true
+        },
+        {
+          "bytes": 470,
+          "beforeSha256": "8edb62af27f45db75c4bae4baeb5ace8fd18260d0743c6621b2d817cfcb5eedf",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "913ef8255679532272fc110eccac1cddbfc63677717a15f132001310b42f8235",
+          "afterSha256": "8edb62af27f45db75c4bae4baeb5ace8fd18260d0743c6621b2d817cfcb5eedf",
+          "unchanged": true
+        },
+        {
+          "bytes": 458,
+          "beforeSha256": "0b01ccd46ec2e5d9fe6c06d7dc5f6ab48659d510d11bfb3e3daf07d20b17b570",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "a1698db74eaf9b38f6c984c9b7d7fc89809dce5f9cc9f08cde0ee8e34e501f1b",
+          "afterSha256": "0b01ccd46ec2e5d9fe6c06d7dc5f6ab48659d510d11bfb3e3daf07d20b17b570",
+          "unchanged": true
+        },
+        {
+          "bytes": 471,
+          "beforeSha256": "9e0af159b29c106ba3d8025be931068b582ad9fc7985a1f615815a2c419f14a6",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "bdaf4641cb22f942787168157c91ada989c7c1a14273e5afb8014d101af2e20b",
+          "afterSha256": "9e0af159b29c106ba3d8025be931068b582ad9fc7985a1f615815a2c419f14a6",
+          "unchanged": true
+        },
+        {
+          "bytes": 458,
+          "beforeSha256": "3b017275d4bde1f238bfa4b0e7133a4c7362e45bd9349e0d72bc6765bf32fd5d",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "ff7df149f42b845dfa1ebc46862e28d864c6d3ee00e5759e364dd0329bd1cdef",
+          "afterSha256": "3b017275d4bde1f238bfa4b0e7133a4c7362e45bd9349e0d72bc6765bf32fd5d",
+          "unchanged": true
+        }
+      ],
+      "allReadFilesUnchanged": true
+    },
+    {
+      "profile": "earthquake_volcano_data.yml",
+      "probe": "latest-day",
+      "scope": "Bounded configured partitions, foreground-only, no archive reconciliation",
+      "archiveQualification": "not-performed",
+      "readOnly": true,
+      "metadataReadyMs": 15.81,
+      "recordFilesReadBeforeMetadataReady": 0,
+      "domain": {
+        "from": "2026-09-12T00:00:00Z",
+        "to": "2026-09-13T00:00:00Z"
+      },
+      "foregroundWindowMs": 245.08,
+      "records": 251,
+      "coverageComplete": false,
+      "recordKinds": {
+        "event": 251
+      },
+      "configuredNamespaces": [
+        "earthquake",
+        "volcano"
+      ],
+      "partitionModels": [
+        "yyyy/mm/dd"
+      ],
+      "logicalNamespaceGroups": 2,
+      "allConfiguredSourcesRepresented": true,
+      "namespaceCounts": [
+        {
+          "typedIdentitySha256": "74a0ba48322b8717cccb5b8b0bcb18afbb61f04f45b80ec81e5f080742b7a769",
+          "records": 249
+        },
+        {
+          "typedIdentitySha256": "bde2260da7e0b9bc1a1fcd98e7eb09fb3b42d5fabb07598a905772698671c008",
+          "records": 2
+        }
+      ],
+      "combinedViewUniqueIds": 251,
+      "combinedMembershipMatchesWindow": true,
+      "timestampValidity": true,
+      "sessionsCrossingStart": 0,
+      "descriptorSampleStatus": {
+        "missing": 14
+      },
+      "descriptorSampleLimitPerSource": 12,
+      "status": "bounded-window-verified",
+      "readReceipts": [
+        {
+          "bytes": 13540,
+          "beforeSha256": "4c2eccd717904f94d0966ea40c009111628f8d3112385bc7fa3050b0e2db0aed",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "1c1c4182cd798938217639a51063b62d305c7e09236354c74d22d8a29252d123",
+          "afterSha256": "4c2eccd717904f94d0966ea40c009111628f8d3112385bc7fa3050b0e2db0aed",
+          "unchanged": true
+        },
+        {
+          "bytes": 28429,
+          "beforeSha256": "b5ee67722c22b0bb7d861a53abad3c2ca14372a01e9bd12bcb41988378b1718c",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "204ef154a0160d48276213e0e8a54a8fb6825f1561c8b00869a1d46d0c02c4c5",
+          "afterSha256": "b5ee67722c22b0bb7d861a53abad3c2ca14372a01e9bd12bcb41988378b1718c",
+          "unchanged": true
+        },
+        {
+          "bytes": 18053,
+          "beforeSha256": "14779726f1efa3a98590cf4880fe608246f2c1a218c9565a994010621ae7c9d5",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "46172b3ffdd840e1f471c427c08473789d17602ef9d8ce1356b2f8753bb543ee",
+          "afterSha256": "14779726f1efa3a98590cf4880fe608246f2c1a218c9565a994010621ae7c9d5",
+          "unchanged": true
+        },
+        {
+          "bytes": 53950,
+          "beforeSha256": "da0454e8721651f0fbb5d0a7284be8c927f02f6d8c124a85a53729b1da1a1b23",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "4c81bc2f2f7a4ca3346e5a0be0be2c02317b4afe62c15ba7a4c0a31e0462a373",
+          "afterSha256": "da0454e8721651f0fbb5d0a7284be8c927f02f6d8c124a85a53729b1da1a1b23",
+          "unchanged": true
+        },
+        {
+          "bytes": 13620,
+          "beforeSha256": "19c73b53d697700e60fa91dfb050131b54619738455a35852c2a263347d60f87",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "59df85f636adcf0ff55aa1a16b387e3b195b844017f409c62fb46eacedb84e52",
+          "afterSha256": "19c73b53d697700e60fa91dfb050131b54619738455a35852c2a263347d60f87",
+          "unchanged": true
+        },
+        {
+          "bytes": 2857,
+          "beforeSha256": "27e41255d409e661d79f7bd93fe07e9a11544410432177a645d3fc1950e0a4de",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "5f4b537bd2ac2a9fc7be399c0d576623e85fb534d986ae7d63ef603494a88c2a",
+          "afterSha256": "27e41255d409e661d79f7bd93fe07e9a11544410432177a645d3fc1950e0a4de",
+          "unchanged": true
+        },
+        {
+          "bytes": 39024,
+          "beforeSha256": "9d174c2f22902c6028b1609e5403543eaddb9a7af516e205da3ab908fe3a1960",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "602587e036cbc1ca0709d132a42d46fb6c0d20588f198aba7fe73c3c436d0891",
+          "afterSha256": "9d174c2f22902c6028b1609e5403543eaddb9a7af516e205da3ab908fe3a1960",
+          "unchanged": true
+        },
+        {
+          "bytes": 18031,
+          "beforeSha256": "c903d85b3459855534e5f8aa727cb6b251d4909602568e97336cc201d90ed3e3",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "764e50db5f7f654fd1a334c9448f140fd487a901db315a8061a40ca5857980e3",
+          "afterSha256": "c903d85b3459855534e5f8aa727cb6b251d4909602568e97336cc201d90ed3e3",
+          "unchanged": true
+        },
+        {
+          "bytes": 19510,
+          "beforeSha256": "86a8e544f6c7b807888683e67b7b6c5a2fe077a0c5c1da4ee3ac46003d3ef648",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "76b7c92604686356fcb19faf1d965f272d21b0ae63469b40ec515a32e5b3800f",
+          "afterSha256": "86a8e544f6c7b807888683e67b7b6c5a2fe077a0c5c1da4ee3ac46003d3ef648",
+          "unchanged": true
+        },
+        {
+          "bytes": 17974,
+          "beforeSha256": "df27082e78bfc32c79d1982ef921aa6c324751293a01365e5f35d333429c72c2",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "79817cfe967d0a975958fb4180c689b230f8f63e014b1c08da7472d320bdc7b5",
+          "afterSha256": "df27082e78bfc32c79d1982ef921aa6c324751293a01365e5f35d333429c72c2",
+          "unchanged": true
+        },
+        {
+          "bytes": 13483,
+          "beforeSha256": "e2c68c3afe1686848e91562352017384dcfad8ae70e7444c2d7ce3751dc907ba",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "864cf4bf73659656d2be5f06cc02c009b5aef823e1c0bda60a3cd215ded6635f",
+          "afterSha256": "e2c68c3afe1686848e91562352017384dcfad8ae70e7444c2d7ce3751dc907ba",
+          "unchanged": true
+        },
+        {
+          "bytes": 23987,
+          "beforeSha256": "5d5caef7f6d3ee8c12543844dc183c2fe0a977dfa347ffae21ca2dd038f07147",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "93e0357f2af289fbeabe4f01658c489555f402cae58cfa5cda1c39bbdad7c4e8",
+          "afterSha256": "5d5caef7f6d3ee8c12543844dc183c2fe0a977dfa347ffae21ca2dd038f07147",
+          "unchanged": true
+        },
+        {
+          "bytes": 17973,
+          "beforeSha256": "4a50e8f1326ecd8235b9706a39fefbc59ba7ed2231205f9095e7b0278f7fa5f0",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "b157cdd5e1b1785cb8656aa8b78bbbf550a5b1c3bc93db00b89e3e6dfcd24073",
+          "afterSha256": "4a50e8f1326ecd8235b9706a39fefbc59ba7ed2231205f9095e7b0278f7fa5f0",
+          "unchanged": true
+        },
+        {
+          "bytes": 17941,
+          "beforeSha256": "29dc40fe7850bd3195307c513ea79bcd91110d0a7f5da5a9b33ed01a8fe6e1fe",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "b3d0c7ff2be12b72f986a92e867577c8bf5773e76e07bedcafd99a230a3a78ec",
+          "afterSha256": "29dc40fe7850bd3195307c513ea79bcd91110d0a7f5da5a9b33ed01a8fe6e1fe",
+          "unchanged": true
+        },
+        {
+          "bytes": 15001,
+          "beforeSha256": "c9ac59b8ba65a8f543be160265cddf816962d5a0763e7c94b5f4b2fc955392a7",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "b6f83748cbd8576f60b9ebb4073108bc3681b2d8058a50bfeac7f959a45b380d",
+          "afterSha256": "c9ac59b8ba65a8f543be160265cddf816962d5a0763e7c94b5f4b2fc955392a7",
+          "unchanged": true
+        },
+        {
+          "bytes": 15078,
+          "beforeSha256": "7390089e81888b28982af6c0c2f80d48c8ff61e12b27d7a889891ec704ed7662",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "beb1ef4de4c56e96477a062302196467dde7a85c3a817548e76fc0faec2a2cc3",
+          "afterSha256": "7390089e81888b28982af6c0c2f80d48c8ff61e12b27d7a889891ec704ed7662",
+          "unchanged": true
+        },
+        {
+          "bytes": 19499,
+          "beforeSha256": "d3777b88e1163cd275d75320991fef2b571c8b583949dfaa55b26214930909f2",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "c92433ce05c8049692c759eebd298b8a0b6a2fe6a9ae242a46401c29e3fe6881",
+          "afterSha256": "d3777b88e1163cd275d75320991fef2b571c8b583949dfaa55b26214930909f2",
+          "unchanged": true
+        },
+        {
+          "bytes": 28651,
+          "beforeSha256": "12e8a5a88930dd3eb9a1271990c4baea371d1088bfe4a44999df18305afc86c6",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "fdfbaa5479fbb9012aa1628e890e74097077d4d2b002ebe52da613c0f0cd8b2b",
+          "afterSha256": "12e8a5a88930dd3eb9a1271990c4baea371d1088bfe4a44999df18305afc86c6",
+          "unchanged": true
+        }
+      ],
+      "allReadFilesUnchanged": true
+    },
+    {
+      "profile": "multiple_sources_test.yml",
+      "probe": "representative-sources",
+      "scope": "Bounded configured partitions, foreground-only, no archive reconciliation",
+      "archiveQualification": "not-performed",
+      "readOnly": true,
+      "metadataReadyMs": 15.01,
+      "recordFilesReadBeforeMetadataReady": 0,
+      "partitionDirectoriesInspected": 206,
+      "domain": {
+        "from": "2024-03-17T00:00:00Z",
+        "to": "2024-03-25T00:00:00Z"
+      },
+      "foregroundWindowMs": 461.55,
+      "records": 1145,
+      "coverageComplete": false,
+      "recordKinds": {
+        "session": 817,
+        "event": 328
+      },
+      "configuredNamespaces": [
+        "SOURCE1",
+        "SOURCE2"
+      ],
+      "partitionModels": [
+        "yyyy/mm/dd"
+      ],
+      "logicalNamespaceGroups": 2,
+      "allConfiguredSourcesRepresented": true,
+      "namespaceCounts": [
+        {
+          "typedIdentitySha256": "5ef18adb6f3122100deeb15c46fe3bdfe824f18805b71e38c694b1e980f9b14f",
+          "records": 1018
+        },
+        {
+          "typedIdentitySha256": "534722f49b60987350a0f5f7f87bb0d9791b24ce840bdf49282914dfd3644b0a",
+          "records": 127
+        }
+      ],
+      "combinedViewUniqueIds": 1145,
+      "combinedMembershipMatchesWindow": true,
+      "timestampValidity": true,
+      "sessionsCrossingStart": 0,
+      "descriptorSampleStatus": {
+        "current": 13,
+        "missing": 11
+      },
+      "descriptorSampleLimitPerSource": 12,
+      "status": "bounded-window-verified",
+      "readReceipts": [
+        {
+          "bytes": 347,
+          "beforeSha256": "0fe0f766b18dc070cff3517b618dff9f367b12640b8beaee04380f7a85a56b9c",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "089af33e1326a8f4cfb6bb7148bf8f05853503bd497f67fb0133fc5a969e88d9",
+          "afterSha256": "0fe0f766b18dc070cff3517b618dff9f367b12640b8beaee04380f7a85a56b9c",
+          "unchanged": true
+        },
+        {
+          "bytes": 458,
+          "beforeSha256": "a925ab78da68e277ec24f8cafc13fb27fcbe6240ca0de7540a26f75e1b55349f",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "11c595c75d8d03b4780a8dfc7bfac7c545702b766c2d806e12850acfbed5778e",
+          "afterSha256": "a925ab78da68e277ec24f8cafc13fb27fcbe6240ca0de7540a26f75e1b55349f",
+          "unchanged": true
+        },
+        {
+          "bytes": 472,
+          "beforeSha256": "799b441461273bf38563e53780a5547cdd7de5a5dd4d1a30b56dd3047bfa141e",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "2a369d971a40823f4f34938a90e2474cb436b0ee65a4e66dcb7264229c29a27b",
+          "afterSha256": "799b441461273bf38563e53780a5547cdd7de5a5dd4d1a30b56dd3047bfa141e",
+          "unchanged": true
+        },
+        {
+          "bytes": 458,
+          "beforeSha256": "64eefeee30f23c8fd4c2e45a127bec5b19a24aa88e87627083e2105421f90354",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "4cbb3931d8b84c244ab476cfb5164412441817e1b4a38b9ad0d679ef1c6a8447",
+          "afterSha256": "64eefeee30f23c8fd4c2e45a127bec5b19a24aa88e87627083e2105421f90354",
+          "unchanged": true
+        },
+        {
+          "bytes": 333,
+          "beforeSha256": "0c59e134d5e6c416fba81d33b3b4dcd6a887821defc0dffe69d50218b266b14e",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "57e91a88aa08bdc65422040e93b1f72260e5b3e9803c5c710b04b041c4e604fa",
+          "afterSha256": "0c59e134d5e6c416fba81d33b3b4dcd6a887821defc0dffe69d50218b266b14e",
+          "unchanged": true
+        },
+        {
+          "bytes": 457,
+          "beforeSha256": "c773537e832a1ba618356e125e46ef3c0b639f810391ca6996a0927a7b1eb300",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "5ddffbb0d4ef4237d952eb096d2b8e57be9d92bd1021bf97ad5b79fd6f022fb3",
+          "afterSha256": "c773537e832a1ba618356e125e46ef3c0b639f810391ca6996a0927a7b1eb300",
+          "unchanged": true
+        },
+        {
+          "bytes": 348,
+          "beforeSha256": "b4c22c189ef830ee9f807824d75e0993d71fb066b2fa7c22072caead6f257abe",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "76b02661f48fb3cdd9ccd7523c9d44b69e6a63b710f98487aa522fc9f70eac81",
+          "afterSha256": "b4c22c189ef830ee9f807824d75e0993d71fb066b2fa7c22072caead6f257abe",
+          "unchanged": true
+        },
+        {
+          "bytes": 345,
+          "beforeSha256": "454f3870e34f099e25cd06a77654138716d4d37e20184f8c319bf5a250ea263e",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "794564814c7052616f2b66543ecdfd9eec89c3f549b1b3171c3d7abf47a0c93a",
+          "afterSha256": "454f3870e34f099e25cd06a77654138716d4d37e20184f8c319bf5a250ea263e",
+          "unchanged": true
+        },
+        {
+          "bytes": 334,
+          "beforeSha256": "06ec7988507ad2195660c2a6286a6f6b2ad2cc80a026c20f8e439ccf39f08f8a",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "79a7084b9bc3ca9a3e2092186fa61ff5f60b39dc31d979f700effb1842feeac3",
+          "afterSha256": "06ec7988507ad2195660c2a6286a6f6b2ad2cc80a026c20f8e439ccf39f08f8a",
+          "unchanged": true
+        },
+        {
+          "bytes": 54907,
+          "beforeSha256": "2e90bf4acedf5648961ca0e2e5b36a05a47d033292c4a668651496a7c68b1730",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "ace2e76294ed39645d1d45c50f53e069e73d23fe58220d84dd24f06026c10196",
+          "afterSha256": "2e90bf4acedf5648961ca0e2e5b36a05a47d033292c4a668651496a7c68b1730",
+          "unchanged": true
+        },
+        {
+          "bytes": 333,
+          "beforeSha256": "d775de2301be9fb5f8b8318fca3d1febf5857dae00842e62f9f43c28269c2029",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "acf0ee728c632a1bb203500a3e9f97ad2d628107d812072673faafc6d1b2e758",
+          "afterSha256": "d775de2301be9fb5f8b8318fca3d1febf5857dae00842e62f9f43c28269c2029",
+          "unchanged": true
+        },
+        {
+          "bytes": 421150,
+          "beforeSha256": "b69c93caf7b5459f19ce53835c75d9f36f6620f0623736e8bcc5574e11bf2e74",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "ccf01099ca26890b8e55b057952af8d5ddbe43d58bcd1af6ac7bd9a481baff71",
+          "afterSha256": "b69c93caf7b5459f19ce53835c75d9f36f6620f0623736e8bcc5574e11bf2e74",
+          "unchanged": true
+        },
+        {
+          "bytes": 348,
+          "beforeSha256": "4485047e16934df8683f1c4c048ba4636ff6882b229ac1cd922c7d2163c8287e",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "dce8e79cc3b2173764af28867d285baaf1a2138aec71ab6745b2628eec58922e",
+          "afterSha256": "4485047e16934df8683f1c4c048ba4636ff6882b229ac1cd922c7d2163c8287e",
+          "unchanged": true
+        },
+        {
+          "bytes": 330,
+          "beforeSha256": "dc045088acad1900badb6a2cf7ae3497ae0b7220d144e78734e4dac2fe0496d0",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "f37a022305c6782450a75d66d4fd22ba1b56679311e63cd64a375a5dd0ccac01",
+          "afterSha256": "dc045088acad1900badb6a2cf7ae3497ae0b7220d144e78734e4dac2fe0496d0",
+          "unchanged": true
+        },
+        {
+          "bytes": 472,
+          "beforeSha256": "dc1347ef9c1191e5b59bcbab5dff83293143ad63ec4d5816ba20648bd246fc67",
+          "readCount": 1,
+          "changedDuringRead": false,
+          "sourcePathSha256": "fff32da903a71b0f36cb59a0dc24f67178a0a3ecbee7b91804cf7d66061e664f",
+          "afterSha256": "dc1347ef9c1191e5b59bcbab5dff83293143ad63ec4d5816ba20648bd246fc67",
+          "unchanged": true
+        }
+      ],
+      "allReadFilesUnchanged": true
+    }
+  ],
+  "privacy": "No raw records, descriptor text, configured connector values or unhashed source record paths are emitted.",
+  "limitations": [
+    "Archive-wide indexing and all-record completeness are not qualified by foreground window probes.",
+    "Cross-partition long-session correctness is covered by synthetic tests, not asserted for unscanned production partitions.",
+    "Historical exact glyph/layout parity is not claimed for font substitution or responsive geometry.",
+    "Catalog visual dry-run remains deliberately stricter than the runtime compatibility adapter."
+  ]
+}

@@ -8,7 +8,8 @@ const own = (value, key) => Object.hasOwn(value, key);
 
 function patchMaps(target, incoming) {
   for (const [key, value] of Object.entries(incoming)) {
-    if (['range', 'overview', 'search'].includes(key) && plain(value)) target[key] = { ...target[key], ...clone(value) };
+    if (key === 'search' && plain(value) && (value.mode === 'regex' || target.search?.mode === 'regex' && value.mode !== undefined && value.mode !== 'regex')) target[key] = clone(value);
+    else if (['range', 'overview', 'search', 'table'].includes(key) && plain(value)) target[key] = { ...target[key], ...clone(value) };
     else Object.defineProperty(target, key, { value: clone(value), enumerable: true, writable: true, configurable: true });
   }
 }
@@ -38,8 +39,10 @@ export function applySettingsCommand(input, command, actor) {
       for (const path of paths) {
         if (typeof path !== 'string' || !path.startsWith('/') || /~(?![01])/.test(path)) fail('invalid_settings', 'Reset requires valid JSON pointers');
         const parts = path.slice(1).split('/').map(part => part.replace(/~1/g, '/').replace(/~0/g, '~'));
-        if (parts.some(part => !part || ['__proto__', 'prototype', 'constructor'].includes(part)) || parts.length > 2 || (parts.length === 2 && !['range', 'overview', 'search'].includes(parts[0]))) fail('invalid_settings', 'Reset requires a settings field or declared map member');
-        if (!own(definitions.$defs.settings.properties, parts[0]) || (parts.length === 2 && !(parts[0] === 'search' ? ['text', 'mode', 'caseSensitive', 'fields'] : ['from', 'to']).includes(parts[1]))) fail('invalid_settings', 'Unknown settings reset path');
+        const maps = { range: ['from', 'to'], overview: ['from', 'to'], search: ['text', 'mode', 'caseSensitive', 'fields'] };
+        if (settings.values.definitionVersion === 2) { maps.search.push('flags', 'matchMode', 'dialect'); maps.table = ['scope', 'projection', 'limit']; }
+        if (parts.some(part => !part || ['__proto__', 'prototype', 'constructor'].includes(part)) || parts.length > 2 || (parts.length === 2 && !own(maps, parts[0]))) fail('invalid_settings', 'Reset requires a settings field or declared map member');
+        if (!own(definitions.$defs.settings.properties, parts[0]) || (parts.length === 2 && !maps[parts[0]].includes(parts[1]))) fail('invalid_settings', 'Unknown settings reset path');
         let target = settings.values;
         for (const part of parts.slice(0, -1)) target = plain(target) && own(target, part) ? target[part] : undefined;
         if (plain(target)) delete target[parts.at(-1)];

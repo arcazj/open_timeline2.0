@@ -44,6 +44,7 @@ local-browser-key.json
 !/output/pdf/OpenBEXI_Hazard_Comparison.pdf
 !/output/pdf/local-test-data.pdf
 !/output/pdf/OpenBEXI_Timeline_Sorting_Filtering_Prompt.pdf
+!/output/pdf/sorting-filtering-candidate.pdf
 
 # Machine-specific editor/OS state. Shared .run templates remain versioned.
 .idea/

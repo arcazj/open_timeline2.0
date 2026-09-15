@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import argparse
 import json
 import re
 import subprocess
@@ -27,32 +28,36 @@ SCRATCH = ROOT / "tmp/pdfs/sorting-filtering"
 PORTRAIT = A4
 WIDE = landscape(A3)
 WIDTH = PORTRAIT[0] - 84
-SOURCE_HASH = hashlib.sha256(SOURCE.read_bytes()).hexdigest()
+DEFAULT_LABEL = "Specification 1.0 / 2026-09-14 / Proposed features are not implemented"
 
 
-def tokens():
+def tokens(source=SOURCE):
     command = ["node", "--input-type=module", "-e",
                "import {marked} from 'marked'; import fs from 'node:fs'; "
-               "console.log(JSON.stringify(marked.lexer(fs.readFileSync(process.argv[1],'utf8'))));", str(SOURCE)]
+               "console.log(JSON.stringify(marked.lexer(fs.readFileSync(process.argv[1],'utf8'))));", str(source)]
     return json.loads(subprocess.run(command, cwd=ROOT, check=True, capture_output=True, text=True, timeout=30).stdout)
 
 
-def inline(items):
+def inline(items, source=SOURCE, revision="docs/sorting-filtering-specification"):
     result = []
     for item in items:
         kind = item["type"]
         if kind in {"text", "escape"}:
-            result.append(inline(item["tokens"]) if item.get("tokens") else escape(item["text"]))
+            result.append(inline(item["tokens"], source, revision) if item.get("tokens") else escape(item["text"]))
         elif kind in {"strong", "em", "del"}:
             tag = {"strong": "b", "em": "i", "del": "strike"}[kind]
-            result.append(f"<{tag}>{inline(item['tokens'])}</{tag}>")
+            result.append(f"<{tag}>{inline(item['tokens'], source, revision)}</{tag}>")
         elif kind == "codespan":
             result.append(f'<font name="Courier" size="8.4">{escape(item["text"])}</font>')
         elif kind == "link":
             href = item["href"]
             if not href.startswith(("https://", "http://")):
-                href = "https://github.com/arcazj/open_timeline2.0/blob/docs/sorting-filtering-specification/" + quote(href, safe="/#")
-            result.append(f'<a href="{escape(href, quote=True)}" color="#216650">{inline(item["tokens"])}</a>')
+                path, marker, fragment = href.partition("#")
+                target = (source.parent / path).resolve() if path else source
+                if not target.is_relative_to(ROOT):
+                    raise ValueError("Link outside repository")
+                href = "https://github.com/arcazj/open_timeline2.0/blob/" + quote(revision, safe="/") + "/" + quote(target.relative_to(ROOT).as_posix(), safe="/") + ("#" + quote(fragment) if marker else "")
+            result.append(f'<a href="{escape(href, quote=True)}" color="#216650">{inline(item["tokens"], source, revision)}</a>')
         elif kind == "br":
             result.append("<br/>")
         else:
@@ -61,8 +66,23 @@ def inline(items):
 
 
 def main():
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    SCRATCH.mkdir(parents=True, exist_ok=True)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source", type=Path, default=SOURCE)
+    parser.add_argument("--output", type=Path, default=OUTPUT)
+    parser.add_argument("--label", default=DEFAULT_LABEL, help="Honest footer status; does not change source content")
+    parser.add_argument("--expected-figures", type=int, default=4)
+    parser.add_argument("--link-revision", default="docs/sorting-filtering-specification")
+    options = parser.parse_args()
+    source, output = options.source.resolve(), options.output.resolve()
+    if not source.is_relative_to(ROOT) or options.expected_figures < 0 or not options.label.strip() or len(options.label) > 100:
+        parser.error("Use a repository source, nonnegative figure count and 1-100 character label")
+    source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
+    scratch = SCRATCH if source == SOURCE and output == OUTPUT else ROOT / "tmp/pdfs" / output.stem
+    output.parent.mkdir(parents=True, exist_ok=True)
+    scratch.mkdir(parents=True, exist_ok=True)
+
+    def markup(items):
+        return inline(items, source, options.link_revision)
     body = ParagraphStyle("SpecBody", fontName="Helvetica", fontSize=9.5, leading=13.4,
                           spaceAfter=7, textColor=colors.HexColor("#25353c"), splitLongWords=True)
     small = ParagraphStyle("SpecSmall", parent=body, fontSize=8.5, leading=11.7)
@@ -87,11 +107,11 @@ def main():
         canvas.setStrokeColor(colors.HexColor("#c8d5d5"))
         canvas.line(42, 34, width - 42, 34)
         canvas.setFont("Helvetica", 7.5)
-        canvas.drawString(42, 22, "Specification 1.0 / 2026-09-14 / Proposed features are not implemented")
+        canvas.drawString(42, 22, options.label)
         canvas.drawRightString(width - 42, 22, str(doc.page))
         canvas.restoreState()
 
-    doc = BaseDocTemplate(str(OUTPUT), pagesize=PORTRAIT, leftMargin=42, rightMargin=42,
+    doc = BaseDocTemplate(str(output), pagesize=PORTRAIT, leftMargin=42, rightMargin=42,
                           topMargin=46, bottomMargin=43, title="OpenBEXI Timeline 2.0 - Sorting, Filtering and Search",
                           author="OpenBEXI Timeline", pageCompression=1)
     doc.addPageTemplates([
@@ -109,10 +129,10 @@ def main():
                 continue
             if kind == "heading":
                 headings.append(token["text"])
-                story.append(Paragraph(inline(token["tokens"]), heading[min(3, token["depth"])]))
+                story.append(Paragraph(markup(token["tokens"]), heading[min(3, token["depth"])]))
             elif kind == "paragraph":
                 paragraph_style = ParagraphStyle("CodeLead", parent=body, keepWithNext=True) if token.get("keepWithNext") else body
-                story.append(Paragraph(inline(token["tokens"]), paragraph_style))
+                story.append(Paragraph(markup(token["tokens"]), paragraph_style))
             elif kind == "list":
                 for index, item in enumerate(token["items"], token.get("start") or 1):
                     prefix = f"{index}. " if token["ordered"] else "- "
@@ -122,14 +142,14 @@ def main():
                             continue
                         if block["type"] != "text":
                             raise ValueError(f"Unsupported nested list content: {block['type']}")
-                        parts.append(inline(block["tokens"]))
+                        parts.append(markup(block["tokens"]))
                     story.append(Paragraph(prefix + "<br/>".join(parts), body))
             elif kind == "code":
                 text = escape(token["text"]).replace(" ", "&#160;").replace("\n", "<br/>")
                 story.append(KeepTogether([Paragraph(text, code)]))
             elif kind == "table":
-                rows = [[Paragraph(inline(part["tokens"]), cell) for part in token["header"]]]
-                rows.extend([[Paragraph(inline(part["tokens"]), cell) for part in row] for row in token["rows"]])
+                rows = [[Paragraph(markup(part["tokens"]), cell) for part in token["header"]]]
+                rows.extend([[Paragraph(markup(part["tokens"]), cell) for part in row] for row in token["rows"]])
                 columns = len(rows[0])
                 widths = [WIDTH * .32, WIDTH * .68] if columns == 2 else [WIDTH / columns] * columns
                 table = Table(rows, colWidths=widths, repeatRows=1, hAlign=TA_LEFT)
@@ -144,7 +164,7 @@ def main():
             else:
                 raise ValueError(f"Unsupported block Markdown: {kind}")
 
-    blocks = tokens()
+    blocks = tokens(source)
     index = 0
     after_figure = False
     while index < len(blocks):
@@ -157,17 +177,17 @@ def main():
                      and nonspace[1][1]["tokens"][0]["type"] == "image")
         if is_figure:
             image_token = nonspace[1][1]["tokens"][0]
-            filename = (ROOT / image_token["href"]).resolve()
+            filename = (source.parent / image_token["href"]).resolve()
             if not filename.is_relative_to(ROOT):
                 raise ValueError("Image outside repository")
             width, height = ImageReader(str(filename)).getSize()
             template, size = ("wide", WIDE) if width > height else ("portrait", PORTRAIT)
-            story.extend([NextPageTemplate(template), PageBreak(), Paragraph(inline(block["tokens"]), heading[2])])
+            story.extend([NextPageTemplate(template), PageBreak(), Paragraph(markup(block["tokens"]), heading[2])])
             max_height = size[1] - 185
             ratio = min((size[0] - 84) / width, max_height / height)
             figure = Image(str(filename), width=width * ratio, height=height * ratio)
             figure.hAlign = "CENTER"
-            story.extend([figure, Spacer(1, 12), Paragraph(inline(nonspace[2][1]["tokens"]), body)])
+            story.extend([figure, Spacer(1, 12), Paragraph(markup(nonspace[2][1]["tokens"]), body)])
             images.append({"path": image_token["href"], "sha256": hashlib.sha256(filename.read_bytes()).hexdigest()})
             headings.append(block["text"])
             after_figure = True
@@ -182,21 +202,23 @@ def main():
             index += 1
 
     story.append(Spacer(1, 12))
-    story.append(Paragraph("Source SHA-256: " + SOURCE_HASH, small))
-    story.append(Paragraph("Generated from the Markdown specification. The separate analysis, evidence JSON and acceptance plan remain linked source documents, not claims of completed implementation.", small))
+    story.append(Paragraph("Source SHA-256: " + source_hash, small))
+    statement = "Generated from the Markdown specification. The separate analysis, evidence JSON and acceptance plan remain linked source documents, not claims of completed implementation." if source == SOURCE else "Generated from the linked Markdown candidate guide. Screenshots demonstrate the captured build and fixture only; they do not certify a stable release or completion of outstanding usability and platform gates."
+    story.append(Paragraph(statement, small))
     doc.build(story)
-    reader = PdfReader(OUTPUT)
+    reader = PdfReader(output)
     text = " ".join((page.extract_text() or "") for page in reader.pages)
     normalized = re.sub(r"\s+", " ", text)
     for title in headings:
         if re.sub(r"\s+", " ", title) not in normalized:
             raise ValueError(f"Heading absent from PDF: {title}")
-    if len(images) != 4 or any(len((page.extract_text() or "").strip()) < 200 for page in reader.pages):
+    if len(images) != options.expected_figures or any(len((page.extract_text() or "").strip()) < 200 for page in reader.pages):
         raise ValueError("Missing figure or empty page")
-    manifest = {"source": SOURCE.name, "sourceSha256": SOURCE_HASH, "pdfSha256": hashlib.sha256(OUTPUT.read_bytes()).hexdigest(),
+    manifest = {"source": source.relative_to(ROOT).as_posix(), "sourceSha256": source_hash, "pdfSha256": hashlib.sha256(output.read_bytes()).hexdigest(),
+                "label": options.label,
                 "pages": len(reader.pages), "headingsVerified": len(headings), "figures": images,
                 "textVerification": "All Markdown headings found; visual rendering must be checked separately"}
-    (SCRATCH / "build.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    (scratch / "build.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(manifest, indent=2))
 
 

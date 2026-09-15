@@ -126,12 +126,15 @@ export function openConfigurationManager(host) {
     await renderDefinition();
     if (resource && !actions.includes('update')) for (const control of find('.cfg-metadata').querySelectorAll('input,textarea,select')) control.disabled = true;
   }
-  async function selectResource(id, { bypass = false } = {}) {
+  async function selectResource(id, { bypass = false, version } = {}) {
     if (!bypass && !discard()) return;
     const ticket = ++intent; busy = true; lock();
     try {
       const result = await read('getConfiguration', family, id); if (!current() || ticket !== intent) return;
-      resource = result.resource; actions = result.allowedActions || []; definition = copy(resource.draft ?? resource.versions.at(-1).definition); selectedVersion = resource.draft ? null : resource.versions.at(-1).version;
+      resource = result.resource; actions = result.allowedActions || [];
+      const publication = version === undefined ? null : resource.versions.find(item => item.version === version);
+      if (version !== undefined && !publication) throw new Error('The requested published version is unavailable. No other version was selected.');
+      definition = copy(publication?.definition ?? resource.draft ?? resource.versions.at(-1).definition); selectedVersion = publication?.version ?? (resource.draft ? null : resource.versions.at(-1).version);
       modified = false; tab = 'fields'; usage = null; impact = null; renderCatalog(); await renderEditor(); message('');
     } catch (error) { if (current() && ticket === intent) fail(error); }
     finally { if (current() && ticket === intent) { busy = false; renderActions(); } }
@@ -147,7 +150,7 @@ export function openConfigurationManager(host) {
     for (const button of layer.querySelectorAll('[data-cfg-family]')) button.setAttribute('aria-pressed', String(button.dataset.cfgFamily === family));
     find('[name=cfgName]')?.focus();
   }
-  async function loadFamily(next = family, preferredId) {
+  async function loadFamily(next = family, preferredId, preferredVersion) {
     if (!discard()) return;
     const ticket = ++intent; family = next; modified = false; busy = true; lock();
     for (const button of layer.querySelectorAll('[data-cfg-family]')) button.setAttribute('aria-pressed', String(button.dataset.cfgFamily === family));
@@ -155,9 +158,11 @@ export function openConfigurationManager(host) {
       if (family === 'settings') { resource = null; renderCatalog(); await showSettings(); return; }
       const result = await read('listConfiguration', family, { includeArchived: true }); if (!current() || ticket !== intent) return;
       catalogs[family] = result.items; renderCatalog();
-      const selected = catalogs[family].find(item => item.id === preferredId) || filteredItems()[0];
+      const preferred = catalogs[family].find(item => item.id === preferredId);
+      if (preferredVersion !== undefined && !preferred) throw new Error('The requested preset is no longer accessible. No other preset was selected.');
+      const selected = preferred || filteredItems()[0];
       busy = false;
-      if (selected) await selectResource(selected.id, { bypass: true });
+      if (selected) await selectResource(selected.id, { bypass: true, ...(preferredVersion === undefined ? {} : { version: preferredVersion }) });
       else if (creationAllowed(family, 'workspace') || creationAllowed(family, 'personal')) await newResource();
       else { resource = null; definition = null; actions = []; fields = null; find('.cfg-editor').innerHTML = '<p class="cfg-empty">No resources available to this principal.</p>'; }
     } catch (error) { if (current()) fail(error); }
@@ -323,7 +328,11 @@ export function openConfigurationManager(host) {
     busy = true; lock(); host.updateIcons();
     try {
       for (const target of CONFIGURATION_FAMILIES) { const result = await read('listConfiguration', target, { includeArchived: true }); assertCurrent(); catalogs[target] = result.items; }
-      effective = await read('getEffectiveSettings', effectiveInput()); assertCurrent(); busy = false; await loadFamily('sources');
+      effective = await read('getEffectiveSettings', effectiveInput()); assertCurrent(); busy = false;
+      if (host.initialImport) {
+        await newResource(parseConfigurationDefinition(JSON.stringify(host.initialImport)));
+        message('Current view captured as an unsaved draft. Nothing has been published or applied.');
+      } else await loadFamily(host.initialFamily || 'sources', host.initialResourceId, host.initialVersion);
       if (pending().length) message('An original configuration outcome is unresolved. Mutations are locked until it is confirmed.');
     } catch (error) { if (current()) fail(error); }
     finally { if (current()) { busy = false; renderActions(); } }

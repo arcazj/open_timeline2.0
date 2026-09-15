@@ -32,7 +32,7 @@ export class ServerProvider {
       const text = await response.text();
       let body;
       try { body = text ? JSON.parse(text) : null; } catch { throw new ProviderError(options.mutation ? 'write_outcome_unknown' : 'invalid_response', options.mutation ? 'Write reply was malformed; check the original command outcome' : 'Server returned malformed JSON', 502); }
-      if (!response.ok) throw new ProviderError(body?.code ?? 'http_error', body?.message ?? body?.detail ?? `Server returned ${response.status}`, response.status, { requestId: body?.requestId, errors: body?.errors });
+      if (!response.ok) throw new ProviderError(body?.code ?? 'http_error', body?.message ?? body?.detail ?? `Server returned ${response.status}`, response.status, { requestId: body?.requestId, errors: body?.errors, diagnostic: body?.diagnostic });
       return body;
     } catch (error) {
       if (error instanceof ProviderError) throw error;
@@ -172,7 +172,7 @@ export class ServerProvider {
               }
             }
           }
-          if (manifest?.state === 'failed') throw new ProviderError(manifest.error?.code ?? 'preparation_failed', manifest.error?.message ?? 'Preparation failed', manifest.error?.status ?? 500);
+          if (manifest?.state === 'failed') throw new ProviderError(manifest.error?.code ?? 'preparation_failed', manifest.error?.message ?? 'Preparation failed', manifest.error?.status ?? 500, { diagnostic: manifest.error?.diagnostic });
           if (!manifest || manifest[kind === 'query' ? 'queryId' : 'layoutId'] !== id || (manifest.state !== undefined && manifest.state !== 'ready')) {
             throw new ProviderError('invalid_response', 'Preparation returned an invalid ready manifest', 502);
           }
@@ -184,7 +184,10 @@ export class ServerProvider {
       })();
     });
   }
-  createQuery(input, options = {}) { return this._prepare(`${this.base}/query-sessions`, input, options, 'query'); }
+  createQuery(input, options = {}) {
+    if (input?.definitionVersion === 2 && !this.metadata?.capabilities?.query?.definitionVersions?.includes(2)) return Promise.reject(new ProviderError('unsupported_query_definition', 'This server has not advertised query definition version 2', 422));
+    return this._prepare(`${this.base}/query-sessions`, input, options, 'query');
+  }
   getQuery(id, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(id)}`, options); }
   getDensity(id, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(id)}/density`, options); }
   getMap(id, mapId, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(id)}/maps/${encodeURIComponent(mapId)}`, options); }
@@ -195,6 +198,9 @@ export class ServerProvider {
   getRows(id, layoutId, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(id)}/layouts/${encodeURIComponent(layoutId)}/rows${options.cursor ? `?cursor=${encodeURIComponent(options.cursor)}` : ''}`, options); }
   getPlacement(id, layoutId, recordId, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(id)}/layouts/${encodeURIComponent(layoutId)}/placement/${encodeURIComponent(recordId)}`, options); }
   getRecord(id, options = {}) { return this._request(`${this.base}/records/${encodeURIComponent(id)}${options.includeDeleted ? '?includeDeleted=true' : ''}`, options); }
+  getQueryRecord(queryId, id, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(queryId)}/records/${encodeURIComponent(id)}`, options); }
+  findMatch(queryId, input = {}, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(queryId)}/find`, { ...options, method: 'POST', body: input }); }
+  migrateLegacyFilter(queryId, input, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(queryId)}/legacy-filter-migration`, { ...options, method: 'POST', body: input }); }
   queryRecords(id, input = {}, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(id)}/records/query`, { ...options, method: 'POST', body: input }); }
 
   async executeCommand(command, options = {}) {

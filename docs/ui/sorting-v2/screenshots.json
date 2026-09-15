@@ -1,0 +1,41 @@
+{
+  "format": "openbexi-candidate-screenshots-v1",
+  "classification": "implementation-candidate-not-stable-release",
+  "captureMethod": "Unmodified Playwright descriptor test screenshots",
+  "browser": "Microsoft Edge 153.0.4234.32",
+  "devicePixelRatio": 1,
+  "gitBaseHead": "be15cb6a5a8874155821481672ea23ce65ed8333",
+  "workingTree": "Uncommitted implementation changes; base HEAD does not identify the captured implementation",
+  "bundle": {
+    "path": "dist/index.html",
+    "sha256": "8c33461d5ba16263c4af21c8d4ad0e8e2488d001be5f1ba9a71913976b41562c"
+  },
+  "datasetKind": "Generic synthetic integration fixture; no private records",
+  "fixtures": [
+    {"path": "tests/integration/legacy-server-fixture.mjs", "sha256": "0aaae61e41e80f4aeacbd9f7c8522daabcc861fe4673e30ce270bd0fceed2caf"},
+    {"path": "tests/e2e/record-descriptor.spec.mjs", "sha256": "c8e10d9e1a5c086ad3104d043e7a44cc8f180d1706cf808c70a29d526e3e5eb0"}
+  ],
+  "images": [
+    {
+      "path": "docs/ui/sorting-v2/descriptor-desktop.png",
+      "sha256": "543804c9cc4a348a666aa563dc4d353efe1b252a91541e3bbdd25444bb735fef",
+      "capturedAt": "2026-09-15T02:20:51.2271147Z",
+      "viewport": {"width": 1600, "height": 900},
+      "mode": "Server-connected read-only legacy fixture",
+      "original": "artifacts/browser/final-descriptor-evidence/record-descriptor-a-delaye-5a3f9-r-replace-another-selection/legacy-descriptor-clean-desktop.png"
+    },
+    {
+      "path": "docs/ui/sorting-v2/descriptor-mobile.png",
+      "sha256": "ea2cd86eb9847b9a0c38f3677441d0f26c898880ce53346ebbf22c53d64b20ea",
+      "capturedAt": "2026-09-15T02:21:00.2746665Z",
+      "viewport": {"width": 390, "height": 844},
+      "mode": "Complete imported snapshot opened using file://",
+      "original": "artifacts/browser/final-descriptor-evidence/record-descriptor-offline--8bf3f-ss-and-narrow-screen-layout/legacy-descriptor-mobile.png"
+    }
+  ],
+  "limits": [
+    "Screenshots demonstrate these fixtures and the recorded bundle only.",
+    "They are not an exact-commit platform matrix or proof of every historical model variation.",
+    "No five-person usability study, screen-reader certification or stable-release approval is implied."
+  ]
+}

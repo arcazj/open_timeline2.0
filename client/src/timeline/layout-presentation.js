@@ -1,12 +1,16 @@
 import { createTimeMap, projectTime, timeDecimal, toMs } from './time-scale.js';
 import { measureText, wrapLabel } from './text-metrics.js';
 import { compareGroups, groupStyle, groupValue, recordLabel, resolvePresentation, resolveRecordStyle, isHazardIcon } from './presentation.js';
+import { normalizeStringOrder } from '../data/string-order.js';
+import { collapsedGroupKeys, paginateGroupRows } from './group-pagination.js';
 
 const failure = (code, message) => Object.assign(new Error(message), { code, status: 422 });
 const compareRecords = (a, b) => toMs(a.start) - toMs(b.start) || ((a.end === null ? Infinity : toMs(a.end)) - (b.end === null ? Infinity : toMs(b.end))) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
 const compareSiblings = (a, b) => (a.record.order ?? 0) - (b.record.order ?? 0) || compareRecords(a.record, b.record);
 
 export function buildPresentationLayout(records, rawMap, input, matches, overlaps) {
+  const groupOrder = normalizeStringOrder(input.groupOrder === undefined ? {} : input.groupOrder, input.definitionVersion === undefined ? 1 : input.definitionVersion);
+  const collapsed = collapsedGroupKeys(input.collapsedGroups, input.definitionVersion ?? 1);
   const map = createTimeMap(rawMap), from = input.viewFromMs ?? input.from, to = input.viewToMs ?? input.to;
   const width = Number(input.width), fontSize = Number(input.fontSize ?? 13), requestedHeight = Number(input.rowHeight ?? 32), availableHeight = Number(input.availableHeight ?? 480);
   if (!(width >= 64 && width <= 8192) || !Number.isFinite(width) || !(fontSize >= 10 && fontSize <= 32) || !Number.isFinite(fontSize) || !Number.isFinite(requestedHeight) || requestedHeight < Math.max(32, fontSize + 19) || requestedHeight > 192) throw failure('invalid_profile', 'Invalid render dimensions');
@@ -23,7 +27,10 @@ export function buildPresentationLayout(records, rawMap, input, matches, overlap
   const project = value => projectTime(map, timeDecimal(value).clamp(domainStart, domainEnd), from, to, width);
   for (const record of eligible) {
     const group = groupValue(record, presentation);
-    if (!groups.has(group.key)) groups.set(group.key, { ...group, items: [] });
+    if (!groups.has(group.key)) groups.set(group.key, { ...group, items: [], recordCount: 0, matchCount: 0, collapsed: collapsed.has(group.key) });
+    groups.get(group.key).recordCount++;
+    if (matches.has(record.id)) groups.get(group.key).matchCount++;
+    if (collapsed.has(group.key)) continue;
     const style = resolveRecordStyle(record, presentation), fullLabel = recordLabel(record, presentation);
     const start = timeDecimal(toMs(record.start));
     const end = record.end === null && record.kind === 'session' ? domainEnd : record.end === null ? start : timeDecimal(toMs(record.end));
@@ -71,10 +78,11 @@ export function buildPresentationLayout(records, rawMap, input, matches, overlap
   }
   if (rowHeight > 192 || rowHeight > availableHeight) throw failure('row_height_limit', 'Resolved labels and graphics do not fit the available row height');
   let offset = 0;
-  for (const group of [...groups.values()].sort((a, b) => compareGroups(a, b, presentation.grouping.direction))) {
+  for (const group of [...groups.values()].sort((a, b) => compareGroups(a, b, presentation.grouping.direction, groupOrder))) {
     if (presentation.grouping.field) {
-      rows.push({ row: offset++, type: 'group', name: group.name, key: group.key, style: groupStyle(group, presentation) });
+      rows.push({ row: offset++, type: 'group', name: group.name, key: group.key, style: groupStyle(group, presentation), ...(input.definitionVersion === 2 ? { collapsed: group.collapsed, recordCount: group.recordCount, matchCount: group.matchCount } : {}) });
     }
+    if (group.collapsed) continue;
     const groupIds = new Set(group.items.map(item => item.record.id));
     if (presentation.nesting.enabled && group.items.some(item => groupIds.has(item.parentId))) {
       const byId = new Map(group.items.map(item => [item.record.id, item]));
@@ -106,6 +114,7 @@ export function buildPresentationLayout(records, rawMap, input, matches, overlap
     }
   }
   enclosures.sort((a, b) => a.startRow - b.startRow || b.endRow - a.endRow || (a.parentId < b.parentId ? -1 : a.parentId > b.parentId ? 1 : 0));
-  return { items, rows, enclosures, presentation, totalRows: offset, detailTotal: eligible.length, detailMatchTotal: eligible.filter(record => matches.has(record.id)).length, renderInstanceTotal: eligible.length, rowHeight, pageCapacity: Math.min(100, Math.floor(availableHeight / rowHeight)), from, to, width, fontSize };
+  const result = { items, rows, enclosures, presentation, totalRows: offset, detailTotal: eligible.length, detailMatchTotal: eligible.filter(record => matches.has(record.id)).length, renderInstanceTotal: items.length, rowHeight, pageCapacity: Math.min(100, Math.floor(availableHeight / rowHeight)), from, to, width, fontSize };
+  return input.definitionVersion === 2 ? paginateGroupRows(result, result.pageCapacity) : result;
 }
 import { packFootprints } from './row-packer.js';

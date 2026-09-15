@@ -2,6 +2,8 @@ import { createTimeMap, projectTime, timeDecimal, toMs } from './time-scale.js';
 import { measureText } from './text-metrics.js';
 import { buildPresentationLayout } from './layout-presentation.js';
 import { packFootprints } from './row-packer.js';
+import { normalizeStringOrder } from '../data/string-order.js';
+import { collapsedGroupKeys } from './group-pagination.js';
 
 export { measureText } from './text-metrics.js';
 
@@ -32,7 +34,9 @@ export function overlaps(record, from, to) {
 }
 
 export function buildLayout(records, rawMap, input, matches = new Set()) {
-  if (input.presentation !== undefined || records.some(record => Object.keys(record.render ?? {}).some(key => key !== 'color') && overlaps(record, input.viewFromMs ?? input.from, input.viewToMs ?? input.to))) return buildPresentationLayout(records, rawMap, input, matches, overlaps);
+  normalizeStringOrder(input.groupOrder === undefined ? {} : input.groupOrder, input.definitionVersion === undefined ? 1 : input.definitionVersion);
+  collapsedGroupKeys(input.collapsedGroups, input.definitionVersion ?? 1);
+  if (input.definitionVersion === 2 || input.presentation !== undefined || records.some(record => Object.keys(record.render ?? {}).some(key => key !== 'color') && overlaps(record, input.viewFromMs ?? input.from, input.viewToMs ?? input.to))) return buildPresentationLayout(records, rawMap, input, matches, overlaps);
   const map = createTimeMap(rawMap);
   const from = input.viewFromMs ?? input.from;
   const to = input.viewToMs ?? input.to;

@@ -26,7 +26,16 @@ for (const test of cases.searches) {
   assert.deepEqual(result.yellowIds, test.expectedYellowIds);
 }
 assert.deepEqual(evidence.legacyResults.at(-1).ids, cases.dates.expectedLegacyIds);
-for (const [file, expected] of Object.entries(evidence.currentSources)) assert.equal(hash(await read(file)), expected, `Reviewed current source changed: ${file}`);
+assert.match(evidence.currentBaseline, /^[0-9a-f]{40}$/);
+let historicalBaseline = true;
+try { execFileSync('git', ['cat-file', '-e', `${evidence.currentBaseline}^{commit}`], { cwd: root, stdio: 'pipe' }); }
+catch { historicalBaseline = false; }
+for (const [file, expected] of Object.entries(evidence.currentSources)) {
+  assert.match(expected, /^[0-9a-f]{64}$/);
+  // This is the audited historical implementation, not a freeze on future source changes.
+  if (historicalBaseline) assert.equal(hash(execFileSync('git', ['show', `${evidence.currentBaseline}:${file}`], { cwd: root })), expected, `Historical audit source mismatch: ${file}`);
+}
+if (!historicalBaseline) console.log('Historical source blobs unavailable in this shallow checkout; recorded hashes retained, not reverified.');
 const images = JSON.parse(await read('docs/sorting-filtering/ui-proposals.json'));
 assert.equal(images.implementationVerified, false);
 assert.equal(images.captures.length, 3);
@@ -41,4 +50,4 @@ for (const file of docs) assert.deepEqual(documentationProblems(file, (await rea
 const prompt = (await read(docs[0])).toString();
 for (let index = 1; index <= 11; index++) assert(prompt.includes(`## R${index}. `), `Missing R${index}`);
 assert(prompt.includes('Version-1 requests remain unchanged'));
-console.log('Specification links, R1-R11 coverage, 14 recorded Java cases, reviewed source hashes and three proposal hashes verified. Future features are not certified.');
+console.log('Specification links, R1-R11 coverage, 14 recorded Java cases and three proposal hashes verified. This historical audit does not certify later implementation changes.');

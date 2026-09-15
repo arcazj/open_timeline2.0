@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 export const legacyDomain = { from: '2024-03-01T00:00:00.000Z', to: '2024-03-02T00:00:00.000Z' };
 
-export async function startLegacyServer() {
+export async function startLegacyServer({ recordsBySource, preferences = false } = {}) {
   const directory = await mkdtemp(path.join(tmpdir(), 'openbexi-legacy-parity-'));
   const legacy = path.join(directory, 'legacy'), authority = path.join(directory, 'authority');
   const listener = net.createServer();
@@ -28,6 +28,9 @@ export async function startLegacyServer() {
   const record = (id, start, title, extra = {}) => ({ id, start, data: { title }, ...extra });
   const files = [];
   await mkdir(legacy);
+  if (recordsBySource) {
+    for (const [source, partitions] of Object.entries(recordsBySource)) for (const [day, items] of Object.entries(partitions)) files.push(await events(source, day, items));
+  } else {
   files.push(await events('alpha', '2023/12/31', [
     record('long', '2023-12-31T00:00:00Z', 'Cross-year session Match_5_1', { end: '2024-04-01T00:00:00Z' }),
     record('old', '2023-12-31T01:00:00Z', 'Outside-domain old point'),
@@ -51,8 +54,11 @@ export async function startLegacyServer() {
     record('ongoing', '2024-03-01T10:00:00Z', 'Ongoing Match_5_1', { kind: 'session', end: null }),
     record('zone-b', '2024-03-01T11:30:00Z', 'Beta zone', { end: '2024-03-01T15:00:00Z', zone: true, render: { color: '#66AA99' } }),
   ]));
+  }
   const yaml = path.join(legacy, 'sources.yml'), model = path.join(legacy, 'model.json');
-  await writeFile(yaml, 'data_sources:\n' + ['alpha', 'beta'].map((source, index) =>
+  const profile = preferences ? `version: 1\nserver: ${JSON.stringify({ host: '127.0.0.1', port, local_browser: false, state_root: path.join(directory, 'state') })}\nlegacy: ${JSON.stringify({ root: legacy,
+    allow_roots: [authority], path_maps: { '/archive': authority }, model, timezone: 'UTC', dialect: 'strict', namespace_grouping: true })}\n` : '';
+  await writeFile(yaml, profile + 'data_sources:\n' + (recordsBySource ? Object.keys(recordsBySource) : ['alpha', 'beta']).map((source, index) =>
     `- namespace: ${source}\n  type: json_file\n  enable: true\n  data_path: /archive\n  data_model: /archive/${source}/yyyy/mm/dd\n  render:\n    color: '${index ? '#E7EDDA' : '#D9EDF2'}'\n`).join(''));
   await writeFile(model, await readFile(path.join(root, 'tests/client/fixtures/legacy-test-regular.json')));
   files.push(yaml, model);
@@ -66,9 +72,10 @@ export async function startLegacyServer() {
     }
   }
   try {
-    child = spawn(executable, ['scripts/serve-legacy.py', '--source-yaml', yaml, '--legacy-root', legacy,
+    const args = preferences ? ['scripts/serve-legacy.py', '--yaml', yaml] : ['scripts/serve-legacy.py', '--source-yaml', yaml, '--legacy-root', legacy,
       '--allow-root', authority, '--path-map', `/archive=${authority}`, '--model', model,
-      '--namespace-grouping', '--state-root', path.join(directory, 'state'), '--port', String(port)], {
+      '--namespace-grouping', '--state-root', path.join(directory, 'state'), '--port', String(port)];
+    child = spawn(executable, args, {
       cwd: root, windowsHide: true, env: { ...process.env, OPENBEXI_API_TOKEN: token }, stdio: ['ignore', 'pipe', 'pipe'],
     });
     child.stdout.on('data', value => { output = (output + value).slice(-32000); });

@@ -2,6 +2,7 @@
 .table-toolbar{display:flex;align-items:center;gap:7px;padding:9px 12px;flex:none;flex-wrap:wrap;border-bottom:1px solid var(--line);background:var(--surface)}
 .table-toolbar select{font-size:11px;max-width:200px;height:33px}
 .table-toolbar button{margin-left:auto}
+.table-case-control{display:flex;align-items:center;gap:5px;font-size:11px;white-space:nowrap;flex:none}.table-case-control input{margin:0}.data-table .table-role{width:145px;min-width:145px;font-size:11px;white-space:normal;overflow-wrap:anywhere}
 .table-caption{position:static;flex:none;gap:8px;flex-wrap:wrap;padding:7px 12px;min-height:32px}
 .table-scroll{flex:1;min-height:0;overflow:auto}
 .table-pagination{display:flex;align-items:center;justify-content:center;gap:10px;flex:none;min-height:42px;border-top:1px solid var(--line);background:var(--surface);font-size:11px}

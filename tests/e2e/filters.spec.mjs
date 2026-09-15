@@ -87,7 +87,7 @@ for (const mode of ['local', 'server']) {
     await second.locator('[data-filter-op]').selectOption('contains');
     await second.locator('[data-filter-value]').fill('Telemetry');
     await expect(first.locator('[data-filter-value]')).toHaveValue('not-json');
-    await form.locator('[type=submit]').click();
+    await expect(form.locator('[type=submit]')).toBeDisabled();
     await expect(form.locator('.form-error')).toContainText('JSON array');
     expect(await page.evaluate(() => window.__timelineDebug.queryId)).toBe(before);
     await first.locator('[data-filter-value]').fill('["operations"]');
@@ -130,7 +130,7 @@ test('filter validation preserves the draft and narrow layout remains readable',
   await open(page, 'local'); await page.setViewportSize({ width: 390, height: 844 });
   await page.locator('[data-action=settings]').click(); const form = page.locator('#settings-form');
   await form.locator('[data-filter-command=add-root]').click(); await form.locator('[data-filter-op]').selectOption('in');
-  await form.locator('[data-filter-value]').fill('not-json'); await form.locator('[type=submit]').click();
+  await form.locator('[data-filter-value]').fill('not-json'); await expect(form.locator('[type=submit]')).toBeDisabled();
   await expect(form.locator('.form-error')).toContainText('JSON array'); await expect(form.locator('[data-filter-value]')).toHaveValue('not-json');
   const overflow = await form.evaluate(node => node.scrollWidth > node.clientWidth + 1); expect(overflow).toBe(false);
   await form.locator('[data-filter-value]').fill('["Telemetry downlink"]'); await apply(form);

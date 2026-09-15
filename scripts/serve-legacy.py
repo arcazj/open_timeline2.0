@@ -81,6 +81,8 @@ def main():
         options["model"] = str(args.model)
     if args.yaml:
         options["sourceDocument"] = args.source_document
+        if args.preferences_root is not None:
+            options["preferencesRoot"] = str(args.preferences_root)
         print(f"Server configuration: {args.source_yaml}", flush=True)
     local = {"local_browser_origin": f"http://127.0.0.1:{args.port}", "token": secrets.token_urlsafe(32)} if args.local_browser else {}
     background_startup = getattr(args, "background_startup", True)

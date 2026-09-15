@@ -1421,7 +1421,48 @@
         "$defs": {
           "filters": {
             "additionalProperties": false,
+            "allOf": [
+              {
+                "else": {
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "relationshipMode"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "migration"
+                        ]
+                      }
+                    ]
+                  },
+                  "properties": {
+                    "expression": {
+                      "properties": {
+                        "version": {
+                          "const": 1
+                        }
+                      }
+                    },
+                    "search": {
+                      "$ref": "#/components/schemas/ConfigurationDefinition/$defs/search"
+                    }
+                  }
+                },
+                "if": {
+                  "$ref": "#/components/schemas/ConfigurationDefinition/$defs/v2"
+                }
+              }
+            ],
             "properties": {
+              "definitionVersion": {
+                "enum": [
+                  1,
+                  2
+                ]
+              },
               "expression": {
                 "type": [
                   "object",
@@ -1439,6 +1480,15 @@
                 "type": "array",
                 "uniqueItems": true
               },
+              "migration": {
+                "$ref": "#/components/schemas/ConfigurationDefinition/$defs/migration"
+              },
+              "relationshipMode": {
+                "enum": [
+                  "independent",
+                  "family"
+                ]
+              },
               "schemaRefs": {
                 "items": {
                   "$ref": "#/components/schemas/ConfigurationDefinition/$defs/pin"
@@ -1448,7 +1498,7 @@
                 "uniqueItems": true
               },
               "search": {
-                "$ref": "#/components/schemas/ConfigurationDefinition/$defs/search"
+                "$ref": "#/components/schemas/ConfigurationDefinition/$defs/searchV2"
               },
               "sourceIds": {
                 "items": {
@@ -1504,6 +1554,57 @@
             "minLength": 1,
             "type": "string"
           },
+          "migration": {
+            "additionalProperties": false,
+            "properties": {
+              "acknowledged": {
+                "items": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "maxItems": 20,
+                "type": "array",
+                "uniqueItems": true
+              },
+              "format": {
+                "const": "legacy-filter-migration"
+              },
+              "original": {
+                "additionalProperties": false,
+                "properties": {
+                  "exclude": {
+                    "maxLength": 4096,
+                    "type": "string"
+                  },
+                  "include": {
+                    "maxLength": 4096,
+                    "type": "string"
+                  },
+                  "sortBy": {
+                    "maxLength": 4096,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "include",
+                  "exclude",
+                  "sortBy"
+                ],
+                "type": "object"
+              },
+              "version": {
+                "const": 1
+              }
+            },
+            "required": [
+              "format",
+              "version",
+              "original",
+              "acknowledged"
+            ],
+            "type": "object"
+          },
           "nullablePin": {
             "oneOf": [
               {
@@ -1544,6 +1645,16 @@
             },
             "type": "object"
           },
+          "partialSearchV2": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ConfigurationDefinition/$defs/partialSearch"
+              },
+              {
+                "$ref": "#/components/schemas/ConfigurationDefinition/$defs/regexSearch"
+              }
+            ]
+          },
           "pin": {
             "additionalProperties": false,
             "properties": {
@@ -1574,6 +1685,56 @@
                 "type": "string"
               }
             },
+            "type": "object"
+          },
+          "regexSearch": {
+            "additionalProperties": false,
+            "properties": {
+              "dialect": {
+                "const": "re2-common-v1"
+              },
+              "fields": {
+                "items": {
+                  "maxLength": 256,
+                  "type": "string"
+                },
+                "maxItems": 16,
+                "minItems": 1,
+                "type": "array",
+                "uniqueItems": true
+              },
+              "flags": {
+                "items": {
+                  "enum": [
+                    "i",
+                    "m",
+                    "s"
+                  ]
+                },
+                "maxItems": 3,
+                "type": "array",
+                "uniqueItems": true
+              },
+              "matchMode": {
+                "enum": [
+                  "search",
+                  "full"
+                ]
+              },
+              "mode": {
+                "const": "regex"
+              },
+              "text": {
+                "maxLength": 512,
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "required": [
+              "text",
+              "mode",
+              "fields"
+            ],
             "type": "object"
           },
           "schemas": {
@@ -1624,8 +1785,69 @@
             ],
             "type": "object"
           },
+          "searchV2": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ConfigurationDefinition/$defs/search"
+              },
+              {
+                "$ref": "#/components/schemas/ConfigurationDefinition/$defs/regexSearch"
+              }
+            ]
+          },
           "settings": {
             "additionalProperties": false,
+            "allOf": [
+              {
+                "else": {
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "relationshipMode"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "groupOrder"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "table"
+                        ]
+                      }
+                    ]
+                  },
+                  "properties": {
+                    "collapsedGroups": {
+                      "items": {
+                        "$ref": "#/components/schemas/ConfigurationDefinition/$defs/id"
+                      },
+                      "maxItems": 100
+                    },
+                    "search": {
+                      "$ref": "#/components/schemas/ConfigurationDefinition/$defs/partialSearch"
+                    },
+                    "sort": {
+                      "$ref": "#/components/schemas/ConfigurationDefinition/$defs/sortV1"
+                    }
+                  }
+                },
+                "if": {
+                  "$ref": "#/components/schemas/ConfigurationDefinition/$defs/v2"
+                },
+                "then": {
+                  "properties": {
+                    "collapsedGroups": {
+                      "items": {
+                        "pattern": "^(number|string|boolean|null|missing):"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
             "properties": {
               "bins": {
                 "maximum": 256,
@@ -1634,9 +1856,11 @@
               },
               "collapsedGroups": {
                 "items": {
-                  "$ref": "#/components/schemas/ConfigurationDefinition/$defs/id"
+                  "maxLength": 4096,
+                  "minLength": 1,
+                  "type": "string"
                 },
-                "maxItems": 100,
+                "maxItems": 1000,
                 "type": "array",
                 "uniqueItems": true
               },
@@ -1667,6 +1891,12 @@
                 "maxItems": 32,
                 "minItems": 1,
                 "type": "array"
+              },
+              "definitionVersion": {
+                "enum": [
+                  1,
+                  2
+                ]
               },
               "displayUnit": {
                 "enum": [
@@ -1711,6 +1941,21 @@
                   "kind"
                 ]
               },
+              "groupOrder": {
+                "additionalProperties": false,
+                "properties": {
+                  "caseSensitive": {
+                    "type": "boolean"
+                  },
+                  "order": {
+                    "enum": [
+                      "codepoint",
+                      "natural"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
               "mode": {
                 "enum": [
                   "timeline",
@@ -1746,6 +1991,12 @@
                 "format": "timeline-instant",
                 "type": "string"
               },
+              "relationshipMode": {
+                "enum": [
+                  "independent",
+                  "family"
+                ]
+              },
               "rowHeight": {
                 "maximum": 128,
                 "minimum": 32,
@@ -1758,32 +2009,33 @@
                 ]
               },
               "search": {
-                "$ref": "#/components/schemas/ConfigurationDefinition/$defs/partialSearch"
+                "$ref": "#/components/schemas/ConfigurationDefinition/$defs/partialSearchV2"
               },
               "sort": {
-                "items": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "direction": {
-                      "enum": [
-                        "asc",
-                        "desc"
-                      ]
-                    },
-                    "field": {
-                      "maxLength": 256,
-                      "type": "string"
-                    }
+                "$ref": "#/components/schemas/ConfigurationDefinition/$defs/sortV2"
+              },
+              "table": {
+                "additionalProperties": false,
+                "properties": {
+                  "limit": {
+                    "maximum": 1000,
+                    "minimum": 1,
+                    "type": "integer"
                   },
-                  "required": [
-                    "field",
-                    "direction"
-                  ],
-                  "type": "object"
+                  "projection": {
+                    "enum": [
+                      "context",
+                      "matches"
+                    ]
+                  },
+                  "scope": {
+                    "enum": [
+                      "all",
+                      "window"
+                    ]
+                  }
                 },
-                "maxItems": 3,
-                "minItems": 1,
-                "type": "array"
+                "type": "object"
               },
               "theme": {
                 "enum": [
@@ -1816,6 +2068,65 @@
             },
             "type": "object"
           },
+          "sortV1": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "direction": {
+                  "enum": [
+                    "asc",
+                    "desc"
+                  ]
+                },
+                "field": {
+                  "maxLength": 256,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "field",
+                "direction"
+              ],
+              "type": "object"
+            },
+            "maxItems": 3,
+            "minItems": 1,
+            "type": "array"
+          },
+          "sortV2": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "caseSensitive": {
+                  "type": "boolean"
+                },
+                "direction": {
+                  "enum": [
+                    "asc",
+                    "desc"
+                  ]
+                },
+                "field": {
+                  "maxLength": 256,
+                  "type": "string"
+                },
+                "order": {
+                  "enum": [
+                    "codepoint",
+                    "natural"
+                  ]
+                }
+              },
+              "required": [
+                "field",
+                "direction"
+              ],
+              "type": "object"
+            },
+            "maxItems": 3,
+            "minItems": 1,
+            "type": "array"
+          },
           "sources": {
             "additionalProperties": false,
             "properties": {
@@ -1840,9 +2151,50 @@
             ],
             "type": "object"
           },
+          "v2": {
+            "properties": {
+              "definitionVersion": {
+                "const": 2
+              }
+            },
+            "required": [
+              "definitionVersion"
+            ]
+          },
           "views": {
             "additionalProperties": false,
+            "allOf": [
+              {
+                "else": {
+                  "properties": {
+                    "settings": {
+                      "properties": {
+                        "definitionVersion": {
+                          "const": 1
+                        }
+                      }
+                    }
+                  }
+                },
+                "if": {
+                  "$ref": "#/components/schemas/ConfigurationDefinition/$defs/v2"
+                },
+                "then": {
+                  "properties": {
+                    "settings": {
+                      "$ref": "#/components/schemas/ConfigurationDefinition/$defs/v2"
+                    }
+                  }
+                }
+              }
+            ],
             "properties": {
+              "definitionVersion": {
+                "enum": [
+                  1,
+                  2
+                ]
+              },
               "filter": {
                 "$ref": "#/components/schemas/ConfigurationDefinition/$defs/nullablePin"
               },
@@ -1863,7 +2215,7 @@
         },
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "x-source-file": "shared/schemas/configuration-definition.schema.json",
-        "x-source-sha256": "8057d00220d7893b697bd2cfbcf3fcfae0e2b4b9087e38ff32c6cfa38a092aa4"
+        "x-source-sha256": "ab539bb4b871abde021312f82629009c760e7e5b7d6eaf0aa57338069c433a0d"
       },
       "ConfigurationItem": {
         "additionalProperties": false,
@@ -2592,20 +2944,40 @@
         "type": "object"
       },
       "FilterExpression": {
-        "additionalProperties": false,
-        "properties": {
-          "root": {
-            "$ref": "#/components/schemas/FilterNode"
+        "oneOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "root": {
+                "$ref": "#/components/schemas/FilterNode"
+              },
+              "version": {
+                "const": 1
+              }
+            },
+            "required": [
+              "version",
+              "root"
+            ],
+            "type": "object"
           },
-          "version": {
-            "const": 1
+          {
+            "additionalProperties": false,
+            "properties": {
+              "root": {
+                "$ref": "#/components/schemas/FilterNodeV2"
+              },
+              "version": {
+                "const": 2
+              }
+            },
+            "required": [
+              "version",
+              "root"
+            ],
+            "type": "object"
           }
-        },
-        "required": [
-          "version",
-          "root"
-        ],
-        "type": "object"
+        ]
       },
       "FilterNode": {
         "description": "Additional semantic bounds: depth 8, at most 100 predicates; operators validate operand type before evaluation. Missing and null are distinct. No regex or executable code.",
@@ -2773,6 +3145,327 @@
             "type": "object"
           }
         ]
+      },
+      "FilterNodeV2": {
+        "description": "Typed version2 AST; depth8,100 nodes,8 regex nodes. RE2 common subset, no lookaround/backreferences/inline flags.",
+        "oneOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "args": {
+                "items": {
+                  "$ref": "#/components/schemas/FilterNodeV2"
+                },
+                "maxItems": 100,
+                "minItems": 1,
+                "type": "array"
+              },
+              "op": {
+                "enum": [
+                  "and",
+                  "or"
+                ]
+              },
+              "ruleId": {
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "op",
+              "args"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "arg": {
+                "$ref": "#/components/schemas/FilterNodeV2"
+              },
+              "op": {
+                "const": "not"
+              },
+              "ruleId": {
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "op",
+              "arg"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "caseSensitive": {
+                "type": "boolean"
+              },
+              "field": {
+                "description": "Declared core/custom JSON Pointer; schema pins determine custom types.",
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "op": {
+                "enum": [
+                  "eq",
+                  "ne",
+                  "lt",
+                  "lte",
+                  "gt",
+                  "gte",
+                  "contains"
+                ]
+              },
+              "ruleId": {
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$",
+                "type": "string"
+              },
+              "value": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "op",
+              "field",
+              "value"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "caseSensitive": {
+                "type": "boolean"
+              },
+              "field": {
+                "description": "Declared core/custom JSON Pointer; schema pins determine custom types.",
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "op": {
+                "const": "in"
+              },
+              "ruleId": {
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$",
+                "type": "string"
+              },
+              "values": {
+                "items": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "maxItems": 100,
+                "minItems": 1,
+                "type": "array"
+              }
+            },
+            "required": [
+              "op",
+              "field",
+              "values"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "field": {
+                "description": "Declared core/custom JSON Pointer; schema pins determine custom types.",
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "op": {
+                "const": "exists"
+              },
+              "ruleId": {
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$",
+                "type": "string"
+              },
+              "value": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "op",
+              "field",
+              "value"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "from": {
+                "description": "Explicit-offset proleptic Gregorian instant, astronomical years -9999 through 9999, at most millisecond precision. Year 0000 is 1 BC; negative years use six digits (for example -000199 for 200 BC).",
+                "format": "timeline-instant",
+                "type": "string"
+              },
+              "op": {
+                "const": "overlaps"
+              },
+              "ruleId": {
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$",
+                "type": "string"
+              },
+              "to": {
+                "description": "Explicit-offset proleptic Gregorian instant, astronomical years -9999 through 9999, at most millisecond precision. Year 0000 is 1 BC; negative years use six digits (for example -000199 for 200 BC).",
+                "format": "timeline-instant",
+                "type": "string"
+              }
+            },
+            "required": [
+              "op",
+              "from",
+              "to"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "dialect": {
+                "const": "re2-common-v1"
+              },
+              "field": {
+                "description": "Declared core/custom JSON Pointer; schema pins determine custom types.",
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "flags": {
+                "items": {
+                  "enum": [
+                    "i",
+                    "m",
+                    "s"
+                  ]
+                },
+                "maxItems": 3,
+                "type": "array",
+                "uniqueItems": true
+              },
+              "matchMode": {
+                "enum": [
+                  "search",
+                  "full"
+                ]
+              },
+              "op": {
+                "const": "regex"
+              },
+              "pattern": {
+                "maxLength": 512,
+                "minLength": 1,
+                "type": "string"
+              },
+              "ruleId": {
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "op",
+              "field",
+              "pattern"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "FindRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "afterId": {
+            "anyOf": [
+              {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "direction": {
+            "enum": [
+              "next",
+              "previous"
+            ]
+          }
+        },
+        "required": [],
+        "type": "object"
+      },
+      "Finding": {
+        "additionalProperties": false,
+        "properties": {
+          "position": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "queryId": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "record": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Record"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "total": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "wrapped": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "queryId",
+          "record",
+          "position",
+          "total",
+          "wrapped"
+        ],
+        "type": "object"
       },
       "Health": {
         "additionalProperties": true,
@@ -3154,6 +3847,26 @@
             "minimum": 32,
             "type": "number"
           },
+          "collapsedGroupTotal": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "collapsedGroups": {
+            "items": {
+              "maxLength": 1024,
+              "type": "string"
+            },
+            "maxItems": 10000,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "definitionVersion": {
+            "enum": [
+              1,
+              2
+            ]
+          },
           "detailMatchTotal": {
             "maximum": 9007199254740991,
             "minimum": 0,
@@ -3178,10 +3891,36 @@
             "format": "timeline-instant",
             "type": "string"
           },
+          "groupOrder": {
+            "additionalProperties": false,
+            "properties": {
+              "caseSensitive": {
+                "type": "boolean"
+              },
+              "order": {
+                "enum": [
+                  "natural",
+                  "codepoint"
+                ]
+              }
+            },
+            "required": [],
+            "type": "object"
+          },
+          "hiddenItemTotal": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
           "layoutId": {
             "maxLength": 128,
             "minLength": 1,
             "type": "string"
+          },
+          "logicalGroupTotal": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
           },
           "mapId": {
             "maxLength": 128,
@@ -3315,6 +4054,21 @@
             "minimum": 32,
             "type": "number"
           },
+          "collapsedGroups": {
+            "items": {
+              "maxLength": 1024,
+              "type": "string"
+            },
+            "maxItems": 10000,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "definitionVersion": {
+            "enum": [
+              1,
+              2
+            ]
+          },
           "displayUnit": {
             "$ref": "#/components/schemas/VisualDefinition/properties/displayUnit"
           },
@@ -3335,6 +4089,22 @@
               "sourceId",
               "kind"
             ]
+          },
+          "groupOrder": {
+            "additionalProperties": false,
+            "properties": {
+              "caseSensitive": {
+                "type": "boolean"
+              },
+              "order": {
+                "enum": [
+                  "natural",
+                  "codepoint"
+                ]
+              }
+            },
+            "required": [],
+            "type": "object"
           },
           "mapId": {
             "maxLength": 128,
@@ -3438,6 +4208,128 @@
         "required": [
           "status"
         ],
+        "type": "object"
+      },
+      "LegacyFilterMigration": {
+        "additionalProperties": false,
+        "properties": {
+          "classification": {
+            "enum": [
+              "exact",
+              "intent-repair",
+              "blocked"
+            ]
+          },
+          "diagnostics": {
+            "items": {
+              "additionalProperties": true,
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "draft": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "properties": {},
+                "required": [],
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "format": {
+            "const": "legacy-filter-migration"
+          },
+          "publishable": {
+            "type": "boolean"
+          },
+          "requiredAcknowledgements": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "scope": {
+            "additionalProperties": false,
+            "properties": {
+              "complete": {
+                "type": "boolean"
+              },
+              "domain": {
+                "$ref": "#/components/schemas/Range"
+              },
+              "generation": {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              },
+              "queryId": {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              },
+              "revision": {
+                "maximum": 9007199254740991,
+                "minimum": 1,
+                "type": "integer"
+              }
+            },
+            "required": [],
+            "type": "object"
+          },
+          "version": {
+            "const": 1
+          }
+        },
+        "required": [
+          "format",
+          "version",
+          "classification",
+          "publishable",
+          "diagnostics",
+          "requiredAcknowledgements",
+          "draft",
+          "scope"
+        ],
+        "type": "object"
+      },
+      "LegacyFilterMigrationRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "acknowledgements": {
+            "items": {
+              "maxLength": 100,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "exclude": {
+            "maxLength": 4096,
+            "type": "string"
+          },
+          "include": {
+            "maxLength": 4096,
+            "type": "string"
+          },
+          "relationshipMode": {
+            "enum": [
+              "independent",
+              "family"
+            ]
+          },
+          "sortBy": {
+            "maxLength": 4096,
+            "type": "string"
+          }
+        },
+        "required": [],
         "type": "object"
       },
       "ModelApply": {
@@ -3877,6 +4769,40 @@
           "code": {
             "maxLength": 128,
             "type": "string"
+          },
+          "diagnostic": {
+            "additionalProperties": true,
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "field": {
+                "type": "string"
+              },
+              "hint": {
+                "type": "string"
+              },
+              "offset": {
+                "anyOf": [
+                  {
+                    "maximum": 9007199254740991,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "offsetUnit": {
+                "const": "unicode-codepoint"
+              },
+              "ruleId": {
+                "type": "string"
+              }
+            },
+            "required": [],
+            "type": "object"
           },
           "message": {
             "maxLength": 256,
@@ -4710,6 +5636,40 @@
           "detail": {
             "type": "string"
           },
+          "diagnostic": {
+            "additionalProperties": true,
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "field": {
+                "type": "string"
+              },
+              "hint": {
+                "type": "string"
+              },
+              "offset": {
+                "anyOf": [
+                  {
+                    "maximum": 9007199254740991,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "offsetUnit": {
+                "const": "unicode-codepoint"
+              },
+              "ruleId": {
+                "type": "string"
+              }
+            },
+            "required": [],
+            "type": "object"
+          },
           "errors": {
             "items": {
               "additionalProperties": true,
@@ -4759,6 +5719,64 @@
         ],
         "type": "object"
       },
+      "QueryCounts": {
+        "additionalProperties": false,
+        "properties": {
+          "complete": {
+            "type": "boolean"
+          },
+          "contextRecords": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "directPredicateHits": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "domain": {
+            "$ref": "#/components/schemas/Range"
+          },
+          "filterResults": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "generation": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "revision": {
+            "maximum": 9007199254740991,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "searchFindings": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "visibleContextRecords": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "domain",
+          "generation",
+          "revision",
+          "complete",
+          "filterResults",
+          "directPredicateHits",
+          "searchFindings",
+          "contextRecords",
+          "visibleContextRecords"
+        ],
+        "type": "object"
+      },
       "QueryFailed": {
         "additionalProperties": false,
         "properties": {
@@ -4774,6 +5792,11 @@
             "maxLength": 128,
             "minLength": 1,
             "type": "string"
+          },
+          "preferencesRevision": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
           },
           "queryId": {
             "maxLength": 128,
@@ -4900,8 +5923,14 @@
             "minimum": 0,
             "type": "integer"
           },
+          "counts": {
+            "$ref": "#/components/schemas/QueryCounts"
+          },
           "coverage": {
             "$ref": "#/components/schemas/WindowCoverage"
+          },
+          "definitionVersion": {
+            "const": 2
           },
           "fieldTypes": {
             "additionalProperties": {
@@ -4936,10 +5965,21 @@
             "minimum": 0,
             "type": "integer"
           },
+          "preferencesRevision": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
           "queryId": {
             "maxLength": 128,
             "minLength": 1,
             "type": "string"
+          },
+          "relationshipMode": {
+            "enum": [
+              "independent",
+              "family"
+            ]
           },
           "revision": {
             "maximum": 9007199254740991,
@@ -4983,6 +6023,11 @@
             "minLength": 1,
             "type": "string"
           },
+          "preferencesRevision": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
           "queryId": {
             "maxLength": 128,
             "minLength": 1,
@@ -5009,6 +6054,143 @@
           "snapshotId",
           "mapId",
           "state"
+        ],
+        "type": "object"
+      },
+      "QueryRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "ancestors": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "end": {
+                  "anyOf": [
+                    {
+                      "description": "Explicit-offset proleptic Gregorian instant, astronomical years -9999 through 9999, at most millisecond precision. Year 0000 is 1 BC; negative years use six digits (for example -000199 for 200 BC).",
+                      "format": "timeline-instant",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "id": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "kind": {
+                  "enum": [
+                    "event",
+                    "session"
+                  ]
+                },
+                "start": {
+                  "description": "Explicit-offset proleptic Gregorian instant, astronomical years -9999 through 9999, at most millisecond precision. Year 0000 is 1 BC; negative years use six digits (for example -000199 for 200 BC).",
+                  "format": "timeline-instant",
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "title",
+                "kind",
+                "start",
+                "end"
+              ],
+              "type": "object"
+            },
+            "maxItems": 32,
+            "type": "array"
+          },
+          "ancestorsTruncated": {
+            "type": "boolean"
+          },
+          "explanation": {
+            "additionalProperties": false,
+            "properties": {
+              "rules": {
+                "items": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "field": {
+                      "description": "Declared core/custom JSON Pointer; schema pins determine custom types.",
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "op": {
+                      "type": "string"
+                    },
+                    "ruleId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [],
+                  "type": "object"
+                },
+                "maxItems": 16,
+                "type": "array"
+              },
+              "truncated": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "rules",
+              "truncated"
+            ],
+            "type": "object"
+          },
+          "provenance": {
+            "$ref": "#/components/schemas/QueryRecordProvenance"
+          },
+          "record": {
+            "$ref": "#/components/schemas/Record"
+          },
+          "searchActive": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "record",
+          "ancestors",
+          "ancestorsTruncated"
+        ],
+        "type": "object"
+      },
+      "QueryRecordProvenance": {
+        "additionalProperties": false,
+        "properties": {
+          "descendantMatchCount": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "directPredicate": {
+            "type": "boolean"
+          },
+          "match": {
+            "type": "boolean"
+          },
+          "role": {
+            "enum": [
+              "direct",
+              "family-context",
+              "ancestor-context"
+            ]
+          }
+        },
+        "required": [
+          "role",
+          "directPredicate",
+          "match",
+          "descendantMatchCount"
         ],
         "type": "object"
       },
@@ -5044,6 +6226,12 @@
             "minimum": 16,
             "type": "integer"
           },
+          "definitionVersion": {
+            "enum": [
+              1,
+              2
+            ]
+          },
           "domain": {
             "$ref": "#/components/schemas/Range"
           },
@@ -5063,6 +6251,12 @@
             "minimum": 1,
             "type": "number"
           },
+          "relationshipMode": {
+            "enum": [
+              "independent",
+              "family"
+            ]
+          },
           "scaleMode": {
             "default": "uniform",
             "enum": [
@@ -5077,6 +6271,9 @@
           "searchCaseSensitive": {
             "type": "boolean"
           },
+          "searchDialect": {
+            "const": "re2-common-v1"
+          },
           "searchFields": {
             "items": {
               "description": "Declared core/custom JSON Pointer; schema pins determine custom types.",
@@ -5088,11 +6285,30 @@
             "minItems": 1,
             "type": "array"
           },
+          "searchFlags": {
+            "items": {
+              "enum": [
+                "i",
+                "m",
+                "s"
+              ]
+            },
+            "maxItems": 3,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "searchMatchMode": {
+            "enum": [
+              "search",
+              "full"
+            ]
+          },
           "searchMode": {
             "enum": [
               "any",
               "all",
-              "phrase"
+              "phrase",
+              "regex"
             ]
           }
         },
@@ -6447,6 +7663,17 @@
             "minimum": 0,
             "type": "integer"
           },
+          "contextTotal": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "definitionVersion": {
+            "enum": [
+              1,
+              2
+            ]
+          },
           "endIndex": {
             "maximum": 9007199254740991,
             "minimum": 0,
@@ -6463,6 +7690,9 @@
               "properties": {
                 "match": {
                   "type": "boolean"
+                },
+                "provenance": {
+                  "$ref": "#/components/schemas/QueryRecordProvenance"
                 },
                 "record": {
                   "$ref": "#/components/schemas/Record"
@@ -6559,6 +7789,9 @@
             "items": {
               "additionalProperties": false,
               "properties": {
+                "caseSensitive": {
+                  "type": "boolean"
+                },
                 "direction": {
                   "enum": [
                     "asc",
@@ -6567,6 +7800,12 @@
                 },
                 "field": {
                   "type": "string"
+                },
+                "order": {
+                  "enum": [
+                    "natural",
+                    "codepoint"
+                  ]
                 }
               },
               "required": [
@@ -6654,7 +7893,7 @@
       },
       "TableRequest": {
         "additionalProperties": false,
-        "description": "Complete filtered record pagination independent of row pages. Custom scalar sorts require query schemaRefs. Present, null, missing order is stable in either direction; ID ascending is final tie-breaker.",
+        "description": "Complete filtered record pagination independent of row pages. Custom scalar sorts require query schemaRefs. Present, null, missing order is stable in either direction; ID ascending is final tie-breaker. Natural string ordering requires a version2 query.",
         "examples": [
           {
             "limit": 100,
@@ -6678,6 +7917,12 @@
               {
                 "type": "null"
               }
+            ]
+          },
+          "definitionVersion": {
+            "enum": [
+              1,
+              2
             ]
           },
           "limit": {
@@ -6704,6 +7949,9 @@
             "items": {
               "additionalProperties": false,
               "properties": {
+                "caseSensitive": {
+                  "type": "boolean"
+                },
                 "direction": {
                   "enum": [
                     "asc",
@@ -6712,6 +7960,12 @@
                 },
                 "field": {
                   "type": "string"
+                },
+                "order": {
+                  "enum": [
+                    "natural",
+                    "codepoint"
+                  ]
                 }
               },
               "required": [
@@ -12558,6 +13812,115 @@
         "x-permission-policy": "records.read with source scope rechecked on every page; changed scope invalidates entire handle."
       }
     },
+    "/api/v1/workspaces/default/query-sessions/{query_id}/find": {
+      "post": {
+        "description": "Traverse direct search findings in stable time/ID order across all row pages in this query domain; returns one pinned record.",
+        "operationId": "post__api_v1_workspaces_default_query_sessions_query_id_find",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "query_id",
+            "required": true,
+            "schema": {
+              "title": "Query Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FindRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Finding"
+                }
+              }
+            },
+            "description": "Successful read-only result",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "const": "no-store"
+                }
+              },
+              "X-Request-Id": {
+                "description": "Correlation ID; never a token.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Problem400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Problem401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Problem403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Problem404"
+          },
+          "408": {
+            "$ref": "#/components/responses/Problem408"
+          },
+          "409": {
+            "$ref": "#/components/responses/Problem409"
+          },
+          "410": {
+            "$ref": "#/components/responses/Problem410"
+          },
+          "412": {
+            "$ref": "#/components/responses/Problem412"
+          },
+          "413": {
+            "$ref": "#/components/responses/Problem413"
+          },
+          "415": {
+            "$ref": "#/components/responses/Problem415"
+          },
+          "422": {
+            "$ref": "#/components/responses/Problem422"
+          },
+          "428": {
+            "$ref": "#/components/responses/Problem428"
+          },
+          "429": {
+            "$ref": "#/components/responses/Problem429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Problem500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Problem503"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Find match",
+        "tags": [
+          "queries"
+        ],
+        "x-handler": "find_match",
+        "x-permission-policy": "records.read with source scope rechecked on every page; changed scope invalidates entire handle.",
+        "x-request-byte-limit": 1048576
+      }
+    },
     "/api/v1/workspaces/default/query-sessions/{query_id}/layouts": {
       "post": {
         "description": "Read or prepare bounded immutable projections. Cursors never advance time or change the filter.",
@@ -13196,6 +14559,115 @@
         "x-permission-policy": "records.read with source scope rechecked on every page; changed scope invalidates entire handle."
       }
     },
+    "/api/v1/workspaces/default/query-sessions/{query_id}/legacy-filter-migration": {
+      "post": {
+        "description": "Read-only dry-run with explicit repair acknowledgements and typed AST. No source or preference files are written; publication is separate.",
+        "operationId": "post__api_v1_workspaces_default_query_sessions_query_id_legacy_filter_migration",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "query_id",
+            "required": true,
+            "schema": {
+              "title": "Query Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LegacyFilterMigrationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LegacyFilterMigration"
+                }
+              }
+            },
+            "description": "Successful read-only result",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "const": "no-store"
+                }
+              },
+              "X-Request-Id": {
+                "description": "Correlation ID; never a token.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Problem400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Problem401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Problem403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Problem404"
+          },
+          "408": {
+            "$ref": "#/components/responses/Problem408"
+          },
+          "409": {
+            "$ref": "#/components/responses/Problem409"
+          },
+          "410": {
+            "$ref": "#/components/responses/Problem410"
+          },
+          "412": {
+            "$ref": "#/components/responses/Problem412"
+          },
+          "413": {
+            "$ref": "#/components/responses/Problem413"
+          },
+          "415": {
+            "$ref": "#/components/responses/Problem415"
+          },
+          "422": {
+            "$ref": "#/components/responses/Problem422"
+          },
+          "428": {
+            "$ref": "#/components/responses/Problem428"
+          },
+          "429": {
+            "$ref": "#/components/responses/Problem429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Problem500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Problem503"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Migrate legacy filter",
+        "tags": [
+          "queries"
+        ],
+        "x-handler": "migrate_legacy_filter",
+        "x-permission-policy": "records.read with source scope rechecked on every page; changed scope invalidates entire handle.",
+        "x-request-byte-limit": 1048576
+      }
+    },
     "/api/v1/workspaces/default/query-sessions/{query_id}/maps/{map_id}": {
       "get": {
         "description": "Read exact immutable density-derived mapping knots.",
@@ -13519,6 +14991,113 @@
         "x-handler": "query_records",
         "x-permission-policy": "records.read with source scope rechecked on every page; changed scope invalidates entire handle.",
         "x-request-byte-limit": 65536
+      }
+    },
+    "/api/v1/workspaces/default/query-sessions/{query_id}/records/{record_id}": {
+      "get": {
+        "description": "Read a pinned selected record, scoped provenance and permitted ancestor breadcrumbs. No data outside the owned query scope is exposed.",
+        "operationId": "get__api_v1_workspaces_default_query_sessions_query_id_records_record_id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "query_id",
+            "required": true,
+            "schema": {
+              "title": "Query Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "record_id",
+            "required": true,
+            "schema": {
+              "title": "Record Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QueryRecord"
+                }
+              }
+            },
+            "description": "Successful read-only result",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "const": "no-store"
+                }
+              },
+              "X-Request-Id": {
+                "description": "Correlation ID; never a token.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Problem400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Problem401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Problem403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Problem404"
+          },
+          "408": {
+            "$ref": "#/components/responses/Problem408"
+          },
+          "409": {
+            "$ref": "#/components/responses/Problem409"
+          },
+          "410": {
+            "$ref": "#/components/responses/Problem410"
+          },
+          "412": {
+            "$ref": "#/components/responses/Problem412"
+          },
+          "413": {
+            "$ref": "#/components/responses/Problem413"
+          },
+          "415": {
+            "$ref": "#/components/responses/Problem415"
+          },
+          "422": {
+            "$ref": "#/components/responses/Problem422"
+          },
+          "428": {
+            "$ref": "#/components/responses/Problem428"
+          },
+          "429": {
+            "$ref": "#/components/responses/Problem429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Problem500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Problem503"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Query record",
+        "tags": [
+          "queries"
+        ],
+        "x-handler": "query_record",
+        "x-permission-policy": "records.read with source scope rechecked on every page; changed scope invalidates entire handle."
       }
     },
     "/api/v1/workspaces/default/query-sessions/{query_id}/zones": {
@@ -17669,6 +19248,11 @@
       "path": "/api/v1/workspaces/default/query-sessions/{query_id}/density"
     },
     {
+      "handler": "find_match",
+      "method": "POST",
+      "path": "/api/v1/workspaces/default/query-sessions/{query_id}/find"
+    },
+    {
       "handler": "layout_create",
       "method": "POST",
       "path": "/api/v1/workspaces/default/query-sessions/{query_id}/layouts"
@@ -17694,6 +19278,11 @@
       "path": "/api/v1/workspaces/default/query-sessions/{query_id}/layouts/{layout_id}/rows"
     },
     {
+      "handler": "migrate_legacy_filter",
+      "method": "POST",
+      "path": "/api/v1/workspaces/default/query-sessions/{query_id}/legacy-filter-migration"
+    },
+    {
       "handler": "mapping",
       "method": "GET",
       "path": "/api/v1/workspaces/default/query-sessions/{query_id}/maps/{map_id}"
@@ -17707,6 +19296,11 @@
       "handler": "query_records",
       "method": "POST",
       "path": "/api/v1/workspaces/default/query-sessions/{query_id}/records/query"
+    },
+    {
+      "handler": "query_record",
+      "method": "GET",
+      "path": "/api/v1/workspaces/default/query-sessions/{query_id}/records/{record_id}"
     },
     {
       "handler": "zones",

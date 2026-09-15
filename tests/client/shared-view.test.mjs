@@ -18,6 +18,16 @@ test('links strip credentials, query secrets and local filesystem locations', ()
   assert.match(sharedViewLink('file:///C:/private/data/index.html', view()), /^#view=/);
   assert.throws(() => sharedViewLink('javascript:alert(1)', view()));
 });
+test('v2 shared views retain regex, family context and typed group collapse without changing v1', () => {
+  const input = { ...view(), version: 2, relationshipMode: 'family', groupOrder: { order: 'natural', caseSensitive: true }, collapsedGroups: ['string:SOURCE1'],
+    search: { definitionVersion: 2, search: '^Task_[0-9]+$', searchMode: 'regex', searchFlags: ['i'], searchMatchMode: 'full', searchDialect: 're2-common-v1', searchFields: ['/title'] },
+    filters: { expression: { version: 2, root: { op: 'regex', field: '/title', pattern: 'Task' } } } };
+  assert.deepEqual(structuredClone(decodeSharedView(encodeSharedView(input))), input);
+  for (const change of [value => value.version = 1, value => value.relationshipMode = 'unknown', value => value.search.searchCaseSensitive = false,
+    value => value.search.search = '(?=unsafe)', value => value.collapsedGroups.push('string:SOURCE1')]) {
+    const invalid = structuredClone(input); change(invalid); assert.throws(() => validateSharedView(invalid));
+  }
+});
 test('shared views reject unexpected settings, malformed encodings, invalid ranges and oversized links', () => {
   for (const change of [item => item.token = 'secret', item => item.filters.path = 'C:/data', item => item.range.toMs = '-1', item => item.range.fromMs = 'NaN', item => item.version = 2, item => item.settings.ratio = 100, item => item.selectedId = '<script>']) {
     const input = view(); change(input); assert.throws(() => validateSharedView(input));

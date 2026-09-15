@@ -5,6 +5,9 @@ const EMBEDDED_SOURCE = typeof __OPENBEXI_LOCAL_WORKER_SOURCE__ === 'string' ? _
 const MUTATIONS = new Set(['executeCommand', 'executeModelCommand', 'mutateConfiguration', 'mutateSettings', 'executeBatch']);
 const METHODS = { getStatus: 0, createQuery: 1, getQuery: 1, getDensity: 1, getMap: 2, getZones: 1, getOverview: 1, createLayout: 2, getLayout: 2, getRows: 2, getPlacement: 3, getRecord: 1, queryRecords: 2, executeCommand: 1, executeBatch: 1, getCommandOutcome: 1, listModels: 0, getModel: 1, validateModel: 1, executeModelCommand: 1, exportSnapshot: 0, releaseQuery: 1, releaseLayout: 2, listConfiguration: 2, getConfiguration: 2, validateConfiguration: 3, configurationUsage: 3, mutateConfiguration: 1, getEffectiveSettings: 1, mutateSettings: 1, previewSchemaImpact: 2 };
 const aborted = () => new DOMException('Operation aborted', 'AbortError');
+METHODS.getQueryRecord = 2;
+METHODS.findMatch = 2;
+METHODS.migrateLegacyFilter = 2;
 const unknownWrite = () => new ProviderError('write_outcome_unknown', 'Local write outcome is unknown; keep this source open and check the original command identity', 503);
 const lostWorker = () => new ProviderError('local_worker_lost', 'The Local worker stopped. Unsaved changes cannot be recovered by reopening the original snapshot', 503);
 
@@ -137,6 +140,7 @@ export class WorkerLocalProvider {
     }
     if (message.error) {
       const error = message.error.name === 'AbortError' ? aborted() : new ProviderError(message.error.code ?? 'local_worker_error', message.error.message, message.error.status ?? 500, { errors: message.error.errors });
+      if (message.error.diagnostic) error.diagnostic = clone(message.error.diagnostic);
       request.reject(error);
     } else request.resolve(request.method === 'getStatus' ? this._status(message.result) : message.result);
   }

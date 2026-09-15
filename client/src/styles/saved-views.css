@@ -1,0 +1,5 @@
+.saved-view-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; min-width: 0; max-width: 100%; }
+.saved-view-controls select { width: 164px; max-width: 100%; min-width: 0; }
+.saved-view-controls button { width: 30px; height: 30px; flex: 0 0 30px; padding: 5px; }
+.saved-view-status { flex-basis: 100%; font-size: 12px; line-height: 1.4; overflow-wrap: anywhere; }
+.filter-strip { flex-wrap: wrap; gap: 6px 12px; }

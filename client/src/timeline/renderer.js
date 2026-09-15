@@ -3,6 +3,7 @@ import { createElement, icons } from 'lucide';
 import { escapeHtml } from '../utils/dom.js';
 import { zoneLabels } from './zones.js';
 import { hazardIcons } from './hazard-icons.js';
+import '../styles/grouping.css';
 const recordIcons = { circle: icons.Circle, check: icons.Check, 'alert-triangle': icons.AlertTriangle, info: icons.Info, flag: icons.Flag, radio: icons.Radio, clock: icons.Clock, 'file-text': icons.FileText, star: icons.Star };
 
 export class TimelineRenderer {
@@ -50,6 +51,7 @@ export class TimelineRenderer {
     }
   }
   render({ rows, width, height, rowHeight, fontSize, project, zones = [], selectedId, theme = 'light', ticks = [], hasSearch = false, referenceTime, interactive = true, presentation, labelBackgroundAuthored = false }) {
+    const focusedGroup = this.labels.contains(document.activeElement) ? document.activeElement.closest('[data-group-key]')?.dataset.groupKey : null;
     const styled = !!presentation || rows.items?.some(item => item.style);
     rowHeight = rows.rowHeight || rowHeight; presentation = styled ? rows.presentation || presentation : undefined;
     const paddingTop = presentation?.compact ? presentation.bandLayout?.some(band => band.relativeAxis) ? 28 : 4 : 52;
@@ -82,7 +84,13 @@ export class TimelineRenderer {
     for (const group of groups) {
       const y = paddingTop + (group.row - rows.startRow) * rowHeight;
       this.rect(0, y, width, rowHeight - 2, group.style?.backgroundColor || (theme === 'dark' ? '#293740' : '#dae3e7'), 1, 0.5, true);
-      labels.push(`<div class="group-label" style="top:${y}px;color:${group.style?.textColor || presentation?.bands.primary.textColor || 'inherit'}">${escapeHtml(group.name)}</div>`);
+      const groupColor = group.style?.textColor || presentation?.bands.primary.textColor || 'inherit';
+      if (interactive && typeof group.collapsed === 'boolean') {
+        const disclosure = createElement(group.collapsed ? icons.ChevronRight : icons.ChevronDown, { 'aria-hidden': 'true' }).outerHTML;
+        const action = `${group.collapsed ? 'Expand' : 'Collapse'} ${group.name}`;
+        const status = `${group.recordCount} records${hasSearch ? `, ${group.matchCount} findings` : ''}${group.continuation ? ', continued' : ''}`;
+        labels.push(`<button type="button" class="group-label group-toggle" data-group-key="${escapeHtml(group.key)}" data-continuation="${!!group.continuation}" aria-expanded="${!group.collapsed}" aria-label="${escapeHtml(`${action}, ${status}`)}" title="${escapeHtml(action)}" style="top:${y}px;height:${rowHeight - 2}px;max-width:${Math.max(1, width - 14)}px;color:${groupColor}">${disclosure}<span class="group-name">${escapeHtml(group.name)}</span><span class="group-count">${group.recordCount}</span>${group.continuation ? '<span class="group-continued">continued</span>' : ''}</button>`);
+      } else labels.push(`<div class="group-label" style="top:${y}px;color:${groupColor}">${escapeHtml(group.name)}</div>`);
     }
     for (const item of rows.items || []) {
       const record = item.record; if (!record) continue;
@@ -136,6 +144,7 @@ export class TimelineRenderer {
       if (!isPoint && interactive) labels.push(`<button class="record-hit" data-record-id="${escapeHtml(record.id)}" style="left:${Math.max(0, x)}px;top:${y + barTop - 2}px;width:${Math.max(8, Math.min(width, end) - Math.max(0, x))}px" title="${escapeHtml(record.title)}" aria-label="${escapeHtml(record.title)}" tabindex="-1"></button>`);
     }
     this.labels.innerHTML = labels.join('');
+    if (focusedGroup) [...this.labels.querySelectorAll('[data-group-key]')].find(node => node.dataset.groupKey === focusedGroup)?.focus({ preventScroll: true });
     this.renderer.render(this.scene, this.camera);
   }
   previewOffset(dx) {

@@ -1,5 +1,41 @@
 .search-options{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.search-options>label{display:flex;flex-direction:column;gap:6px;font-size:12px}.search-fields{margin-top:14px;font-size:12px}.search-fields>div{display:grid;grid-template-columns:1fr 1fr;margin-top:8px}.search-fields label{overflow-wrap:anywhere}.filter-heading{display:flex;align-items:center;gap:4px;margin-top:18px}.filter-heading h3{font-size:13px;margin:0 auto 0 0}.filter-tree{margin-top:10px}.filter-node{margin:8px 0;padding-left:9px;border-left:1px solid var(--line)}.filter-rule{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 34px 34px;gap:6px}.filter-rule>input{grid-column:1/3;grid-row:2}.filter-rule>button{grid-row:2}.filter-rule>select:nth-child(3){grid-column:1/3;grid-row:2}.filter-rule>span{grid-column:1/-1}.filter-rule>[data-filter-from]{grid-row:2}.filter-rule>[data-filter-to]{grid-row:3}.filter-rule input,.filter-rule select{width:100%;font-size:12px}.filter-group-tools{display:flex;align-items:center;gap:4px}.filter-group-tools select{flex:1;min-width:0;font-size:12px}.filter-group-tools span{margin-right:auto;font-size:12px}.filter-empty{font-size:12px;color:var(--muted)}.filter-node .check-label{font-size:11px}.axis span,.axis span:first-child,.axis span:last-child{transform:none}
 @media(max-width:600px){.search-options,.search-fields>div{grid-template-columns:1fr}.filter-node{padding-left:4px}.filter-rule{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 44px 44px}.filter-node button,.filter-heading button{min-width:44px;min-height:44px}.filter-group-tools{flex-wrap:wrap}.filter-group-tools select{flex-basis:100%}}
 .tall-rows .plot-wrap{min-height:var(--minimum-plot-height,246px)}
+.filter-definition-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.filter-definition-options label { display: flex; flex-direction: column; gap: 6px; font-size: 12px; min-width: 0; }
+.filter-definition-options select { max-width: 100%; }
+.filter-editor-modes { display: flex; gap: 2px; margin-top: 18px; border-bottom: 1px solid var(--line); }
+.filter-editor-modes button { font-size: 12px; border-radius: 0; }
+.filter-editor-modes button[aria-pressed=true] { border-bottom: 2px solid var(--accent); color: var(--accent); }
+.filter-advanced { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; font-size: 12px; }
+.filter-advanced textarea { width: 100%; min-height: 230px; max-height: 50dvh; resize: vertical; font: 12px/1.5 monospace; }
+.filter-regex-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 7px; }
+.filter-regex-options select { font-size: 12px; }
+.filter-regex-options label { font-size: 11px; }
+.filter-rule > .filter-unary-value { grid-column: 1/3; grid-row: 2; }
+.filter-preview { margin-top: 14px; border-top: 1px solid var(--line); font-size: 12px; }
+.filter-preview ul { padding-left: 18px; margin: 8px 0; }
+.filter-preview li { overflow-wrap: anywhere; margin-bottom: 5px; }
+@media(max-width:600px) { .filter-definition-options { grid-template-columns: 1fr; } }
+.filter-migration { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 12px; }
+.filter-migration summary { cursor: pointer; }
+.filter-migration-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.filter-migration-inputs label { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.filter-migration-inputs textarea { width: 100%; min-height: 65px; resize: vertical; }
+.filter-migration-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.filter-migration-actions button { border: 1px solid var(--line); }
+.filter-migration-diagnostics { padding-left: 18px; line-height: 1.5; }
+.filter-migration-diagnostics li { margin-bottom: 8px; overflow-wrap: anywhere; }
+.filter-migration-diagnostics [data-severity=error] { color: #a3312e; }
+.filter-migration-acknowledgements .check-label { align-items: flex-start; line-height: 1.5; white-space: normal; }
+.filter-migration-acknowledgements input { flex: none; }
+.filter-migration-proposal pre { white-space: pre-wrap; overflow-wrap: anywhere; font: 11px/1.5 monospace; }
+@media(max-width:600px) { .filter-migration-inputs { grid-template-columns: 1fr; } }
 @media(max-width:850px){.tall-rows .split-view .table-view{flex:0 0 180px;min-height:180px;max-height:180px}}
 @media(max-width:850px){.tall-rows:has(.split-view) .filter-strip{min-height:0;max-height:120px;overflow-y:auto;overflow-x:hidden;align-content:flex-start;overscroll-behavior:contain}}
+.filter-grouping-fields { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }
+.filter-grouping-fields > label { display: flex; flex-direction: column; min-width: 0; gap: 4px; }
+.filter-grouping-fields > .check-label { flex-direction: row; align-items: center; }
+.filter-grouping-fields select { min-width: 0; max-width: 100%; }
+.filter-schema-choices { display: grid; gap: 6px; }
+.filter-schema-scope { margin: 10px 0; }

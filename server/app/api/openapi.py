@@ -100,6 +100,7 @@ def components():
     pin = ref("ConfigurationDefinition/$defs/pin")
     scalar = {"type": ["string", "number", "boolean", "null"]}
     schemas["Problem"] = obj({"type": string(), "title": string(), "status": integer(400, 599), "detail": string(),
+        'diagnostic': obj({'code': string(), 'offset': nullable(integer()), 'offsetUnit': {'const': 'unicode-codepoint'}, 'field': string(), 'ruleId': string(), 'hint': string()}, additional=True),
         "instance": string(), "code": string(), "message": string(), "requestId": nullable(string()), "errors": array(obj({}, additional=True))},
         ["type", "title", "status", "detail", "instance", "code", "message", "requestId"])
     schemas["ValidationReport"] = obj({"valid": boolean, "errors": array(obj({"path": string(), "code": string(), "message": string()}, additional=True))}, ["valid", "errors"])
@@ -119,6 +120,18 @@ def components():
         obj({"op": {"const": "overlaps"}, "from": timeline_instant, "to": timeline_instant}, ["op", "from", "to"]),
     ], "description": "Additional semantic bounds: depth 8, at most 100 predicates; operators validate operand type before evaluation. Missing and null are distinct. No regex or executable code."}
     schemas["FilterExpression"] = obj({"version": {"const": 1}, "root": ref("FilterNode")}, ["version", "root"])
+    v2_nodes = copy.deepcopy(schemas['FilterNode']['oneOf'])
+    for node in v2_nodes:
+        node['properties']['ruleId'] = string(minLength=1, maxLength=64, pattern='^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$')
+        if 'args' in node['properties']:
+            node['properties']['args']['items'] = ref('FilterNodeV2')
+        if 'arg' in node['properties']:
+            node['properties']['arg'] = ref('FilterNodeV2')
+    regex_properties = {'pattern': string(minLength=1, maxLength=512), 'flags': array(enum('i', 'm', 's'), maxItems=3, uniqueItems=True),
+                        'matchMode': enum('search', 'full'), 'dialect': {'const': 're2-common-v1'}}
+    v2_nodes.append(obj({'op': {'const': 'regex'}, 'field': field, 'ruleId': string(minLength=1, maxLength=64, pattern='^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$'), **regex_properties}, ['op', 'field', 'pattern']))
+    schemas['FilterNodeV2'] = {'oneOf': v2_nodes, 'description': 'Typed version2 AST; depth8,100 nodes,8 regex nodes. RE2 common subset, no lookaround/backreferences/inline flags.'}
+    schemas['FilterExpression'] = {'oneOf': [schemas['FilterExpression'], obj({'version': {'const': 2}, 'root': ref('FilterNodeV2')}, ['version', 'root'])]}
     schemas["QueryFilters"] = obj({"kind": enum("all", "event", "session"), "sourceId": string(),
         "sourceIds": nullable(array(identity, maxItems=100, uniqueItems=True)), "kinds": array(enum("event", "session"), maxItems=2, uniqueItems=True),
         "schemaRefs": array(pin, maxItems=100), "filterId": nullable(identity), "filterVersion": nullable(integer(1, 32)), "expression": nullable(ref("FilterExpression"))},
@@ -126,23 +139,44 @@ def components():
     search_properties = {"search": string(maxLength=512), "searchMode": enum("any", "all", "phrase"), "searchCaseSensitive": boolean,
                          "searchFields": array(field, minItems=1, maxItems=16)}
     schemas["QueryRequest"] = obj({"domain": ref("Range"), "filters": ref("QueryFilters"), **search_properties,
+        'definitionVersion': enum(1, 2), 'relationshipMode': enum('independent', 'family'),
+        'searchMode': enum('any', 'all', 'phrase', 'regex'), 'searchFlags': regex_properties['flags'],
+        'searchMatchMode': regex_properties['matchMode'], 'searchDialect': regex_properties['dialect'],
         "scaleMode": enum("uniform", "adaptive", default="uniform"), "ratio": {"type": "number", "minimum": 1, "maximum": 32, "default": 4},
         "fixedScale": array(ref("Presentation/definitions/scaleInterval"), maxItems=32),
         "bins": integer(16, 256, default=128)}, ["domain"], additional=True,
         description="Bounded immutable read-only query preparation. Prefer: respond-async requests immediate status; otherwise a short ready wait may return200 or202. Context C, search matches M, density C_O, overview M_O when search is active. Additional currently unconsumed members have no effect; use only declared fields.")
+    schemas['QueryCounts'] = obj({'domain': ref('Range'), **provenance, 'complete': boolean,
+        **{key: integer() for key in ('filterResults', 'directPredicateHits', 'searchFindings', 'contextRecords', 'visibleContextRecords')}},
+        ['domain', *provenance, 'complete', 'filterResults', 'directPredicateHits', 'searchFindings', 'contextRecords', 'visibleContextRecords'])
+    schemas['QueryRecordProvenance'] = obj({'role': enum('direct', 'family-context', 'ancestor-context'), 'directPredicate': boolean,
+        'match': boolean, 'descendantMatchCount': integer()}, ['role', 'directPredicate', 'match', 'descendantMatchCount'])
+    schemas['QueryRecord'] = obj({'record': ref('Record'), 'provenance': ref('QueryRecordProvenance'),
+        'searchActive': boolean, 'explanation': obj({'rules': array(obj({'ruleId': string(), 'field': field, 'op': string()}, additional=True), maxItems=16), 'truncated': boolean}, ['rules', 'truncated']),
+        'ancestors': array(obj({'id': identity, 'title': string(), 'kind': enum('event', 'session'), 'start': timeline_instant, 'end': nullable(timeline_instant)}, ['id', 'title', 'kind', 'start', 'end']), maxItems=32),
+        'ancestorsTruncated': boolean}, ['record', 'ancestors', 'ancestorsTruncated'])
+    schemas['FindRequest'] = obj({'afterId': nullable(identity), 'direction': enum('next', 'previous')})
+    schemas['Finding'] = obj({'queryId': identity, 'record': nullable(ref('Record')), 'position': integer(), 'total': integer(), 'wrapped': boolean}, ['queryId', 'record', 'position', 'total', 'wrapped'])
+    schemas['LegacyFilterMigrationRequest'] = obj({'include': string(maxLength=4096), 'exclude': string(maxLength=4096), 'sortBy': string(maxLength=4096),
+        'relationshipMode': enum('independent', 'family'), 'acknowledgements': array(string(maxLength=100), maxItems=20, uniqueItems=True)})
+    schemas['LegacyFilterMigration'] = obj({'format': {'const': 'legacy-filter-migration'}, 'version': {'const': 1}, 'classification': enum('exact', 'intent-repair', 'blocked'),
+        'publishable': boolean, 'diagnostics': array(obj({}, additional=True)), 'requiredAcknowledgements': array(string()), 'draft': nullable(obj({}, additional=True)),
+        'scope': obj({'queryId': identity, **provenance, 'domain': ref('Range'), 'complete': boolean})},
+        ['format', 'version', 'classification', 'publishable', 'diagnostics', 'requiredAcknowledgements', 'draft', 'scope'])
     schemas["WindowCoverage"] = obj({"complete": boolean, "state": string(), "indexVersion": integer(),
         "checkedAt": nullable(instant), "indexedFiles": integer(), "indexedRecords": integer(),
         "rejectedFiles": integer(), "recordCount": nullable(integer())},
         ["complete", "state", "indexVersion", "checkedAt", "indexedFiles", "indexedRecords", "rejectedFiles", "recordCount"],
         description="Legacy file-index coverage pinned to this query. Provisional counts are not complete archive counts; incomplete coverage forces a uniform map.")
     schemas["QueryManifest"] = obj({**provenance, "queryId": identity, "snapshotId": identity, "mapId": identity, "coverage": ref("WindowCoverage"),
+        'definitionVersion': {'const': 2}, 'relationshipMode': enum('independent', 'family'), 'counts': ref('QueryCounts'), 'preferencesRevision': integer(),
         "baseTotal": integer(), "matchTotal": integer(), "overviewTotal": integer(), "overviewMatchTotal": integer(),
         "fieldTypes": obj({}, additional=string()), "state": {"const": "ready"}},
         [*provenance, "queryId", "snapshotId", "mapId", "baseTotal", "matchTotal", "overviewTotal", "overviewMatchTotal", "fieldTypes", "state"])
-    schemas["PreparationError"] = obj({"code": string(maxLength=128), "message": string(maxLength=256), "status": integer(400, 599)}, ["code", "message", "status"])
+    schemas["PreparationError"] = obj({"code": string(maxLength=128), "message": string(maxLength=256), "status": integer(400, 599), 'diagnostic': schemas['Problem']['properties']['diagnostic']}, ["code", "message", "status"])
     query_preparation = {**provenance, "queryId": identity, "snapshotId": identity, "mapId": identity}
-    schemas["QueryPreparing"] = obj({**query_preparation, "state": {"const": "preparing"}}, [*query_preparation, "state"])
-    schemas["QueryFailed"] = obj({**query_preparation, "state": {"const": "failed"}, "error": ref("PreparationError")}, [*query_preparation, "state", "error"])
+    schemas["QueryPreparing"] = obj({**query_preparation, 'preferencesRevision': integer(), "state": {"const": "preparing"}}, [*query_preparation, "state"])
+    schemas["QueryFailed"] = obj({**query_preparation, 'preferencesRevision': integer(), "state": {"const": "failed"}, "error": ref("PreparationError")}, [*query_preparation, "state", "error"])
     schemas["QueryStatus"] = {"oneOf": [ref("QueryManifest"), ref("QueryFailed")]}
     schemas["Density"] = obj({"bins": array(obj({"from": integer(-SAFE_INT), "to": integer(-SAFE_INT), "points": integer(),
         "overlapMs": string(pattern="^[0-9]+$"), "endpoints": integer(), "density": number}, ["from", "to", "points", "overlapMs", "endpoints", "density"]), maxItems=256),
@@ -155,6 +189,8 @@ def components():
         "items": array(ref("OverviewMark"), maxItems=1000), "coverage": ref("WindowCoverage")}, ["domain", "total", "matched", "matchActive", "aggregated", "items"])
     schemas["Zones"] = obj({"items": array(ref("Snapshot/properties/zones/items"), maxItems=512)}, ["items"])
     layout_properties = {"mapId": identity, "from": timeline_instant, "to": timeline_instant, "viewFromMs": ref("ContinuousMs"), "viewToMs": ref("ContinuousMs"),
+        'definitionVersion': enum(1, 2), 'groupOrder': obj({'order': enum('natural', 'codepoint'), 'caseSensitive': boolean}),
+        'collapsedGroups': array(string(maxLength=1024), maxItems=10000, uniqueItems=True),
         "width": {"type": "number", "minimum": 64, "maximum": 8192}, "availableHeight": {"type": "number", "minimum": 32, "maximum": 8192, "default": 480},
         "rowHeight": {"type": "number", "minimum": 32, "maximum": 192, "default": 32}, "fontSize": {"type": "number", "minimum": 10, "maximum": 32, "default": 13},
         "groupBy": enum("none", "sourceId", "kind"), "renderProfileId": {"const": "noto-sans-latin-v1"}, "theme": enum("light", "classic", "dark"),
@@ -163,6 +199,7 @@ def components():
         description="Effective rowHeight must fit availableHeight and all font/mark/label footprints. Legacy geometry caps rowHeight at128; presentation geometry at192. from/to are required conservative instants; continuous view bounds are exact.")
     manifest = {key: value for key, value in layout_properties.items() if key not in ("fontSize", "groupBy", "theme", "displayUnit")}
     schemas["LayoutManifest"] = obj({**manifest, "layoutId": identity, "totalRows": integer(), "detailTotal": integer(), "detailMatchTotal": integer(),
+        **{key: integer() for key in ('logicalGroupTotal', 'collapsedGroupTotal', 'hiddenItemTotal')},
         "renderInstanceTotal": integer(), "pageCapacity": integer(1, 100), "enclosures": array(obj({}, additional=True))},
         ["layoutId", "mapId", "totalRows", "detailTotal", "detailMatchTotal", "renderInstanceTotal", "rowHeight", "pageCapacity", "from", "to", "viewFromMs", "viewToMs", "width", "availableHeight", "renderProfileId"])
     layout_preparation = {**provenance, "queryId": identity, "layoutId": identity, "mapId": identity}
@@ -180,14 +217,15 @@ def components():
         "previousCursor": cursor, "nextCursor": cursor, "pageComplete": {"const": True}, "enclosures": array(obj({}, additional=True))},
         ["layoutId", "mapId", "items", "rows", "startRow", "endRow", "totalRows", "pageIndex", "pageCount", "loadedCount", "previousCursor", "nextCursor", "pageComplete"])
     schemas["Placement"] = obj({"outsideLayout": boolean, "recordId": identity, "layoutId": identity, "mapId": identity, "row": integer(), "pageIndex": integer(), "cursor": string()}, ["outsideLayout", "recordId"])
-    sort = array(obj({"field": string(), "direction": enum("asc", "desc")}, ["field", "direction"]), minItems=1, maxItems=3)
+    sort = array(obj({"field": string(), "direction": enum("asc", "desc"), 'order': enum('natural', 'codepoint'), 'caseSensitive': boolean}, ["field", "direction"]), minItems=1, maxItems=3)
     window = obj({**schemas["Range"]["properties"], "viewFromMs": ref("ContinuousMs"), "viewToMs": ref("ContinuousMs")}, ["from", "to"])
     table_properties = {"scope": enum("all", "window", default="all"), "window": nullable(window), "projection": enum("context", "matches", default="context"),
                         "sort": sort, "limit": integer(1, 1000, default=100)}
-    schemas["TableRequest"] = obj({**table_properties, "cursor": cursor}, description="Complete filtered record pagination independent of row pages. Custom scalar sorts require query schemaRefs. Present, null, missing order is stable in either direction; ID ascending is final tie-breaker.")
+    schemas["TableRequest"] = obj({**table_properties, "cursor": cursor, 'definitionVersion': enum(1, 2)}, description="Complete filtered record pagination independent of row pages. Custom scalar sorts require query schemaRefs. Present, null, missing order is stable in either direction; ID ascending is final tie-breaker. Natural string ordering requires a version2 query.")
     schemas["TablePage"] = obj({**provenance, **table_properties, "queryId": identity, "snapshotId": identity, "tableId": string(),
+        'definitionVersion': enum(1, 2), 'contextTotal': integer(),
         **{key: integer() for key in ("baseTotal", "total", "matchTotal", "startIndex", "endIndex", "pageIndex", "pageCount")}, "matchActive": boolean,
-        "items": array(obj({"record": ref("Record"), "match": boolean}, ["record", "match"]), maxItems=1000), "previousCursor": cursor, "nextCursor": cursor, "pageComplete": {"const": True}},
+        "items": array(obj({"record": ref("Record"), "match": boolean, 'provenance': ref('QueryRecordProvenance')}, ["record", "match"]), maxItems=1000), "previousCursor": cursor, "nextCursor": cursor, "pageComplete": {"const": True}},
         [*provenance, *table_properties, "queryId", "snapshotId", "tableId", "baseTotal", "total", "matchTotal", "matchActive", "items", "startIndex", "endIndex", "pageIndex", "pageCount", "previousCursor", "nextCursor", "pageComplete"])
     mutable = {key: copy.deepcopy(schemas["Record"]["properties"][key]) for key in sorted(MUTABLE_FIELDS)}
     schemas["RecordCreate"] = obj(mutable, ["title"], description="Provider defaults optional canonical fields, including current start when omitted; custom data requires an exact published workspace schema pin. Typed collection enforces kind.")
@@ -370,6 +408,12 @@ def _operation(path, method, name):
     if suffix.startswith("/query-snapshots/") or (suffix.startswith("/query-sessions/") and method == "DELETE"):
         return None, None, 204, "queries", "Release an owned ephemeral view handle; do not delete records.", True
     if suffix.startswith("/query-sessions/"):
+        if suffix.endswith('/legacy-filter-migration'):
+            return 'LegacyFilterMigration', 'LegacyFilterMigrationRequest', 200, 'queries', 'Read-only dry-run with explicit repair acknowledgements and typed AST. No source or preference files are written; publication is separate.', True
+        if suffix.endswith('/find'):
+            return 'Finding', 'FindRequest', 200, 'queries', 'Traverse direct search findings in stable time/ID order across all row pages in this query domain; returns one pinned record.', True
+        if suffix.endswith('/records/{record_id}'):
+            return 'QueryRecord', None, 200, 'queries', 'Read a pinned selected record, scoped provenance and permitted ancestor breadcrumbs. No data outside the owned query scope is exposed.', True
         for ending, response, body in (("/density", "Density", None), ("/overview", "Overview", None), ("/zones", "Zones", None),
                                       ("/records/query", "TablePage", "TableRequest"), ("/layouts", "LayoutStatus", "LayoutRequest"), ("/rows", "RowsPage", None)):
             if suffix.endswith(ending):
