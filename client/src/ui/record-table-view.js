@@ -13,8 +13,8 @@ const csvCell = value => {
 };
 
 export class RecordTableView {
-  constructor({ element, context, onSelect, onError, onChange, onPreferenceChange, updateIcons, dateLabel }) {
-    Object.assign(this, { element, context, onSelect, onError, onChange, onPreferenceChange, updateIcons, dateLabel });
+  constructor({ element, context, onSelect, onError, onChange, onPreferenceChange, updateIcons, dateLabel, beforeRead }) {
+    Object.assign(this, { element, context, onSelect, onError, onChange, onPreferenceChange, updateIcons, dateLabel, beforeRead });
     this.scope = 'all'; this.projection = 'context'; this.sort = 'start'; this.direction = 'asc'; this.limit = 100;
     this.visible = false; this.result = null; this.intent = 0; this.key = null; this.pending = false;
     this.columns = null; this.sorts = [{ field: this.sort, direction: this.direction }];
@@ -107,13 +107,17 @@ export class RecordTableView {
     const controller = this.controller;
     if (key !== this.key) this.result = null;
     this.key = key; this.pending = true; this.render(); this.onChange();
+    let release;
     try {
+      release = await this.beforeRead?.(context, { signal: controller.signal });
+      if (intent !== this.intent || !this.current(context) || controller.signal.aborted) return;
       const result = await context.provider.queryRecords(context.query.queryId, { ...input, ...(cursor ? { cursor } : {}) }, { signal: controller.signal });
       if (intent !== this.intent || !this.current(context)) return;
       this.result = result;
     } catch (error) {
       if (intent === this.intent && this.current(context) && error.name !== 'AbortError') { this.key = null; this.onError(error); }
     } finally {
+      release?.();
       if (intent === this.intent) { this.pending = false; this.render(); this.onChange(); }
     }
   }
@@ -158,7 +162,10 @@ export class RecordTableView {
     if (!context.query || context.unavailable || context.authRequired) return;
     const input = { ...this.input(context), limit: 1000 }, controller = new AbortController();
     this.exportController = controller; this.exporting = true; this.render();
+    let release;
     try {
+      release = await this.beforeRead?.(context, { signal: controller.signal });
+      if (!this.current(context) || controller.signal.aborted) throw new DOMException('Export canceled', 'AbortError');
       const version2 = context.query.definitionVersion === 2;
       const lines = [['ID', 'Title', 'Kind', 'Start (UTC)', 'End (UTC)', 'Source', 'Status', ...(version2 ? ['Result role', 'Direct predicate match', 'Search finding', 'Matching descendants'] : [])].map(csvCell).join(',')];
       let cursor = null, count = 0, bytes = lines[0].length;
@@ -177,6 +184,6 @@ export class RecordTableView {
       const anchor = document.createElement('a'); anchor.href = url; anchor.download = `openbexi-${input.scope}${version2 ? `-${input.projection === 'matches' ? 'findings' : 'context'}` : ''}-snapshot-${context.query.revision}.csv`; anchor.click();
       setTimeout(() => URL.revokeObjectURL(url), 30000);
     } catch (error) { if (this.current(context) && error.name !== 'AbortError') this.onError(error); }
-    finally { if (this.exportController === controller) { this.exporting = false; this.exportController = null; this.render(); } }
+    finally { release?.(); if (this.exportController === controller) { this.exporting = false; this.exportController = null; this.render(); } }
   }
 }

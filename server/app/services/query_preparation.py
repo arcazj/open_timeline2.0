@@ -65,11 +65,13 @@ class _Preparation:
 
 class QueryPreparationCoordinator:
     def __init__(self, engine, access, *, workers=2, queue_capacity=8, deadline_seconds=30,
-                 ready_wait_seconds=0.1, preparation_allowance_bytes=8 * 1024 * 1024, preferences=None):
+                 ready_wait_seconds=0.1, release_wait_seconds=5,
+                 preparation_allowance_bytes=8 * 1024 * 1024, preferences=None):
         self.engine, self.access = engine, access
         self.preferences = preferences
         self.worker_limit, self.queue_capacity = workers, queue_capacity
         self.deadline_seconds, self.ready_wait_seconds = deadline_seconds, ready_wait_seconds
+        self.release_wait_seconds = release_wait_seconds
         self.preparation_allowance_bytes = preparation_allowance_bytes
         self.condition = threading.Condition(engine.mutex)
         self.jobs, self.queue, self.active_principals = {}, [], set()
@@ -96,6 +98,8 @@ class QueryPreparationCoordinator:
             self._expire_queued()
         if operation == "query_records":
             return self._table(identity, *args)
+        if operation in ("release_query", "release_layout", "release_snapshot"):
+            return self._release(identity, operation, args)
         started = operation in ("create_query", "create_layout")
         if started:
             job = self._submit(identity, operation, args)
@@ -106,12 +110,44 @@ class QueryPreparationCoordinator:
         result = self.access.query(identity, operation, *args)
         if started and not prefer_async and result.get("state") == "failed":
             failure = result["error"]
-            self.access.query(identity, "release_query" if job.kind == "query" else "release_layout", *args)
+            self._release(identity, "release_query" if job.kind == "query" else "release_layout", args)
             error = DomainError(failure["code"], failure["message"], failure["status"])
             if 'diagnostic' in failure:
                 error.diagnostic = copy.deepcopy(failure['diagnostic'])
             raise error
         return result
+
+    def _release(self, identity, operation, args):
+        try:
+            result = self.access.query(identity, operation, *args)
+        except DomainError as error:
+            if error.status in (404, 410):
+                self._wait_released(identity, operation, args)
+            raise
+        self._wait_released(identity, operation, args)
+        return result
+
+    def _wait_released(self, identity, operation, args):
+        def matches(query_id, layout_id, snapshot_id):
+            if operation == "release_snapshot":
+                return snapshot_id == args[0]
+            return query_id == args[0] and (operation == "release_query" or layout_id == args[1])
+
+        # A removed handle can still own a running job. Retain only completion
+        # events, then release all authority/engine locks before waiting.
+        with self.condition:
+            completions = [job.done for job in self.jobs.values()
+                           if job.scope["principalId"] == identity["id"] and
+                           matches(job.query_id, job.key if job.kind == "layout" else None,
+                                   (job.placeholder if job.kind == "query" else job.captured)["manifest"]["snapshotId"])]
+            completions.extend(work["done"] for work in self.synchronous.values()
+                               if work["principalId"] == identity["id"] and
+                               matches(work["queryId"], None, work["snapshotId"]))
+        deadline = time.monotonic() + self.release_wait_seconds
+        for done in completions:
+            if not done.wait(max(0, deadline - time.monotonic())):
+                raise DomainError("preparation_release_timeout",
+                                  "The handle is released but preparation cleanup is still running; retry the same DELETE.", 503)
 
     def _table(self, identity, query_id, request):
         if not isinstance(request, dict) or len(json_bytes(request)) > 64 * 1024:
@@ -121,17 +157,18 @@ class QueryPreparationCoordinator:
                 raise DomainError("query_service_closed", "Query service is closed.", 503)
             scope = self.access._scope(self.access._current(identity, "records.read"))
             with query_access(scope):
-                self.engine._query(query_id)
+                snapshot_id = self.engine._query(query_id)["manifest"]["snapshotId"]
                 if self.engine.has_table(query_id, request):
                     # The lock covers lookup and read, so another request cannot evict this index between them.
                     return self.engine.query_records(query_id, request)
             principal = scope["principalId"]
             if principal in self.active_principals or len(self.active_principals) >= self.worker_limit or self.queue:
                 raise DomainError("preparation_capacity", "Preparation capacity is in use; retry after the current preparation.", 429)
-            key, cancelled = str(uuid.uuid4()), threading.Event()
+            key, cancelled, done = str(uuid.uuid4()), threading.Event(), threading.Event()
             self.engine.resources.reserve(("table-preparation", key), {"request": request, "scope": scope}, overhead=self.preparation_allowance_bytes)
             self.active_principals.add(principal)
-            self.synchronous[key] = {"queryId": query_id, "cancelled": cancelled}
+            self.synchronous[key] = {"queryId": query_id, "snapshotId": snapshot_id,
+                                     "principalId": principal, "cancelled": cancelled, "done": done}
         try:
             with preparation_control(cancelled, time.monotonic() + self.deadline_seconds):
                 return self.access.query(identity, "query_records", query_id, request)
@@ -140,6 +177,7 @@ class QueryPreparationCoordinator:
                 self.engine.resources.release(("table-preparation", key))
                 self.synchronous.pop(key, None)
                 self.active_principals.discard(principal)
+                done.set()
                 self.condition.notify_all()
 
     def _submit(self, identity, operation, args):

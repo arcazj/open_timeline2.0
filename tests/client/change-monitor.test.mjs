@@ -90,3 +90,41 @@ test('an explicit refresh requested during another read waits without concurrent
   assert.deepEqual(await Promise.all([second, third]), [true, true]);
   await pause(20); assert.equal(completions.length, 2); f.monitor.dispose();
 });
+
+test('direct scoped boundaries cancel queued reads and paint without recursive host callbacks', async () => {
+  for (const boundary of ['authorization-lost', 'generation-changed', 'replay-gap']) {
+    const f = fixture(); f.block(true); const pending = f.monitor.reload();
+    assert.equal(f.monitor.markBoundary(f.source, boundary), true);
+    assert.equal(f.monitor.state.required, boundary); assert.equal(f.notices.at(-1).required, boundary);
+    assert.equal(await pending, false); assert.deepEqual(f.calls, []);
+    f.monitor.acknowledge({ generation: 'one', revision: 99 });
+    assert.equal(f.monitor.state.baseline, 1); assert.equal(f.monitor.state.required, boundary);
+    f.block(false); await pause(20); assert.equal(f.reloads, 0); f.monitor.dispose();
+  }
+});
+
+test('direct boundaries reject invalid values, obsolete providers and disposed monitors', () => {
+  const f = fixture(), other = { subscribeChanges: () => () => {} };
+  for (const invalid of ['refresh-required', 'server-unavailable', '', null]) assert.throws(() => f.monitor.markBoundary(f.source, invalid), TypeError);
+  const notices = f.notices.length;
+  assert.equal(f.monitor.markBoundary(other, 'authorization-lost'), false);
+  assert.equal(f.monitor.state.required, null); assert.equal(f.notices.length, notices);
+  f.monitor.start(other, { generation: 'two', revision: 20 });
+  assert.equal(f.monitor.markBoundary(f.source, 'authorization-lost'), false);
+  assert.equal(f.monitor.state.required, null); assert.equal(f.monitor.state.baseline, 20);
+  f.monitor.dispose(); assert.equal(f.monitor.markBoundary(other, 'authorization-lost'), false);
+});
+
+test('direct authorization loss wins over later generation notifications and in-flight reads', async () => {
+  let complete;
+  const f = fixture({ reload: () => new Promise(resolve => { complete = resolve; }) });
+  const pending = f.monitor.reload();
+  assert.equal(f.monitor.markBoundary(f.source, 'authorization-lost'), true);
+  assert.equal(f.monitor.markBoundary(f.source, 'generation-changed'), false);
+  f.emit({ type: 'generation-changed', code: 'replay_gap' });
+  f.monitor.acknowledge({ generation: 'one', revision: 50 });
+  complete({ generation: 'one', revision: 50 });
+  assert.equal(await pending, false); assert.equal(f.monitor.state.required, 'authorization-lost');
+  assert.equal(f.monitor.state.baseline, 1); assert.equal(f.monitor.state.inFlight, false); assert.deepEqual(f.calls, []);
+  f.monitor.dispose();
+});

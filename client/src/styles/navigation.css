@@ -3,5 +3,6 @@
 .plot-wrap[data-navigation-phase=dragging] .record-label-layer,.plot-wrap[data-navigation-phase=coasting] .record-label-layer{will-change:transform}
 .plot-wrap[data-navigation-phase=dragging],.plot-wrap[data-navigation-phase=coasting]{user-select:none;cursor:grabbing}
 .plot-wrap[data-navigation-phase=settling] .record-label-layer{pointer-events:none}
-.navigation-pending-edge{position:absolute;top:0;bottom:0;min-width:0;overflow:hidden;pointer-events:none;background:#b9cbd51c;border-inline:1px dotted #8fa3af;color:var(--muted);font-size:10px;padding-top:30px;text-align:center;white-space:nowrap}
+.navigation-pending-edge{position:absolute;inset:0;overflow:hidden;pointer-events:none;color:var(--muted);font-size:10px}
+.navigation-loading-span{position:absolute;top:0;bottom:0;overflow:hidden;padding:30px 4px 0;box-sizing:border-box;background:#b9cbd51c;border-inline:1px dotted #8fa3af;text-align:center;overflow-wrap:anywhere}
 .plot-wrap[data-navigation-phase=dragging] .empty-state,.plot-wrap[data-navigation-phase=coasting] .empty-state,.plot-wrap[data-navigation-phase=settling] .empty-state{display:none}

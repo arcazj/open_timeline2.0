@@ -14460,6 +14460,7 @@
             }
           },
           {
+            "description": "Opaque cursor from this layout. Mutually exclusive with pageIndex.",
             "in": "query",
             "name": "cursor",
             "required": false,
@@ -14473,6 +14474,17 @@
                 }
               ],
               "title": "Cursor"
+            }
+          },
+          {
+            "description": "Zero-based direct vertical page of this pinned layout. Mutually exclusive with cursor. Page0 is valid for an empty layout; out-of-range pages reject with invalid_page_index.",
+            "in": "query",
+            "name": "pageIndex",
+            "required": false,
+            "schema": {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
             }
           }
         ],

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { descriptorFields, descriptorText, needsLegacyDescriptor } from '../../client/src/ui/record-descriptor.js';
+import { canRetainDescriptor, descriptorFields, descriptorText, needsLegacyDescriptor } from '../../client/src/ui/record-descriptor.js';
 
 test('legacy descriptor exposes authored metadata instead of the adapter wrapper', () => {
   const record = { extensions: { legacy: { id: 'event-1' } }, data: { namespace: 'SOURCE1', type: 'normalized', description: '', legacy: { title: 'Event', description: '', type: 'authored', status: 'FAILED', priority: 0, optional: null, empty: '', nested: { value: false }, text: 'Secondary note' } } };
@@ -28,4 +28,22 @@ test('sidecar loading follows legacy empty-description behavior without discardi
   for (const description of ['', '  ', null, undefined]) assert.equal(needsLegacyDescriptor({ data: { description } }), true);
   for (const description of ['Inline description', 0, false]) assert.equal(needsLegacyDescriptor({ data: { description } }), false);
   assert.equal(needsLegacyDescriptor({ data: { legacy: { description: 'Legacy description' } } }), false);
+});
+
+test('descriptor retention is limited to navigation within the same authorized query definition and data revision', () => {
+  const provider = {}, selected = { id: 'record-1' };
+  const previousQuery = { queryId: 'q1', definitionVersion: 2, generation: 'g1', revision: 4, preferencesRevision: 2 };
+  const query = { ...previousQuery, queryId: 'q2' };
+  const input = { navigationOnly: true, provider, selected, previousQuery, query, previousScope: 'scope1', scope: 'scope1',
+    selectedContext: { provider, queryId: 'q1', context: { record: selected } }, unavailable: false };
+  assert.equal(canRetainDescriptor(input), true);
+  for (const change of [
+    { navigationOnly: false }, { unavailable: true }, { scope: 'changed-filter-search-or-principal' }, { previousScope: undefined },
+    { provider: {} }, { selected: { id: 'record-1' } }, { selectedContext: null },
+    { query: { ...query, definitionVersion: 1 } }, { query: { ...query, generation: 'g2' } }, { query: { ...query, revision: 5 } },
+    { query: { ...query, preferencesRevision: 3 } }, { query: { ...query, preferencesRevision: undefined } },
+    { selectedContext: { ...input.selectedContext, queryId: 'obsolete-query' } },
+  ]) assert.equal(canRetainDescriptor({ ...input, ...change }), false);
+  assert.equal(canRetainDescriptor({ ...input, previousQuery: query, query: { ...query, queryId: 'q3' },
+    selectedContext: { ...input.selectedContext, retainedForQueryId: 'q2' } }), true);
 });

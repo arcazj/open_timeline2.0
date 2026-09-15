@@ -38,11 +38,12 @@ export function createModelPreview(options) {
     running = true;
     const requestIntent = intent, { width, height } = requested;
     task = (async () => {
-      let candidateId = null;
+      let candidateId = null, releasePreparation;
       try {
         check();
+        if (!queryId) { await previous?.dispose(); check(); }
+        releasePreparation = await options.beforePrepare?.({ signal: controller.signal }); check();
         if (!queryId) {
-          await previous?.dispose(); check();
           // Let allocations return their IDs even after Close so they can be released.
           const query = await provider.createQuery({ domain, filters, search, ...queryOptions, scaleMode: definition.scaleMode, ratio: definition.ratio, bins: definition.bins }, { timeout: 10000 });
           queryId = query.queryId; check();
@@ -80,9 +81,11 @@ export function createModelPreview(options) {
         if (!disposed && error.name !== 'AbortError') { container.dataset.previewState = 'error'; publish({ error }); }
         if (!renderer) await releaseQuery();
       } finally {
-        await releaseLayout(candidateId);
-        running = false;
-        if (!disposed && requestIntent !== intent) { clearTimeout(timer); timer = setTimeout(pump, RESIZE_DELAY); }
+        try { await releaseLayout(candidateId); }
+        finally {
+          releasePreparation?.(); running = false;
+          if (!disposed && requestIntent !== intent) { clearTimeout(timer); timer = setTimeout(pump, RESIZE_DELAY); }
+        }
       }
     })();
   }

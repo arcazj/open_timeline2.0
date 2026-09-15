@@ -407,8 +407,13 @@ def create_app(data_root=None, token=None, seed_path=None, metrics_path=None, le
         return preparation_response(await query_call(request, "get_layout", query_id, layout_id))
 
     @app.get(query_base + "/layouts/{layout_id}/rows", dependencies=[Depends(authenticated)])
-    async def rows(query_id: str, layout_id: str, request: Request, cursor: str | None = None):
-        return await query_call(request, "rows", query_id, layout_id, cursor)
+    async def rows(query_id: str, layout_id: str, request: Request, cursor: str | None = None, pageIndex: str | None = None):
+        if pageIndex is not None:
+            if cursor is not None:
+                raise DomainError("invalid_pagination", "Specify either cursor or pageIndex, not both.", 422)
+            if len(pageIndex) > 16 or not pageIndex.isascii() or not pageIndex.isdecimal() or int(pageIndex) > 9007199254740991:
+                raise DomainError("invalid_page_index", "pageIndex must be a nonnegative safe integer.", 422)
+        return await query_call(request, "rows", query_id, layout_id, cursor, int(pageIndex) if pageIndex is not None else None)
 
     @app.get(query_base + "/layouts/{layout_id}/placement/{record_id}", dependencies=[Depends(authenticated)])
     async def placement(query_id: str, layout_id: str, record_id: str, request: Request):

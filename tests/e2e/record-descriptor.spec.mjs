@@ -93,6 +93,85 @@ test('a delayed sidecar cannot revive a closed descriptor or replace another sel
   await expect(page.locator('.descriptor')).not.toContainText('Linked source description');
 });
 
+test('label activation during a pending descriptor resize retains the selection', async ({ page }) => {
+  await sidecar(); await openServer(page); await label(page).click();
+  await expect(page.locator('.linked-descriptor-fields')).toContainText('Linked source description');
+  await expect.poll(() => page.locator('.plot-wrap').evaluate(node => Math.abs(node.querySelector('canvas').width / Math.min(devicePixelRatio, 2) - node.clientWidth))).toBeLessThan(1);
+  await ready(page);
+  let entered, release;
+  const requested = new Promise(resolve => { entered = resolve; });
+  const held = new Promise(resolve => { release = resolve; });
+  await page.route('**/query-sessions/*/layouts', async route => {
+    if (route.request().method() !== 'POST') { await route.continue(); return; }
+    entered(); await held;
+    try { await route.continue(); } catch { /* A subsequent resize may cancel the obsolete layout. */ }
+  });
+  try {
+    await page.locator('[data-action=close-descriptor]').click(); await requested;
+    await expect(page.locator('.descriptor')).toBeHidden();
+    expect(await page.locator('.plot-wrap').evaluate(node => Math.abs(node.querySelector('canvas').width / Math.min(devicePixelRatio, 2) - node.clientWidth))).toBeGreaterThan(1);
+    // Deliver activation directly so the held request and busy overlay cannot turn
+    // this width-mismatch regression into a machine-speed-dependent pointer test.
+    await label(page).dispatchEvent('click', { bubbles: true, button: 0, detail: 1 });
+    await expect(page.locator('.descriptor')).toBeVisible();
+    await expect(page.locator('.linked-descriptor-fields')).toContainText('Linked source description');
+  } finally { release(); await page.unroute('**/query-sessions/*/layouts'); }
+  await ready(page);
+});
+
+test('time-only navigation retains an offscreen v2 descriptor without reloading its sidecar, while filter changes recheck it', async ({ page }) => {
+  await sidecar(`Navigation description ${'Long metadata value. '.repeat(600)}`); await openServer(page);
+  await page.locator('[data-action=filters]').first().click();
+  const form = page.locator('#settings-form'); await form.locator('[name=definitionVersion]').selectOption('2');
+  await form.getByRole('combobox', { name: 'Group by field', exact: true }).selectOption('/sourceId');
+  await form.locator('[name=search]').fill('Match_5_1'); await form.locator('[type=submit]').click();
+  await expect.poll(() => page.evaluate(() => window.__timelineDebug?.ready)).toBe(true);
+  let sidecarRequests = 0;
+  page.on('request', request => { if (request.url().endsWith(`/records/${target().id}/legacy-descriptor`)) sidecarRequests++; });
+  await label(page).click();
+  await expect(page.locator('.linked-descriptor-fields')).toContainText('Navigation description');
+  await expect(page.locator('.descriptor-context')).toContainText('Matching record');
+  await expect.poll(() => page.evaluate(() => window.__timelineDebug?.ready)).toBe(true);
+  await expect.poll(() => page.locator('.plot-wrap').evaluate(node => Math.abs(node.querySelector('canvas').width / Math.min(devicePixelRatio, 2) - node.clientWidth))).toBeLessThan(1);
+  const detail = page.locator('.linked-descriptor-fields details').first(); await detail.locator('summary').click();
+  const original = await page.locator('.descriptor').evaluate(node => {
+    window.__retainedDescriptorFields = node.querySelector('.linked-descriptor-fields'); node.scrollTop = 120;
+    return { scrollTop: node.scrollTop, queryId: window.__timelineDebug.queryId };
+  });
+  const reads = sidecarRequests;
+  const move = async (from, to) => {
+    const queryId = await page.evaluate(() => window.__timelineDebug.queryId);
+    await page.locator('.range-button').click();
+    await page.locator('#range-form [name=from]').fill(from); await page.locator('#range-form [name=to]').fill(to);
+    await page.locator('#range-form [type=submit]').click();
+    await expect.poll(() => page.evaluate(() => window.__timelineDebug.queryId)).not.toBe(queryId);
+    await expect.poll(() => page.evaluate(() => window.__timelineDebug?.ready)).toBe(true);
+  };
+  await move('2040-01-01T00:00', '2040-01-02T00:00');
+  await expect(label(page)).toHaveCount(0); await expect(page.locator('.descriptor')).toBeVisible();
+  await expect(page.locator('.descriptor-retained')).toBeVisible();
+  await expect(page.locator('.descriptor-context')).toHaveCount(0);
+  await expect(page.locator('.descriptor-data')).not.toContainText('Timeline snapshot');
+  await expect(detail).toHaveAttribute('open', '');
+  expect(await page.locator('.descriptor').evaluate(node => node.querySelector('.linked-descriptor-fields') === window.__retainedDescriptorFields)).toBe(true);
+  expect(await page.locator('.descriptor').evaluate(node => node.scrollTop)).toBe(original.scrollTop);
+  expect(sidecarRequests).toBe(reads);
+  await move(legacyDomain.from.slice(0, 16), legacyDomain.to.slice(0, 16));
+  expect(sidecarRequests).toBe(reads);
+  const retainedQuery = await page.evaluate(() => window.__timelineDebug.queryId);
+  await page.locator('#search').fill('');
+  await expect.poll(() => page.evaluate(() => window.__timelineDebug.queryId)).not.toBe(retainedQuery);
+  await expect.poll(() => page.evaluate(() => window.__timelineDebug?.ready)).toBe(true);
+  await expect(page.locator('.descriptor-retained')).toHaveCount(0);
+  await expect(page.locator('.descriptor-context')).not.toContainText('Matching record');
+  await expect(page.locator('.linked-descriptor-fields')).toContainText('Navigation description');
+  expect(sidecarRequests).toBeGreaterThan(reads);
+  const otherSource = snapshot.records.find(record => record.sourceId !== target().sourceId).sourceId;
+  await page.locator('#source-filter').selectOption(otherSource);
+  await expect.poll(() => page.evaluate(() => window.__timelineDebug?.ready)).toBe(true);
+  await expect(page.locator('.descriptor')).toBeHidden();
+});
+
 test('offline descriptors retain complete imported metadata, keyboard access and narrow-screen layout', async ({ page }, info) => {
   const value = target(); value.data.description = 'Inline source description'; value.data.legacy.description = value.data.description;
   value.data.legacy.status = 'FAILED'; value.data.legacy.nested = { text: 'x'.repeat(12000), safe: '<img src=x onerror=alert(1)>' };

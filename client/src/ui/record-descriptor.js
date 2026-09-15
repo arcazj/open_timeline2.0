@@ -31,6 +31,28 @@ export function needsLegacyDescriptor(record) {
   return value === undefined || value === null || String(value).trim() === '';
 }
 
+export function canRetainDescriptor({ navigationOnly, provider, previousQuery, query, selected, selectedContext, previousScope, scope, unavailable }) {
+  return navigationOnly === true && !unavailable && !!selected && previousQuery?.definitionVersion === 2 && query?.definitionVersion === 2 &&
+    previousQuery.generation === query.generation && previousQuery.revision === query.revision &&
+    previousQuery.preferencesRevision === query.preferencesRevision &&
+    typeof scope === 'string' && scope === previousScope && selectedContext?.provider === provider && selectedContext.context?.record === selected &&
+    (selectedContext.queryId === previousQuery.queryId || selectedContext.retainedForQueryId === previousQuery.queryId);
+}
+
+export function markRetainedDescriptor(panel) {
+  const scrollTop = panel.scrollTop;
+  panel.querySelector('.descriptor-context')?.remove();
+  for (const term of panel.querySelectorAll('.descriptor-data > dt[data-query-snapshot]')) {
+    term.nextElementSibling?.remove(); term.remove();
+  }
+  if (!panel.querySelector('.descriptor-retained')) {
+    const note = document.createElement('p'); note.className = 'descriptor-retained subtle'; note.setAttribute('role', 'status');
+    note.textContent = 'Retained selection. Query matches are not re-evaluated for this time range.';
+    panel.querySelector('.descriptor-metadata')?.before(note);
+  }
+  panel.scrollTop = scrollTop;
+}
+
 export function appendDescriptorValue(parent, value) {
   const text = descriptorText(value);
   if (text.length > 4096) {

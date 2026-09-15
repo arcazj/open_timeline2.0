@@ -1,4 +1,5 @@
 import copy
+import threading
 import uuid
 
 import pytest
@@ -25,7 +26,7 @@ def create_identity(client, sources=None, role="viewer", workspace="default"):
 
 
 @pytest.mark.parametrize("asynchronous", [False, True])
-def test_viewer_metadata_and_every_query_surface_is_source_scoped(client, bundle, asynchronous):
+def test_viewer_metadata_and_every_query_surface_is_source_scoped(client, app, bundle, asynchronous, monkeypatch):
     source = bundle["records"][0]["sourceId"]
     allowed = {record["id"] for record in bundle["records"] if record["sourceId"] == source and not record["deletedAt"]}
     _, _, headers = create_identity(client, [source])
@@ -35,10 +36,24 @@ def test_viewer_metadata_and_every_query_surface_is_source_scoped(client, bundle
     assert metadata["capabilities"]["write"] is False
     assert metadata["capabilities"]["modelManagement"] is False
     assert metadata["actor"]["role"] == "viewer"
-    response = client.post(BASE + "/query-sessions", json={"domain": bundle["settings"]["overview"]},
-        headers={**headers, **({"Prefer": "respond-async"} if asynchronous else {})})
+    entered, finish = threading.Event(), threading.Event()
     if asynchronous:
-        assert response.status_code == 202, response.text
+        original = app.state.preparations._calculate
+
+        def held(job, resources):
+            entered.set()
+            assert finish.wait(5)
+            return original(job, resources)
+
+        monkeypatch.setattr(app.state.preparations, "_calculate", held)
+    try:
+        response = client.post(BASE + "/query-sessions", json={"domain": bundle["settings"]["overview"]},
+            headers={**headers, **({"Prefer": "respond-async"} if asynchronous else {})})
+        if asynchronous:
+            assert response.status_code == 202, response.text
+            assert entered.wait(2)
+    finally:
+        finish.set()
     query = prepared(client, response, headers=headers).json()
     assert query["baseTotal"] == len(allowed)
     url = BASE + "/query-sessions/" + query["queryId"]

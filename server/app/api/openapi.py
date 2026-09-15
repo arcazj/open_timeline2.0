@@ -516,7 +516,12 @@ def build_contract(app):
             parameters.append({"name": "Prefer", "in": "header", "required": False, "schema": {"const": "respond-async"},
                                "description": "Request immediate preparing status. Omission uses the same admission limits with a short ready wait."})
         for parameter in parameters:
-            if parameter["name"] == "family":
+            if response == "RowsPage" and parameter["name"] == "pageIndex":
+                parameter["schema"] = integer(0, 9007199254740991)
+                parameter["description"] = "Zero-based direct vertical page of this pinned layout. Mutually exclusive with cursor. Page0 is valid for an empty layout; out-of-range pages reject with invalid_page_index."
+            elif response == "RowsPage" and parameter["name"] == "cursor":
+                parameter["description"] = "Opaque cursor from this layout. Mutually exclusive with pageIndex."
+            elif parameter["name"] == "family":
                 parameter["schema"] = enum(*FAMILIES)
             elif parameter["name"] == "limit":
                 parameter["schema"].update(minimum=1, maximum=500 if tag == "changes" else 1000)

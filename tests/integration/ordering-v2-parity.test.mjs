@@ -98,6 +98,11 @@ test('v2 continuation pages and collapse preserve pinned density, findings and c
       const input = { ...domain, width: 1000, availableHeight: 132, collapsedGroups, groupOrder: { order: 'natural' }, presentation: { version: 1, grouping: { field: '/data/namespace' }, nesting: { enabled: true } } };
       const ll = await standalone.createLayout(lq.queryId, { ...input, mapId: lq.mapId }), rl = await remote.createLayout(rq.queryId, { ...input, mapId: rq.mapId });
       try {
+        const lastIndex = Math.max(0, Math.ceil(ll.totalRows / ll.pageCapacity) - 1);
+        const directLocal = await standalone.getRows(lq.queryId, ll.layoutId, { pageIndex: lastIndex });
+        const directRemote = await remote.getRows(rq.queryId, rl.layoutId, { pageIndex: lastIndex });
+        for (const field of ['rows', 'startRow', 'endRow', 'pageIndex', 'pageCount', 'loadedCount']) assert.deepEqual(directLocal[field], directRemote[field], field);
+        assert.deepEqual(directLocal.items.map(item => [item.record.id, item.row]), directRemote.items.map(item => [item.record.id, item.row]));
         for (const field of ['definitionVersion', 'totalRows', 'detailTotal', 'detailMatchTotal', 'renderInstanceTotal', 'pageCapacity', 'logicalGroupTotal', 'collapsedGroupTotal', 'hiddenItemTotal']) assert.equal(ll[field], rl[field], field);
         assert.equal(ll.detailTotal, 9); assert.equal(ll.detailMatchTotal, 9); assert.equal(ll.logicalGroupTotal, 2);
         assert.equal(ll.hiddenItemTotal, collapsedGroups.length === 0 ? 0 : collapsedGroups.length === 1 ? 8 : 9);
@@ -106,6 +111,8 @@ test('v2 continuation pages and collapse preserve pinned density, findings and c
         const found = [];
         do {
           const lp = await standalone.getRows(lq.queryId, ll.layoutId, { cursor: lc }), rp = await remote.getRows(rq.queryId, rl.layoutId, { cursor: rc });
+          assert.deepEqual(await standalone.getRows(lq.queryId, ll.layoutId, { pageIndex: lp.pageIndex }), lp);
+          assert.deepEqual(await remote.getRows(rq.queryId, rl.layoutId, { pageIndex: rp.pageIndex }), rp);
           assert.deepEqual(lp.rows, rp.rows);
           assert.deepEqual(lp.items.map(item => [item.record.id, item.row]), rp.items.map(item => [item.record.id, item.row]));
           assert.ok(lp.items.length || lp.rows.some(row => row.collapsed), 'Only deliberately collapsed groups may have header-only pages');

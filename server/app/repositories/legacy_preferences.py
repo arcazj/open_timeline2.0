@@ -25,8 +25,9 @@ class LegacyPreferencesRepository:
 
     def __init__(self, base, root):
         self.base, self.mutex = base, base.mutex
-        self.root = _guard_path(Path(root).absolute())
-        state_root = _guard_path(base.root)
+        # Reject authored reparse paths before expanding equivalent Windows short names.
+        self.root = _guard_path(_guard_path(Path(root).absolute()).resolve())
+        state_root = _guard_path(_guard_path(base.root).resolve())
         if self.root == state_root or not self.root.is_relative_to(state_root):
             raise DomainError("preferences_path", "Preferences must use a dedicated child directory of the application state root.", 403)
         self.root.mkdir(mode=0o700, parents=True, exist_ok=True)

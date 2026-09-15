@@ -10,6 +10,7 @@ export async function prepareScaledQuery(provider, input, createLayout, { optimi
   let best = null, baseline = null, layoutError = null, candidate = null;
   const prepare = async ratio => {
     if (candidate) { await release(candidate.query.queryId); candidate = null; }
+    await provider.awaitPreparationCleanup?.();
     if (!isCurrent()) return null;
     const query = await provider.createQuery({ ...input, ratio });
     retained.add(query.queryId);

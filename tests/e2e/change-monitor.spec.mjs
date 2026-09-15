@@ -16,14 +16,36 @@ async function connect(page, token = server.token) {
   await page.locator('#server-form [type=submit]').click(); await page.locator('#switch-source').click();
   await expect.poll(async () => (await debug(page)).providerKind).toBe('server'); await ready(page);
 }
-async function commitFrom(page, title, sourceId = 'operations') {
-  return page.evaluate(async ({ token, title, sourceId }) => {
+async function commitFrom(page, title, sourceId = 'operations', start = '2026-09-12T10:15:00.000Z') {
+  return page.evaluate(async ({ token, title, sourceId, start }) => {
     const status = await (await fetch('/api/v1/workspaces/default', { headers: { Authorization: `Bearer ${token}` } })).json();
-    const response = await fetch('/api/v1/workspaces/default/records', { method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', 'Idempotency-Key': crypto.randomUUID(), 'X-Workspace-Generation': status.generation }, body: JSON.stringify({ kind: 'event', sourceId, title, start: '2026-09-12T10:15:00.000Z', end: null }) });
+    const response = await fetch('/api/v1/workspaces/default/records', { method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', 'Idempotency-Key': crypto.randomUUID(), 'X-Workspace-Generation': status.generation }, body: JSON.stringify({ kind: 'event', sourceId, title, start, end: null }) });
     const body = await response.json(); if (!response.ok) throw new Error(JSON.stringify(body)); return body;
-  }, { token: server.token, title, sourceId });
+  }, { token: server.token, title, sourceId, start });
 }
 const pinnedShape = state => Object.fromEntries(['queryId', 'queryRevision', 'mapId', 'layoutId', 'fromMs', 'toMs', 'startRow', 'endRow', 'loadedCount', 'detailTotal', 'overviewTotal', 'scaleMode', 'search'].map(key => [key, state[key]]));
+const isQuery = request => request.method() === 'POST' && request.url().endsWith('/query-sessions');
+const sameDomain = (left, right) => left?.from === right?.from && left?.to === right?.to;
+function queryReads(page, domain) {
+  const reads = { canonical: [], neighbors: [], maximum: 0 };
+  const active = new Set();
+  page.on('request', request => {
+    if (!isQuery(request)) return;
+    const input = request.postDataJSON();
+    (sameDomain(input.domain, domain) ? reads.canonical : reads.neighbors).push(input);
+    active.add(request); reads.maximum = Math.max(reads.maximum, active.size);
+  });
+  page.on('requestfinished', request => active.delete(request));
+  page.on('requestfailed', request => active.delete(request));
+  return reads;
+}
+function expectOnlyNeighborPreparation(reads, domain, { sourceId, search = '' }) {
+  for (const input of reads.neighbors) {
+    expect(sameDomain(input.domain, domain)).toBe(false);
+    expect(input.scaleMode).toBe('uniform'); expect(input.ratio).toBe(1);
+    expect(input.filters.sourceId).toBe(sourceId); expect(input.search).toBe(search);
+  }
+}
 
 test('two browser contexts keep Pinned rows, map, range, zones and overview unchanged until explicit Reload', async ({ browser }, info) => {
   const first = await browser.newContext(), second = await browser.newContext(), page = await first.newPage(), writer = await second.newPage();
@@ -33,11 +55,13 @@ test('two browser contexts keep Pinned rows, map, range, zones and overview unch
     if (await page.locator('[data-action=next]').isEnabled()) { const row = (await debug(page)).startRow; await page.locator('[data-action=next]').click(); await expect.poll(async () => (await debug(page)).startRow).not.toBe(row); }
     const before = pinnedShape(await debug(page)), labels = await page.locator('.plot-wrap .record-label').evaluateAll(nodes => nodes.map(node => node.dataset.recordId));
     const geometry = await page.locator('.plot-wrap').boundingBox(), zones = await page.locator('.zone-label').allTextContents();
-    let queries = 0; page.on('request', request => { if (request.method() === 'POST' && request.url().endsWith('/query-sessions')) queries++; });
-    for (let i = 0; i < 3; i++) await commitFrom(writer, `Pinned change ${i}`);
+    const domain = (await debug(page)).queryDomain, reads = queryReads(page, domain), committed = [];
+    for (let i = 0; i < 3; i++) committed.push(await commitFrom(writer, `Pinned change ${i}`));
     await expect.poll(async () => (await debug(page)).changePending).toBe(true); await expect(page.locator('.change-summary')).toContainText('Committed changes available');
     expect(pinnedShape(await debug(page))).toEqual(before); expect(await page.locator('.plot-wrap').boundingBox()).toEqual(geometry);
-    expect(await page.locator('.plot-wrap .record-label').evaluateAll(nodes => nodes.map(node => node.dataset.recordId))).toEqual(labels); expect(await page.locator('.zone-label').allTextContents()).toEqual(zones); expect(queries).toBe(0);
+    expect(await page.locator('.plot-wrap .record-label').evaluateAll(nodes => nodes.map(node => node.dataset.recordId))).toEqual(labels); expect(await page.locator('.zone-label').allTextContents()).toEqual(zones); expect(reads.canonical).toHaveLength(0);
+    expectOnlyNeighborPreparation(reads, domain, { sourceId: 'operations' });
+    for (const result of committed) await expect(page.locator(`.plot-wrap .record-label[data-record-id="${result.record.id}"]`)).toHaveCount(0);
     await expect(page.locator('.toast')).toHaveCount(0); await page.screenshot({ path: info.outputPath('server-pinned-changes.png') });
     await page.locator('[data-action=reload-changes]').click(); await expect.poll(async () => (await debug(page)).queryId).not.toBe(before.queryId); await ready(page);
     expect((await debug(page)).queryRevision).toBeGreaterThan(before.queryRevision); expect((await debug(page)).fromMs).toBe(before.fromMs); expect((await debug(page)).toMs).toBe(before.toMs); expect(await page.locator('#source-filter').inputValue()).toBe('operations');
@@ -51,19 +75,45 @@ test('Live coalesces committed changes, defers open drafts, and keeps range and 
     await connect(page); await connect(writer); await page.locator('#source-filter').selectOption('operations'); await ready(page);
     const previous = (await debug(page)).queryId; await page.locator('#search').fill('Liveproof'); await expect.poll(async () => (await debug(page)).queryId).not.toBe(previous); await ready(page);
     await page.locator('[data-change-mode=live]').click(); await page.locator('[data-action=create]').first().click(); await page.locator('#record-form [name=title]').fill('Unsaved local draft');
-    const before = await debug(page); let reads = 0, active = 0, maximum = 0;
-    const isQuery = request => request.method() === 'POST' && request.url().endsWith('/query-sessions');
-    page.on('request', request => { if (isQuery(request)) { reads++; active++; maximum = Math.max(maximum, active); } });
-    page.on('requestfinished', request => { if (isQuery(request)) active--; }); page.on('requestfailed', request => { if (isQuery(request)) active--; });
+    const before = await debug(page), reads = queryReads(page, before.queryDomain);
     for (let i = 0; i < 4; i++) await commitFrom(writer, `Liveproof ${i}`);
     await expect.poll(async () => (await debug(page)).changePending).toBe(true); await page.waitForTimeout(400);
-    expect((await debug(page)).queryId).toBe(before.queryId); expect(reads).toBe(0); expect(await page.locator('#record-form [name=title]').inputValue()).toBe('Unsaved local draft');
+    expect((await debug(page)).queryId).toBe(before.queryId); expect(reads.canonical).toHaveLength(0); expect(reads.neighbors).toHaveLength(0); expect(await page.locator('#record-form [name=title]').inputValue()).toBe('Unsaved local draft');
     await page.locator('#cancel-edit').click(); await expect.poll(async () => (await debug(page)).queryId).not.toBe(before.queryId); await ready(page);
-    await expect.poll(async () => (await debug(page)).overviewMatched).toBe(4); expect(maximum).toBe(1); expect(reads).toBe(1);
+    await expect.poll(async () => (await debug(page)).overviewMatched).toBe(4); expect(reads.maximum).toBe(1); expect(reads.canonical).toHaveLength(1);
+    expectOnlyNeighborPreparation(reads, before.queryDomain, { sourceId: 'operations', search: 'Liveproof' });
     expect(await page.locator('#source-filter').inputValue()).toBe('operations'); expect((await debug(page)).search).toBe(before.search); expect((await debug(page)).fromMs).toBe(before.fromMs); expect((await debug(page)).toMs).toBe(before.toMs);
     await page.setViewportSize({ width: 390, height: 844 }); await ready(page); expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
     await expect(page.locator('.toast')).toHaveCount(0); await page.screenshot({ path: info.outputPath('server-live-updates.png') });
   } finally { await first.close(); await second.close(); }
+});
+
+test('neighbor preparation from a newer revision cannot enter a pinned drag preview', async ({ page }) => {
+  let release = () => {}, entered;
+  const started = new Promise(resolve => { entered = resolve; }), gate = new Promise(resolve => { release = resolve; });
+  await page.route('**/query-sessions', async route => {
+    const request = route.request();
+    if (request.method() !== 'POST' || request.postDataJSON()?.ratio !== 1) return route.continue();
+    entered(); await gate;
+    try { await route.continue(); } catch { /* The preview may be superseded during cleanup. */ }
+  });
+  try {
+    await connect(page); await started;
+    const before = await debug(page), reads = queryReads(page, before.queryDomain);
+    const created = await commitFrom(page, 'Newer revision preview sentinel', 'operations', '2026-09-12T18:00:00.000Z');
+    await expect.poll(async () => (await debug(page)).changePending).toBe(true);
+    release();
+    const plot = await page.locator('.plot-wrap').boundingBox(), x = plot.x + plot.width * .5, y = plot.y + plot.height * .8;
+    await page.mouse.move(x, y); await page.mouse.down(); await page.mouse.move(x - plot.width * .35, y, { steps: 10 });
+    await expect.poll(async () => (await debug(page)).navigationOffset).toBeLessThan(-plot.width * .3);
+    await expect.poll(async () => (await debug(page)).navigationBuffer.activeRequests).toBe(0);
+    await expect(page.locator('.navigation-pending-edge')).toBeVisible();
+    expect((await debug(page)).navigationCoverage).toBe('partial');
+    expect((await debug(page)).queryId).toBe(before.queryId); expect((await debug(page)).queryRevision).toBe(before.queryRevision);
+    await expect(page.locator(`.plot-wrap .record-label[data-record-id="${created.record.id}"]`)).toHaveCount(0);
+    expect(reads.canonical).toHaveLength(0);
+    expectOnlyNeighborPreparation(reads, before.queryDomain, { sourceId: 'all' });
+  } finally { release(); await page.mouse.up(); }
 });
 
 async function identity(method, path, payload, expected) {

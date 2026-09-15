@@ -16,6 +16,7 @@ import { applySettingsCommand } from './settings-commands.js';
 import { assertSourceWritable, validateRecordData } from './record-schema.js';
 import { snapshotContent } from './snapshot-content.js';
 import { prepareRecordBatch } from './record-batch.js';
+import { validateRowPageOptions } from './row-pagination.js';
 
 import { MUTABLE_RECORD_FIELDS, patchRecord, recordReplacement, partialUpdatePatch } from './record-commands.js';
 const MUTABLE = new Set(MUTABLE_RECORD_FIELDS);
@@ -214,7 +215,13 @@ export class LocalProvider {
 
   async getRows(queryId, layoutId, options = {}) {
     const layout = this._layout(queryId, layoutId); abortIfNeeded(options.signal);
+    validateRowPageOptions(options);
+    const pageCount = Math.max(1, Math.ceil(layout.totalRows / layout.pageCapacity));
     let startRow = 0;
+    if (options.pageIndex !== undefined) {
+      if (options.pageIndex >= pageCount) throw new ProviderError('invalid_page_index', 'pageIndex is outside this layout', 400);
+      startRow = options.pageIndex * layout.pageCapacity;
+    }
     if (options.cursor) {
       if (!layout.cursors.has(options.cursor)) throw new ProviderError('cursor_mismatch', 'Cursor is stale or incompatible', 409);
       startRow = layout.cursors.get(options.cursor);
@@ -224,7 +231,7 @@ export class LocalProvider {
     const enclosureData = layout.enclosures ? { enclosures: layout.enclosures.filter(enclosure => enclosure.startRow < endRow && enclosure.endRow > startRow).map(enclosure => ({ ...enclosure, visibleStartRow: Math.max(startRow, enclosure.startRow), visibleEndRow: Math.min(endRow, enclosure.endRow), continuedBefore: enclosure.startRow < startRow, continuedAfter: enclosure.endRow > endRow })) } : {};
     if (items.length > 1000 || new TextEncoder().encode(JSON.stringify({ items, ...enclosureData })).length > 2 * 1024 * 1024) throw new ProviderError('row_payload_limit', 'This row range exceeds the first-slice payload limit; reduce row capacity', 413);
     const cursor = row => this._cursor(layout, row);
-    return clone({ ...layout.manifest, items, ...enclosureData, rows: layout.rows.filter(row => row.row >= startRow && row.row < endRow), startRow, endRow, pageIndex: Math.floor(startRow / layout.pageCapacity), pageCount: Math.max(1, Math.ceil(layout.totalRows / layout.pageCapacity)), previousCursor: startRow > 0 ? cursor(Math.max(0, startRow - layout.pageCapacity)) : null, nextCursor: endRow < layout.totalRows ? cursor(endRow) : null, pageComplete: true, loadedCount: items.length });
+    return clone({ ...layout.manifest, items, ...enclosureData, rows: layout.rows.filter(row => row.row >= startRow && row.row < endRow), startRow, endRow, pageIndex: Math.floor(startRow / layout.pageCapacity), pageCount, previousCursor: startRow > 0 ? cursor(Math.max(0, startRow - layout.pageCapacity)) : null, nextCursor: endRow < layout.totalRows ? cursor(endRow) : null, pageComplete: true, loadedCount: items.length });
   }
 
   async getPlacement(queryId, layoutId, recordId) {

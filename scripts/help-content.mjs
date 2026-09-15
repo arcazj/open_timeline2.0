@@ -17,6 +17,7 @@ export async function collectHelpContent(root) {
     'docs/implementation-status.md': 'Implementation status', 'docs/testing.md': 'Testing',
     'docs/help-and-sharing.md': 'Help and sharing',
     'docs/calendar-navigation.md': 'Calendar and navigation',
+    'docs/smart-dragging.md': 'Smart dragging and loading coverage',
     'docs/on-demand-loading.md': 'On-demand server loading',
     'docs/local-test-data.md': 'Local test datasets',
     'docs/sorting-filtering/implementation-status.md': 'Sorting, filtering and descriptors',

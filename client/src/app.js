@@ -17,7 +17,11 @@ import { createIcons, icons } from 'lucide';
 import Decimal from 'decimal.js';
 import { createLocalProvider } from './data/worker-provider.js';
 import { ServerProvider } from './data/server-provider.js';
-import { ProviderError } from './data/data-provider.js';
+import { prepareServerReconnect } from './data/server-reconnect.js';
+import { createModelCommandRecovery } from './data/command-recovery.js';
+import { createConfigurationCommandRecovery } from './data/configuration-command-recovery.js';
+import { ProviderError, canonicalJson } from './data/data-provider.js';
+import { createPreparationAdmission } from './data/preparation-admission.js';
 import { bufferedWindow, createWindowLoader, startupTarget } from './data/window-loading.js';
 import { legacyViewport } from './data/legacy-presentation.js';
 import { discoverStartupCatalog, startupMessage } from './data/startup-discovery.js';
@@ -25,16 +29,19 @@ import { LOCAL_LIMITS } from './data/snapshot.js';
 import { projectTime, invertPosition, panRange, zoomRange, overviewBodyDrag, overviewResize, generateTicks, toIso, toMs, timeDecimal } from './timeline/time-scale.js';
 import { TimelineRenderer } from './timeline/renderer.js';
 import { OverviewRenderer } from './timeline/overview.js';
+import { mergeOverviewPreview } from './timeline/navigation-overview.js';
 import { createNavigationMotion } from './timeline/navigation-motion.js';
-import { createNavigationLayoutCache } from './timeline/navigation-layout-cache.js';
-import { navigatePan, navigateZoom, followingOverview, rangeInside, createPanProjector, navigationMap } from './timeline/navigation-domain.js';
+import { createNavigationBuffer } from './timeline/navigation-buffer.js';
+import { mergeNavigationPreviewRows } from './timeline/navigation-preview-rows.js';
+import { previewProjector, extendPreviewSessions, reprojectPreviewRows } from './timeline/navigation-preview-projection.js';
+import { navigatePan, navigateZoom, followingOverview, rangeInside, createPanProjector, navigationMap, navigationQueryDomain } from './timeline/navigation-domain.js';
 import { openTimelineCalendar } from './ui/timeline-calendar.js';
 import { calendarRange, centerCalendarRange } from './ui/calendar-time.js';
 import { loadPathPreferences, savePathPreferences, groupingMode, groupedPresentation } from './ui/source-paths.js';
 import { openModelManager } from './ui/model-manager.js';
 import { createModelPreview } from './ui/model-preview.js';
 import { RecordTableView } from './ui/record-table-view.js';
-import { appendDescriptorContext, appendDescriptorFacts, appendDescriptorValue, descriptorFields, descriptorNotes, mountLegacyDescriptor } from './ui/record-descriptor.js';
+import { appendDescriptorContext, appendDescriptorFacts, appendDescriptorValue, canRetainDescriptor, descriptorFields, descriptorNotes, markRetainedDescriptor, mountLegacyDescriptor } from './ui/record-descriptor.js';
 import { compileExpression, compileSearch } from './data/filter-expression.js';
 import { resolvePresentation, readField, groupValue } from './timeline/presentation.js';
 import { formatBandDate } from './timeline/date-format.js';
@@ -89,6 +96,8 @@ let recordGestures, editSources = new Map(), editActor = null, editMetadataKey =
 let tableView;
 let disposeLegacyDescriptor;
 let selectionRequest;
+let reconnectRequest;
+let pendingReconnectResize;
 let lastAppliedQueryState;
 let unsubscribeSource;
 let changeMonitor, timeCommitPending = 0, navigationActive = false;
@@ -98,7 +107,8 @@ let displayedTimeUnit = null;
 let bootPending = true;
 let pathCatalog = null, pathPreferences = null;
 let startupDiscovery;
-let configuredServer = false, windowLoader, loadingTimer, overviewRequest, overviewTimer;
+let configuredServer = false, windowLoader, loadingTimer, overviewRequest, overviewTimer, overviewWork = null;
+const preparationAdmission = createPreparationAdmission();
 const bootControls = new Map();
 const legacyControls = new Map();
 const $ = selector => document.querySelector(selector);
@@ -394,7 +404,7 @@ function shell() {
   <footer class="app-footer"><div class="pagination">${button('previous', 'chevron-left', 'Previous rows', true)}<span class="row-count"></span>${button('next', 'chevron-right', 'Next rows', true)}</div><span class="record-count"></span><span class="save-status"></span></footer>`;
   timeline = new TimelineRenderer($('.plot-wrap')); overviewRenderer = new OverviewRenderer($('.overview-plot'));
   bandStack = new BandStack($('.timeline-view'), { select: selectRecord, updateIcons, error: showError,
-    center: target => { if (state.queryLoading) return; navigation?.cancel(); const range = calendarRange(target, timeDecimal(state.toMs).minus(state.fromMs)); Object.assign(state, range); followRange(range); rememberSetting('range', rangeIso()); refreshQuery({ focusTime: target }); } });
+    center: target => { if (state.queryLoading) return; navigation?.cancel(); const range = calendarRange(target, timeDecimal(state.toMs).minus(state.fromMs)); Object.assign(state, range); followRange(range); rememberSetting('range', rangeIso()); refreshQuery({ focusTime: target, navigationOnly: true }); } });
   const calendarButton = $('.header-tools [data-action="range"]');
   $('#search').insertAdjacentHTML('afterend', `${button('find-previous', 'chevron-up', 'Previous finding')}${button('find-next', 'chevron-down', 'Next finding')}<output class="finding-position" aria-live="polite"></output>`);
   calendarButton.dataset.action = 'calendar'; calendarButton.title = 'Calendar'; calendarButton.setAttribute('aria-label', 'Calendar');
@@ -415,7 +425,7 @@ function shell() {
   } });
   changeMonitor = createChangeMonitor({ blocked: changeRefreshBlocked, render: renderChanges, reload: reloadCommittedSource, error: showError,
     authorizationLost: clearUnauthorized,
-    refreshRequired: () => { ++state.epoch; ++layoutIntent; state.queryLoading = false; state.generationRequired = true; state.stale = true; setBusy(false); resetTimeMode(); tableView.suspend(); $('.overview-plot').dispatchEvent(new Event('pointercancel')); updateStatus(); },
+    refreshRequired: requireGenerationRefresh,
     unavailable: () => { if (!state.authRequired) activateFallback().catch(error => toast(error.message)); },
   });
   $('.scale-guide').insertAdjacentHTML('beforeend', `<span class="time-preview" role="status" hidden></span><div class="interaction-mode" role="group" aria-label="Timeline interaction mode"><button type="button" data-time-mode="navigate" aria-pressed="true" aria-label="Navigate timeline" title="Navigate timeline">${icon('mouse-pointer-2')}</button><button type="button" data-time-mode="edit" aria-pressed="false" aria-label="Edit record times" title="Edit record times">${icon('move-horizontal')}</button></div>`);
@@ -427,7 +437,7 @@ function shell() {
   const interactionControls = $('.interaction-mode'), narrow = matchMedia('(max-width:850px)');
   const placeInteractionControls = () => { recordGestures.cancel(); if (narrow.matches) $('.filter-strip').insertBefore(interactionControls, $('.auto-label')); else $('.scale-guide').append(interactionControls); };
   narrow.addEventListener('change', placeInteractionControls); placeInteractionControls();
-  tableView = new RecordTableView({ element: $('.table-view'), context: () => ({ provider: state.provider, query: state.query, authRequired: state.authRequired, unavailable: state.localUnavailable || state.generationRequired, selectedId: state.selected?.id, timeZone: state.timeZone, window: state.fromMs === null ? initialSnapshot.settings.range : { ...rangeIso(), viewFromMs: state.fromMs, viewToMs: state.toMs } }), onSelect: selectRecord, onError: showError, onChange: updateStatus, onPreferenceChange: rememberSetting, updateIcons, dateLabel });
+  tableView = new RecordTableView({ element: $('.table-view'), context: () => ({ provider: state.provider, query: state.query, authRequired: state.authRequired, unavailable: state.localUnavailable || state.generationRequired, selectedId: state.selected?.id, timeZone: state.timeZone, window: state.fromMs === null ? initialSnapshot.settings.range : { ...rangeIso(), viewFromMs: state.fromMs, viewToMs: state.toMs } }), beforeRead: beginTableRead, onSelect: selectRecord, onError: showError, onChange: updateStatus, onPreferenceChange: rememberSetting, updateIcons, dateLabel });
   app.setAttribute('aria-busy', 'true');
   for (const control of app.querySelectorAll('button, input, select, textarea')) { bootControls.set(control, control.disabled); control.disabled = true; }
   $('.provider-status').setAttribute('role', 'status');
@@ -440,8 +450,10 @@ function shell() {
     const box = plot.getBoundingClientRect();
     if (Math.abs(box.width - lastWidth) < 1 && Math.abs(box.height - lastHeight) < 1) return;
     clearTimeout(resizeTimer); const resize = () => {
+      if (reconnectRequest) { pendingReconnectResize = resize; return; }
       if (!state.query || state.view === 'table') return;
-      const current = plot.getBoundingClientRect();
+      const current = $('.plot-wrap')?.getBoundingClientRect();
+      if (!current) return;
       if (Math.abs(current.width - lastWidth) < 1 && Math.abs(current.height - lastHeight) < 1) return;
       if (navigation?.active && Math.abs(current.width - lastWidth) < 1) {
         resizeTimer = setTimeout(resize, 100); return;
@@ -541,10 +553,16 @@ function showError(error) {
   if (state.provider instanceof ServerProvider && ([401, 403].includes(error?.status) || error?.code === 'permission_scope_changed')) { clearUnauthorized(); return; }
   if (state.provider instanceof ServerProvider && state.authRequired) return;
   if (state.provider instanceof ServerProvider && error?.code === 'server_unavailable') { activateFallback().catch(failure => toast(failure.message)); return; }
-  if (state.provider instanceof ServerProvider) { state.stale = true; $('.notice span').textContent = `Server data may be stale. ${message}`; $('.notice').hidden = false; noticeAction('refresh'); }
+  if (state.provider instanceof ServerProvider) { state.stale = true; $('.notice span').textContent = `Server data may be stale. ${message}`; $('.notice').hidden = false; noticeAction(state.provider.requiresReconnect ? 'reconnect-server' : 'refresh'); }
   updateStatus();
 }
+function requireGenerationRefresh(event) {
+  changeMonitor?.markBoundary(state.provider, event?.code === 'replay_gap' ? 'replay-gap' : 'generation-changed');
+  ++state.epoch; ++layoutIntent; state.queryLoading = false; state.generationRequired = true; state.stale = true;
+  setBusy(false); resetTimeMode(); tableView.suspend(); $('.overview-plot').dispatchEvent(new Event('pointercancel')); updateStatus();
+}
 function clearUnauthorized() {
+  changeMonitor?.markBoundary(state.provider, 'authorization-lost');
   changeMonitor?.cancelQueuedReload();
   bandStack?.configure(null);
   ++state.epoch; ++layoutIntent; state.authRequired = true; state.selected = null; state.rows = null; state.overview = null;
@@ -572,7 +590,7 @@ async function activateFallback() {
   if (configuredServer && state.provider.localBrowser) {
     state.stale = true; state.queryLoading = false; setBusy(false);
     $('.notice span').textContent = 'Configured server unavailable. The displayed view is retained and may be stale. Retry to reconnect; no sample data was substituted.';
-    $('.notice').hidden = false; noticeAction('refresh'); updateStatus(); return;
+    $('.notice').hidden = false; noticeAction('reconnect-server'); updateStatus(); return;
   }
   const failed = state.provider, intent = ++sourceIntent;
   resetTimeMode();
@@ -635,13 +653,120 @@ async function activateFallback() {
     if (fallbackActive === failed) fallbackActive = false;
   }
 }
+const reconnectStateKeys = [...queryStateKeys, 'domain', 'fromMs', 'toMs', 'unit', 'theme', 'rowHeight', 'fontSize', 'timeZone',
+  'scaleMode', 'ratio', 'bins', 'scaleStrategy', 'view', 'transient', 'dirty', 'preferencesDirty', 'sort', 'sortDirection'];
+function captureReconnectView() {
+  return structuredClone({ state: Object.fromEntries(reconnectStateKeys.map(key => [key, state[key]])), settings: state.info.settings,
+    table: { columns: tableView.columns, sort: tableView.sorts, table: { scope: tableView.scope, projection: tableView.projection, limit: tableView.limit } },
+    pageIndex: state.rows?.pageIndex || 0, changeMode: changeMonitor.state.mode });
+}
+async function reconnectServer() {
+  const provider = state.provider;
+  if (!(provider instanceof ServerProvider) || state.authRequired) return;
+  if (state.generationRequired) { toast('Choose the restored workspace before reconnecting.'); return; }
+  const modelRecovery = createModelCommandRecovery({ provider, generation: state.info.generation, local: false,
+    logicalKey: `server:${provider.baseUrl || location.origin}:${provider.workspaceId}` });
+  const configurationRecovery = createConfigurationCommandRecovery({ provider, generation: state.info.generation, principalId: state.info.actor?.id, local: false });
+  const blocked = () => !!(navigation?.active || navigationActive || recordGestures?.active || timeCommitPending || calendar
+    || $('.modal-backdrop') || modelManager?.isOpen() || configurationManager?.isOpen() || recordRecovery?.pending().length
+    || modelRecovery.read().length || configurationRecovery.read().length);
+  if (blocked()) { toast('Finish the current interaction and resolve pending command outcomes before reconnecting.'); return; }
+  reconnectRequest?.abort();
+  const controller = new AbortController(); reconnectRequest = controller;
+  $('.notice').setAttribute('aria-busy', 'true');
+  const view = captureReconnectView(), viewKey = canonicalJson(view), previousQuery = state.query;
+  const source = sourceIntent, importing = importIntent, selected = selectionIntent;
+  let epoch = state.epoch, layout = layoutIntent, tableIntent = tableView.intent, candidate, release, timer, invalidated = false, adopted = false, timedOut = false;
+  const current = () => reconnectRequest === controller && !controller.signal.aborted && provider === state.provider && source === sourceIntent && importing === importIntent
+    && state.query === previousQuery
+    && epoch === state.epoch && layout === layoutIntent && selected === selectionIntent && tableIntent === tableView.intent
+    && !state.authRequired && !state.generationRequired && !blocked() && !state.searchPending && $('#search').value === state.search
+    && canonicalJson(captureReconnectView()) === viewKey;
+  const check = () => { if (!current()) throw new DOMException('Reconnect superseded by a newer view', 'AbortError'); };
+  const interruptGesture = event => { if (event.target.closest?.('.plot-wrap,.overview-plot')) controller.abort(); };
+  document.addEventListener('pointerdown', interruptGesture, { capture: true });
+  let interrupted;
+  const interruption = new Promise((resolve, reject) => {
+    interrupted = () => reject(new DOMException('Reconnect canceled', 'AbortError'));
+    controller.signal.addEventListener('abort', interrupted, { once: true });
+  });
+  interruption.catch(() => {});
+  const wait = async promise => { const result = await Promise.race([promise, interruption]); check(); return result; };
+  try {
+    const staged = await prepareServerReconnect({ provider, info: state.info, view, signal: controller.signal, isCurrent: current });
+    candidate = staged.provider;
+    check();
+    if (staged.status === 'authorization-changed') { clearUnauthorized(); return; }
+    if (staged.status === 'generation-changed') {
+      navigation?.cancel(); requireGenerationRefresh();
+      $('.notice span').textContent = 'The server workspace was restored or replaced. Choose the source again to load its new generation; the previous view has not been transferred.';
+      $('.notice').hidden = false; noticeAction('sources'); updateStatus(); return;
+    }
+    timer = setTimeout(() => { timedOut = true; controller.abort(); }, 35000);
+    // Invalidate old jobs before entering their shared preparation queue. Never wait for that queue while holding its lease.
+    epoch = ++state.epoch; layout = ++layoutIntent; invalidated = true;
+    selectionRequest?.abort(); navigation?.cancel(); clearTimeout(overviewTimer); overviewRequest?.abort(); windowLoader?.pause();
+    clearTimeout(loadingTimer); changeMonitor.cancelQueuedReload(); tableView.suspend(); tableIntent = tableView.intent;
+    state.queryLoading = true; setBusy(true);
+    release = await preparationAdmission.acquire({ signal: controller.signal }); check();
+    await wait(Promise.all([navigation?.idle, overviewWork, bandStack?.idle()]));
+    await wait(provider.awaitPendingPreparationCleanup({ signal: controller.signal, timeout: 35000 }));
+    if (previousQuery) {
+      try { await wait(provider.releaseQuery(previousQuery.queryId)); }
+      catch (error) { check(); if (![404, 410].includes(error.status)) throw error; }
+    }
+    check();
+    ++sourceIntent; ++state.epoch; ++layoutIntent; ++selectionIntent;
+    provider.dispose();
+    state.provider = candidate; candidate = null; adopted = true;
+    state.info = { ...staged.info, settings: staged.view.settings };
+    Object.assign(state, staged.view.state, { query: null, map: null, layout: null, rows: null, overview: null, bandOverview: null,
+      zones: [], overviewZones: null, selected: null, selectedContext: null, stale: false, authRequired: false, generationRequired: false,
+      localUnavailable: false, pendingServer: null, queryLoading: false });
+    disposeLegacyDescriptor?.(); disposeLegacyDescriptor = null;
+    bandStack.configure(null); bandStack.configure(state.presentation);
+    windowLoader?.dispose();
+    windowLoader = state.info.legacy?.lazy ? createWindowLoader(state.provider, { ratio: state.info.legacy.loading?.bufferRatio ?? .25 }) : null;
+    tableView.clear(); tableView.configure(staged.view.table); setView(state.view, { transient: false, refresh: false });
+    watchSource(state.provider); changeMonitor.setMode(staged.view.changeMode);
+    updatePathShortcut(); activateRecordRecovery(); activateSavedViews(); renderDescriptor();
+    $('.notice').hidden = true;
+    release(); release = null; clearTimeout(timer);
+    const active = state.provider;
+    await refreshQuery({ pageIndex: staged.view.pageIndex });
+    if (active === state.provider && state.info.legacy?.lazy) monitorLegacyLoading(active);
+  } catch (error) {
+    if (!adopted && provider === state.provider && source === sourceIntent && epoch === state.epoch) {
+      if (error.name !== 'AbortError' && ([401, 403].includes(error.status) || error.code === 'permission_scope_changed')) clearUnauthorized();
+      else if (error.name !== 'AbortError' || timedOut) {
+        const message = timedOut ? 'Existing server work did not finish before the reconnect deadline. Retry when it has settled.' : error.message;
+        state.stale = true; $('.notice span').textContent = `Reconnect failed. The current server view is retained; no sample data was substituted. ${message}`;
+        $('.notice').hidden = false; noticeAction('reconnect-server'); toast(message);
+      }
+    } else if (adopted && error.name !== 'AbortError') showError(error);
+  } finally {
+    clearTimeout(timer); release?.(); candidate?.dispose();
+    document.removeEventListener('pointerdown', interruptGesture, { capture: true });
+    controller.signal.removeEventListener('abort', interrupted);
+    if (reconnectRequest === controller) {
+      reconnectRequest = null; $('.notice').setAttribute('aria-busy', 'false');
+      if (pendingReconnectResize) {
+        const resize = pendingReconnectResize; pendingReconnectResize = null;
+        clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 0);
+      }
+    }
+    if (invalidated && !adopted && provider === state.provider && source === sourceIntent && epoch === state.epoch) {
+      state.queryLoading = false; setBusy(false); updateStatus();
+    }
+  }
+}
 function toast(message) {
   $('.toast')?.remove(); const node = document.createElement('div'); node.className = 'toast'; node.setAttribute('role', 'status'); node.textContent = message; document.body.append(node);
   clearTimeout(toastTimer); toastTimer = setTimeout(() => node.remove(), 4200);
 }
 function setBusy(value) {
   state.loading = value; $('.busy-indicator')?.remove();
-  if (!value) queueMicrotask(() => document.dispatchEvent(new Event('timeline-ready')));
+  if (!value) { queueMicrotask(() => document.dispatchEvent(new Event('timeline-ready'))); navigation?.warm(); }
   if (value) { const node = document.createElement('div'); node.className = 'busy-indicator'; node.setAttribute('role', 'status'); node.textContent = 'Updating timeline...'; $('.workspace').append(node); }
   updateTimeControls();
   for (const id of ['local-scale', 'scale-strategy']) {
@@ -652,6 +777,7 @@ function setBusy(value) {
 function refreshQuery(options = {}) {
   if (!state.info || state.localUnavailable || state.authRequired || state.generationRequired) return Promise.resolve();
   windowLoader?.pause(); clearTimeout(overviewTimer); overviewRequest?.abort();
+  navigation?.prepareQuery(options.navigationOnly === true);
   navigation?.cancel();
   clearTimeout(searchTimer); state.searchPending = false;
   const epoch = ++state.epoch; ++layoutIntent; const provider = state.provider;
@@ -661,14 +787,38 @@ function refreshQuery(options = {}) {
   queryQueue = queryQueue.catch(() => {}).then(() => { if (epoch !== state.epoch || provider !== state.provider) return; return performQuery(epoch, provider, options); });
   return queryQueue;
 }
-async function performQuery(epoch, provider, { focusTime } = {}) {
-  setBusy(true);
-  let stagedQuery = null;
+async function beginTableRead(context, { signal }) {
+  navigation?.suspendBuffer();
+  const unlock = await preparationAdmission.acquire({ signal });
+  const release = () => { unlock(); navigation?.warm(); };
   try {
+    await navigation?.idle; await overviewWork;
+    await context.provider.awaitPreparationCleanup?.({ signal });
+    if (signal.aborted) throw new DOMException('Table request canceled', 'AbortError');
+    return release;
+  } catch (error) { release(); throw error; }
+}
+const queryDescriptorScopes = new WeakMap();
+function descriptorSelectionScope() {
+  return canonicalJson({ filters: state.filter, search: searchOptions(), definition: queryOptions(), fieldTypes: state.fieldTypes,
+    actor: state.info.actor, preferenceRevision: state.info.preferenceRevision, defaultsRevision: state.info.defaultsRevision,
+    modelId: state.info.settings?.modelId, modelVersion: state.info.settings?.modelVersion, inspector: state.presentation?.inspector,
+    timeZone: state.timeZone });
+}
+async function performQuery(epoch, provider, { focusTime, navigationOnly = false, pageIndex: requestedPageIndex } = {}) {
+  setBusy(true);
+  let stagedQuery = null, releasePreparation;
+  try {
+    releasePreparation = await preparationAdmission.acquire();
+    if (epoch !== state.epoch || provider !== state.provider) return;
+    await navigation?.idle;
+    await overviewWork;
     await bandStack.idle();
     await modelManager?.suspendPreview();
+    await provider.awaitPreparationCleanup?.();
     if (epoch !== state.epoch || provider !== state.provider) return;
     const oldQuery = state.query;
+    const descriptorScope = descriptorSelectionScope();
     const plot = $('.plot-wrap').getBoundingClientRect(), width = Math.max(100, Math.round(plot.width || $('.primary').clientWidth - 40)), height = Math.max(1, Math.round(plot.height || 400));
     const focusRanges = new Map(), requestedRange = { fromMs: state.fromMs, toMs: state.toMs };
     const queryDomain = state.info.legacy?.lazy ? bufferedWindow(requestedRange, state.info.legacy.loading?.bufferRatio ?? .25) : state.domain;
@@ -683,7 +833,9 @@ async function performQuery(epoch, provider, { focusTime } = {}) {
     if (!prepared) return;
     const { query, map, layout } = prepared;
     stagedQuery = query;
-    const rows = await provider.getRows(query.queryId, layout.layoutId, {});
+    const requestedPage = Number.isSafeInteger(requestedPageIndex) && requestedPageIndex >= 0 ? requestedPageIndex : navigationOnly ? state.rows?.pageIndex || 0 : 0;
+    const pageIndex = Math.min(requestedPage, Math.max(0, Math.ceil(layout.totalRows / layout.pageCapacity) - 1));
+    const rows = await provider.getRows(query.queryId, layout.layoutId, { pageIndex });
     const zones = await provider.getZones(query.queryId);
     if (epoch !== state.epoch || provider !== state.provider) { await provider.releaseQuery(query.queryId); return; }
     const overview = await provider.getOverview(query.queryId);
@@ -691,9 +843,16 @@ async function performQuery(epoch, provider, { focusTime } = {}) {
     if (focusTime !== undefined) {
       Object.assign(state, focusRanges.get(map.mapId)); rememberSetting('range', rangeIso());
     }
+    const retainDescriptor = canRetainDescriptor({ navigationOnly, provider, previousQuery: oldQuery, query,
+      selected: state.selected, selectedContext: state.selectedContext, previousScope: queryDescriptorScopes.get(oldQuery), scope: descriptorScope,
+      unavailable: state.authRequired || state.generationRequired || state.localUnavailable || descriptorSelectionScope() !== descriptorScope });
+    queryDescriptorScopes.set(query, descriptorScope);
     Object.assign(state, { query, map, overview, bandOverview: null, zones: zones.items || [], layout, rows, stale: false, overviewZones: null });
     const selectedId = state.selected?.id;
-    if (query.definitionVersion === 2) {
+    if (retainDescriptor) {
+      state.selectedContext = { ...state.selectedContext, retainedForQueryId: query.queryId };
+      renderDescriptor();
+    } else if (query.definitionVersion === 2) {
       if (selectedId) ++selectionIntent;
       selectionRequest?.abort();
       // Keep selection identity across rapid refreshes, but hide obsolete query details.
@@ -705,20 +864,22 @@ async function performQuery(epoch, provider, { focusTime } = {}) {
     $('.overview-window').hidden = false;
     $('.notice').hidden = true;
     render();
+    if (pageIndex !== requestedPage) toast('The previous vertical page is not present in this interval. Showing the last available page.');
     if (oldQuery?.queryId && oldQuery.queryId !== query.queryId) await provider.releaseQuery(oldQuery.queryId).catch(() => {});
-    if (query.definitionVersion === 2 && selectedId && selectionIntent === adoptedSelectionIntent) {
-      if (epoch !== state.epoch || provider !== state.provider) return;
-      await selectRecord(selectedId, null, { clearIfUnavailable: true });
-      if (epoch !== state.epoch || provider !== state.provider) return;
-    }
     await refreshBands(epoch);
+    if (epoch !== state.epoch || provider !== state.provider) return;
     if (state.info.legacy?.lazy) {
       state.overviewZones = null;
       windowLoader.request(requestedRange, state.filter);
       showLegacyCoverage();
       scheduleLegacyOverview(provider, epoch);
     }
-  } catch (error) { if (stagedQuery && state.query?.queryId !== stagedQuery.queryId) await provider.releaseQuery(stagedQuery.queryId).catch(() => {}); if (epoch === state.epoch && provider === state.provider) showError(error); } finally { if (epoch === state.epoch) { state.queryLoading = false; setBusy(false); } }
+    releasePreparation(); releasePreparation = null;
+    if (!retainDescriptor && query.definitionVersion === 2 && selectedId && selectionIntent === adoptedSelectionIntent) {
+      if (epoch !== state.epoch || provider !== state.provider) return;
+      await selectRecord(selectedId, null, { clearIfUnavailable: true });
+    }
+  } catch (error) { if (stagedQuery && state.query?.queryId !== stagedQuery.queryId) await provider.releaseQuery(stagedQuery.queryId).catch(() => {}); if (epoch === state.epoch && provider === state.provider) showError(error); } finally { releasePreparation?.(); if (epoch === state.epoch) { state.queryLoading = false; setBusy(false); } }
 }
 async function visibleLayout(provider, queryId, mapId, width, height, range = { fromMs: state.fromMs, toMs: state.toMs }, options = {}) {
   await bandStack.releaseLayouts(provider, queryId);
@@ -727,6 +888,7 @@ async function visibleLayout(provider, queryId, mapId, width, height, range = { 
   try { return await provider.createLayout(queryId, input, options); }
   catch (error) {
     if (error.code !== 'row_height_limit' || height >= 246 || provider !== state.provider || options.noResize) throw error;
+    await provider.awaitPreparationCleanup?.(options);
     const probe = await provider.createLayout(queryId, { ...input, availableHeight: 192 }, options);
     app.style.setProperty('--minimum-plot-height', `${probe.rowHeight + 52}px`);
     app.classList.add('tall-rows');
@@ -736,34 +898,45 @@ async function visibleLayout(provider, queryId, mapId, width, height, range = { 
     return provider.createLayout(queryId, { ...input, width: Math.max(100, Math.round(box.width)), availableHeight: Math.max(probe.rowHeight, Math.round(box.height) - 52) }, options);
   }
 }
-function refreshLayout(cursor, queryEpoch = state.epoch) {
+function refreshLayout(cursor, queryEpoch = state.epoch, options = {}) {
   if (state.localUnavailable || state.authRequired || state.generationRequired) return Promise.resolve();
   if (state.queryLoading) return queryQueue;
+  navigation?.pauseBuffer();
   const intent = ++layoutIntent, provider = state.provider, query = state.query;
   layoutQueue = layoutQueue.catch(() => {}).then(() => {
     if (intent !== layoutIntent || queryEpoch !== state.epoch || provider !== state.provider) return;
-    return performLayout(cursor, queryEpoch, intent, provider, query);
+    return performLayout(cursor, queryEpoch, intent, provider, query, options);
   });
   return layoutQueue;
 }
-async function performLayout(cursor, queryEpoch, intent, provider, query) {
+async function performLayout(cursor, queryEpoch, intent, provider, query, { navigationOnly = false } = {}) {
   if (!state.query || !state.map) return;
   setBusy(true);
+  let releasePreparation;
   try {
+    releasePreparation = await preparationAdmission.acquire();
+    if (queryEpoch !== state.epoch || intent !== layoutIntent || provider !== state.provider) return;
+    await navigation?.idle;
+    await overviewWork;
+    await provider.awaitPreparationCleanup?.();
+    if (queryEpoch !== state.epoch || intent !== layoutIntent || provider !== state.provider || query !== state.query) return;
     const plot = $('.plot-wrap').getBoundingClientRect();
     const width = Math.max(100, Math.round(plot.width || $('.primary').clientWidth - 40));
     const height = Math.max(1, Math.round(plot.height || 400));
     lastWidth = plot.width; lastHeight = plot.height;
     let layout = state.layout;
     if (!cursor) layout = await visibleLayout(provider, query.queryId, state.map.mapId, width, height);
-    const rows = await provider.getRows(query.queryId, layout.layoutId, { cursor });
+    const requestedPage = navigationOnly && !cursor ? state.rows?.pageIndex || 0 : 0;
+    const pageIndex = Math.min(requestedPage, Math.max(0, Math.ceil(layout.totalRows / layout.pageCapacity) - 1));
+    const rows = await provider.getRows(query.queryId, layout.layoutId, cursor ? { cursor } : { pageIndex });
     if (queryEpoch !== state.epoch || intent !== layoutIntent || provider !== state.provider) { if (!cursor) await provider.releaseLayout(query.queryId, layout.layoutId).catch(() => {}); return; }
     const oldLayout = state.layout;
     state.layout = layout; state.rows = rows;
     try { render(); }
     finally { if (!cursor && oldLayout?.layoutId && oldLayout.layoutId !== layout.layoutId) await provider.releaseLayout(query.queryId, oldLayout.layoutId).catch(() => {}); }
     if (!cursor) await refreshBands(queryEpoch);
-  } catch (error) { if (intent === layoutIntent && provider === state.provider) showError(error); } finally { if (intent === layoutIntent) setBusy(false); }
+    if (pageIndex !== requestedPage) toast('The previous vertical page is not present in this interval. Showing the last available page.');
+  } catch (error) { if (intent === layoutIntent && provider === state.provider) showError(error); } finally { releasePreparation?.(); if (intent === layoutIntent) setBusy(false); }
 }
 function clampTime(value) { return Decimal.min(Decimal.max(decimal(value instanceof Date ? value.getTime() : typeof value === 'string' && value.includes('T') ? toMs(value) : value), toMs(state.map.domain.from)), toMs(state.map.domain.to)).toString(); }
 function project(value) { return projectTime(state.map, clampTime(value), state.fromMs, state.toMs, state.layout.width); }
@@ -832,6 +1005,7 @@ function render() {
   updateTimeControls();
   calendar?.update(timelineCenter(), calendarUnit());
   if (recordGestures?.mode === 'edit' || state.selected) refreshTimePermissions();
+  navigation?.warm();
 }
 function refreshBands(epoch = state.epoch) {
   if (!state.presentation?.bandLayout || state.authRequired) return Promise.resolve();
@@ -842,18 +1016,27 @@ function refreshBands(epoch = state.epoch) {
     range: rangeIso(), settings: state.info.settings, filters: structuredClone(state.filter), search: { ...searchOptions(), ...queryOptions() }, zones: state.zones,
     selectedId: state.selected?.id, current: () => state.epoch === epoch && provider === state.provider && !state.authRequired });
 }
-function renderOverview(domain = state.domain, presentation = state.rows?.presentation) {
+function renderOverview(domain = state.domain, presentation = state.rows?.presentation, preview = null) {
   if ($('.overview-section').hidden || $('.overview-plot').clientWidth <= 0) return;
   const width = $('.overview-plot').clientWidth, mapper = value => overviewProject(value, domain);
   const sources = state.presentation?.bandLayout?.find(b => b.role === 'overview')?.sourceIds;
-  const overviewItems = sources ? state.bandOverview?.items || [] : state.overview.items || [];
-  overviewRenderer.render({ items: overviewItems, zones: sources ? state.bandOverview?.zones || [] : state.overviewZones || state.zones, width, height: $('.overview-plot').clientHeight || 68, project: mapper, theme: state.theme, presentation, domainEnd: domain.to });
+  const merged = preview ? mergeOverviewPreview({ ...preview, domain, sourceIds: sources || null, matchActive: !!state.search }) : null;
+  const overviewItems = merged?.items || (sources ? state.bandOverview?.items || [] : state.overview.items || []);
+  const zones = merged?.zones || (sources ? state.bandOverview?.zones || [] : state.overviewZones || state.zones);
+  overviewRenderer.render({ items: overviewItems, zones, width, height: $('.overview-plot').clientHeight || 68, project: mapper, theme: state.theme, presentation, domainEnd: domain.to });
+  $('.overview-section').dataset.navigationCoverage = merged?.coverage.state || 'inactive';
+  if (merged) {
+    const noun = merged.matchActive ? 'search matches' : 'records';
+    const count = merged.coverage.countsExact ? `${merged.coverage.visibleRecordCount} ${noun}` : merged.aggregated ? `Aggregated ${noun}` : `Loaded ${noun}`;
+    $('.overview-count').textContent = `${count} / ${merged.coverage.complete ? 'rolling context' : 'partial rolling context'}${merged.coverage.aggregateCountsApproximate ? ' / estimated bins' : ''}`;
+  }
   const span = decimal(toMs(domain.to)).minus(toMs(domain.from)).toNumber();
   const unit = state.presentation?.bands?.overview?.intervalUnit || (span > 366 * 86400000 ? 'YEAR' : span > 3 * 86400000 ? 'DAY' : 'HOUR');
   const linear = overviewMap(domain);
   $('.overview-section').dataset.fixed = String(linear.mode === 'fixed');
   const ticks = readableTicks(toMs(domain.from), toMs(domain.to), unit, width, mapper, presentation?.bands?.overview?.dateFormat, linear.mode === 'fixed', 0, linear);
   $('.overview-axis').innerHTML = ticks.map(t => `<span style="left:${mapper(t.timeMs)}px">${esc(t.label)}</span>`).join('');
+  return merged;
 }
 function renderScaleCues() {
   const guide = $('.scale-guide'); guide.querySelector('.scale-map')?.remove(); guide.classList.toggle('adaptive-guide', state.scaleMode === 'adaptive' || state.map?.mode === 'fixed');
@@ -955,9 +1138,15 @@ async function selectRecord(id, pinnedRecord = null, { clearIfUnavailable = fals
   }
 }
 function renderDescriptor() {
+  const record = state.selected; const panel = $('.descriptor');
+  const selectedContext = state.selectedContext;
+  const retained = selectedContext?.provider === state.provider && selectedContext?.context.record === record && selectedContext?.retainedForQueryId === state.query?.queryId;
+  const context = selectedContext?.provider === state.provider && (selectedContext?.queryId === state.query?.queryId || retained) && selectedContext?.context.record === record ? selectedContext.context : null;
+  if (record && retained && panel.dataset.recordId === record.id && panel.childElementCount && !panel.hidden) {
+    markRetainedDescriptor(panel); updateTimeControls(); return;
+  }
   disposeLegacyDescriptor?.(); disposeLegacyDescriptor = null;
-  const record = state.selected; const panel = $('.descriptor'); panel.hidden = !record; if (!record) { state.selectedContext = null; selectionRequest?.abort(); panel.replaceChildren(); return; }
-  const context = state.selectedContext?.provider === state.provider && state.selectedContext?.queryId === state.query?.queryId && state.selectedContext?.context.record === record ? state.selectedContext.context : null;
+  panel.hidden = !record; if (!record) { state.selectedContext = null; selectionRequest?.abort(); panel.replaceChildren(); return; }
   if (state.query?.definitionVersion === 2 && !context) { panel.hidden = true; panel.replaceChildren(); return; }
   const scrollTop = panel.dataset.recordId === record.id ? panel.scrollTop : 0;
   const expanded = panel.dataset.recordId === record.id ? new Set([...panel.querySelectorAll('details[open]')].map(node => node.dataset.descriptorKey || node.querySelector('summary')?.textContent)) : new Set();
@@ -968,12 +1157,13 @@ function renderDescriptor() {
   appendDescriptorValue(panel.querySelector('.descriptor-notes'), descriptorNotes(record));
   const metadata = document.createElement('section'); metadata.className = 'descriptor-metadata';
   const originalDates = [];
-  if (context) originalDates.push({ label: 'Timeline snapshot', value: `Query revision ${state.query.revision}` });
+  if (context && !retained) originalDates.push({ label: 'Timeline snapshot', value: `Query revision ${state.query.revision}` });
   if (record.originalStart) originalDates.push({ label: `Original start / ${state.timeZone || 'UTC'}`, value: dateLabel(record.originalStart, true) });
   if (record.originalEnd) originalDates.push({ label: `Original end / ${state.timeZone || 'UTC'}`, value: dateLabel(record.originalEnd, true) });
   if (record.extensions?.legacy?.id !== undefined) originalDates.push({ label: 'Legacy record ID', value: record.extensions.legacy.id });
-  appendDescriptorFacts(metadata, [...originalDates, ...descriptorFields(record)], 'descriptor-data');
-  appendDescriptorContext(metadata, context, id => selectRecord(id));
+  const dataFacts = appendDescriptorFacts(metadata, [...originalDates, ...descriptorFields(record)], 'descriptor-data');
+  if (context && !retained) dataFacts.firstElementChild.dataset.querySnapshot = 'true';
+  appendDescriptorContext(metadata, retained ? null : context, id => selectRecord(id));
   panel.querySelector('.descriptor-actions').before(metadata);
   panel.querySelector('.descriptor-actions').insertAdjacentHTML('beforeend', button('locate', 'crosshair', 'Locate on timeline', true));
   if (record.extensions?.sourceRecord) {
@@ -1012,10 +1202,12 @@ function renderDescriptor() {
     const provider = state.provider, generation = state.info.generation, queryId = context ? state.query.queryId : null;
     disposeLegacyDescriptor = mountLegacyDescriptor(metadata, { record,
       load: (id, options) => provider.getLegacyDescriptor(id, options),
-      current: () => state.provider === provider && state.selected === record && state.info.generation === generation && (!queryId || state.query?.queryId === queryId) && !state.authRequired,
+      current: () => state.provider === provider && state.selected === record && state.info.generation === generation &&
+        (!queryId || state.query?.queryId === queryId || (state.selectedContext?.context.record === record && state.selectedContext.retainedForQueryId === state.query?.queryId)) && !state.authRequired,
     });
   }
   for (const node of panel.querySelectorAll('details')) node.open = expanded.has(node.dataset.descriptorKey || node.querySelector('summary')?.textContent);
+  if (retained) markRetainedDescriptor(panel);
   panel.scrollTop = scrollTop;
   panel.onkeydown = event => {
     if (event.key === 'Escape') { event.preventDefault(); handleAction('close-descriptor'); $('.plot-wrap').focus({ preventScroll: true }); }
@@ -1083,6 +1275,7 @@ function setView(view, { transient = true, refresh = true } = {}) {
 async function handleAction(action) {
   if (!state.info) return;
   if (action === 'help') return openHelp();
+  if (action === 'reconnect-server') return reconnectServer();
   if (action === 'reload-changes') return changeMonitor.reload();
   if (state.generationRequired && !['refresh', 'sources', 'close-descriptor', 'record-recovery'].includes(action)) { toast('Reload the restored workspace before continuing.'); return; }
   if (action === 'record-recovery') return recordRecovery?.open();
@@ -1098,7 +1291,7 @@ async function handleAction(action) {
   if (action === 'now') {
     const now = new Date(), day = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
     state.domain = { from: day.toISOString(), to: new Date(day.getTime() + 86400000).toISOString() };
-    state.fromMs = String(Math.max(day.getTime(), now.getTime() - 4 * 3600000)); state.toMs = String(Math.min(day.getTime() + 86400000, now.getTime() + 4 * 3600000)); rememberSetting('overview', state.domain); rememberSetting('range', rangeIso()); return refreshQuery();
+    state.fromMs = String(Math.max(day.getTime(), now.getTime() - 4 * 3600000)); state.toMs = String(Math.min(day.getTime() + 86400000, now.getTime() + 4 * 3600000)); rememberSetting('overview', state.domain); rememberSetting('range', rangeIso()); return refreshQuery({ navigationOnly: true });
   }
   if (action === 'refresh') {
     if (!isLocal() && !state.authRequired && state.info.capabilities?.changeFeed !== false) return changeMonitor.reload();
@@ -1147,7 +1340,7 @@ async function locateSelected({ preserveView = false } = {}) {
   state.fromMs = String(left); state.toMs = String(right);
   if (outside) rememberSetting('overview', state.domain); rememberSetting('range', rangeIso());
   if (!preserveView) setView('split');
-  await (outside ? refreshQuery() : refreshLayout());
+  await (outside ? refreshQuery({ navigationOnly: true }) : refreshLayout(undefined, state.epoch, { navigationOnly: true }));
   if (provider !== state.provider || state.authRequired || !state.query || !state.layout) return;
   const query = state.query, layout = state.layout;
   const placement = await provider.getPlacement(query.queryId, layout.layoutId, record.id);
@@ -1158,6 +1351,7 @@ function currentDefinition() {
 }
 function openHelp(link = '', tab = 'help') {
   const provider = state.provider, intent = sourceIntent, epoch = state.epoch;
+  const retainedSelection = !!state.selected && state.selectedContext?.provider === provider && state.selectedContext.retainedForQueryId === state.query?.queryId;
   const serverReady = !isLocal() && !state.authRequired && !state.localUnavailable && !state.generationRequired;
   return openHelpPanel({
     openDialog, closeDialog, updateIcons, toast, serverReady, generation: state.info.generation,
@@ -1167,8 +1361,8 @@ function openHelp(link = '', tab = 'help') {
     get shareReady() { return !!state.query && !state.queryLoading && !state.loading && !state.searchPending && !navigation?.active && !state.authRequired && !state.localUnavailable && !state.generationRequired; },
     isCurrent: () => provider === state.provider && intent === sourceIntent && epoch === state.epoch,
     viewStamp: () => JSON.stringify([state.fromMs, state.toMs, state.layout?.layoutId, state.selected?.id, state.view]),
-    capture: () => ({ version: state.definitionVersion, ...(state.definitionVersion === 2 ? { relationshipMode: state.relationshipMode, groupOrder: structuredClone(state.groupOrder), collapsedGroups: [...state.collapsedGroups] } : {}), range: { fromMs: state.fromMs, toMs: state.toMs }, domain: structuredClone(state.domain), settings: currentDefinition(), filters: structuredClone(state.filter), search: searchOptions(), view: state.view, scaleStrategy: state.scaleStrategy, selectedId: state.selected?.id ?? null, generation: state.info.generation ?? null }),
-    summary: { source: `${isLocal() ? 'Local snapshot' : 'Server data'} / ${state.info.snapshotAt || 'Live source'}`, range: `${toIso(state.fromMs)} to ${toIso(state.toMs)}`, filter: `${state.filter.sourceId || 'all'} / ${state.filter.kind || 'all'}${state.search ? ` / Search: ${state.search}` : ''}${state.filter.expression || state.filter.filterId ? ' / Advanced filter' : ''}`, selection: state.selected?.title || 'None' },
+    capture: () => ({ version: state.definitionVersion, ...(state.definitionVersion === 2 ? { relationshipMode: state.relationshipMode, groupOrder: structuredClone(state.groupOrder), collapsedGroups: [...state.collapsedGroups] } : {}), range: { fromMs: state.fromMs, toMs: state.toMs }, domain: structuredClone(state.domain), settings: currentDefinition(), filters: structuredClone(state.filter), search: searchOptions(), view: state.view, scaleStrategy: state.scaleStrategy, selectedId: retainedSelection ? null : state.selected?.id ?? null, generation: state.info.generation ?? null }),
+    summary: { source: `${isLocal() ? 'Local snapshot' : 'Server data'} / ${state.info.snapshotAt || 'Live source'}`, range: `${toIso(state.fromMs)} to ${toIso(state.toMs)}`, filter: `${state.filter.sourceId || 'all'} / ${state.filter.kind || 'all'}${state.search ? ` / Search: ${state.search}` : ''}${state.filter.expression || state.filter.filterId ? ' / Advanced filter' : ''}`, selection: state.selected ? `${state.selected.title}${retainedSelection ? ' (retained; excluded from shared view)' : ''}` : 'None' },
     diagnostics: { provider: isLocal() ? 'local' : 'server', readOnlyLegacy: legacyReadOnly(), recordCount: state.info.recordCount, revision: state.query?.revision ?? state.info.revision, stale: !!state.stale, sourceAvailable: !state.localUnavailable && !state.authRequired && !state.generationRequired, view: state.view, scaleMode: state.scaleMode, scaleStrategy: state.scaleStrategy, ratioLimit: state.ratio, appliedRatio: state.map?.ratio, totalRows: state.layout?.totalRows, pageCapacity: state.layout?.pageCapacity, viewport: { width: window.innerWidth, height: window.innerHeight, pixelRatio: window.devicePixelRatio }, browser: { secureContext: window.isSecureContext, nativeShare: !!navigator.share, clipboardText: !!navigator.clipboard?.writeText, clipboardImage: !!navigator.clipboard?.write && !!window.ClipboardItem } },
     liveApi: options => provider.getOpenApi(options), health: options => provider.probe(options), apply: applySharedView,
   }, link, tab);
@@ -1178,7 +1372,7 @@ window.addEventListener('hashchange', () => {
 });
 async function applySharedView(input, { signal, isCurrent }) {
   const view = validateSharedView(input), provider = state.provider, openingIntent = sourceIntent;
-  const current = () => isCurrent() && !signal.aborted && !state.authRequired && !state.localUnavailable && !state.generationRequired;
+  const current = () => isCurrent() && provider === state.provider && openingIntent === sourceIntent && !signal.aborted && !state.authRequired && !state.localUnavailable && !state.generationRequired;
   if (!current() || state.queryLoading || state.loading) throw new Error('Wait for the current view to finish loading.');
   const sources = [...(view.filters.sourceIds || []), ...(view.filters.sourceId && view.filters.sourceId !== 'all' ? [view.filters.sourceId] : [])];
   if (sources.some(id => !state.info.sourceIds.includes(id))) throw new Error('This view references sources unavailable in the active dataset. Choose the matching dataset first.');
@@ -1186,10 +1380,13 @@ async function applySharedView(input, { signal, isCurrent }) {
   const settings = view.settings, oldQuery = state.query;
   const sharedQuery = view.version === 2 ? { definitionVersion: 2, relationshipMode: view.relationshipMode } : {};
   const sharedLayout = view.version === 2 ? { definitionVersion: 2, groupOrder: view.groupOrder, collapsedGroups: view.collapsedGroups } : {};
-  let prepared;
+  let prepared, releasePreparation;
   state.queryLoading = true; setBusy(true);
   try {
+    releasePreparation = await beginTableRead({ provider }, { signal });
+    await bandStack.idle();
     await modelManager?.suspendPreview();
+    if (!current()) throw new DOMException('Operation aborted', 'AbortError');
     prepared = await prepareScaledQuery(provider,
       { domain: view.domain, filters: view.filters, ...view.search, ...sharedQuery, scaleMode: settings.scaleMode, ratio: settings.ratio, bins: settings.bins },
       (query, map) => provider.createLayout(query.queryId, { mapId: map.mapId, from: toIso(view.range.fromMs), to: toIso(view.range.toMs), viewFromMs: view.range.fromMs, viewToMs: view.range.toMs, width, availableHeight: height, rowHeight: settings.rowHeight, fontSize: settings.fontSize, groupBy: settings.groupBy, theme: settings.theme, displayUnit: settings.displayUnit, ...(settings.presentation ? { presentation: settings.presentation } : {}), ...sharedLayout, renderProfileId: 'noto-sans-latin-v1' }, { signal }),
@@ -1212,6 +1409,8 @@ async function applySharedView(input, { signal, isCurrent }) {
     ++state.epoch; ++layoutIntent; ++selectionIntent;
     Object.assign(state, settings, { unit: settings.displayUnit, presentation: structuredClone(settings.presentation), fromMs: view.range.fromMs, toMs: view.range.toMs, domain: structuredClone(view.domain), filter: structuredClone(view.filters), ...view.search, searchFields: view.search.searchFields, scaleStrategy: view.scaleStrategy, query, map, layout, rows, overview, zones: zones.items || [], selected, fieldTypes, stale: false });
     Object.assign(state, { definitionVersion: view.version, relationshipMode: view.relationshipMode || 'independent', groupOrder: view.groupOrder || { order: 'codepoint', caseSensitive: true }, collapsedGroups: view.collapsedGroups || [], pendingMigration: null });
+    const adoptedEpoch = state.epoch, adoptedSelectionIntent = selectionIntent;
+    selectionRequest?.abort(); state.selectedContext = null;
     for (const [key, value] of Object.entries(settings)) rememberSetting(key, value);
     rememberSetting('definitionVersion', state.definitionVersion);
     if (state.definitionVersion === 2) for (const key of ['relationshipMode', 'groupOrder', 'collapsedGroups']) rememberSetting(key, state[key]);
@@ -1220,12 +1419,18 @@ async function applySharedView(input, { signal, isCurrent }) {
     rememberSetting('filterId', state.filter.filterId ?? null); rememberSetting('filterVersion', state.filter.filterVersion ?? null);
     $('#source-filter').value = state.filter.sourceId || 'all'; $('#kind-filter').value = state.filter.kind || 'all'; $('#search').value = state.search;
     app.classList.toggle('dark', state.theme === 'dark');
+    queryDescriptorScopes.set(query, descriptorSelectionScope());
     state.queryLoading = false; setBusy(false); setView(view.view, { refresh: false });
     changeMonitor.acknowledge(query); renderDescriptor(); render();
     if (oldQuery?.queryId && oldQuery.queryId !== query.queryId) await provider.releaseQuery(oldQuery.queryId).catch(() => {});
-    if (view.view !== 'table') setTimeout(() => refreshLayout(), 0);
+    releasePreparation(); releasePreparation = null;
+    if (query.definitionVersion === 2 && selected && state.query === query && state.epoch === adoptedEpoch && selectionIntent === adoptedSelectionIntent) {
+      await selectRecord(selected.id, null, { clearIfUnavailable: true });
+    }
+    if (view.view !== 'table' && current() && state.query === query && state.epoch === adoptedEpoch) setTimeout(() => refreshLayout(), 0);
   } finally {
     if (prepared && state.query?.queryId !== prepared.query.queryId) await provider.releaseQuery(prepared.query.queryId).catch(() => {});
+    releasePreparation?.();
     if (provider === state.provider && openingIntent === sourceIntent) { state.queryLoading = false; setBusy(false); }
   }
 }
@@ -1240,7 +1445,7 @@ function openModels() {
     recoveryKey: isLocal() ? provider.identity : `server:${provider.baseUrl || location.origin}:${provider.workspaceId}`,
     onClose: () => { if (modelManager === manager) modelManager = null; },
     onAuthorizationError: showError,
-    createPreview: (container, axis, definition) => createModelPreview({ provider, generation, isCurrent, container, axis, definition, domain: { ...state.domain }, fromMs: state.fromMs, toMs: state.toMs, filters: structuredClone(state.filter), sourceIds: state.info.sourceIds, ...searchOptions(), ...queryOptions() }),
+    createPreview: (container, axis, definition) => createModelPreview({ provider, generation, isCurrent, container, axis, definition, beforePrepare: options => beginTableRead({ provider }, options), domain: { ...state.domain }, fromMs: state.fromMs, toMs: state.toMs, filters: structuredClone(state.filter), sourceIds: state.info.sourceIds, ...searchOptions(), ...queryOptions() }),
     onMutation: async (result, type, modelId) => {
       if (!isCurrent(provider, generation)) return;
       state.info = { ...state.info, settings: result.settings, revision: result.revision };
@@ -1289,6 +1494,7 @@ async function openConfigurations(options = {}) {
     validateApply: async ({ family, definition, resource, version }) => {
       const input = family === 'views' ? { viewId: resource.id, viewVersion: version } : { transient: { filterId: resource.id, filterVersion: version, viewId: null, viewVersion: null } };
       const candidate = await provider.getEffectiveSettings(input); if (!current()) throw new Error('Source changed; no preference was changed.');
+      if (candidate.values.definitionVersion !== 2 && candidate.values.collapsedGroups?.length) throw new Error('Group collapse requires a version 2 view with typed group keys. No preference was changed.');
       const registry = await settingsRegistry(provider, state.info, candidate.values); if (!current()) throw new Error('Source changed; no preference was changed.');
       try { compileExpression(state.filter.expression, { fieldTypes: registry }); }
       catch { throw new Error('Temporary conditions use fields outside this saved filter schema. Clear those conditions before applying; no preference was changed.'); }
@@ -1319,40 +1525,126 @@ async function changeRange(range) {
   state.fromMs = range.fromMs; state.toMs = range.toMs;
   const changed = followRange(range);
   rememberSetting('range', rangeIso()); updateOverviewWindow();
-  return changed || state.queryLoading || (state.info.legacy?.lazy && !rangeInside(state.map.domain, range)) || (state.scaleMode === 'adaptive' && state.scaleStrategy === 'automatic') ? refreshQuery() : refreshLayout();
+  return changed || state.queryLoading || (state.info.legacy?.lazy && !rangeInside(state.map.domain, range)) || (state.scaleMode === 'adaptive' && state.scaleStrategy === 'automatic') ? refreshQuery({ navigationOnly: true }) : refreshLayout(undefined, state.epoch, { navigationOnly: true });
 }
 
 function bindNavigation() {
-  const plot = $('.plot-wrap'); let drag = null, prefetchTimer, prefetched = false;
+  const plot = $('.plot-wrap'); let drag = null, warmTimer, suppressClickUntil = 0, completedClick = null, baseContext = null, holdingPreview = false, heldContext = null, heldOffset = 0;
+  const frameTimes = []; let lastFrameAt = null, waitingQuery = null;
   const pendingEdge = document.createElement('div'); pendingEdge.className = 'navigation-pending-edge'; pendingEdge.hidden = true;
-  pendingEdge.textContent = 'Pending'; pendingEdge.setAttribute('aria-hidden', 'true'); plot.append(pendingEdge);
+  pendingEdge.setAttribute('role', 'status'); pendingEdge.setAttribute('aria-live', 'polite'); plot.append(pendingEdge);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const rangeKey = range => `${range.fromMs}:${range.toMs}`;
+  const overviewSources = () => state.presentation?.bandLayout?.find(band => band.role === 'overview')?.sourceIds || null;
   const current = context => context && context.provider === state.provider && context.query === state.query && context.map === state.map && context.layout === state.layout && context.rows === state.rows && context.epoch === state.epoch && Math.abs(context.width - plot.clientWidth) < 1 && !state.authRequired && !state.generationRequired && !state.localUnavailable;
-  const cache = createNavigationLayoutCache({
-    prepare: async (context, range, signal) => {
-      await layoutQueue;
-      if (signal.aborted || !current(context)) return null;
-      let layout;
+  const capture = () => ({ provider: state.provider, query: state.query, map: state.map, layout: state.layout, rows: state.rows, previewRows: { ...state.layout, ...state.rows },
+    epoch: state.epoch, width: state.layout.width, height: plot.clientHeight, fromMs: state.fromMs, toMs: state.toMs,
+    overview: overviewSources() ? { ...state.bandOverview, domain: { ...state.domain }, matchActive: !!state.search } : state.overview,
+    overviewZones: overviewSources() ? state.bandOverview?.zones || [] : state.overviewZones || state.zones,
+    overviewSourceIds: overviewSources(),
+    input: structuredClone({ filters: state.filter, ...searchOptions(), ...queryOptions() }),
+    scope: { providerId: state.info.providerId || state.info.identity, generation: state.query.generation, revision: state.query.revision,
+      preferencesRevision: state.query.preferencesRevision, definitionVersion: state.definitionVersion,
+      querySignature: JSON.stringify({ filters: state.filter, ...searchOptions(), ...queryOptions(), ...presentationOptions(), width: state.layout.width, height: plot.clientHeight, page: state.rows.pageIndex }) } });
+  function paintOverviewBuffer(context, domain = context.previewDomain || state.domain) {
+    return renderOverview(domain, context.rows.presentation, { scope: context.scope,
+      base: { scope: context.scope, overview: context.overview, zones: context.overviewZones, sourceIds: context.overviewSourceIds,
+        coverage: context.overviewSourceIds ? { complete: false } : context.query.coverage },
+      entries: buffer.entries(context).map(entry => entry.overviewPacket).filter(Boolean) });
+  }
+  function paintBuffer(context) {
+    if (!current(context) || holdingPreview || recordGestures?.mode === 'edit') return;
+    const projector = previewProjector(context), entries = buffer.entries(context);
+    const merge = mergeNavigationPreviewRows(extendPreviewSessions(context.previewRows, projector),
+      entries.filter(entry => entry.rows).map(entry => ({ rows: entry.rows, offsetX: 0 })), { groupBy: state.groupBy, fontSize: state.fontSize });
+    context.previewCoverage = merge.coverage;
+    const zones = new Map(state.zones.map(zone => [zone.id, zone]));
+    for (const entry of entries) for (const zone of entry.zones || []) zones.set(zone.id, zone);
+    const presentation = context.previewRows.presentation || (state.presentation ? resolvePresentation({ ...currentDefinition(), displayUnit: state.unit }) : undefined);
+    const ticks = timeline.baseGrid?.ticks || [];
+    timeline.render({ rows: merge.rows, width: context.width, height: context.height, rowHeight: context.previewRows.rowHeight,
+      fontSize: state.fontSize, project: projector, zones: [...zones.values()], selectedId: state.selected?.id, theme: state.theme,
+      presentation, labelBackgroundAuthored: Object.hasOwn(state.presentation?.labels || {}, 'backgroundColor'), ticks,
+      hasSearch: !!state.search, referenceTime: state.info.settings?.referenceTime, preview: true });
+    timeline.previewOffset(motion.context === context ? motion.offset : 0);
+    if (motion.context === context) { paintOverviewBuffer(context); updateOverviewWindow(motion.context === context ? navigatePan(context.map, context.fromMs, context.toMs, motion.offset, context.width).range : undefined, context.previewDomain || state.domain); }
+    if (motion.context === context) paintCoverage(context, motion.offset);
+  }
+  function paintCoverage(context, offset) {
+    const spans = buffer.coverage(offset, context.width).map(span => span.index !== 0 && span.status === 'ready' && context.previewCoverage?.partial
+      ? { ...span, status: 'partial' } : span).filter(span => span.status !== 'ready');
+    pendingEdge.hidden = !spans.length;
+    const key = spans.map(span => `${span.index}:${span.status}`).join('|');
+    if (pendingEdge.dataset.coverage !== key) {
+      pendingEdge.dataset.coverage = key;
+      pendingEdge.replaceChildren(...spans.map(span => {
+        const node = document.createElement('span'); node.dataset.index = String(span.index); node.className = 'navigation-loading-span';
+        node.textContent = span.status === 'partial' ? 'Additional rows pending' : span.status === 'incompatible' ? 'Source changed; refresh pending' : span.status === 'error' ? 'Data unavailable; retry pending' : 'Loading more records...';
+        return node;
+      }));
+    }
+    for (const span of spans) {
+      const node = pendingEdge.querySelector(`[data-index="${span.index}"]`); node.style.left = `${span.left}px`; node.style.width = `${span.width}px`;
+    }
+    plot.dataset.navigationCoverage = spans.length ? spans.some(span => span.status === 'error') ? 'error' : 'partial' : 'ready';
+    buffer.observeFrame(spans.length > 0);
+  }
+  const buffer = createNavigationBuffer({
+    changed: context => { if (current(context)) paintBuffer(context); },
+    prepare: async (context, index, signal) => {
+      if (waitingQuery || overviewWork || preparationAdmission.pendingCount || signal.aborted || !current(context)) return null;
+      await context.provider.awaitPreparationCleanup?.({ signal });
+      if (signal.aborted || !current(context) || preparationAdmission.pendingCount) return null;
+      const range = navigatePan(context.map, context.fromMs, context.toMs, -index * context.width, context.width).range;
+      let query = context.query, map = context.map, layout, ownQuery = false, overviewPacket = null, zones = [];
       try {
-        layout = await visibleLayout(context.provider, context.query.queryId, context.map.mapId, context.width, context.height, range, { signal, noResize: true });
-        const rows = await context.provider.getRows(context.query.queryId, layout.layoutId, { signal });
-        return { layout, rows };
+        if (!rangeInside(map.domain, range)) {
+          query = await context.provider.createQuery({ ...context.input, domain: navigationQueryDomain(range), scaleMode: 'uniform', ratio: 1, bins: state.bins }, { signal });
+          ownQuery = true;
+          if (query.generation !== context.query.generation || query.revision !== context.query.revision || query.preferencesRevision !== context.query.preferencesRevision) return { status: 'incompatible', reason: 'Source revision changed', retryAt: performance.now() + 2000 };
+          map = await context.provider.getMap(query.queryId, query.mapId, { signal });
+          zones = (await context.provider.getZones(query.queryId, { signal })).items || [];
+          overviewPacket = { scope: context.scope, overview: await context.provider.getOverview(query.queryId, { signal }), zones, coverage: query.coverage, sourceIds: null };
+        }
+        if (signal.aborted || !current(context)) return null;
+        layout = await visibleLayout(context.provider, query.queryId, map.mapId, context.width, context.height, range, { signal, noResize: true });
+        const pageIndex = context.rows.pageIndex || 0, pageCount = Math.max(1, Math.ceil(layout.totalRows / layout.pageCapacity));
+        if (pageIndex >= pageCount) return { status: 'partial', reason: 'The selected vertical page is outside this interval', overviewPacket, zones, retryAt: Infinity };
+        const rows = { ...layout, ...await context.provider.getRows(query.queryId, layout.layoutId, { pageIndex, signal }) };
+        const projected = reprojectPreviewRows(rows, map, range, context.width, previewProjector(context),
+          { fromMs: context.fromMs, toMs: context.toMs, recordIds: new Set(context.rows.items.filter(item => item.record).map(item => item.record.id)) });
+        projected.rows.mapId = context.map.mapId;
+        const admission = mergeNavigationPreviewRows(extendPreviewSessions(context.previewRows, previewProjector(context)), [{ rows: projected.rows, offsetX: 0 }], { groupBy: state.groupBy, fontSize: state.fontSize });
+        const partial = projected.omitted || admission.coverage.partial || query.coverage?.complete === false;
+        return { status: partial ? 'partial' : 'ready', rows: projected.rows, zones, overviewPacket,
+          preparationCoverage: admission.coverage, sourceRevision: query.revision, retryAt: Infinity };
       } catch (error) {
-        if (layout) await context.provider.releaseLayout(context.query.queryId, layout.layoutId).catch(() => {});
+        if (current(context)) {
+          if ([401, 403].includes(error.status) || error.code === 'permission_scope_changed') clearUnauthorized();
+          else if (['generation_mismatch', 'generation_conflict', 'workspace_generation_conflict'].includes(error.code)) {
+            requireGenerationRefresh();
+            $('.notice span').textContent = 'The server workspace changed. Reload the current source before continuing; preview records were not adopted.';
+            $('.notice').hidden = false; noticeAction('refresh');
+          }
+        }
         throw error;
+      } finally {
+        if (ownQuery) await context.provider.releaseQuery(query.queryId).catch(() => {});
+        else if (layout) await context.provider.releaseLayout(query.queryId, layout.layoutId).catch(() => {});
       }
     },
-    release: ({ layout }, context) => context.provider.releaseLayout(context.query.queryId, layout.layoutId).catch(() => {}),
   });
   const paint = (value, context) => {
     if (value && !current(context)) { navigation.cancel(); return; }
     const offset = value?.offset || 0;
-    if (value && (!context.labelAt || performance.now() - context.labelAt >= 80)) {
+    if (value) {
+      const timestamp = performance.now();
+      if (lastFrameAt !== null && timestamp - lastFrameAt < 250) { frameTimes.push(timestamp - lastFrameAt); if (frameTimes.length > 240) frameTimes.shift(); }
+      lastFrameAt = timestamp;
+    } else lastFrameAt = null;
+    if (value) {
       context.rangeLabel ??= $('.range-button').textContent;
       const from = toIso(value.range.fromMs), to = toIso(value.range.toMs);
       $('.range-button').textContent = `${rangeDate(from)} / ${dateLabel(from)} - ${dateLabel(to)}`;
-      context.labelAt = performance.now();
     } else if (!value && context.rangeLabel) $('.range-button').textContent = context.rangeLabel;
     if (value && Math.abs(offset - (context.gridOffset || 0)) > context.width * .5) {
       const map = navigationMap(context.map), mapper = time => projectTime(map, time, context.fromMs, context.toMs, context.width);
@@ -1374,65 +1666,45 @@ function bindNavigation() {
     if (state.domain && state.fromMs) {
       const domain = value ? followingOverview(context.previewDomain || state.domain, value.range) : state.domain;
       if (domain !== (context.previewDomain || state.domain)) {
-        context.previewDomain = domain; renderOverview(domain);
-        if (value) $('.overview-count').textContent = 'Pending context'; else updateStatus();
+        context.previewDomain = domain;
+        if (value) paintOverviewBuffer(context, domain); else { renderOverview(domain); updateStatus(); }
       }
       updateOverviewWindow(value?.range, domain);
     }
     plot.dataset.navigationOffset = String(offset);
-    if (value && windowLoader && (!context.prefetchAt || performance.now() - context.prefetchAt >= 150)) {
+    if (value && (!context.prefetchAt || performance.now() - context.prefetchAt >= 100)) {
       const delta = offset - (context.prefetchOffset || 0), elapsed = performance.now() - (context.prefetchAt || performance.now() - 150);
-      windowLoader.request(value.range, state.filter, { direction: -Math.sign(delta), speed: Math.abs(delta) / Math.max(1, elapsed) });
+      context.velocity = delta / Math.max(1, elapsed);
+      if (!waitingQuery && !overviewWork && !preparationAdmission.pendingCount) buffer.request(context, offset, context.velocity);
+      windowLoader?.observeLatency(buffer.metrics.estimatedPreparationMs);
+      windowLoader?.request(value.range, context.input.filters, { direction: -Math.sign(delta), speed: Math.abs(context.velocity), viewportWidth: context.width, scope: context.scope });
       context.prefetchAt = performance.now(); context.prefetchOffset = offset;
     }
-    pendingEdge.hidden = !value || Math.abs(value.constrainedOffset) < 1;
-    pendingEdge.style.left = value?.constrainedOffset < 0 ? `${Math.max(0, context.width + value.constrainedOffset)}px` : '0';
-    pendingEdge.style.width = `${Math.min(context?.width || 0, Math.abs(value?.constrainedOffset || 0))}px`;
-    if (value && motion.phase === 'dragging' && !prefetched) {
-      clearTimeout(prefetchTimer);
-      prefetchTimer = setTimeout(() => {
-        if (motion.phase !== 'dragging' || motion.context !== context || !current(context)) return;
-        if (rangeInside(state.map.domain, value.range)) { prefetched = true; cache.request(context, rangeKey(value.range), value.range); }
-      }, 180);
-    }
+    if (value) paintCoverage(context, offset); else pendingEdge.hidden = true;
   };
   const motion = createNavigationMotion({
     reducedMotion: () => reduced.matches,
     preview: paint,
-    changed: phase => { plot.dataset.navigationPhase = phase; if (phase !== 'dragging') clearTimeout(prefetchTimer); },
-    canceled: () => { clearTimeout(prefetchTimer); void cache.discard(); },
+    changed: phase => { plot.dataset.navigationPhase = phase; },
+    canceled: () => { clearTimeout(warmTimer); },
     settle: async (value, context) => {
       if (!current(context) || motion.context !== context) return;
+      buffer.reset();
+      await buffer.idle;
+      if (!current(context) || motion.context !== context) return;
       setBusy(true);
-      if (followingOverview(state.domain, value.range) !== state.domain || !rangeInside(state.map.domain, value.range)) {
-        await cache.discard();
-        if (!current(context) || motion.context !== context) return;
-        // Restore the old grid while its original range is still valid. The
-        // replacement viewport may extend beyond this pinned query's map.
+      if (followingOverview(state.domain, value.range) !== state.domain || !rangeInside(state.map.domain, value.range) || (state.scaleMode === 'adaptive' && state.scaleStrategy === 'automatic')) {
+        holdingPreview = true; heldContext = context; heldOffset = value.offset;
         navigation.cancel();
         state.fromMs = value.range.fromMs; state.toMs = value.range.toMs;
         followRange(value.range); rememberSetting('range', rangeIso());
-        await refreshQuery(); return;
-      }
-      let prepared = await cache.take(context, rangeKey(value.range));
-      if (prepared && Math.abs(context.height - plot.clientHeight) >= 1) {
-        await context.provider.releaseLayout(context.query.queryId, prepared.layout.layoutId).catch(() => {});
-        prepared = null;
-      }
-      if (!current(context) || motion.context !== context) {
-        if (prepared) await context.provider.releaseLayout(context.query.queryId, prepared.layout.layoutId).catch(() => {});
-        return;
+        await refreshQuery({ navigationOnly: true }); return;
       }
       context.committedRange = value.range;
       state.fromMs = value.range.fromMs; state.toMs = value.range.toMs;
       rememberSetting('range', rangeIso());
-      if (prepared) {
-        state.layout = prepared.layout; state.rows = prepared.rows; render(); setBusy(false);
-        await context.provider.releaseLayout(context.query.queryId, context.layout.layoutId).catch(() => {});
-      } else {
-        await refreshLayout();
-        if (current(context) && motion.context === context) navigation.cancel();
-      }
+      await refreshLayout(undefined, state.epoch, { navigationOnly: true });
+      if (current(context) && motion.context === context) navigation.cancel();
     },
   });
   const releasePointer = previous => { if (previous && plot.hasPointerCapture(previous.pointer)) plot.releasePointerCapture(previous.pointer); };
@@ -1440,20 +1712,51 @@ function bindNavigation() {
     stop() { motion.stop(); },
     cancel() {
       const previous = drag; drag = null; const context = motion.context;
+      clearTimeout(warmTimer); buffer.reset();
       if (current(context) && context.committedRange && state.fromMs === context.committedRange.fromMs && state.toMs === context.committedRange.toMs) { state.fromMs = context.fromMs; state.toMs = context.toMs; }
       if (motion.active) { ++layoutIntent; setBusy(false); }
-      motion.cancel(); releasePointer(previous); plot.style.cursor = '';
+      motion.cancel({ reset: !holdingPreview }); releasePointer(previous); plot.style.cursor = '';
     },
-    rendered() { const previous = drag; drag = null; motion.cancel({ reset: false }); releasePointer(previous); plot.style.cursor = ''; plot.dataset.navigationOffset = '0'; pendingEdge.hidden = true; },
+    rendered() { const previous = drag; drag = null; clearTimeout(warmTimer); buffer.reset(); baseContext = null; holdingPreview = false; heldContext = null; heldOffset = 0; lastFrameAt = null; motion.cancel({ reset: false }); releasePointer(previous); plot.style.cursor = ''; plot.dataset.navigationOffset = '0'; pendingEdge.hidden = true; },
+    prepareQuery(navigationOnly) { if (!navigationOnly) { holdingPreview = false; heldContext = null; heldOffset = 0; } },
+    warm() {
+      clearTimeout(warmTimer);
+      warmTimer = setTimeout(() => {
+        if (waitingQuery || overviewWork || preparationAdmission.pendingCount || !state.layout || !state.rows || state.queryLoading || state.loading || state.view === 'table' || state.authRequired || state.generationRequired || state.localUnavailable || calendar || $('.modal-backdrop') || modelManager?.isOpen() || configurationManager?.isOpen() || recordGestures?.mode === 'edit') return;
+        if (motion.active) {
+          if (['dragging', 'coasting'].includes(motion.phase) && current(motion.context)) buffer.request(motion.context, motion.offset, motion.context.velocity || 0);
+          return;
+        }
+        if (!current(baseContext)) baseContext = capture();
+        if (current(baseContext)) buffer.request(baseContext);
+      }, 120);
+    },
+    get idle() { return buffer.idle; },
+    pauseBuffer() { clearTimeout(warmTimer); buffer.reset(); },
+    suspendBuffer() { clearTimeout(warmTimer); buffer.suspend(); },
+    get metrics() { const times = [...frameTimes].sort((a, b) => a - b); return { ...buffer.metrics,
+      tiles: buffer.entries().map(({ index, status, reason }) => ({ index, status, reason })),
+      frameSamples: times.length, frameP95Ms: times.length ? times[Math.ceil(times.length * .95) - 1] : null }; },
     get active() { return motion.active; }, get phase() { return motion.phase; },
   };
   plot.addEventListener('pointerdown', e => {
-    if (!state.map || !state.layout || state.queryLoading || state.authRequired || state.generationRequired || state.localUnavailable || e.button !== 0 || e.isPrimary === false) return;
-    const previous = current(motion.context) ? motion.context : null, initialOffset = previous ? motion.offset : 0;
-    const context = { provider: state.provider, query: state.query, map: state.map, layout: state.layout, rows: state.rows, epoch: state.epoch, width: state.layout.width, height: plot.clientHeight, fromMs: previous?.fromMs || state.fromMs, toMs: previous?.toMs || state.toMs };
+    completedClick = null;
+    if (e.target.closest('[data-group-key]')) { navigation.cancel(); return; }
+    if (!state.map || !state.layout || state.authRequired || state.generationRequired || state.localUnavailable || e.button !== 0 || e.isPrimary === false) return;
+    let resumed = null;
+    if (state.queryLoading) {
+      if (!holdingPreview || !heldContext || heldContext.provider !== state.provider || heldContext.query !== state.query || heldContext.layout !== state.layout) return;
+      // Supersede the pending range without discarding the already painted viewport.
+      ++state.epoch; heldContext.epoch = state.epoch; state.queryLoading = false;
+      resumed = { context: heldContext, offset: heldOffset }; holdingPreview = false;
+      const pending = queryQueue.catch(() => {}); waitingQuery = pending;
+      pending.finally(() => { if (waitingQuery === pending) waitingQuery = null; navigation.warm(); });
+    }
+    const previous = resumed?.context || (current(motion.context) ? motion.context : null), initialOffset = resumed?.offset ?? (previous ? motion.offset : 0);
+    const context = previous || (current(baseContext) ? baseContext : capture());
     if (previous) Object.assign(context, { axisHtml: previous.axisHtml, gridOffset: previous.gridOffset, previewDomain: previous.previewDomain, rangeLabel: previous.rangeLabel });
     if (!current(context)) return;
-    ++layoutIntent; prefetched = false; setBusy(false);
+    ++layoutIntent; setBusy(false); baseContext = context;
     motion.begin(context, createPanProjector(context.map, context.fromMs, context.toMs, context.width), initialOffset);
     state.fromMs = context.fromMs; state.toMs = context.toMs;
     drag = { x: e.clientX, y: e.clientY, initialOffset, id: e.target.closest('[data-record-id]')?.dataset.recordId, moved: !!initialOffset, pointer: e.pointerId };
@@ -1462,16 +1765,26 @@ function bindNavigation() {
   plot.addEventListener('pointermove', e => {
     if (!drag || drag.pointer !== e.pointerId) return; const dx = e.clientX - drag.x;
     if (Math.hypot(dx, e.clientY - drag.y) >= (e.pointerType === 'touch' ? 8 : 4)) drag.moved = true;
-    if (drag.moved) { motion.move(drag.initialOffset + dx); plot.style.cursor = 'grabbing'; e.preventDefault(); }
+    if (drag.moved) { suppressClickUntil = performance.now() + 500; motion.move(drag.initialOffset + dx); plot.style.cursor = 'grabbing'; e.preventDefault(); }
   });
   plot.addEventListener('pointerup', e => {
     if (!drag || drag.pointer !== e.pointerId) return; const completed = drag; drag = null; plot.style.cursor = ''; releasePointer(completed);
-    if (completed.moved) motion.release();
-    else { navigation.cancel(); if (completed.id) selectRecord(completed.id); }
+    if (completed.moved) { suppressClickUntil = performance.now() + 500; motion.release(); }
+    else { completedClick = { id: completed.id, provider: state.provider, until: performance.now() + 300 }; navigation.cancel(); }
   });
-  plot.addEventListener('pointercancel', () => navigation.cancel());
+  plot.addEventListener('click', async e => {
+    const id = e.target.closest('[data-record-id]')?.dataset.recordId || (completedClick?.provider === state.provider && completedClick.until >= performance.now() ? completedClick.id : null);
+    completedClick = null;
+    if (!id || performance.now() < suppressClickUntil || state.authRequired || state.generationRequired || state.localUnavailable) return;
+    const provider = state.provider, source = sourceIntent, selection = ++selectionIntent;
+    selectionRequest?.abort();
+    if (state.queryLoading) await queryQueue;
+    if (provider !== state.provider || source !== sourceIntent || selection !== selectionIntent || state.authRequired || state.generationRequired || state.localUnavailable) return;
+    await selectRecord(id, null, { clearIfUnavailable: true });
+  });
+  plot.addEventListener('pointercancel', () => { completedClick = null; navigation.cancel(); });
   plot.addEventListener('lostpointercapture', () => { if (drag) navigation.cancel(); });
-  window.addEventListener('blur', () => navigation.cancel());
+  window.addEventListener('blur', () => { completedClick = null; navigation.cancel(); });
   document.addEventListener('visibilitychange', () => { if (document.hidden) navigation.cancel(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') navigation.cancel(); }, { capture: true });
   document.addEventListener('pointerdown', e => {
@@ -1639,7 +1952,7 @@ function toggleCalendar() {
       const previous = { query: state.query, fromMs: state.fromMs, toMs: state.toMs, domain: state.domain, transient: structuredClone(state.transient), preferencesDirty: state.preferencesDirty };
       const range = calendarRange(target, timeDecimal(state.toMs).minus(state.fromMs));
       Object.assign(state, range); followRange(range); rememberSetting('range', rangeIso());
-      const pending = refreshQuery({ focusTime: target }), epoch = state.epoch;
+      const pending = refreshQuery({ focusTime: target, navigationOnly: true }), epoch = state.epoch;
       await pending;
       if (state.epoch === epoch && state.query === previous.query) {
         Object.assign(state, previous); render();
@@ -1654,7 +1967,7 @@ function rangeDate(value) { const date = new Date(value); return date.toLocaleDa
 function openRange() {
   const historical = new Date(toIso(state.fromMs)).getUTCFullYear() <= 0 || new Date(toIso(state.toMs)).getUTCFullYear() <= 0;
   const dialog = openDialog('Date and time range', `<form id="range-form"><div class="form-grid"><label class="full">Start / UTC<input name="from" type="${historical ? 'text' : 'datetime-local'}" step="0.001" required value="${dateInput(toIso(state.fromMs))}"></label><label class="full">End / UTC<input name="to" type="${historical ? 'text' : 'datetime-local'}" step="0.001" required value="${dateInput(toIso(state.toMs))}"></label></div><div class="modal-actions"><button type="submit" class="primary-button">${icon('calendar-check')}Apply range</button></div></form>`);
-  dialog.querySelector('form').onsubmit = async e => { e.preventDefault(); try { const from = inputIso(e.target.elements.from.value), to = inputIso(e.target.elements.to.value); if (toMs(to) <= toMs(from)) throw new Error('End must be later than start.'); state.fromMs = String(toMs(from)); state.toMs = String(toMs(to)); if (toMs(from) < toMs(state.domain.from) || toMs(to) > toMs(state.domain.to)) { state.domain = { from, to }; rememberSetting('overview', state.domain); } rememberSetting('range', { from, to }); closeDialog(); await refreshQuery(); } catch (error) { formError(e.target, error); } };
+  dialog.querySelector('form').onsubmit = async e => { e.preventDefault(); try { const from = inputIso(e.target.elements.from.value), to = inputIso(e.target.elements.to.value); if (toMs(to) <= toMs(from)) throw new Error('End must be later than start.'); state.fromMs = String(toMs(from)); state.toMs = String(toMs(to)); if (toMs(from) < toMs(state.domain.from) || toMs(to) > toMs(state.domain.to)) { state.domain = { from, to }; rememberSetting('overview', state.domain); } rememberSetting('range', { from, to }); closeDialog(); await refreshQuery({ navigationOnly: true }); } catch (error) { formError(e.target, error); } };
 }
 
 function openSettings(filtersOnly = false) {
@@ -1710,9 +2023,11 @@ function openSettings(filtersOnly = false) {
     preview.hidden = false; preview.setAttribute('aria-busy', 'true'); previewStatus.textContent = 'Preparing preview...'; preview.querySelector('ul').replaceChildren(); previewButton.textContent = 'Cancel preview';
     previewQueue = previewQueue.catch(() => {}).then(async () => {
       if (!current() || controller.signal.aborted) return;
-      let query;
+      let query, releasePreparation;
       const timer = setTimeout(() => controller.abort(), 8000);
       try {
+        releasePreparation = await beginTableRead({ provider }, { signal: controller.signal });
+        if (!current() || controller.signal.aborted) return;
         const { expression, ...options } = draft, filters = { ...state.filter };
         const scope = schemaScope?.value(); if (scope && !scope.locked) filters.schemaRefs = scope.pins;
         if (expression) filters.expression = expression; else delete filters.expression;
@@ -1730,6 +2045,7 @@ function openSettings(filtersOnly = false) {
         if (current() && intent === previewIntent) previewStatus.textContent = controller.signal.aborted ? 'Preview timed out. The active timeline is unchanged.' : `Preview unavailable: ${error.message}`;
       } finally {
         clearTimeout(timer); if (query) await provider.releaseQuery(query.queryId).catch(() => {});
+        releasePreparation?.();
         if (current() && intent === previewIntent) { previewController = null; previewButton.textContent = 'Preview'; preview.removeAttribute('aria-busy'); }
       }
     });
@@ -1992,17 +2308,32 @@ function monitorLegacyLoading(provider) {
 }
 function scheduleLegacyOverview(provider, epoch) {
   clearTimeout(overviewTimer); overviewRequest?.abort();
-  const domain = structuredClone(state.domain), filters = structuredClone(state.filter), search = { ...searchOptions(), ...queryOptions() };
+  const domain = structuredClone(state.domain), filters = structuredClone(state.filter), search = { ...searchOptions(), ...queryOptions() }, pinnedQuery = state.query;
   $('.overview-count').textContent = 'Loading broader context';
   overviewTimer = setTimeout(async () => {
     if (provider !== state.provider || epoch !== state.epoch) return;
+    if (preparationAdmission.pendingCount) { scheduleLegacyOverview(provider, epoch); return; }
     const controller = overviewRequest = new AbortController(), options = { signal: controller.signal };
-    let query;
-    const current = () => provider === state.provider && epoch === state.epoch && !controller.signal.aborted;
+    const current = () => provider === state.provider && epoch === state.epoch && state.query === pinnedQuery && !controller.signal.aborted && !state.authRequired && !state.generationRequired && !state.localUnavailable;
     try {
-      query = await provider.createQuery({ domain, filters, ...search, scaleMode: 'uniform', ratio: 1, bins: 64 }, options);
-      const overview = await provider.getOverview(query.queryId, options);
-      const zones = await provider.getZones(query.queryId, options);
+      const previous = overviewWork;
+      navigation?.suspendBuffer();
+      const work = (async () => {
+        let query;
+        try {
+          await previous; await navigation?.idle; await provider.awaitPreparationCleanup?.(options);
+          if (!current()) return null;
+          query = await provider.createQuery({ domain, filters, ...search, scaleMode: 'uniform', ratio: 1, bins: 64 }, options);
+          if (query.generation !== pinnedQuery.generation || query.revision !== pinnedQuery.revision || query.preferencesRevision !== pinnedQuery.preferencesRevision) throw new Error('Broader context belongs to a different source revision');
+          const overview = await provider.getOverview(query.queryId, options), zones = await provider.getZones(query.queryId, options);
+          return { overview, zones };
+        } finally { if (query) await provider.releaseQuery(query.queryId).catch(() => {}); }
+      })();
+      overviewWork = work.catch(() => {});
+      const owner = overviewWork;
+      const result = await work.finally(() => { if (overviewWork === owner) overviewWork = null; navigation?.warm(); });
+      if (!result) return;
+      const { overview, zones } = result;
       if (!current()) return;
       // Hold fresh context during a gesture; never move its map or geometry.
       while (navigation?.active && current()) await new Promise(resolve => setTimeout(resolve, 100));
@@ -2011,7 +2342,7 @@ function scheduleLegacyOverview(provider, epoch) {
       renderOverview(); updateStatus();
     } catch (error) {
       if (current()) $('.overview-count').textContent = 'Broader context unavailable; visible data retained';
-    } finally { if (query) await provider.releaseQuery(query.queryId).catch(() => {}); }
+    }
   }, 350);
 }
 async function startConfiguredServer(target) {
@@ -2109,6 +2440,7 @@ window.addEventListener('error', e => { if (app && !state.info) { finishBoot(); 
 Object.defineProperty(window, '__timelineDebug', { get: () => Object.freeze({
   providerKind: isLocal() ? 'local' : 'server', executionMode: state.provider?.executionMode ?? 'server',
   ready: !!state.query && !state.queryLoading && !state.loading && !state.searchPending && !navigation?.active && !state.authRequired && !state.localUnavailable && !state.generationRequired,
+  queryLoading: state.queryLoading,
   providerId: state.provider?.identity, generation: state.info?.generation, sourceName: state.info?.sourceName,
   testDatasetId: state.info?.origin?.testDataset?.id || state.info?.testDataset?.id,
   bandCount: state.presentation?.bandLayout?.length || 2, recordCount: state.info?.recordCount,
@@ -2127,6 +2459,7 @@ Object.defineProperty(window, '__timelineDebug', { get: () => Object.freeze({
   selectedSourceIds: state.filter.sourceIds ? [...state.filter.sourceIds] : null, localPaths: !!state.provider?.localBrowser,
   interactionMode: recordGestures?.mode || 'navigate',
   navigationPhase: navigation?.phase || 'idle', navigationOffset: Number($('.plot-wrap')?.dataset.navigationOffset || 0),
+  navigationBuffer: navigation?.metrics, navigationCoverage: $('.plot-wrap')?.dataset.navigationCoverage || 'ready',
   changeMode: changeMonitor?.state.mode, changePending: changeMonitor?.state.pending, changeRequired: changeMonitor?.state.required,
   queryRevision: state.query?.revision, queryGeneration: state.query?.generation,
   coverage: state.query?.coverage, loadingStatus: state.info?.legacy?.coverage, queryDomain: state.map?.domain,

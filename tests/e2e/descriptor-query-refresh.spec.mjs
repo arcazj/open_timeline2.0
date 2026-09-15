@@ -53,7 +53,7 @@ for (const mode of ['local', 'server']) {
     await change(page, () => page.locator('#source-filter').selectOption('verification'));
     await expect(page.locator('.descriptor')).toBeHidden();
     expect(await page.evaluate(() => window.__timelineDebug.selectedId)).toBeUndefined();
-    await expect(page.locator('.toast')).not.toContainText('Record is not available');
+    await expect(page.locator('.toast').filter({ hasText: 'Record is not available' })).toHaveCount(0);
   });
 
   test(`${mode} refreshed child descriptors cannot use an unscoped parent fallback`, async ({ page }) => {
@@ -69,6 +69,44 @@ for (const mode of ['local', 'server']) {
     await expect(page.locator('.descriptor')).not.toContainText('Review parent');
     await expect(page.getByRole('navigation', { name: 'Parent sessions' })).toHaveCount(0);
     expect(unscopedReads).toEqual([]);
+  });
+
+  test(`${mode} reviewed v2 shared views restore scoped descriptors and retain them on the first range-only navigation`, async ({ page }) => {
+    await open(page, mode);
+    await page.locator('[data-action=help]').click(); await page.locator('[data-help-tab=share]').click();
+    const link = await page.getByRole('textbox', { name: 'View link', exact: true }).inputValue();
+    await page.keyboard.press('Escape'); await page.locator('[data-action=close-descriptor]').click();
+    await change(page, () => page.locator('#search').fill(''));
+    const unscopedReads = [], scopedReads = [];
+    page.on('request', request => {
+      if (request.method() !== 'GET') return;
+      const path = new URL(request.url()).pathname;
+      if (/\/workspaces\/[^/]+\/records\/[^/]+$/.test(path)) unscopedReads.push(path);
+      if (path.endsWith(`/records/${child.id}`) && path.includes('/query-sessions/')) scopedReads.push(path);
+    });
+    await page.locator('[data-action=help]').click(); await page.locator('[data-help-tab=share]').click();
+    await page.getByRole('textbox', { name: 'Shared view link', exact: true }).fill(link);
+    await page.locator('[data-help=review-link]').click(); await page.locator('[data-help=apply-link]').click();
+    await expect(page.getByRole('dialog')).toHaveCount(0); await ready(page);
+    await expect(page.locator('.descriptor h3')).toHaveText('Review child');
+    await expect(page.locator('.descriptor-context')).toContainText('Matching record');
+    expect(unscopedReads).toEqual([]);
+    if (mode === 'server') expect(scopedReads).toHaveLength(1);
+    await page.locator('.range-button').click();
+    await page.locator('#range-form [name=from]').fill('2040-01-01T00:00'); await page.locator('#range-form [name=to]').fill('2040-01-02T00:00');
+    await change(page, () => page.locator('#range-form [type=submit]').click());
+    await expect(page.locator('.descriptor h3')).toHaveText('Review child');
+    await expect(page.locator('.descriptor-retained')).toBeVisible();
+    await expect(page.locator('.descriptor-context')).toHaveCount(0);
+    expect(unscopedReads).toEqual([]);
+    if (mode === 'server') expect(scopedReads).toHaveLength(1);
+    await page.locator('[data-action=help]').click(); await page.locator('[data-help-tab=share]').click();
+    const retainedLink = await page.getByRole('textbox', { name: 'View link', exact: true }).inputValue();
+    expect(JSON.parse(Buffer.from(new URL(retainedLink, server.baseUrl).hash.slice(6), 'base64url').toString('utf8')).selectedId).toBeNull();
+    await expect(page.locator('.help-facts')).toContainText('retained; excluded from shared view');
+    await page.keyboard.press('Escape');
+    await change(page, () => page.locator('#source-filter').selectOption('verification'));
+    await expect(page.locator('.descriptor')).toBeHidden();
   });
 }
 
@@ -102,6 +140,8 @@ for (const action of ['refresh', 'new selection']) {
         await change(page, () => page.locator('#search').fill('Review child'));
         expect(requests).toBe(2);
       } else {
+        await expect(page.locator('.table-view tbody tr')).toHaveCount(50);
+        expect(await page.evaluate(() => window.__timelineDebug.providerKind)).toBe('server');
         await page.locator(`.table-view [data-record-id="${parent.id}"]`).click(); await ready(page);
       }
       const expected = action === 'refresh' ? child : parent;

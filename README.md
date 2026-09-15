@@ -110,6 +110,8 @@ The supplied archive profiles are templates for the author's local layout, not b
 
 Legacy sources support `<path>/yyyy/mm/dd` partitions. The server reads the visible interval and a small buffer first, then loads more on navigation. Sessions overlapping the interval are included even when they begin earlier. Background discovery reports provisional coverage until older partitions are verified; it does not claim an incomplete window is a complete archive.
 
+Smart dragging prepares adjacent rows ahead of movement, with bounded, direction-aware caching. Rows and the time mapping stay fixed while you drag; partial or unavailable intervals are marked explicitly. Range-only navigation retains the selected descriptor and its expanded details. See [smart dragging](docs/smart-dragging.md) for behavior and limits, and [verification captures and results](docs/smart-drag-verification.md) for recorded evidence.
+
 Keep private launch overrides in `yaml/local/` or `config/local/`, which are excluded from Git. See [source paths and favorites](docs/local-source-paths.md), [legacy JSON compatibility](docs/legacy-json-sources.md), and [on-demand loading](docs/on-demand-loading.md).
 
 ### Writable Python API

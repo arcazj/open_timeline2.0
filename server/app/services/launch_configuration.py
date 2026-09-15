@@ -41,9 +41,11 @@ def load_launch_configuration(filename):
         selected = Path(_text(value, name))
         return _guard_path(base / selected)
 
-    state_root = resolve(server["state_root"], "server.state_root")
+    state_root = _guard_path(resolve(server["state_root"], "server.state_root").resolve())
     preferences_root = (state_root / "preferences" if "preferences_root" not in server else
                         None if server["preferences_root"] is None else resolve(server["preferences_root"], "server.preferences_root"))
+    if preferences_root is not None:
+        preferences_root = _guard_path(_guard_path(preferences_root).resolve())
     if preferences_root is not None and (preferences_root == state_root or not preferences_root.is_relative_to(state_root)):
         raise ValueError("server.preferences_root must be a dedicated child of server.state_root, or null to disable preferences")
 

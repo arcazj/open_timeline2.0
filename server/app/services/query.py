@@ -713,12 +713,22 @@ class QueryEngine:
         except (ValueError, UnicodeError) as error:
             raise DomainError("invalid_cursor", "Cursor belongs to a different layout or has been altered.", 400) from error
 
-    def rows(self, query_id, layout_id, cursor=None):
+    def rows(self, query_id, layout_id, cursor=None, page_index=None):
         with self.mutex:
             layout = self._layout(query_id, layout_id)
             manifest = layout["manifest"]
             capacity, total = manifest["pageCapacity"], manifest["totalRows"]
-            start = self._offset(cursor, layout_id, capacity)
+            page_count = max(1, math.ceil(total / capacity))
+            if page_index is not None:
+                if cursor is not None:
+                    raise DomainError("invalid_pagination", "Specify either cursor or pageIndex, not both.", 422)
+                if type(page_index) is not int or not 0 <= page_index <= 9007199254740991:
+                    raise DomainError("invalid_page_index", "pageIndex must be a nonnegative safe integer.", 422)
+                if page_index >= page_count:
+                    raise DomainError("invalid_page_index", "pageIndex is outside this layout.", 400)
+                start = page_index * capacity
+            else:
+                start = self._offset(cursor, layout_id, capacity)
             if start >= total and start != 0:
                 raise DomainError("invalid_cursor", "Cursor points beyond the last row.", 400)
             end = min(total, start + capacity)
@@ -726,7 +736,7 @@ class QueryEngine:
             result = {"layoutId": layout_id, "mapId": manifest["mapId"], "items": copy.deepcopy(items),
                     "rows": copy.deepcopy([row for row in layout["rows"] if start <= row["row"] < end]),
                     "startRow": start, "endRow": end, "totalRows": total, "pageIndex": start // capacity,
-                    "pageCount": max(1, math.ceil(total / capacity)),
+                    "pageCount": page_count,
                     "previousCursor": self._cursor(layout_id, max(0, start - capacity)) if start else None,
                     "nextCursor": self._cursor(layout_id, end) if end < total else None,
                     "pageComplete": True, "loadedCount": len(items)}

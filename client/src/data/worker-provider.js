@@ -3,6 +3,7 @@ import { ProviderError, abortIfNeeded, clone, uuid } from './data-provider.js';
 
 const EMBEDDED_SOURCE = typeof __OPENBEXI_LOCAL_WORKER_SOURCE__ === 'string' ? __OPENBEXI_LOCAL_WORKER_SOURCE__ : '';
 const MUTATIONS = new Set(['executeCommand', 'executeModelCommand', 'mutateConfiguration', 'mutateSettings', 'executeBatch']);
+const ALLOCATIONS = new Set(['createQuery', 'createLayout']);
 const METHODS = { getStatus: 0, createQuery: 1, getQuery: 1, getDensity: 1, getMap: 2, getZones: 1, getOverview: 1, createLayout: 2, getLayout: 2, getRows: 2, getPlacement: 3, getRecord: 1, queryRecords: 2, executeCommand: 1, executeBatch: 1, getCommandOutcome: 1, listModels: 0, getModel: 1, validateModel: 1, executeModelCommand: 1, exportSnapshot: 0, releaseQuery: 1, releaseLayout: 2, listConfiguration: 2, getConfiguration: 2, validateConfiguration: 3, configurationUsage: 3, mutateConfiguration: 1, getEffectiveSettings: 1, mutateSettings: 1, previewSchemaImpact: 2 };
 const aborted = () => new DOMException('Operation aborted', 'AbortError');
 METHODS.getQueryRecord = 2;
@@ -10,6 +11,8 @@ METHODS.findMatch = 2;
 METHODS.migrateLegacyFilter = 2;
 const unknownWrite = () => new ProviderError('write_outcome_unknown', 'Local write outcome is unknown; keep this source open and check the original command identity', 503);
 const lostWorker = () => new ProviderError('local_worker_lost', 'The Local worker stopped. Unsaved changes cannot be recovered by reopening the original snapshot', 503);
+const cleanupPending = () => new ProviderError('local_allocation_pending', 'Canceled Local allocation cleanup is not yet confirmed; keep this source open and retry after it finishes', 503);
+const cleanupFailed = () => new ProviderError('local_allocation_cleanup_failed', 'Local view cleanup failed and new views are blocked. Export unsaved changes before reopening this source', 503);
 
 function directProvider(input, reason) {
   const provider = new LocalProvider(input), status = provider.getStatus.bind(provider);
@@ -117,7 +120,10 @@ export class WorkerLocalProvider {
     if (!value || this.disposed) return;
     for (const key of ['identity', 'generation', 'revision', 'modified']) if (value[key] !== undefined) this[key] = value[key];
   }
-  _status(status) { return { ...status, execution: { mode: this.executionMode } }; }
+  _status(status) {
+    const cleanup = [...this.pending.values()].find(request => request.allocation && request.cancelError);
+    return { ...status, execution: { mode: this.executionMode, ...(cleanup ? { allocationCleanup: cleanup.cleanupError ? 'failed' : 'pending' } : {}) } };
+  }
   _change(event) {
     this._metadata(event);
     for (const listener of this.listeners) { try { listener(clone(event)); } catch { /* Observers cannot change a committed result. */ } }
@@ -130,14 +136,25 @@ export class WorkerLocalProvider {
     if (message?.type !== 'response') return;
     const request = this.pending.get(message.id);
     if (!request) return;
-    this.pending.delete(message.id);
-    request.cleanup();
-    if (request.settled) {
-      // An aborted read may have allocated a handle before cancellation was received.
-      if (!message.error && request.method === 'createQuery') this.releaseQuery(message.result.queryId).catch(() => {});
-      if (!message.error && request.method === 'createLayout') this.releaseLayout(request.args[0], message.result.layoutId).catch(() => {});
+    if (request.allocation && request.cancelError) {
+      if (request.releasing) return;
+      if (message.error) { this._finishCanceledAllocation(message.id, request); return; }
+      request.releasing = true;
+      const method = request.method === 'createQuery' ? 'releaseQuery' : 'releaseLayout';
+      const args = request.method === 'createQuery' ? [message.result.queryId] : [request.args[0], message.result.layoutId];
+      const acknowledge = response => {
+        if (!response.error || (method === 'releaseLayout' && response.error.code === 'snapshot_expired')) this._finishCanceledAllocation(message.id, request);
+        else this._allocationCleanupFailed(request, true);
+      };
+      // Retain the allocation slot until release is acknowledged, even if the caller's deadline expires.
+      this._rpc(method, args, { timeout: Math.max(1, request.deadline - Date.now()) }, { cleanup: true, acknowledge })
+        .catch(error => this._allocationCleanupFailed(request, error.code !== 'local_allocation_pending'));
       return;
     }
+    this.pending.delete(message.id);
+    request.cleanup();
+    request.acknowledge?.(message);
+    if (request.settled) return;
     if (message.error) {
       const error = message.error.name === 'AbortError' ? aborted() : new ProviderError(message.error.code ?? 'local_worker_error', message.error.message, message.error.status ?? 500, { errors: message.error.errors });
       if (message.error.diagnostic) error.diagnostic = clone(message.error.diagnostic);
@@ -145,16 +162,43 @@ export class WorkerLocalProvider {
     } else request.resolve(request.method === 'getStatus' ? this._status(message.result) : message.result);
   }
 
-  _rpc(method, args, options) {
+  _finishCanceledAllocation(id, request) {
+    if (this.pending.get(id) !== request) return;
+    this.pending.delete(id); request.cleanup();
+    if (!request.settled) { request.settled = true; request.reject(request.cancelError); }
+  }
+
+  _allocationCleanupFailed(request, terminal = false) {
+    if (terminal) request.cleanupError ??= cleanupFailed();
+    if (!request.settled) { request.settled = true; request.cleanup(); request.reject(request.cleanupError || cleanupPending()); }
+  }
+
+  _rpc(method, args, options, internal = {}) {
     this._assert(); abortIfNeeded(options.signal);
-    if (this.pending.size >= 64) return Promise.reject(new ProviderError('worker_capacity', 'Too many pending Local operations', 429));
+    const blocked = ALLOCATIONS.has(method) && [...this.pending.values()].find(request => request.allocation && request.cancelError);
+    if (blocked) return Promise.reject(blocked.cleanupError || cleanupPending());
+    if (this.pending.size >= (internal.cleanup ? 128 : 64)) return Promise.reject(new ProviderError('worker_capacity', 'Too many pending Local operations', 429));
     const signal = options.signal, mutation = MUTATIONS.has(method), id = uuid();
     const timeout = Number.isFinite(options.timeout) && options.timeout > 0 ? Math.min(options.timeout, 120000) : 60000;
     const { signal: ignoredSignal, timeout: ignoredTimeout, ...wireOptions } = options;
     return new Promise((resolve, reject) => {
-      const request = { method, args, resolve, reject, mutation, settled: false, cleanup: () => {} };
+      const request = { method, args, resolve, reject, mutation, allocation: ALLOCATIONS.has(method),
+        deadline: Date.now() + timeout, acknowledge: internal.acknowledge, settled: false, cleanup: () => {} };
       const cancel = timedOut => {
         if (request.settled) return;
+        if (internal.cleanup) {
+          request.settled = true; request.cleanup();
+          // Stop waiting at the deadline, but keep the release and its late acknowledgement alive.
+          reject(cleanupPending());
+          return;
+        }
+        if (request.allocation) {
+          request.cancelError ??= timedOut ? new ProviderError('local_request_timeout', 'Local work timed out', 503) : aborted();
+          signal?.removeEventListener('abort', relay);
+          try { this.worker.postMessage({ type: 'cancel', id }); } catch { /* Keep the allocation blocked until cleanup or worker loss is confirmed. */ }
+          if (timedOut) this._allocationCleanupFailed(request);
+          return;
+        }
         request.settled = true;
         request.cleanup();
         try { this.worker.postMessage({ type: 'cancel', id }); } catch { /* Failure is handled by the original request outcome. */ }

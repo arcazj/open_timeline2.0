@@ -24,6 +24,14 @@ async function openLocal(page) {
   await page.goto(fileUrl);
   await expect(page.locator('.record-label').first()).toBeVisible();
   await expect(page.locator('.busy-indicator')).toHaveCount(0);
+  await page.evaluate(() => document.fonts.ready);
+  // The initial query can finish before the toolbar's ResizeObserver layout.
+  await expect.poll(() => page.locator('.plot-wrap').evaluate(plot => {
+    const canvas = plot.querySelector('canvas'), debug = window.__timelineDebug;
+    const capacity = Math.min(100, Math.floor(Math.max(debug.effectiveRowHeight, plot.clientHeight - 52) / debug.effectiveRowHeight));
+    return debug.ready && debug.pageCapacity === capacity && debug.layoutWidth === plot.clientWidth
+      && canvas.height / Math.min(devicePixelRatio, 2) === plot.clientHeight;
+  })).toBe(true);
   await expect(page.locator('.record-label.search-match')).toHaveCount(0);
   await expect(page.locator('.range-button')).not.toBeEmpty();
   await expect(page.locator('.scale-cue')).toHaveText('Uniform time scale');

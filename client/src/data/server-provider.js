@@ -1,5 +1,9 @@
 import { ProviderError, uuid, clone } from './data-provider.js';
 import { partialUpdatePatch } from './record-commands.js';
+import { validateRowPageOptions } from './row-pagination.js';
+
+const PREPARATION_LIMIT = 64;
+const CLEANUP_WAIT_MS = 35000;
 
 export class ServerProvider {
   constructor({ baseUrl = '', token = '', workspaceId = 'default', localBrowser = false } = {}) {
@@ -13,6 +17,7 @@ export class ServerProvider {
     this.controllers = new Set();
     this.changeSubscriptions = new Set();
     this.preparationWaiters = new Set();
+    this.preparationDrains = new Set();
     this.metadata = null;
     this.disposed = false;
   }
@@ -25,10 +30,11 @@ export class ServerProvider {
     options.signal?.addEventListener('abort', relay, { once: true });
     if (options.signal?.aborted) relay();
     const timer = setTimeout(() => controller.abort(new Error('Request timed out')), options.timeout ?? 30000);
-    const headers = { Accept: 'application/json', ...(this.localBrowser ? { 'X-OpenBEXI-Local': '1' } : this.token ? { Authorization: `Bearer ${this.token}` } : {}), ...options.headers };
+    const source = options.preparationSource ?? this;
+    const headers = { Accept: 'application/json', ...(source.localBrowser ? { 'X-OpenBEXI-Local': '1' } : source.token ? { Authorization: `Bearer ${source.token}` } : {}), ...options.headers };
     if (options.body !== undefined && !headers['Content-Type']) headers['Content-Type'] = 'application/json';
     try {
-      const response = await fetch(this.baseUrl + path, { method: options.method ?? 'GET', headers, body: options.body === undefined ? undefined : JSON.stringify(options.body), signal: controller.signal, credentials: 'omit', cache: 'no-store' });
+      const response = await fetch(source.baseUrl + path, { method: options.method ?? 'GET', headers, body: options.body === undefined ? undefined : JSON.stringify(options.body), signal: controller.signal, credentials: 'omit', cache: 'no-store' });
       const text = await response.text();
       let body;
       try { body = text ? JSON.parse(text) : null; } catch { throw new ProviderError(options.mutation ? 'write_outcome_unknown' : 'invalid_response', options.mutation ? 'Write reply was malformed; check the original command outcome' : 'Server returned malformed JSON', 502); }
@@ -120,9 +126,49 @@ export class ServerProvider {
     else void poll();
     return stop;
   }
+  get requiresReconnect() { return [...this.preparationDrains].some(item => Boolean(item.error)); }
+  awaitPreparationCleanup(options = {}) { return this._awaitPreparationCleanup(options, false); }
+  awaitPendingPreparationCleanup(options = {}) { return this._awaitPreparationCleanup(options, true); }
+  async _awaitPreparationCleanup({ signal, timeout = CLEANUP_WAIT_MS }, ignoreTerminal) {
+    if (!Number.isFinite(timeout) || timeout <= 0) throw new TypeError('Cleanup timeout must be positive');
+    const deadline = Date.now() + Math.min(timeout, CLEANUP_WAIT_MS);
+    while (true) {
+      if (signal?.aborted) throw new DOMException('Operation aborted', 'AbortError');
+      const pending = [...this.preparationDrains].filter(item => item.needsCleanup && (!ignoreTerminal || !item.error));
+      if (!pending.length) return;
+      const failed = pending.find(item => item.error);
+      if (failed) throw failed.error;
+      let timer, aborted;
+      const interrupted = new Promise((resolve, reject) => {
+        timer = setTimeout(() => reject(new ProviderError('preparation_cleanup_pending', 'A canceled server view is still being released; retry when cleanup finishes', 409)), Math.max(0, deadline - Date.now()));
+        aborted = () => reject(new DOMException('Operation aborted', 'AbortError'));
+        signal?.addEventListener('abort', aborted, { once: true });
+        if (signal?.aborted) aborted();
+      });
+      try {
+        const errors = await Promise.race([Promise.all(pending.map(item => item.done)), interrupted]);
+        const error = errors.find(Boolean);
+        if (error && !ignoreTerminal) throw error;
+      } finally {
+        clearTimeout(timer); signal?.removeEventListener('abort', aborted);
+      }
+    }
+  }
   _prepare(path, input, options, kind, queryId) {
     if (this.disposed) return Promise.reject(new ProviderError('provider_disposed', 'Server source has been disposed', 409));
     if (options.signal?.aborted) return Promise.reject(new DOMException('Operation aborted', 'AbortError'));
+    const pending = [...this.preparationDrains].find(item => item.needsCleanup);
+    if (pending) return Promise.reject(pending.error ?? new ProviderError('preparation_cleanup_pending', 'A canceled server view is still being released; retry when cleanup finishes', 409));
+    if (this.preparationDrains.size >= PREPARATION_LIMIT) return Promise.reject(new ProviderError('preparation_capacity', 'Too many server views are being prepared', 429));
+    let completeDrain;
+    const drain = { needsCleanup: false, error: null, done: new Promise(resolve => { completeDrain = resolve; }) };
+    this.preparationDrains.add(drain);
+    const settleDrain = error => {
+      if (error) { drain.needsCleanup = true; drain.error = error; }
+      else this.preparationDrains.delete(drain);
+      completeDrain(error);
+    };
+    const cleanupFailed = cause => new ProviderError('preparation_cleanup_failed', 'Server view cleanup could not be confirmed; reconnect before preparing another view', 409, { cause });
     const baseUrl = this.baseUrl, token = this.token, base = this.base, localBrowser = this.localBrowser;
     return new Promise((resolve, reject) => {
       let finished = false, cleanupStarted = false, handlePath, initial;
@@ -130,16 +176,35 @@ export class ServerProvider {
       const detach = () => { options.signal?.removeEventListener('abort', stop); this.preparationWaiters.delete(stop); };
       const cleanup = () => {
         if (!handlePath || cleanupStarted) return;
-        cleanupStarted = true;
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 2000);
+        cleanupStarted = true; drain.needsCleanup = true;
         // Release only this source's ephemeral allocation, including a late reply after disposal.
-        void fetch(baseUrl + handlePath, { method: 'DELETE', headers: { Accept: 'application/json', ...(localBrowser ? { 'X-OpenBEXI-Local': '1' } : token ? { Authorization: `Bearer ${token}` } : {}) },
-          credentials: 'omit', cache: 'no-store', signal: controller.signal }).then(response => response.body?.cancel()).catch(() => {}).finally(() => clearTimeout(timer));
+        void (async () => {
+          const deadline = Date.now() + 30000;
+          for (let attempt = 0; attempt < 6; attempt++) {
+            const remaining = deadline - Date.now();
+            if (remaining <= 0) break;
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), Math.min(7000, remaining));
+            try {
+              const response = await fetch(baseUrl + handlePath, { method: 'DELETE', headers: { Accept: 'application/json', ...(localBrowser ? { 'X-OpenBEXI-Local': '1' } : token ? { Authorization: `Bearer ${token}` } : {}) },
+                credentials: 'omit', cache: 'no-store', signal: controller.signal });
+              if (response.ok || response.status === 404 || response.status === 410) {
+                void response.body?.cancel().catch(() => {});
+                settleDrain(); return;
+              }
+              let error;
+              try { error = await response.json(); } catch { /* Only an explicit release timeout is retryable. */ }
+              if (response.status !== 503 || error?.code !== 'preparation_release_timeout') {
+                throw new ProviderError(error?.code ?? 'http_error', 'Server did not acknowledge view cleanup', response.status);
+              }
+            } finally { clearTimeout(timer); }
+          }
+          throw new ProviderError('preparation_release_timeout', 'Server view cleanup exceeded its retry deadline', 503);
+        })().catch(error => settleDrain(cleanupFailed(error)));
       };
       const stop = () => {
         if (finished) return;
-        finished = true; polling.abort(); cleanup(); detach(); reject(new DOMException('Operation aborted', 'AbortError'));
+        finished = true; drain.needsCleanup = true; polling.abort(); cleanup(); detach(); reject(new DOMException('Operation aborted', 'AbortError'));
       };
       const pause = () => new Promise((resume, fail) => {
         const aborted = () => { clearTimeout(timer); polling.signal.removeEventListener('abort', aborted); fail(new DOMException('Operation aborted', 'AbortError')); };
@@ -153,7 +218,7 @@ export class ServerProvider {
         try {
           // Keep the bounded allocation reply alive so cancellation can release a returned handle.
           let manifest = await this._request(path, { ...options, signal: undefined, method: 'POST', body: input,
-            preparationAllocation: true, headers: { ...options.headers, Prefer: 'respond-async' } });
+            timeout: Math.min(options.timeout ?? 30000, 30000), preparationAllocation: true, headers: { ...options.headers, Prefer: 'respond-async' } });
           const id = manifest?.[kind === 'query' ? 'queryId' : 'layoutId'];
           if (typeof id !== 'string' || !id) throw new ProviderError('invalid_response', 'Preparation returned no owned handle', 502);
           handlePath = kind === 'query' ? `${base}/query-sessions/${encodeURIComponent(id)}`
@@ -176,9 +241,13 @@ export class ServerProvider {
           if (!manifest || manifest[kind === 'query' ? 'queryId' : 'layoutId'] !== id || (manifest.state !== undefined && manifest.state !== 'ready')) {
             throw new ProviderError('invalid_response', 'Preparation returned an invalid ready manifest', 502);
           }
-          finished = true; detach(); resolve(manifest);
+          finished = true; detach(); settleDrain(); resolve(manifest);
         } catch (error) {
-          cleanup();
+          if (handlePath) {
+            cleanup();
+            if (!finished) await this.awaitPreparationCleanup({ signal: options.signal }).catch(() => {});
+          }
+          else settleDrain(['server_unavailable', 'invalid_response'].includes(error.code) || error.name === 'AbortError' ? cleanupFailed(error) : undefined);
           if (!finished) { finished = true; detach(); reject(error); }
         }
       })();
@@ -195,13 +264,83 @@ export class ServerProvider {
   getZones(id, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(id)}/zones`, options); }
   createLayout(id, input, options = {}) { return this._prepare(`${this.base}/query-sessions/${encodeURIComponent(id)}/layouts`, input, options, 'layout', id); }
   getLayout(id, layoutId, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(id)}/layouts/${encodeURIComponent(layoutId)}`, options); }
-  getRows(id, layoutId, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(id)}/layouts/${encodeURIComponent(layoutId)}/rows${options.cursor ? `?cursor=${encodeURIComponent(options.cursor)}` : ''}`, options); }
+  async getRows(id, layoutId, options = {}) {
+    validateRowPageOptions(options);
+    const suffix = options.pageIndex !== undefined ? `?pageIndex=${options.pageIndex}` : options.cursor ? `?cursor=${encodeURIComponent(options.cursor)}` : '';
+    return this._request(`${this.base}/query-sessions/${encodeURIComponent(id)}/layouts/${encodeURIComponent(layoutId)}/rows${suffix}`, options);
+  }
   getPlacement(id, layoutId, recordId, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(id)}/layouts/${encodeURIComponent(layoutId)}/placement/${encodeURIComponent(recordId)}`, options); }
   getRecord(id, options = {}) { return this._request(`${this.base}/records/${encodeURIComponent(id)}${options.includeDeleted ? '?includeDeleted=true' : ''}`, options); }
   getQueryRecord(queryId, id, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(queryId)}/records/${encodeURIComponent(id)}`, options); }
   findMatch(queryId, input = {}, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(queryId)}/find`, { ...options, method: 'POST', body: input }); }
   migrateLegacyFilter(queryId, input, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(queryId)}/legacy-filter-migration`, { ...options, method: 'POST', body: input }); }
-  queryRecords(id, input = {}, options = {}) { return this._request(`${this.base}/query-sessions/${encodeURIComponent(id)}/records/query`, { ...options, method: 'POST', body: input }); }
+  queryRecords(id, input = {}, options = {}) {
+    if (this.disposed) return Promise.reject(new ProviderError('provider_disposed', 'Server source has been disposed', 409));
+    if (options.signal?.aborted) return Promise.reject(new DOMException('Operation aborted', 'AbortError'));
+    const pending = [...this.preparationDrains].find(item => item.needsCleanup);
+    if (pending) return Promise.reject(pending.error ?? new ProviderError('preparation_cleanup_pending', 'A canceled server view is still being released; retry when cleanup finishes', 409));
+    if (this.preparationDrains.size >= PREPARATION_LIMIT) return Promise.reject(new ProviderError('preparation_capacity', 'Too many server views are being prepared', 429));
+    let capturedInput;
+    try { capturedInput = clone(input); } catch (error) { return Promise.reject(error); }
+    const path = `${this.base}/query-sessions/${encodeURIComponent(id)}/records/query`;
+    const source = { baseUrl: this.baseUrl, token: this.token, localBrowser: this.localBrowser };
+    const headers = { ...options.headers }, deadline = Date.now() + Math.min(options.timeout ?? 30000, 30000);
+    let completeDrain;
+    const drain = { needsCleanup: false, error: null, done: new Promise(resolve => { completeDrain = resolve; }) };
+    this.preparationDrains.add(drain);
+    return new Promise((resolve, reject) => {
+      let finished = false, uncertain = false;
+      const backoff = new AbortController();
+      const detach = () => { options.signal?.removeEventListener('abort', stop); this.preparationWaiters.delete(stop); };
+      const stop = () => {
+        if (finished) return;
+        finished = true; drain.needsCleanup = true; backoff.abort(); detach(); reject(new DOMException('Operation aborted', 'AbortError'));
+      };
+      const pause = ms => new Promise((resume, rejectPause) => {
+        const aborted = () => { clearTimeout(timer); backoff.signal.removeEventListener('abort', aborted); rejectPause(new DOMException('Operation aborted', 'AbortError')); };
+        const timer = setTimeout(() => { backoff.signal.removeEventListener('abort', aborted); resume(); }, ms);
+        backoff.signal.addEventListener('abort', aborted, { once: true });
+        if (backoff.signal.aborted) aborted();
+      });
+      const read = async () => {
+        for (let attempt = 0; ; attempt++) {
+          if (finished) return;
+          try {
+            return await this._request(path, { ...options, headers, method: 'POST', body: capturedInput, signal: undefined,
+              mutation: false, preparationAllocation: true, preparationSource: source, timeout: Math.max(1, deadline - Date.now()) });
+          } catch (error) {
+            if (error.status !== 429 || error.code !== 'preparation_capacity') {
+              uncertain = error.code === 'server_unavailable' || error.name === 'AbortError';
+              throw error;
+            }
+            if (finished) return;
+            const remaining = deadline - Date.now();
+            if (remaining <= 0 || attempt >= 19) throw error;
+            const delay = Math.min(2000, 100 * 2 ** Math.min(attempt, 5)) * (0.8 + Math.random() * 0.4);
+            await pause(Math.min(delay, remaining));
+            if (Date.now() >= deadline) throw error;
+          }
+        }
+      };
+      this.preparationWaiters.add(stop);
+      options.signal?.addEventListener('abort', stop, { once: true });
+      void (async () => {
+        try {
+          // A canceled HTTP read still occupies synchronous server preparation until its reply.
+          const result = await read();
+          this.preparationDrains.delete(drain); completeDrain();
+          if (!finished) resolve(result);
+        } catch (error) {
+          if (uncertain) {
+            drain.needsCleanup = true;
+            drain.error = new ProviderError('preparation_cleanup_failed', 'Server table completion could not be confirmed; reconnect before preparing another view', 409, { cause: error });
+          } else this.preparationDrains.delete(drain);
+          completeDrain(drain.error);
+          if (!finished) reject(error);
+        } finally { finished = true; detach(); }
+      })();
+    });
+  }
 
   async executeCommand(command, options = {}) {
     command = clone(command);

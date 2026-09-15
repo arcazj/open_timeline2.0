@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { clipPreviewInterval, previewTabIndex, reconcilePreviewChildren } from './preview-dom.js';
 import { createElement, icons } from 'lucide';
 import { escapeHtml } from '../utils/dom.js';
 import { zoneLabels } from './zones.js';
@@ -27,11 +28,22 @@ export class TimelineRenderer {
   }
   rect(x, y, width, height, color, opacity = 1, z = 0, fixed = false) {
     if (!(width > 0 && height > 0)) return;
-    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(width, height), new THREE.MeshBasicMaterial({ color, transparent: true, opacity, depthWrite: false, depthTest: false }));
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(1, height), new THREE.MeshBasicMaterial({ color, transparent: true, opacity, depthWrite: false, depthTest: false }));
     mesh.renderOrder = z * 100;
     mesh.userData.fixed = fixed;
-    mesh.position.set(x + width / 2, this.height - y - height / 2, z); this.scene.add(mesh);
+    mesh.userData.horizontalInterval = { x, width };
+    mesh.position.set(x + width / 2, this.height - y - height / 2, z);
+    mesh.scale.x = width;
+    if (!fixed) this.clipRectangle(mesh, 0);
+    this.scene.add(mesh);
     return mesh;
+  }
+  clipRectangle(mesh, offset) {
+    const interval = mesh.userData.horizontalInterval;
+    // Clip huge/ongoing durations in double precision before handing coordinates to WebGL.
+    const left = Math.max(interval.x, -offset - this.width), right = Math.min(interval.x + interval.width, -offset + this.width * 2);
+    mesh.visible = right > left;
+    if (mesh.visible) { mesh.position.x = left + (right - left) / 2; mesh.scale.x = right - left; }
   }
   previewGrid(ticks = this.baseGrid.ticks, project = this.baseGrid.project) {
     for (const mesh of [...this.scene.children]) if (mesh.userData.timeGrid) {
@@ -50,8 +62,14 @@ export class TimelineRenderer {
       ring.position.set(x, this.height - y, 1.1); ring.renderOrder = 110; this.scene.add(ring);
     }
   }
-  render({ rows, width, height, rowHeight, fontSize, project, zones = [], selectedId, theme = 'light', ticks = [], hasSearch = false, referenceTime, interactive = true, presentation, labelBackgroundAuthored = false }) {
+  render({ rows, width, height, rowHeight, fontSize, project, zones = [], selectedId, theme = 'light', ticks = [], hasSearch = false, referenceTime, interactive = true, presentation, labelBackgroundAuthored = false, preview = false }) {
     const focusedGroup = this.labels.contains(document.activeElement) ? document.activeElement.closest('[data-group-key]')?.dataset.groupKey : null;
+    const focusedNode = this.labels.contains(document.activeElement) ? document.activeElement : null;
+    const focusedRecord = focusedNode?.dataset.recordId;
+    if (preview && !this.previewOverflow) {
+      this.previewOverflow = { value: this.host.style.getPropertyValue('overflow'), priority: this.host.style.getPropertyPriority('overflow') };
+      this.host.style.setProperty('overflow', 'clip');
+    } else if (!preview) this.restoreOverflow();
     const styled = !!presentation || rows.items?.some(item => item.style);
     rowHeight = rows.rowHeight || rowHeight; presentation = styled ? rows.presentation || presentation : undefined;
     const paddingTop = presentation?.compact ? presentation.bandLayout?.some(band => band.relativeAxis) ? 28 : 4 : 52;
@@ -123,7 +141,10 @@ export class TimelineRenderer {
             : createElement(recordIcons[style.icon], { width: 16, height: 16, style: 'width:16px;height:16px;flex:none', 'stroke-width': 2, 'aria-hidden': 'true' }).outerHTML;
           labels.push(`<${tag} class="record-icon" data-record-id="${escapeHtml(record.id)}" tabindex="-1" title="${escapeHtml(fullLabel)}" aria-label="${escapeHtml(fullLabel)}" style="position:absolute;left:${item.iconX - 4}px;top:${centerY - 12}px;width:24px;height:24px;min-width:24px;min-height:24px;padding:4px;border:0;background:transparent;color:${style.color};display:flex;align-items:center;justify-content:center">${svg}</${tag}>`);
         }
-        if (!point && interactive) labels.push(`<button class="record-hit" data-record-id="${escapeHtml(record.id)}" style="left:${left}px;top:${centerY - Math.max(12, style.barHeight) / 2}px;width:${Math.max(8, right - left)}px;height:${Math.max(12, style.barHeight)}px" title="${escapeHtml(fullLabel)}" aria-label="${escapeHtml(fullLabel)}" tabindex="-1"></button>`);
+        if (!point && interactive) {
+          const hitEnd = Math.max(left + 8, right), hit = clipPreviewInterval(left, hitEnd, width);
+          labels.push(`<button class="record-hit" data-record-id="${escapeHtml(record.id)}" data-hit-start="${left}" data-hit-end="${hitEnd}"${hit.visible ? '' : ' hidden'} style="left:${hit.left}px;top:${centerY - Math.max(12, style.barHeight) / 2}px;width:${hit.width}px;height:${Math.max(12, style.barHeight)}px" title="${escapeHtml(fullLabel)}" aria-label="${escapeHtml(fullLabel)}" tabindex="-1"></button>`);
+        }
         continue;
       }
       const barTop = fontSize + 8, pointY = fontSize / 2 + 3.5;
@@ -140,20 +161,58 @@ export class TimelineRenderer {
       }
       const label = item.displayTitle || record.title;
       const labelTag = interactive ? 'button' : 'span';
-      labels.push(`<${labelTag} class="record-label ${hasSearch && item.match ? 'search-match' : ''} ${selectedId === record.id ? 'selected' : ''}" data-record-id="${escapeHtml(record.id)}" style="left:${Math.max(0, item.labelX)}px;top:${y}px;max-width:${Math.max(1, Math.min(item.labelWidth + 3, width - Math.max(0, item.labelX)))}px;font-size:${fontSize}px;height:${fontSize + 7}px;line-height:${fontSize + 5}px" title="${escapeHtml(record.title)}" aria-label="${escapeHtml(`${record.title}, ${record.kind}, ${record.start}`)}">${escapeHtml(label)}</${labelTag}>`);
-      if (!isPoint && interactive) labels.push(`<button class="record-hit" data-record-id="${escapeHtml(record.id)}" style="left:${Math.max(0, x)}px;top:${y + barTop - 2}px;width:${Math.max(8, Math.min(width, end) - Math.max(0, x))}px" title="${escapeHtml(record.title)}" aria-label="${escapeHtml(record.title)}" tabindex="-1"></button>`);
+      const labelLeft = preview ? item.labelX : Math.max(0, item.labelX);
+      labels.push(`<${labelTag} class="record-label ${hasSearch && item.match ? 'search-match' : ''} ${selectedId === record.id ? 'selected' : ''}" data-record-id="${escapeHtml(record.id)}" style="left:${labelLeft}px;top:${y}px;max-width:${Math.max(1, preview ? item.labelWidth + 3 : Math.min(item.labelWidth + 3, width - labelLeft))}px;font-size:${fontSize}px;height:${fontSize + 7}px;line-height:${fontSize + 5}px" title="${escapeHtml(record.title)}" aria-label="${escapeHtml(`${record.title}, ${record.kind}, ${record.start}`)}">${escapeHtml(label)}</${labelTag}>`);
+      if (!isPoint && interactive) {
+        const hitEnd = Math.max(x + 8, end), hit = clipPreviewInterval(x, hitEnd, width);
+        labels.push(`<button class="record-hit" data-record-id="${escapeHtml(record.id)}" data-hit-start="${x}" data-hit-end="${hitEnd}"${hit.visible ? '' : ' hidden'} style="left:${hit.left}px;top:${y + barTop - 2}px;width:${hit.width}px" title="${escapeHtml(record.title)}" aria-label="${escapeHtml(record.title)}" tabindex="-1"></button>`);
+      }
     }
-    this.labels.innerHTML = labels.join('');
+    if (preview) {
+      const template = document.createElement('template'); template.innerHTML = labels.join('');
+      reconcilePreviewChildren(this.labels, [...template.content.children]);
+    } else this.labels.innerHTML = labels.join('');
+    this.hitTargets = [...this.labels.querySelectorAll('[data-hit-start]')].map(node => ({ node, start: Number(node.dataset.hitStart), end: Number(node.dataset.hitEnd) }));
+    this.previewLabels = preview ? [...this.labels.querySelectorAll('button.record-label')].map(node => {
+      const start = Number.parseFloat(node.style.left); return { node, start, end: start + node.getBoundingClientRect().width };
+    }) : [];
+    this.updatePreviewTabOrder(0);
+    if (preview && focusedRecord && document.activeElement !== focusedNode) {
+      const target = this.labels.contains(focusedNode) ? focusedNode : [...this.labels.querySelectorAll('[data-record-id]')].find(node => node.dataset.recordId === focusedRecord && node.className === focusedNode.className);
+      target?.focus({ preventScroll: true });
+    }
     if (focusedGroup) [...this.labels.querySelectorAll('[data-group-key]')].find(node => node.dataset.groupKey === focusedGroup)?.focus({ preventScroll: true });
     this.renderer.render(this.scene, this.camera);
   }
   previewOffset(dx) {
     if (!Number.isFinite(dx) || !this.width) return;
     this.camera.left = -dx; this.camera.right = this.width - dx; this.camera.updateProjectionMatrix();
-    for (const mesh of this.scene.children) if (mesh.userData.fixed) mesh.position.x = this.width / 2 - dx;
+    for (const mesh of this.scene.children) {
+      if (mesh.userData.fixed) mesh.position.x = this.width / 2 - dx;
+      else if (mesh.userData.horizontalInterval) this.clipRectangle(mesh, dx);
+    }
+    for (const target of this.hitTargets || []) {
+      const hit = clipPreviewInterval(target.start, target.end, this.width, dx);
+      if (target.node.hidden === hit.visible) target.node.hidden = !hit.visible;
+      const left = `${hit.left}px`, width = `${hit.width}px`;
+      if (target.node.style.left !== left) target.node.style.left = left;
+      if (target.node.style.width !== width) target.node.style.width = width;
+    }
     this.labels.style.transform = `translate3d(${dx}px,0,0)`;
+    this.updatePreviewTabOrder(dx);
     for (const label of this.labels.querySelectorAll('.group-label')) label.style.transform = `translateX(${-dx}px)`;
     this.renderer.render(this.scene, this.camera);
   }
-  dispose() { this.clear(); this.renderer.dispose(); this.renderer.domElement.remove(); this.labels.remove(); }
+  updatePreviewTabOrder(offset) {
+    for (const target of this.previewLabels || []) {
+      const next = previewTabIndex(target.start, target.end, this.width, offset);
+      if (target.node.tabIndex !== next) target.node.tabIndex = next;
+    }
+  }
+  restoreOverflow() {
+    if (!this.previewOverflow) return;
+    this.host.style.setProperty('overflow', this.previewOverflow.value, this.previewOverflow.priority);
+    this.previewOverflow = null;
+  }
+  dispose() { this.restoreOverflow(); this.clear(); this.renderer.dispose(); this.renderer.domElement.remove(); this.labels.remove(); }
 }

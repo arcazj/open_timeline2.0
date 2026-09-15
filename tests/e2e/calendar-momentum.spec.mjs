@@ -99,19 +99,30 @@ for (const direction of [-1, 1]) test(`long glide and click-stop keep the displa
 
 test('long mobile coast keeps time grids and the rolling overview visible beyond the original query', async ({ page }, info) => {
   await page.setViewportSize({ width: 390, height: 844 });
+  await page.clock.install({ time: new Date('2026-09-12T00:00:00.000Z') });
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await open(page);
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 5000));
   const before = await debug(page), plot = await page.locator('.plot-wrap').boundingBox(), x = plot.x + plot.width * .4, y = plot.y + plot.height * .8;
-  await page.mouse.move(x, y); await page.mouse.down(); await page.mouse.move(x + 150, y, { steps: 3 }); await page.mouse.up();
-  await expect.poll(async () => Math.abs((await debug(page)).navigationOffset)).toBeGreaterThan(plot.width * 1.2);
-  const frames = await page.evaluate(() => new Promise(resolve => {
-    const deltas = []; let previous = performance.now();
-    function frame(now) { deltas.push(now - previous); previous = now; if (deltas.length >= 20) resolve(deltas); else requestAnimationFrame(frame); }
+  await page.mouse.move(x, y); await page.mouse.down();
+  for (let step = 1; step <= 3; step++) {
+    await page.clock.runFor(16); await page.mouse.move(x + step * 50, y);
+  }
+  await page.clock.runFor(8); await page.mouse.up();
+  expect((await debug(page)).navigationPhase).toBe('coasting');
+  await page.clock.runFor(250);
+  expect(Math.abs((await debug(page)).navigationOffset)).toBeGreaterThan(plot.width * 1.2);
+  await page.evaluate(() => {
+    const deltas = window.__controlledCoastFrames = []; let previous = performance.now();
+    function frame(now) { deltas.push(now - previous); previous = now; if (deltas.length < 20) requestAnimationFrame(frame); }
     requestAnimationFrame(frame);
-  }));
+  });
+  await page.clock.runFor(350);
+  const frames = await page.evaluate(() => window.__controlledCoastFrames);
+  expect(frames).toHaveLength(20);
   const band = await page.locator('.overview-plot').boundingBox(), selected = await page.locator('.overview-window').boundingBox();
   expect(selected.x).toBeGreaterThanOrEqual(band.x - 1); expect(selected.x + selected.width).toBeLessThanOrEqual(band.x + band.width + 1);
-  await expect(page.locator('.overview-count')).toHaveText('Pending context');
+  await expect(page.locator('.overview-count')).toContainText('rolling context');
   expect(await page.locator('.main-axis span').count()).toBeGreaterThan(1);
   const colors = await page.locator('.plot-wrap canvas').evaluate(canvas => {
     const gl = canvas.getContext('webgl2'), pixels = new Uint8Array(canvas.width * canvas.height * 4), result = new Set();
@@ -120,9 +131,9 @@ test('long mobile coast keeps time grids and the rolling overview visible beyond
     return result.size;
   });
   expect(colors).toBeGreaterThan(1);
-  await info.attach('coast-frames.json', { body: JSON.stringify(frames), contentType: 'application/json' });
+  await info.attach('coast-frames.json', { body: JSON.stringify({ clock: 'controlled', frameIntervalsMs: frames, performanceBenchmark: false }), contentType: 'application/json' });
   await page.screenshot({ path: info.outputPath('coast-mobile.png'), fullPage: true });
-  await page.mouse.click(x, y); await ready(page);
+  await page.mouse.click(x, y); await page.clock.resume(); await ready(page);
   expect((await debug(page)).domain).not.toEqual(before.domain); expect(errors).toEqual([]);
 });
 

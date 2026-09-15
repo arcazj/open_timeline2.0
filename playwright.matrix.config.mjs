@@ -4,7 +4,7 @@ import base from './playwright.config.mjs';
 export default defineConfig({
   ...base,
   testMatch: ['standalone.spec.mjs', 'configuration-apply.spec.mjs', 'test-data.spec.mjs', 'toolbar-icons.spec.mjs',
-    'record-descriptor.spec.mjs', 'filters-v2.spec.mjs'],
+    'record-descriptor.spec.mjs', 'descriptor-query-refresh.spec.mjs', 'server-reconnect.spec.mjs', 'reconnect-resize.spec.mjs', 'filters-v2.spec.mjs', 'smart-drag.spec.mjs', 'renderer-preview.spec.mjs', 'preview-baseline.spec.mjs', 'model-preview-admission.spec.mjs'],
   outputDir: 'artifacts/browser/matrix',
   reporter: [['list'], ['json', { outputFile: 'artifacts/browser/matrix.json' }]],
   use: { ...base.use, launchOptions: {} },
